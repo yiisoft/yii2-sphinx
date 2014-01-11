@@ -1,70 +1,108 @@
-Yii PHP Framework Version 2
-===========================
+Sphinx Extension for Yii 2
+==========================
 
-Thank you for choosing Yii 2 - a modern PHP framework designed for professional Web development.
-
-Yii 2 is a complete rewrite of its previous version Yii 1.1 which is one of the most popular PHP frameworks.
-Yii 2 inherits the main spirit behind Yii for being simple, fast and highly extensible.
-Yii 2 requires PHP 5.4 and embraces best practices and protocols found in modern Web application development.
+This extension adds [Sphinx](http://sphinxsearch.com/docs) full text search engine extension for the Yii 2 framework.
 
 
-**Yii 2 is not ready for production use yet.** We may make significant changes without prior notices.
-We expect to make the first stable release of Yii 2 in early 2014.
-
-If you mainly want to learn Yii with no real project development requirement, we highly recommend
-you start with Yii 2 as it will be our main focus for the next few years.
-
-If you have a real project with tight schedule, you should stick to [Yii 1.1](https://github.com/yiisoft/yii)
-which is the latest stable release of Yii.
-
-
-[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2/v/stable.png)](https://packagist.org/packages/yiisoft/yii2)
-[![Total Downloads](https://poser.pugx.org/yiisoft/yii2/downloads.png)](https://packagist.org/packages/yiisoft/yii2)
-[![Build Status](https://secure.travis-ci.org/yiisoft/yii2.png)](http://travis-ci.org/yiisoft/yii2)
-[![Dependency Status](https://www.versioneye.com/php/yiisoft:yii2/dev-master/badge.png)](https://www.versioneye.com/php/yiisoft:yii2/dev-master)
-
-
-DIRECTORY STRUCTURE
--------------------
-
-      apps/                ready-to-use application templates
-          advanced/        a template suitable for building sophisticated Web applications
-          basic/           a template suitable for building simple Web applications
-          benchmark/       an application demonstrating the performance of Yii
-      build/               internally used build tools
-      docs/                documentation
-      extensions/          extensions
-      framework/           core framework code
-      tests/               tests of the core framework code
-
-
-REQUIREMENTS
+Installation
 ------------
 
-The minimum requirement by Yii is that your Web server supports PHP 5.4.
+The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
+
+Either run
+
+```
+php composer.phar require --prefer-dist yiisoft/yii2-sphinx "*"
+```
+
+or add
+
+```json
+"yiisoft/yii2-sphinx": "*"
+```
+
+to the require section of your composer.json.
 
 
-DOCUMENTATION
--------------
+Usage & Documentation
+---------------------
 
-A draft of the [Definitive Guide](docs/guide/index.md) is available.
+This extension interacts with Sphinx search daemon using MySQL protocol and [SphinxQL](http://sphinxsearch.com/docs/current.html#sphinxql) query language.
+In order to setup Sphinx "searchd" to support MySQL protocol following configuration should be added:
 
-For 1.1 users, you may refer to [Upgrading from Yii 1.1](docs/guide/upgrade-from-v1.md)
-to have a general idea of what has changed in 2.0.
+```
+searchd
+{
+	listen = localhost:9306:mysql41
+	...
+}
+```
 
+This extension supports all Sphinx features including [Runtime Indexes](http://sphinxsearch.com/docs/current.html#rt-indexes).
+Since this extension uses MySQL protocol to access Sphinx, it shares base approach and much code from the
+regular "yii\db" package.
 
-HOW TO PARTICIPATE
-------------------
+To use this extension, simply add the following code in your application configuration:
 
-**Your participation to Yii 2 development is very welcome!**
+```php
+return [
+	//....
+	'components' => [
+		'sphinx' => [
+			'class' => 'yii\sphinx\Connection',
+			'dsn' => 'mysql:host=127.0.0.1;port=9306;',
+			'username' => '',
+			'password' => '',
+		],
+	],
+];
+```
 
-You may participate in the following ways:
+This extension provides ActiveRecord solution similar ot the [[\yii\db\ActiveRecord]].
+To declare an ActiveRecord class you need to extend [[\yii\sphinx\ActiveRecord]] and
+implement the `indexName` method:
 
-* [Report issues](https://github.com/yiisoft/yii2/issues)
-* [Give us feedback or start a design discussion](http://www.yiiframework.com/forum/index.php/forum/42-design-discussions-for-yii-20/)
-* Fix issues, develop features, write/polish documentation
-    - Before you start, please adopt an existing issue (labelled with "ready for adoption") or start a new one to avoid duplicated efforts.
-    - Please submit a merge request after you finish development.
+```php
+use yii\sphinx\ActiveRecord;
 
-In order to make it easier we've prepared [special `yii2-dev` Composer package](https://github.com/yiisoft/yii2/blob/master/docs/internals/getting-started.md).
+class Article extends ActiveRecord
+{
+	/**
+	 * @return string the name of the index associated with this ActiveRecord class.
+	 */
+	public static function indexName()
+	{
+		return 'idx_article';
+	}
+}
+```
 
+You can use [[\yii\data\ActiveDataProvider]] with the [[\yii\sphinx\Query]] and [[\yii\sphinx\ActiveQuery]]:
+
+```php
+use yii\data\ActiveDataProvider;
+use yii\sphinx\Query;
+
+$query = new Query;
+$query->from('yii2_test_article_index')->match('development');
+$provider = new ActiveDataProvider([
+	'query' => $query,
+	'pagination' => [
+		'pageSize' => 10,
+	]
+]);
+$models = $provider->getModels();
+```
+
+```php
+use yii\data\ActiveDataProvider;
+use app\models\Article;
+
+$provider = new ActiveDataProvider([
+	'query' => Article::find(),
+	'pagination' => [
+		'pageSize' => 10,
+	]
+]);
+$models = $provider->getModels();
+```
