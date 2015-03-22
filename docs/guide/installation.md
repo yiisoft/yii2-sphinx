@@ -1,20 +1,12 @@
-Sphinx Extension for Yii 2
-==========================
+Installation
+============
 
-This extension adds [Sphinx](http://sphinxsearch.com/docs) full text search engine extension for the Yii 2 framework.
-It supports all Sphinx features including [Runtime Indexes](http://sphinxsearch.com/docs/current.html#rt-indexes).
-
-For license information check the [LICENSE](LICENSE.md)-file.
-
-Requirements
-------------
+## Requirements
 
 At least Sphinx version 2.0 is required. However, in order to use all extension features, Sphinx version 2.2 or
 higher is required.
 
-
-Installation
-------------
+## Getting Composer package
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
@@ -32,9 +24,7 @@ or add
 
 to the require section of your composer.json.
 
-
-Configuration
--------------
+## Configuration
 
 This extension interacts with Sphinx search daemon using MySQL protocol and [SphinxQL](http://sphinxsearch.com/docs/current.html#sphinxql) query language.
 In order to setup Sphinx "searchd" to support MySQL protocol following configuration should be added:
