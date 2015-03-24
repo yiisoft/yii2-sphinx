@@ -16,7 +16,7 @@ $config = [
         'dsn' => 'mysql:host=127.0.0.1;dbname=yiitest',
         'username' => 'travis',
         'password' => '',
-        'fixture' => __DIR__ . '/sphinx/source.sql',
+        'fixture' => __DIR__ . '/source.sql',
     ],
 ];
 
