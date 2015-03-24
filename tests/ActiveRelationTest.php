@@ -3,7 +3,7 @@
 namespace yiiunit\extensions\sphinx;
 
 use yiiunit\extensions\sphinx\data\ar\ActiveRecord;
-use yiiunit\data\ar\ActiveRecord as ActiveRecordDb;
+use yiiunit\extensions\sphinx\data\ar\ActiveRecordDb;
 use yiiunit\extensions\sphinx\data\ar\ArticleIndex;
 use yiiunit\extensions\sphinx\data\ar\ArticleDb;
 
