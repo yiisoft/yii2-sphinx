@@ -363,4 +363,34 @@ class QueryTest extends TestCase
             ->all($connection);
         $this->assertNotEmpty($rows);
     }
+
+    /**
+     * @depends testRun
+     */
+    public function testFacets()
+    {
+        $connection = $this->getConnection();
+
+        $query = new Query();
+        $results = $query->from('yii2_test_article_index')
+            ->match('about')
+            ->facets([
+                'author_id'
+            ])
+            ->search($connection);
+        $this->assertNotEmpty($results['hits'], 'Unable to query with facet');
+        $this->assertNotEmpty($results['facets']['author_id'], 'Unable to fill up facet');
+
+        $query = new Query();
+        $results = $query->from('yii2_test_article_index')
+            ->match('about')
+            ->facets([
+                'author_id' => [
+                    'order' => ['COUNT(*)' => SORT_ASC]
+                ],
+            ])
+            ->search($connection);
+        $this->assertNotEmpty($results['hits'], 'Unable to query with complex facet');
+        $this->assertNotEmpty($results['facets']['author_id'], 'Unable to fill up complex facet');
+    }
 }
