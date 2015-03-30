@@ -2,7 +2,7 @@
 
 namespace yiiunit\extensions\sphinx;
 
-use yii\data\ActiveDataProvider;
+use yii\sphinx\ActiveDataProvider;
 use yii\sphinx\Query;
 use yiiunit\extensions\sphinx\data\ar\ActiveRecord;
 use yiiunit\extensions\sphinx\data\ar\ArticleIndex;
@@ -22,7 +22,7 @@ class ActiveDataProviderTest extends TestCase
 
     public function testQuery()
     {
-        $query = new Query;
+        $query = new Query();
         $query->from('yii2_test_article_index');
 
         $provider = new ActiveDataProvider([
@@ -62,5 +62,25 @@ class ActiveDataProviderTest extends TestCase
         ]);
         $models = $provider->getModels();
         $this->assertEquals(1, count($models));
+    }
+
+    /**
+     * @depends testQuery
+     */
+    public function testFacetQuery()
+    {
+        $query = new Query();
+        $query->from('yii2_test_article_index');
+        $query->facets([
+            'author_id'
+        ]);
+
+        $provider = new ActiveDataProvider([
+            'query' => $query,
+            'db' => $this->getConnection(),
+        ]);
+        $models = $provider->getModels();
+        $this->assertEquals(2, count($models));
+        $this->assertEquals(2, count($provider->getFacet('author_id')));
     }
 }
