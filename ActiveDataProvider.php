@@ -12,7 +12,7 @@ use yii\base\InvalidConfigException;
 
 /**
  * ActiveDataProvider is an enhanced version of [[\yii\data\ActiveDataProvider]] specific to the Sphinx.
- * It allows to fetch not only rows and total rows count, but also a facet results.
+ * It allows to fetch not only rows and total rows count, but also a meta information and facet results.
  *
  * The following is an example of using ActiveDataProvider to provide facet results:
  *
@@ -34,6 +34,21 @@ use yii\base\InvalidConfigException;
  * $authorFacet = $provider->getFacet('author_id');
  * ~~~
  *
+ * In case [[Query::showMeta]] is set ActiveDataProvider will fetch total count value from the query meta information,
+ * avoiding extra counting query:
+ *
+ * ~~~
+ * $provider = new ActiveDataProvider([
+ *     'query' => Post::find()->showMeta(true),
+ *     'pagination' => [
+ *         'pageSize' => 20,
+ *     ],
+ * ]);
+ *
+ * $totalCount = $provider->getTotalCount(); // fetched from meta information
+ * ~~~
+ *
+ * @property array $meta search query meta info in format: name => value.
  * @property array $facets query facet results.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
@@ -41,6 +56,10 @@ use yii\base\InvalidConfigException;
  */
 class ActiveDataProvider extends \yii\data\ActiveDataProvider
 {
+    /**
+     * @var array search query meta info in format: name => value.
+     */
+    private $_meta;
     /**
      * @var array query facet results.
      */
@@ -63,6 +82,25 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
             $this->prepareModels();
         }
         return $this->_facets;
+    }
+
+    /**
+     * @param array $meta search query meta info
+     */
+    public function setMeta($meta)
+    {
+        $this->_meta = $meta;
+    }
+
+    /**
+     * @return array search query meta info
+     */
+    public function getMeta()
+    {
+        if (!is_array($this->_meta)) {
+            $this->prepareModels();
+        }
+        return $this->_meta;
     }
 
     /**
@@ -90,20 +128,20 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
         }
         $query = clone $this->query;
         if (($pagination = $this->getPagination()) !== false) {
-            $pagination->totalCount = $this->getTotalCount();
             $query->limit($pagination->getLimit())->offset($pagination->getOffset());
         }
         if (($sort = $this->getSort()) !== false) {
             $query->addOrderBy($sort->getOrders());
         }
 
-        if (empty($query->facets)) {
-            $this->setFacets([]);
-            return $query->all($this->db);
+        $results = $query->search($this->db);
+        $this->setMeta($results['meta']);
+        $this->setFacets($results['facets']);
+
+        if ($pagination !== false) {
+            $pagination->totalCount = $this->getTotalCount();
         }
 
-        $results = $query->search($this->db);
-        $this->setFacets($results['facets']);
         return $results['hits'];
     }
 
@@ -115,7 +153,13 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
         if (!$this->query instanceof Query) {
             throw new InvalidConfigException('The "query" property must be an instance "' . Query::className() . '" or its subclasses.');
         }
+
+        $meta = $this->getMeta();
+        if (isset($meta['total'])) {
+            return (int) $meta['total'];
+        }
+
         $query = clone $this->query;
-        return (int) $query->limit(-1)->offset(-1)->orderBy([])->facets([])->count('*', $this->db);
+        return (int) $query->limit(-1)->offset(-1)->orderBy([])->facets([])->showMeta(false)->count('*', $this->db);
     }
 } 

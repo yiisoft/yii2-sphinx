@@ -83,4 +83,25 @@ class ActiveDataProviderTest extends TestCase
         $this->assertEquals(2, count($models));
         $this->assertEquals(2, count($provider->getFacet('author_id')));
     }
+
+    /**
+     * @depends testQuery
+     */
+    public function testTotalCountFromMeta()
+    {
+        $query = new Query();
+        $query->from('yii2_test_article_index');
+        $query->showMeta(true);
+
+        $provider = new ActiveDataProvider([
+            'query' => $query,
+            'db' => $this->getConnection(),
+            'pagination' => [
+                'pageSize' => 1,
+            ]
+        ]);
+        $models = $provider->getModels();
+        $this->assertEquals(1, count($models));
+        $this->assertEquals(2, $provider->getTotalCount());
+    }
 }

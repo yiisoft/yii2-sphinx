@@ -4,6 +4,7 @@ Yii Framework 2 sphinx extension Change Log
 2.0.4 under development
 -----------------------
 
+- Enh: Fetching 'SHOW META' info added to `yii\sphinx\Query` (klimov-paul)
 - Enh #5234: Facets fetching added to `yii\sphinx\Query` (klimov-paul)
 
 
