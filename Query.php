@@ -110,6 +110,13 @@ class Query extends \yii\db\Query
      * You need to use [[search()]] method in order to fetch facet results.
      */
     public $facets = [];
+    /**
+     * @var boolean|string|Expression whether to automatically perform 'SHOW META' query against main one.
+     * You may set this value to be string or [[Expression]] instance, in this case its value will be used
+     * as 'LIKE' condition for 'SHOW META' statement.
+     * You need to use [[search()]] method in order to fetch 'meta' results.
+     */
+    public $showMeta;
 
     /**
      * @var Connection the Sphinx connection used to generate the SQL statements.
@@ -191,24 +198,53 @@ class Query extends \yii\db\Query
      */
     public function search($db = null)
     {
-        if (empty($this->facets)) {
-            $rows = $this->all($db);
-            $facets = [];
-        } else {
-            $command = $this->createCommand($db);
-            $dataReader = $command->query();
-            $rows = $dataReader->readAll();
-            $rawFacets = [];
-            while ($dataReader->nextResult()) {
-                $rawFacets[] = $dataReader->readAll();
+        $command = $this->createCommand($db);
+        $dataReader = $command->query();
+        $rows = $this->populate($dataReader->readAll());
+
+        $facets = [];
+        if (!empty($this->facets)) {
+            foreach ($this->facets as $facetKey => $facetValue) {
+                $dataReader->nextResult();
+                $rawFacetResults = $dataReader->readAll();
+
+                if (is_numeric($facetKey)) {
+                    $facet = [
+                        'name' => $facetValue,
+                        'value' => $facetValue,
+                        'count' => 'count(*)',
+                    ];
+                } else {
+                    $facet = array_merge(
+                        [
+                            'name' => $facetKey,
+                            'value' => $facetKey,
+                            'count' => 'count(*)',
+                        ],
+                        $facetValue
+                    );
+                }
+
+                foreach ($rawFacetResults as $rawFacetResult) {
+                    $rawFacetResult['value'] = $rawFacetResult[$facet['value']];
+                    $rawFacetResult['count'] = $rawFacetResult[$facet['count']];
+                    $facets[$facet['name']][] = $rawFacetResult;
+                }
             }
-            $facets = $this->normalizeFacetResults($rawFacets);
-            $rows = $this->populate($rows);
+        }
+        $meta = [];
+        if (!empty($this->showMeta)) {
+            $dataReader->nextResult();
+            $rawMetaResults = $dataReader->readAll();
+            foreach ($rawMetaResults as $rawMetaResult) {
+                $meta[$rawMetaResult['Variable_name']] = $rawMetaResult['Value'];
+            }
         }
 
         return [
             'hits' => $rows,
             'facets' => $facets,
+            'meta' => $meta,
         ];
     }
 
@@ -361,38 +397,15 @@ class Query extends \yii\db\Query
     }
 
     /**
-     * Normalizes [[facets]] value from given raw facet results
-     * @param array $rawFacets raw facet results.
-     * @return array normalized facet results.
+     * Sets whether to automatically perform 'SHOW META' for the search query.
+     * @param boolean|string|Expression $showMeta whether to automatically perform 'SHOW META'
+     * @return static the query object itself
+     * @see showMeta
      */
-    private function normalizeFacetResults(array $rawFacets)
+    public function showMeta($showMeta)
     {
-        $facetResults = [];
-        foreach ($this->facets as $key => $value) {
-            if (is_numeric($key)) {
-                $facet = [
-                    'name' => $value,
-                    'value' => $value,
-                    'count' => 'count(*)',
-                ];
-            } else {
-                $facet = array_merge(
-                    [
-                        'name' => $key,
-                        'value' => $key,
-                        'count' => 'count(*)',
-                    ],
-                    $value
-                );
-            }
-            $rawFacetResults = array_shift($rawFacets);
-            foreach ($rawFacetResults as $rawFacetResult) {
-                $rawFacetResult['value'] = $rawFacetResult[$facet['value']];
-                $rawFacetResult['count'] = $rawFacetResult[$facet['count']];
-                $facetResults[$facet['name']][] = $rawFacetResult;
-            }
-        }
-        return $facetResults;
+        $this->showMeta = $showMeta;
+        return $this;
     }
 
     /**

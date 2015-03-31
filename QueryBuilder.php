@@ -39,6 +39,11 @@ class QueryBuilder extends Object
      * Defaults to an empty space. This is mainly used by [[build()]] when generating a SQL statement.
      */
     public $separator = " ";
+    /**
+     * @var string separator between different SQL queries.
+     * This is mainly used by [[build()]] when generating a SQL statement.
+     */
+    public $querySeparator = "; ";
 
     /**
      * @var array map of query condition to builder methods.
@@ -110,7 +115,14 @@ class QueryBuilder extends Object
             $this->buildFacets($query->facets, $params),
         ];
 
-        return [implode($this->separator, array_filter($clauses)), $params];
+        $sql = implode($this->separator, array_filter($clauses));
+
+        $showMetaSql = $this->buildShowMeta($query->showMeta, $params);
+        if (!empty($showMetaSql)) {
+            $sql .= $this->querySeparator . $showMetaSql;
+        }
+
+        return [$sql, $params];
     }
 
     /**
@@ -1071,10 +1083,10 @@ class QueryBuilder extends Object
     }
 
     /**
-     * @param array $facets
-     * @param array $params
-     * @return string
-     * @throws InvalidConfigException
+     * @param array $facets facet specifications
+     * @param array $params the binding parameters to be populated
+     * @return string the FACET clause build from [[query]]
+     * @throws InvalidConfigException on invalid facet specification.
      */
     protected function buildFacets($facets, &$params)
     {
@@ -1116,6 +1128,37 @@ class QueryBuilder extends Object
         }
 
         return implode($this->separator, $sqlParts);
+    }
+
+    /**
+     * Builds SHOW META query.
+     * @param boolean|string|Expression $showMeta show meta specification.
+     * @param array $params the binding parameters to be populated
+     * @return string SHOW META query, if it does not required - empty string.
+     */
+    protected function buildShowMeta($showMeta, &$params)
+    {
+        if (empty($showMeta)) {
+            return '';
+        }
+        $sql = 'SHOW META';
+        if (is_bool($showMeta)) {
+            return $sql;
+        }
+
+        if ($showMeta instanceof Expression) {
+            foreach ($showMeta->params as $n => $v) {
+                $params[$n] = $v;
+            }
+            $phName = $showMeta->expression;
+        } else {
+            $phName = self::PARAM_PREFIX . count($params);
+            $escape = ['%'=>'\%', '_'=>'\_', '\\'=>'\\\\'];
+            $params[$phName] = '%' . strtr($showMeta, $escape) . '%';
+        }
+
+        $sql .= " LIKE {$phName}";
+        return $sql;
     }
 
     /**

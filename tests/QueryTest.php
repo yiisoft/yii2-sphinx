@@ -393,4 +393,51 @@ class QueryTest extends TestCase
         $this->assertNotEmpty($results['hits'], 'Unable to query with complex facet');
         $this->assertNotEmpty($results['facets']['author_id'], 'Unable to fill up complex facet');
     }
+
+    /**
+     * @depends testRun
+     */
+    public function testShowMeta()
+    {
+        $connection = $this->getConnection();
+
+        $query = new Query();
+        $results = $query->from('yii2_test_article_index')
+            ->match('about')
+            ->showMeta(true)
+            ->search($connection);
+        $this->assertNotEmpty($results['hits'], 'Unable to query with meta');
+        $this->assertNotEmpty($results['meta'], 'Unable to fill meta');
+        $this->assertEquals(2, $results['meta']['total'], 'Wrong meta "total"');
+        $this->assertArrayHasKey('time', $results['meta'], '"time" meta data missing.');
+
+        $query = new Query();
+        $results = $query->from('yii2_test_article_index')
+            ->match('about')
+            ->showMeta('total')
+            ->search($connection);
+        $this->assertArrayHasKey('total', $results['meta'], '"total" meta data missing.');
+        $this->assertArrayNotHasKey('time', $results['meta'], '"time" meta data present.');
+    }
+
+    /**
+     * @depends testFacets
+     * @depends testShowMeta
+     */
+    public function testShowMetaWithFacet()
+    {
+        $connection = $this->getConnection();
+
+        $query = new Query();
+        $results = $query->from('yii2_test_article_index')
+            ->match('about')
+            ->showMeta(true)
+            ->facets([
+                'author_id'
+            ])
+            ->search($connection);
+        $this->assertNotEmpty($results['hits'], 'Unable to query with facet');
+        $this->assertNotEmpty($results['meta'], 'Unable to fill meta');
+        $this->assertNotEmpty($results['facets']['author_id'], 'Unable to fill up facet');
+    }
 }
