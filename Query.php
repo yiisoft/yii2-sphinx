@@ -106,6 +106,8 @@ class Query extends \yii\db\Query
      *     ],
      * ]
      * ~~~
+     *
+     * You need to use [[search()]] method in order to fetch facet results.
      */
     public $facets = [];
 

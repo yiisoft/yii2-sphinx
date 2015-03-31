@@ -4,7 +4,7 @@ Yii Framework 2 sphinx extension Change Log
 2.0.4 under development
 -----------------------
 
-- no changes in this release.
+- Enh #5234: Facets fetching added to `yii\sphinx\Query` (klimov-paul)
 
 
 2.0.3 March 01, 2015

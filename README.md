@@ -14,7 +14,7 @@ For license information check the [LICENSE](LICENSE.md)-file.
 Requirements
 ------------
 
-At least Sphinx version 2.0 is required. However, in order to use all extension features, Sphinx version 2.2 or
+At least Sphinx version 2.0 is required. However, in order to use all extension features, Sphinx version 2.2.3 or
 higher is required.
 
 

@@ -7,6 +7,7 @@
 
 namespace yii\sphinx;
 
+use yii\base\InvalidCallException;
 use yii\base\InvalidConfigException;
 
 /**
@@ -46,7 +47,7 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
     private $_facets;
 
     /**
-     * @param array $facets
+     * @param array $facets query facet results.
      */
     public function setFacets($facets)
     {
@@ -54,7 +55,7 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
     }
 
     /**
-     * @return array
+     * @return array query facet results.
      */
     public function getFacets()
     {
@@ -67,11 +68,15 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
     /**
      * Returns results of the specified facet.
      * @param string $name facet name
+     * @throws InvalidCallException if requested facet does not present in results.
      * @return array facet results.
      */
     public function getFacet($name)
     {
         $facets = $this->getFacets();
+        if (!isset($facets[$name])) {
+            throw new InvalidCallException("Facet '{$name}' does not present.");
+        }
         return $facets[$name];
     }
 
