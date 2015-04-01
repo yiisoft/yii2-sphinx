@@ -203,35 +203,34 @@ class Query extends \yii\db\Query
         $rows = $this->populate($dataReader->readAll());
 
         $facets = [];
-        if (!empty($this->facets)) {
-            foreach ($this->facets as $facetKey => $facetValue) {
-                $dataReader->nextResult();
-                $rawFacetResults = $dataReader->readAll();
+        foreach ($this->facets as $facetKey => $facetValue) {
+            $dataReader->nextResult();
+            $rawFacetResults = $dataReader->readAll();
 
-                if (is_numeric($facetKey)) {
-                    $facet = [
-                        'name' => $facetValue,
-                        'value' => $facetValue,
+            if (is_numeric($facetKey)) {
+                $facet = [
+                    'name' => $facetValue,
+                    'value' => $facetValue,
+                    'count' => 'count(*)',
+                ];
+            } else {
+                $facet = array_merge(
+                    [
+                        'name' => $facetKey,
+                        'value' => $facetKey,
                         'count' => 'count(*)',
-                    ];
-                } else {
-                    $facet = array_merge(
-                        [
-                            'name' => $facetKey,
-                            'value' => $facetKey,
-                            'count' => 'count(*)',
-                        ],
-                        $facetValue
-                    );
-                }
+                    ],
+                    $facetValue
+                );
+            }
 
-                foreach ($rawFacetResults as $rawFacetResult) {
-                    $rawFacetResult['value'] = $rawFacetResult[$facet['value']];
-                    $rawFacetResult['count'] = $rawFacetResult[$facet['count']];
-                    $facets[$facet['name']][] = $rawFacetResult;
-                }
+            foreach ($rawFacetResults as $rawFacetResult) {
+                $rawFacetResult['value'] = $rawFacetResult[$facet['value']];
+                $rawFacetResult['count'] = $rawFacetResult[$facet['count']];
+                $facets[$facet['name']][] = $rawFacetResult;
             }
         }
+
         $meta = [];
         if (!empty($this->showMeta)) {
             $dataReader->nextResult();

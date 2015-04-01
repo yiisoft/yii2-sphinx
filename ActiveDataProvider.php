@@ -42,11 +42,16 @@ use yii\base\InvalidConfigException;
  *     'query' => Post::find()->showMeta(true),
  *     'pagination' => [
  *         'pageSize' => 20,
+ *         'validatePage' => false,
  *     ],
  * ]);
  *
  * $totalCount = $provider->getTotalCount(); // fetched from meta information
  * ~~~
+ *
+ * Note: when using 'meta' information results total count will be fetched after pagination limit applying,
+ * which eliminates ability to verify if requested page number actually exist. You should disable `yii\data\Pagination::validatePage`
+ * in case you are using this approach.
  *
  * @property array $meta search query meta info in format: name => value.
  * @property array $facets query facet results.
