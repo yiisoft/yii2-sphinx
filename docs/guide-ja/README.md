@@ -15,6 +15,8 @@ Yii 2 Sphinx エクステンション
 
 * ['MATCH' 文を作成する](usage-match.md)
 * [アクティブレコードを使用する](usage-ar.md)
+* [クエリのメタ情報を取得する](usage-meta.md)
+* [ファセット検索](usage-facets.md)
 * [データプロバイダを扱う](usage-data-providers.md)
 * [スニペット (抜粋) を構築する](usage-snippets.md)
 
