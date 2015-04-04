@@ -30,3 +30,30 @@ $provider = new ActiveDataProvider([
 ]);
 $models = $provider->getModels();
 ```
+
+However, if you want to use ['facet' feature](usage-facets.md) or [query meta information](usage-meta.md) benefit
+you need to use `yii\sphinx\ActiveDataProvider`. It allows preparing total item count using query 'meta' information
+and fetching of the facet results:
+
+```php
+use yii\sphinx\ActiveDataProvider;
+use yii\sphinx\Query;
+
+$query = new Query();
+$query->from('idx_item')
+    ->match('foo')
+    ->showMeta(true)
+    ->facets([
+        'brand_id',
+        'categories',
+    ]);
+$provider = new ActiveDataProvider([
+    'query' => $query,
+    'pagination' => [
+        'pageSize' => 10,
+    ]
+]);
+$models = $provider->getModels();
+$facets = $provider->getFacets();
+$brandIdFacet = $provider->getFacet('brand_id');
+```
