@@ -2,7 +2,7 @@ Composing 'MATCH' statement
 ===========================
 
 Sphinx usage does not make sense unless you are using its fulltext search ability.
-In SphinxSQL it is provided via 'MATCH' statement. You can always compose it manually as a part of the 'where'
+In SphinxQL it is provided via 'MATCH' statement. You can always compose it manually as a part of the 'where'
 condition, but if you are using `yii\sphinx\Query` you can do it via `yii\sphinx\Query::match()`:
 
 ```php
