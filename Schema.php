@@ -29,7 +29,7 @@ use yii\db\Exception;
 class Schema extends Object
 {
     /**
-     * The followings are the supported abstract column data types.
+     * The following are the supported abstract column data types.
      */
     const TYPE_PK = 'pk';
     const TYPE_STRING = 'string';
