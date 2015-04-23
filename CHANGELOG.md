@@ -5,6 +5,7 @@ Yii Framework 2 sphinx extension Change Log
 -----------------------
 
 - Enh: Fetching 'SHOW META' info added to `yii\sphinx\Query` (klimov-paul)
+- Enh #2053: Added fixture support via `yii\sphinx\ActiveFixture` (klimov-paul)
 - Enh #5234: Facets fetching added to `yii\sphinx\Query` (klimov-paul)
 
 
