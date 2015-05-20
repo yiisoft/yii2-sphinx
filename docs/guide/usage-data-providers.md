@@ -57,3 +57,7 @@ $models = $provider->getModels();
 $facets = $provider->getFacets();
 $brandIdFacet = $provider->getFacet('brand_id');
 ```
+
+> Note: because pagination offset and limit may exceed Sphinx 'max_matches' bounds, data provider will set 'max_matches'
+  option automatically based on those values. However, if [[Query::showMeta]] is set, such adjustment is not performed
+  as it will break total count calculation, so you'll have to deal with 'max_matches' bounds on your own.
