@@ -57,3 +57,4 @@ $models = $provider->getModels();
 $facets = $provider->getFacets();
 $brandIdFacet = $provider->getFacet('brand_id');
 ```
+Please note that total item count that can be extracted from 'meta' is limited to `max_matches` sphinx option. To allow pagination through all results in the sphinx index `showMeta` should be set to `false`. This will perform extra `count(*)` query that will consider applied filters and return accurate total count.
