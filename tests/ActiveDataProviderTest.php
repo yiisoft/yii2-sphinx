@@ -133,4 +133,31 @@ class ActiveDataProviderTest extends TestCase
         $models = $provider->getModels();
         $this->assertEquals(2, $models[0]['id']);
     }
+
+    /**
+     * @depends testAutoAdjustPagination
+     *
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/12
+     */
+    public function testAutoAdjustMaxMatches()
+    {
+        $request = new Request();
+        $request->setQueryParams(['page' => 99999]);
+        Yii::$app->set('request', $request);
+
+        $query = new Query();
+        $query->from('yii2_test_article_index');
+        $query->orderBy(['id' => SORT_ASC]);
+
+        $provider = new ActiveDataProvider([
+            'query' => $query,
+            'db' => $this->getConnection(),
+            'pagination' => [
+                'pageSize' => 100,
+                'validatePage' => false,
+            ]
+        ]);
+        $models = $provider->getModels();
+        $this->assertEmpty($models); // no exception
+    }
 }
