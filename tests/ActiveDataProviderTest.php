@@ -4,6 +4,8 @@ namespace yiiunit\extensions\sphinx;
 
 use yii\sphinx\ActiveDataProvider;
 use yii\sphinx\Query;
+use Yii;
+use yii\web\Request;
 use yiiunit\extensions\sphinx\data\ar\ActiveRecord;
 use yiiunit\extensions\sphinx\data\ar\ArticleIndex;
 
@@ -103,5 +105,32 @@ class ActiveDataProviderTest extends TestCase
         $models = $provider->getModels();
         $this->assertEquals(1, count($models));
         $this->assertEquals(2, $provider->getTotalCount());
+    }
+
+    /**
+     * @depends testTotalCountFromMeta
+     *
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/11
+     */
+    public function testAutoAdjustPagination()
+    {
+        $request = new Request();
+        $request->setQueryParams(['page' => 2]);
+        Yii::$app->set('request', $request);
+
+        $query = new Query();
+        $query->from('yii2_test_article_index');
+        $query->orderBy(['id' => SORT_ASC]);
+        $query->showMeta(true);
+
+        $provider = new ActiveDataProvider([
+            'query' => $query,
+            'db' => $this->getConnection(),
+            'pagination' => [
+                'pageSize' => 1,
+            ]
+        ]);
+        $models = $provider->getModels();
+        $this->assertEquals(2, $models[0]['id']);
     }
 }

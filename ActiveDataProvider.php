@@ -42,7 +42,6 @@ use yii\base\InvalidConfigException;
  *     'query' => Post::find()->showMeta(true),
  *     'pagination' => [
  *         'pageSize' => 20,
- *         'validatePage' => false,
  *     ],
  * ]);
  *
@@ -50,8 +49,8 @@ use yii\base\InvalidConfigException;
  * ~~~
  *
  * Note: when using 'meta' information results total count will be fetched after pagination limit applying,
- * which eliminates ability to verify if requested page number actually exist. You should disable `yii\data\Pagination::validatePage`
- * in case you are using this approach.
+ * which eliminates ability to verify if requested page number actually exist. Data provider disables `yii\data\Pagination::validatePage`
+ * automatically in this case.
  *
  * @property array $meta search query meta info in format: name => value.
  * @property array $facets query facet results.
@@ -133,6 +132,9 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
         }
         $query = clone $this->query;
         if (($pagination = $this->getPagination()) !== false) {
+            if (!empty($query->showMeta)) {
+                $pagination->validatePage = false;
+            }
             $query->limit($pagination->getLimit())->offset($pagination->getOffset());
         }
         if (($sort = $this->getSort()) !== false) {

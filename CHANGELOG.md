@@ -4,7 +4,7 @@ Yii Framework 2 sphinx extension Change Log
 2.0.5 under development
 -----------------------
 
-- no changes in this release.
+- Enh #5234: `yii\sphinx\ActiveDataProvider` now disables `yii\data\Pagination::validatePage` automatically if `yii\sphinx\Query::showMeta` is set (klimov-paul)
 
 
 2.0.4 May 10, 2015
