@@ -2,6 +2,7 @@
 
 namespace yiiunit\extensions\sphinx;
 
+use yii\data\Pagination;
 use yiiunit\extensions\sphinx\data\ar\ActiveRecord;
 use yiiunit\extensions\sphinx\data\ar\ActiveRecordDb;
 use yiiunit\extensions\sphinx\data\ar\ArticleIndex;
@@ -13,11 +14,18 @@ use yiiunit\extensions\sphinx\data\ar\TagDb;
  */
 class ExternalActiveRelationTest extends TestCase
 {
+    /**
+     * @var Pagination
+     */
+    protected $pagination;
+
     protected function setUp()
     {
         parent::setUp();
         ActiveRecord::$db = $this->getConnection();
         ActiveRecordDb::$db = $this->getDbConnection();
+
+        $this->pagination = new Pagination();
     }
 
     // Tests :
@@ -49,14 +57,14 @@ class ExternalActiveRelationTest extends TestCase
     {
         // has one :
         $articles = ArticleIndex::find()->with('source')->all();
-        $this->assertEquals(2, count($articles));
+        $this->assertEquals($this->pagination->defaultPageSize, count($articles));
         $this->assertTrue($articles[0]->isRelationPopulated('source'));
         $this->assertTrue($articles[1]->isRelationPopulated('source'));
         $this->assertTrue($articles[0]->source instanceof ArticleDb);
         $this->assertTrue($articles[1]->source instanceof ArticleDb);
 
         // has many :
-        $articles = ArticleIndex::find()->with('tags')->all();
+        $articles = ArticleIndex::find()->with('tags')->limit(2)->all();
         $this->assertEquals(2, count($articles));
         $this->assertTrue($articles[0]->isRelationPopulated('tags'));
         $this->assertTrue($articles[1]->isRelationPopulated('tags'));
