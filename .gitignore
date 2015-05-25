@@ -32,4 +32,4 @@ phpunit.phar
 /tests/data/config.local.php
 
 # runtime cache
-/tests/runtime/cache
+/tests/runtime
