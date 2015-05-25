@@ -2,6 +2,7 @@
 
 namespace yiiunit\extensions\sphinx;
 
+use yii\data\Pagination;
 use yii\sphinx\ActiveQuery;
 use yiiunit\extensions\sphinx\data\ar\ActiveRecord;
 use yiiunit\extensions\sphinx\data\ar\ArticleIndex;
@@ -12,10 +13,17 @@ use yiiunit\extensions\sphinx\data\ar\RuntimeIndex;
  */
 class ActiveRecordTest extends TestCase
 {
+    /**
+     * @var Pagination
+     */
+    protected $pagination;
+
     protected function setUp()
     {
         parent::setUp();
         ActiveRecord::$db = $this->getConnection();
+
+        $this->pagination = new Pagination();
     }
 
     protected function tearDown()
@@ -36,7 +44,7 @@ class ActiveRecordTest extends TestCase
 
         // find all
         $articles = ArticleIndex::find()->all();
-        $this->assertEquals(2, count($articles));
+        $this->assertEquals($this->pagination->defaultPageSize, count($articles));
         $this->assertTrue($articles[0] instanceof ArticleIndex);
         $this->assertTrue($articles[1] instanceof ArticleIndex);
 
@@ -70,13 +78,14 @@ class ActiveRecordTest extends TestCase
         $this->assertEquals(10, $article->custom_column);
 
         // find count, sum, average, min, max, scalar
-        $this->assertEquals(2, ArticleIndex::find()->count());
+        $this->assertEquals(1002, ArticleIndex::find()->count());
         $this->assertEquals(1, ArticleIndex::find()->where('id=1')->count());
-        $this->assertEquals(3, ArticleIndex::find()->sum('id'));
-        $this->assertEquals(1.5, ArticleIndex::find()->average('id'));
+        // sum and average https://www.wolframalpha.com/input/?i=arithmetic+sequence+to+1002
+        $this->assertEquals(502503, ArticleIndex::find()->sum('id'));
+        $this->assertEquals(501.5, ArticleIndex::find()->average('id'));
         $this->assertEquals(1, ArticleIndex::find()->min('id'));
-        $this->assertEquals(2, ArticleIndex::find()->max('id'));
-        $this->assertEquals(2, ArticleIndex::find()->select('COUNT(*)')->scalar());
+        $this->assertEquals(1002, ArticleIndex::find()->max('id'));
+        $this->assertEquals(1002, ArticleIndex::find()->select('COUNT(*)')->scalar());
 
         // scope
         $this->assertEquals(1, ArticleIndex::find()->favoriteAuthor()->count());
@@ -92,17 +101,17 @@ class ActiveRecordTest extends TestCase
 
         // indexBy
         $articles = ArticleIndex::find()->indexBy('author_id')->orderBy('id DESC')->all();
-        $this->assertEquals(2, count($articles));
-        $this->assertTrue($articles['1'] instanceof ArticleIndex);
-        $this->assertTrue($articles['2'] instanceof ArticleIndex);
+        $this->assertEquals($this->pagination->defaultPageSize, count($articles));
+        $this->assertTrue($articles['1001'] instanceof ArticleIndex);
+        $this->assertTrue($articles['1002'] instanceof ArticleIndex);
 
         // indexBy callable
         $articles = ArticleIndex::find()->indexBy(function ($article) {
             return $article->id . '-' . $article->author_id;
         })->orderBy('id DESC')->all();
-        $this->assertEquals(2, count($articles));
-        $this->assertTrue($articles['1-1'] instanceof ArticleIndex);
-        $this->assertTrue($articles['2-2'] instanceof ArticleIndex);
+        $this->assertEquals($this->pagination->defaultPageSize, count($articles));
+        $this->assertTrue($articles['1001-1001'] instanceof ArticleIndex);
+        $this->assertTrue($articles['1002-1002'] instanceof ArticleIndex);
     }
 
     public function testFindBySql()
@@ -110,11 +119,11 @@ class ActiveRecordTest extends TestCase
         // find one
         $article = ArticleIndex::findBySql('SELECT * FROM yii2_test_article_index ORDER BY id DESC')->one();
         $this->assertTrue($article instanceof ArticleIndex);
-        $this->assertEquals(2, $article->author_id);
+        $this->assertEquals(1002, $article->author_id);
 
         // find all
         $articles = ArticleIndex::findBySql('SELECT * FROM yii2_test_article_index')->all();
-        $this->assertEquals(2, count($articles));
+        $this->assertEquals($this->pagination->defaultPageSize, count($articles));
 
         // find with parameter binding
         $article = ArticleIndex::findBySql('SELECT * FROM yii2_test_article_index WHERE id=:id', [':id' => 2])->one();
