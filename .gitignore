@@ -30,3 +30,6 @@ phpunit.phar
 
 # local tests configuration
 /tests/data/config.local.php
+
+# runtime cache
+/tests/runtime/cache
