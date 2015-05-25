@@ -177,6 +177,11 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
 
         if (!empty($this->query->showMeta)) {
             $meta = $this->getMeta();
+
+            if (isset($meta['total_found'])) {
+                return (int) $meta['total_found'];
+            }
+
             if (isset($meta['total'])) {
                 return (int) $meta['total'];
             }
