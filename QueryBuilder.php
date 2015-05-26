@@ -505,8 +505,7 @@ class QueryBuilder extends Object
                 }
                 $indexes[$i] = "$index " . $this->db->quoteIndexName($i);
             } elseif (strpos($index, '(') === false) {
-                if (preg_match('/^(.*?)(?i:\s+as|)\s+([^ ]+)$/', $index, $matches)) {
-                    // with alias
+                if (preg_match('/^(.*?)(?i:\s+as|)\s+([^ ]+)$/', $index, $matches)) { // with alias
                     $indexes[$i] = $this->db->quoteIndexName($matches[1]) . ' ' . $this->db->quoteIndexName($matches[2]);
                 } else {
                     $indexes[$i] = $this->db->quoteIndexName($index);
