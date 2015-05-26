@@ -49,14 +49,14 @@ class ExternalActiveRelationTest extends TestCase
     {
         // has one :
         $articles = ArticleIndex::find()->with('source')->all();
-        $this->assertEquals(2, count($articles));
+        $this->assertEquals(20, count($articles));
         $this->assertTrue($articles[0]->isRelationPopulated('source'));
         $this->assertTrue($articles[1]->isRelationPopulated('source'));
         $this->assertTrue($articles[0]->source instanceof ArticleDb);
         $this->assertTrue($articles[1]->source instanceof ArticleDb);
 
         // has many :
-        $articles = ArticleIndex::find()->with('tags')->all();
+        $articles = ArticleIndex::find()->with('tags')->limit(2)->all();
         $this->assertEquals(2, count($articles));
         $this->assertTrue($articles[0]->isRelationPopulated('tags'));
         $this->assertTrue($articles[1]->isRelationPopulated('tags'));
