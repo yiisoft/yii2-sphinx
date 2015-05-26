@@ -531,6 +531,10 @@ abstract class ActiveRecord extends BaseActiveRecord
             if ($lock !== null && !$rows) {
                 throw new StaleObjectException('The object being updated is outdated.');
             }
+
+            if (isset($values[$lock])) {
+                $this->$lock = $values[$lock];
+            }
         }
 
         $changedAttributes = [];
