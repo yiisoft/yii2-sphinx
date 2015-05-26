@@ -32,7 +32,7 @@ class ActiveDataProviderTest extends TestCase
             'db' => $this->getConnection(),
         ]);
         $models = $provider->getModels();
-        $this->assertEquals(2, count($models));
+        $this->assertEquals(20, count($models));
 
         $provider = new ActiveDataProvider([
             'query' => $query,
@@ -51,10 +51,10 @@ class ActiveDataProviderTest extends TestCase
             'query' => ArticleIndex::find()->orderBy('id ASC'),
         ]);
         $models = $provider->getModels();
-        $this->assertEquals(2, count($models));
+        $this->assertEquals(20, count($models));
         $this->assertTrue($models[0] instanceof ArticleIndex);
         $this->assertTrue($models[1] instanceof ArticleIndex);
-        $this->assertEquals([1, 2], $provider->getKeys());
+        $this->assertEquals([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], $provider->getKeys());
 
         $provider = new ActiveDataProvider([
             'query' => ArticleIndex::find(),
@@ -82,8 +82,8 @@ class ActiveDataProviderTest extends TestCase
             'db' => $this->getConnection(),
         ]);
         $models = $provider->getModels();
-        $this->assertEquals(2, count($models));
-        $this->assertEquals(2, count($provider->getFacet('author_id')));
+        $this->assertEquals(20, count($models));
+        $this->assertEquals(20, count($provider->getFacet('author_id')));
     }
 
     /**
@@ -104,7 +104,7 @@ class ActiveDataProviderTest extends TestCase
         ]);
         $models = $provider->getModels();
         $this->assertEquals(1, count($models));
-        $this->assertEquals(2, $provider->getTotalCount());
+        $this->assertEquals(1002, $provider->getTotalCount());
     }
 
     /**
@@ -159,5 +159,27 @@ class ActiveDataProviderTest extends TestCase
         ]);
         $models = $provider->getModels();
         $this->assertEmpty($models); // no exception
+    }
+
+    public function testMatch()
+    {
+        $query = new Query();
+        $query->from('yii2_test_article_index');
+        $query->match('Repeated');
+
+        $provider = new ActiveDataProvider([
+            'query' => $query,
+            'db' => $this->getConnection(),
+        ]);
+
+        $this->assertEquals(1002, $provider->getTotalCount());
+
+        $query->match('Excepturi');
+        $provider = new ActiveDataProvider([
+            'query' => $query,
+            'db' => $this->getConnection(),
+        ]);
+
+        $this->assertEquals(29, $provider->getTotalCount());
     }
 }

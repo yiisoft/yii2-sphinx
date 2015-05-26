@@ -7,6 +7,7 @@ Yii Framework 2 sphinx extension Change Log
 - Bug #13: Fixed `yii\sphinx\ActiveDataProvider` breaks the pagination if `yii\data\Pagination::validatePage` enabled even, if `yii\sphinx\Query::showMeta` is not set (klimov-paul)
 - Enh #11: `yii\sphinx\ActiveDataProvider` now disables `yii\data\Pagination::validatePage` automatically if `yii\sphinx\Query::showMeta` is set (klimov-paul)
 - Enh #11: `yii\sphinx\ActiveDataProvider` now disables `yii\data\Pagination::validatePage` automatically if `yii\sphinx\Query::showMeta` is set (klimov-paul)
+- Enh #17: Using total_found instead of total in `yii\sphinx\ActiveDataProvider::prepareTotalCount` (lmuzinic)
 
 
 2.0.4 May 10, 2015
