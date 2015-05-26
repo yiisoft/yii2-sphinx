@@ -505,7 +505,8 @@ class QueryBuilder extends Object
                 }
                 $indexes[$i] = "$index " . $this->db->quoteIndexName($i);
             } elseif (strpos($index, '(') === false) {
-                if (preg_match('/^(.*?)(?i:\s+as|)\s+([^ ]+)$/', $index, $matches)) { // with alias
+                if (preg_match('/^(.*?)(?i:\s+as|)\s+([^ ]+)$/', $index, $matches)) {
+                    // with alias
                     $indexes[$i] = $this->db->quoteIndexName($matches[1]) . ' ' . $this->db->quoteIndexName($matches[2]);
                 } else {
                     $indexes[$i] = $this->db->quoteIndexName($index);
@@ -686,7 +687,8 @@ class QueryBuilder extends Object
         } elseif (empty($condition)) {
             return '';
         }
-        if (isset($condition[0])) { // operator format: operator, operand 1, operand 2, ...
+        if (isset($condition[0])) {
+            // operator format: operator, operand 1, operand 2, ...
             $operator = strtoupper($condition[0]);
             if (isset($this->conditionBuilders[$operator])) {
                 $method = $this->conditionBuilders[$operator];
@@ -695,7 +697,8 @@ class QueryBuilder extends Object
             }
             array_shift($condition);
             return $this->$method($indexes, $operator, $condition, $params);
-        } else { // hash format: 'column1' => 'value1', 'column2' => 'value2', ...
+        } else {
+            // hash format: 'column1' => 'value1', 'column2' => 'value2', ...
             return $this->buildHashCondition($indexes, $condition, $params);
         }
     }

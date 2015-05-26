@@ -13,4 +13,4 @@ class ActiveRecordDb extends \yii\db\ActiveRecord
     {
         return self::$db;
     }
-} 
+}

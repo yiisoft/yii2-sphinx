@@ -43,39 +43,3 @@ class ActiveFixtureTest extends TestCase
         $test->tearDown();
     }
 }
-
-class RuntimeIndexFixture extends ActiveFixture
-{
-    public $modelClass = 'yiiunit\extensions\sphinx\data\ar\RuntimeIndex';
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        $this->dataFile = __DIR__ . '/data/fixtures/' . RuntimeIndex::indexName() . '.php';
-        parent::init();
-    }
-}
-
-class MySphinxTestCase
-{
-    use FixtureTrait;
-
-    public function setUp()
-    {
-        $this->unloadFixtures();
-        $this->loadFixtures();
-    }
-
-    public function tearDown()
-    {
-    }
-
-    public function fixtures()
-    {
-        return [
-            'runtimeIndex' => RuntimeIndexFixture::className(),
-        ];
-    }
-}
