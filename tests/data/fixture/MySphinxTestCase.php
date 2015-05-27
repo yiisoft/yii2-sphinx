@@ -1,9 +1,9 @@
 <?php
 
-namespace yiiunit\extensions\sphinx;
+namespace yiiunit\extensions\sphinx\data\fixture;
 
 use yii\test\FixtureTrait;
-use yiiunit\extensions\sphinx\RuntimeIndexFixture;
+use yiiunit\extensions\sphinx\data\fixture\RuntimeIndexFixture;
 
 class MySphinxTestCase
 {

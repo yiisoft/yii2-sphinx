@@ -6,6 +6,8 @@ use yii\sphinx\ActiveFixture;
 use yii\test\FixtureTrait;
 use yiiunit\extensions\sphinx\data\ar\ActiveRecord;
 use yiiunit\extensions\sphinx\data\ar\RuntimeIndex;
+use yiiunit\extensions\sphinx\data\fixture\MySphinxTestCase;
+use yiiunit\extensions\sphinx\data\fixture\RuntimeIndexFixture;
 
 class ActiveFixtureTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace yiiunit\extensions\sphinx;
+namespace yiiunit\extensions\sphinx\data\fixture;
 
 use yii\sphinx\ActiveFixture;
 use yiiunit\extensions\sphinx\data\ar\RuntimeIndex;
@@ -14,7 +14,7 @@ class RuntimeIndexFixture extends ActiveFixture
      */
     public function init()
     {
-        $this->dataFile = __DIR__ . '/data/fixtures/' . RuntimeIndex::indexName() . '.php';
+        $this->dataFile = __DIR__ . '/../fixtures/' . RuntimeIndex::indexName() . '.php';
         parent::init();
     }
 }
