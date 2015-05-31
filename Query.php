@@ -126,7 +126,7 @@ class Query extends \yii\db\Query
 
     /**
      * @param Connection $connection Sphinx connection instance
-     * @return static the query object itself
+     * @return $this the query object itself
      */
     public function setConnection($connection)
     {
@@ -260,7 +260,7 @@ class Query extends \yii\db\Query
      * ~~~
      *
      * @param string $query fulltext query text.
-     * @return static the query object itself
+     * @return $this the query object itself
      */
     public function match($query)
     {
@@ -303,7 +303,7 @@ class Query extends \yii\db\Query
     /**
      * Sets the query options.
      * @param array $options query options in format: optionName => optionValue
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see addOptions()
      */
     public function options($options)
@@ -316,7 +316,7 @@ class Query extends \yii\db\Query
     /**
      * Adds additional query options.
      * @param array $options query options in format: optionName => optionValue
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see options()
      */
     public function addOptions($options)
@@ -337,7 +337,7 @@ class Query extends \yii\db\Query
      * (e.g. `['id' => Query::SORT_ASC, 'name' => Query::SORT_DESC]`).
      * The method will automatically quote the column names unless a column contains some parenthesis
      * (which means the column contains a DB expression).
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see addWithin()
      */
     public function within($columns)
@@ -354,7 +354,7 @@ class Query extends \yii\db\Query
      * (e.g. `['id' => Query::SORT_ASC, 'name' => Query::SORT_DESC]`).
      * The method will automatically quote the column names unless a column contains some parenthesis
      * (which means the column contains a DB expression).
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see within()
      */
     public function addWithin($columns)
@@ -372,7 +372,7 @@ class Query extends \yii\db\Query
     /**
      * Sets FACET part of the query.
      * @param array $facets facet specifications.
-     * @return static the query object itself
+     * @return $this the query object itself
      */
     public function facets($facets)
     {
@@ -383,7 +383,7 @@ class Query extends \yii\db\Query
     /**
      * Adds additional FACET part of the query.
      * @param array $facets facet specifications.
-     * @return static the query object itself
+     * @return $this the query object itself
      */
     public function addFacets($facets)
     {
@@ -398,7 +398,7 @@ class Query extends \yii\db\Query
     /**
      * Sets whether to automatically perform 'SHOW META' for the search query.
      * @param boolean|string|Expression $showMeta whether to automatically perform 'SHOW META'
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see showMeta
      */
     public function showMeta($showMeta)
@@ -411,7 +411,7 @@ class Query extends \yii\db\Query
      * Sets the PHP callback, which should be used to retrieve the source data
      * for the snippets building.
      * @param callable $callback PHP callback, which should be used to fetch source data for the snippets.
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see snippetCallback
      */
     public function snippetCallback($callback)
@@ -424,7 +424,7 @@ class Query extends \yii\db\Query
     /**
      * Sets the call snippets query options.
      * @param array $options call snippet options in format: option_name => option_value
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see snippetCallback
      */
     public function snippetOptions($options)
