@@ -411,6 +411,22 @@ class QueryTest extends TestCase
             ->search($connection);
         $this->assertNotEmpty($results['hits'], 'Unable to query with complex facet');
         $this->assertNotEmpty($results['facets']['author_id'], 'Unable to fill up complex facet');
+
+        $query = new Query();
+        $results = $query->from('yii2_test_article_index')
+            ->match('about')
+            ->facets([
+                'range' => [
+                    'select' => 'INTERVAL(author_id,200,400,600,800) AS range',
+                ],
+                'authorId' => [
+                    'select' => [new Expression('author_id AS authorId')],
+                ],
+            ])
+            ->search($connection);
+        $this->assertNotEmpty($results['hits'], 'Unable to query with facet using custom select');
+        $this->assertNotEmpty($results['facets']['range'], 'Unable to fill up facet using function in select');
+        $this->assertNotEmpty($results['facets']['authorId'], 'Unable to fill up facet using `Expression` in select');
     }
 
     /**

@@ -23,7 +23,7 @@ use yii\db\Expression;
  *
  * For example,
  *
- * ~~~
+ * ~~~php
  * $query = new Query;
  * $query->select('id, group_id')
  *     ->from('idx_item')
@@ -71,7 +71,8 @@ class Query extends \yii\db\Query
      * Such callback will receive array of query result rows as an argument and must return the
      * array of snippet source strings in the order, which match one of incoming rows.
      * For example:
-     * ~~~
+     *
+     * ~~~php
      * $query = new Query;
      * $query->from('idx_item')
      *     ->match('pencil')
@@ -101,13 +102,18 @@ class Query extends \yii\db\Query
      *         'order' => ['COUNT(*)' => SORT_ASC],
      *     ],
      *     'price' => [
-     *         'select' => 'INTERVAL(price,200,400,600,800) AS price_seg',
+     *         'select' => 'INTERVAL(price,200,400,600,800) AS price',
      *         'order' => ['FACET()' => SORT_ASC],
+     *     ],
+     *     'name_in_json' => [
+     *         'select' => [new Expression('json_attr.name AS name_in_json')],
      *     ],
      * ]
      * ~~~
      *
      * You need to use [[search()]] method in order to fetch facet results.
+     *
+     * Note: if you specify custom select for the facet, ensure facet name has corresponding column inside it.
      */
     public $facets = [];
     /**
@@ -225,7 +231,7 @@ class Query extends \yii\db\Query
             }
 
             foreach ($rawFacetResults as $rawFacetResult) {
-                $rawFacetResult['value'] = $rawFacetResult[$facet['value']];
+                $rawFacetResult['value'] = $rawFacetResult[strtolower($facet['value'])];
                 $rawFacetResult['count'] = $rawFacetResult[$facet['count']];
                 $facets[$facet['name']][] = $rawFacetResult;
             }
