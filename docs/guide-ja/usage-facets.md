@@ -32,3 +32,26 @@ foreach ($results['facets']['brand_id'] as $frame) {
 ```
 
 > Note|注意: ファセット機能を使おうと試みる前に、Sphinx サーバのバージョン 2.2.3 以降を使用していることを確認してください。
+
+配列形式を使うと、`select` や `order` など、ファセットのオプションを追加して指定することが出来ます。
+
+```php
+use yii\db\Expression;
+use yii\sphinx\Query;
+
+$query = new Query();
+$results = $query->from('idx_item')
+    ->facets([
+        'price' => [
+            'select' => 'INTERVAL(price,200,400,600,800) AS price', // 関数を使用
+            'order' => ['FACET()' => SORT_ASC],
+        ],
+        'name_in_json' => [
+            'select' => [new Expression('json_attr.name AS name_in_json')], // 不必要な引用符号を避けるために `Expression` を使用する必要がある
+        ],
+    ])
+    ->search($connection);
+```
+
+> Note|注意: ファセットにカスタムセレクトを指定する場合は、必ずセレクト文の中にファセット名に対応するカラムを含めてください。
+  つまり、'my_facet' というファセットを指定した場合は、そのセレクト文は 'my_facet' という属性か、'my_facet' というエイリアスを持つ式 ('expr() AS my_facet') を含んでいなければなりません。
