@@ -35,7 +35,7 @@ foreach ($results['facets']['brand_id'] as $frame) {
 
 > Note: make sure you are using Sphinx server version 2.2.3 or higher before attempting to use facet feature.
 
-You may specify additional facet options like actual selection and order using array format:
+You may specify additional facet options like `select` or `order` using an array format:
 
 ```php
 use yii\db\Expression;
@@ -55,6 +55,6 @@ $results = $query->from('idx_item')
     ->search($connection);
 ```
 
-> Note: if you specify custom select for the facet, ensure facet name has corresponding column inside it.
-  This means if you have specified facet named 'my_facet', its select statement should contained 'my_facet' attribute or
-  expression aliased to 'my_facet' ('expr() AS my_facet').
+> Note: if you specify a custom select for a facet, ensure the facet name has the corresponding column inside the select statement.
+  For example, if you have specified a facet named 'my_facet', its select statement should contain 'my_facet' attribute or
+  an expression aliased as 'my_facet' ('expr() AS my_facet').
