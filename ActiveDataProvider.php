@@ -87,7 +87,7 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
     public function getFacets()
     {
         if (!is_array($this->_facets)) {
-            $this->prepareModels();
+            $this->prepare();
         }
         return $this->_facets;
     }
@@ -106,7 +106,7 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
     public function getMeta()
     {
         if (!is_array($this->_meta)) {
-            $this->prepareModels();
+            $this->prepare();
         }
         return $this->_meta;
     }
