@@ -6,6 +6,7 @@ Yii Framework 2 sphinx extension Change Log
 
 - Bug #13: Fixed `yii\sphinx\ActiveDataProvider` breaks the pagination if `yii\data\Pagination::validatePage` enabled even, if `yii\sphinx\Query::showMeta` is not set (klimov-paul)
 - Bug #21: `yii\sphinx\Query` unable to retrieve facet named in camel-case notation (klimov-paul)
+- Bug #27: Fixed `yii\sphinx\ActiveQuery::search()` produces 'unbuffered query' error if 'facet' or 'show meta' are used (klimov-paul)
 - Enh #11: `yii\sphinx\ActiveDataProvider` now disables `yii\data\Pagination::validatePage` automatically if `yii\sphinx\Query::showMeta` is set (klimov-paul)
 - Enh #11: `yii\sphinx\ActiveDataProvider` now disables `yii\data\Pagination::validatePage` automatically if `yii\sphinx\Query::showMeta` is set (klimov-paul)
 - Enh #17: Using total_found instead of total in `yii\sphinx\ActiveDataProvider::prepareTotalCount` (lmuzinic)
