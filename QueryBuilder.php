@@ -833,8 +833,18 @@ class QueryBuilder extends Object
 
         list($column, $values) = $operands;
 
-        if ($values === [] || $column === []) {
-            return $operator === 'IN' ? '0=1' : '';
+        if ($values === []) {
+            if ($operator === 'IN') {
+                if (empty($column)) {
+                    throw new Exception("Operator '$operator' requires column being specified.");
+                }
+                $column = $this->db->quoteColumnName($column);
+                return "({$column} = 0 AND {$column} = 1)";
+            }
+            return '';
+        }
+        if ($column === []) {
+            return '';
         }
 
         if ($values instanceof Query) {

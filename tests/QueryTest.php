@@ -475,4 +475,21 @@ class QueryTest extends TestCase
         $this->assertNotEmpty($results['meta'], 'Unable to fill meta');
         $this->assertNotEmpty($results['facets']['author_id'], 'Unable to fill up facet');
     }
+
+    /**
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/31
+     *
+     * @depends testRun
+     */
+    public function testWhereEmptyIn()
+    {
+        $connection = $this->getConnection();
+
+        $query = new Query();
+        $results = $query->from('yii2_test_article_index')
+            ->where(['id' => []])
+            ->all($connection);
+
+        $this->assertEmpty($results);
+    }
 }
