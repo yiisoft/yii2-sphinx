@@ -193,6 +193,10 @@ class QueryBuilder extends Object
         $names = [];
         $placeholders = [];
         foreach ($columns as $name => $value) {
+            if ($value === null) {
+                // Sphinx does not allows inserting `null`, column should be skipped instead
+                continue;
+            }
             $names[] = $this->db->quoteColumnName($name);
             $placeholders[] = $this->composeColumnValue($indexSchemas, $name, $value, $params);
         }
@@ -271,21 +275,27 @@ class QueryBuilder extends Object
             $indexSchemas = [];
         }
 
-        foreach ($columns as $i => $name) {
-            $columns[$i] = $this->db->quoteColumnName($name);
-        }
-
+        $notNullColumns = [];
         $values = [];
         foreach ($rows as $row) {
             $vs = [];
             foreach ($row as $i => $value) {
+                if ($value === null) {
+                    continue;
+                } elseif (!in_array($columns[$i], $notNullColumns)) {
+                    $notNullColumns[] = $columns[$i];
+                }
                 $vs[] = $this->composeColumnValue($indexSchemas, $columns[$i], $value, $params);
             }
             $values[] = '(' . implode(', ', $vs) . ')';
         }
 
+        foreach ($notNullColumns as $i => $name) {
+            $notNullColumns[$i] = $this->db->quoteColumnName($name);
+        }
+
         return $statement . ' INTO ' . $this->db->quoteIndexName($index)
-            . ' (' . implode(', ', $columns) . ') VALUES ' . implode(', ', $values);
+            . ' (' . implode(', ', $notNullColumns) . ') VALUES ' . implode(', ', $values);
     }
 
     /**

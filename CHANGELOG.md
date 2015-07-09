@@ -12,6 +12,7 @@ Yii Framework 2 sphinx extension Change Log
 - Enh #11: `yii\sphinx\ActiveDataProvider` now disables `yii\data\Pagination::validatePage` automatically if `yii\sphinx\Query::showMeta` is set (klimov-paul)
 - Enh #11: `yii\sphinx\ActiveDataProvider` now disables `yii\data\Pagination::validatePage` automatically if `yii\sphinx\Query::showMeta` is set (klimov-paul)
 - Enh #17: Using total_found instead of total in `yii\sphinx\ActiveDataProvider::prepareTotalCount` (lmuzinic)
+- Enh #29: Added `yii\sphinx\Command` automatically skips `null` values while inserting data (klimov-paul)
 
 
 2.0.4 May 10, 2015
