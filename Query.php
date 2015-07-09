@@ -206,7 +206,7 @@ class Query extends \yii\db\Query
     {
         $command = $this->createCommand($db);
         $dataReader = $command->query();
-        $rows = $this->populate($dataReader->readAll());
+        $rawRows = $dataReader->readAll();
 
         $facets = [];
         foreach ($this->facets as $facetKey => $facetValue) {
@@ -245,6 +245,9 @@ class Query extends \yii\db\Query
                 $meta[$rawMetaResult['Variable_name']] = $rawMetaResult['Value'];
             }
         }
+
+        // rows should be populated after all data read from cursor, avoiding possible 'unbuffered query' error
+        $rows = $this->populate($rawRows);
 
         return [
             'hits' => $rows,

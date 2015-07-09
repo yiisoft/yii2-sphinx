@@ -181,18 +181,6 @@ class ActiveQuery extends Query implements ActiveQueryInterface
     /**
      * @inheritdoc
      */
-    public function search($db = null)
-    {
-        /* @var $modelClass ActiveRecord */
-        $modelClass = $this->modelClass;
-        $modelClass::getIndexSchema(); // avoid 'unbuffered query' error while populating result AR objects
-
-        return parent::search($db);
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function populate($rows)
     {
         if (empty($rows)) {
