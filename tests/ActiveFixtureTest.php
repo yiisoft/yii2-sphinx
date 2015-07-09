@@ -6,6 +6,8 @@ use yii\sphinx\ActiveFixture;
 use yii\test\FixtureTrait;
 use yiiunit\extensions\sphinx\data\ar\ActiveRecord;
 use yiiunit\extensions\sphinx\data\ar\RuntimeIndex;
+use yiiunit\extensions\sphinx\data\fixture\MySphinxTestCase;
+use yiiunit\extensions\sphinx\data\fixture\RuntimeIndexFixture;
 
 class ActiveFixtureTest extends TestCase
 {
@@ -41,41 +43,5 @@ class ActiveFixtureTest extends TestCase
         $this->assertEquals(2, $fixture->getModel('row2')->id);
         $this->assertEquals(2, $fixture->getModel('row2')->type_id);
         $test->tearDown();
-    }
-}
-
-class RuntimeIndexFixture extends ActiveFixture
-{
-    public $modelClass = 'yiiunit\extensions\sphinx\data\ar\RuntimeIndex';
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        $this->dataFile = __DIR__ . '/data/fixtures/' . RuntimeIndex::indexName() . '.php';
-        parent::init();
-    }
-}
-
-class MySphinxTestCase
-{
-    use FixtureTrait;
-
-    public function setUp()
-    {
-        $this->unloadFixtures();
-        $this->loadFixtures();
-    }
-
-    public function tearDown()
-    {
-    }
-
-    public function fixtures()
-    {
-        return [
-            'runtimeIndex' => RuntimeIndexFixture::className(),
-        ];
     }
 }

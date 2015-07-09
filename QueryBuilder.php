@@ -686,7 +686,8 @@ class QueryBuilder extends Object
         } elseif (empty($condition)) {
             return '';
         }
-        if (isset($condition[0])) { // operator format: operator, operand 1, operand 2, ...
+        if (isset($condition[0])) {
+            // operator format: operator, operand 1, operand 2, ...
             $operator = strtoupper($condition[0]);
             if (isset($this->conditionBuilders[$operator])) {
                 $method = $this->conditionBuilders[$operator];
@@ -695,7 +696,8 @@ class QueryBuilder extends Object
             }
             array_shift($condition);
             return $this->$method($indexes, $operator, $condition, $params);
-        } else { // hash format: 'column1' => 'value1', 'column2' => 'value2', ...
+        } else {
+            // hash format: 'column1' => 'value1', 'column2' => 'value2', ...
             return $this->buildHashCondition($indexes, $condition, $params);
         }
     }

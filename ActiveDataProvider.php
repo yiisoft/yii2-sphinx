@@ -190,4 +190,4 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
         $query = clone $this->query;
         return (int) $query->limit(-1)->offset(-1)->orderBy([])->facets([])->showMeta(false)->count('*', $this->db);
     }
-} 
+}
