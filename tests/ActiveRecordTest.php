@@ -256,4 +256,15 @@ class ActiveRecordTest extends TestCase
         $this->assertTrue($result->one() instanceof ArticleIndex);
         $this->assertTrue($result->one() instanceof ArticleIndex);
     }
+
+    /**
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/30
+     *
+     * @depends testFind
+     */
+    public function testFindByStringPk()
+    {
+        $model = ArticleIndex::findOne('1');
+        $this->assertTrue($model instanceof ArticleIndex);
+    }
 }
