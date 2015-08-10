@@ -82,7 +82,7 @@ class Command extends \yii\db\Command
      * For example,
      *
      * ~~~
-     * $connection->createCommand()->insert('idx_user', [
+     * $connection->createCommand()->replace('idx_user', [
      *     'name' => 'Sam',
      *     'age' => 30,
      * ])->execute();
@@ -109,7 +109,7 @@ class Command extends \yii\db\Command
      * For example,
      *
      * ~~~
-     * $connection->createCommand()->batchInsert('idx_user', ['name', 'age'], [
+     * $connection->createCommand()->batchReplace('idx_user', ['name', 'age'], [
      *     ['Tom', 30],
      *     ['Jane', 20],
      *     ['Linda', 25],
