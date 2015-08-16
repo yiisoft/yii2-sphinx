@@ -449,7 +449,35 @@ class Schema extends Object
      */
     protected function findColumns($index)
     {
-        $sql = 'DESCRIBE ' . $this->quoteSimpleIndexName($index->name);
+        $columns = $this->getIndexColumns($index->name);
+        if (!empty($columns[0]['Agent'])) {
+            $columns = $this->getIndexColumns($columns[0]['Agent']);
+        }
+
+        if (empty($columns)) {
+            return $columns;
+        }
+
+        foreach ($columns as $info) {
+            $column = $this->loadColumnSchema($info);
+            $index->columns[$column->name] = $column;
+            if ($column->isPrimaryKey) {
+                $index->primaryKey = $column->name;
+            }
+        }
+
+        return true;
+    }
+
+
+    /**
+     * Return columns for index $name
+     * @param $name string index name
+     * @return array|bool
+     * @throws \Exception
+     */
+    protected function getIndexColumns($name) {
+        $sql = 'DESCRIBE ' . $this->quoteSimpleIndexName($name);
         try {
             $columns = $this->db->createCommand($sql)->queryAll();
         } catch (\Exception $e) {
@@ -462,21 +490,8 @@ class Schema extends Object
             throw $e;
         }
 
-        if (empty($columns[0]['Agent'])) {
-            foreach ($columns as $info) {
-                $column = $this->loadColumnSchema($info);
-                $index->columns[$column->name] = $column;
-                if ($column->isPrimaryKey) {
-                    $index->primaryKey = $column->name;
-                }
-            }
-        } else {
-            // Distributed index :
-            $agent = $this->getIndexSchema($columns[0]['Agent']);
-            $index->columns = $agent->columns;
-        }
+        return $columns;
 
-        return true;
     }
 
     /**
