@@ -30,6 +30,18 @@ class SchemaTest extends TestCase
         }
     }
 
+    public function testGetPrimaryKeySchema() {
+        $indexes = $this->getConnection()->schema->getIndexSchemas();
+        foreach($indexes as $index) {
+            foreach($index->columns as $column) {
+                if ($column->isPrimaryKey) {
+                    $this->assertEquals($index->primaryKey, $column->name);
+                    break;
+                }
+            }
+        }
+    }
+
     public function testGetNonExistingIndexSchema()
     {
         $this->assertNull($this->getConnection()->schema->getIndexSchema('non_existing_index'));
