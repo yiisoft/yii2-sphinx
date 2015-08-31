@@ -9,6 +9,7 @@ Yii Framework 2 sphinx extension Change Log
 - Bug #27: Fixed `yii\sphinx\ActiveQuery::search()` produces 'unbuffered query' error if 'facet' or 'show meta' are used (klimov-paul)
 - Bug #30: Fixed `yii\sphinx\ActiveQuery` does not perform typecast for condition values (klimov-paul)
 - Bug #31: Fixed `yii\sphinx\QueryBuilder::buildInCondition()` fails produces invalid SphinxQL for empty values (klimov-paul)
+- Bug #43: Fixed `yii\sphinx\QueryBuilder::buildWithin()` does not define sort order for `SORT_ASC` (klimov-paul)
 - Enh #11: `yii\sphinx\ActiveDataProvider` now disables `yii\data\Pagination::validatePage` automatically if `yii\sphinx\Query::showMeta` is set (klimov-paul)
 - Enh #11: `yii\sphinx\ActiveDataProvider` now disables `yii\data\Pagination::validatePage` automatically if `yii\sphinx\Query::showMeta` is set (klimov-paul)
 - Enh #17: Using total_found instead of total in `yii\sphinx\ActiveDataProvider::prepareTotalCount` (lmuzinic)

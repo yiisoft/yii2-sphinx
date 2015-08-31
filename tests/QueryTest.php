@@ -492,4 +492,23 @@ class QueryTest extends TestCase
 
         $this->assertEmpty($results);
     }
+
+    /**
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/43
+     *
+     * @depends testRun
+     * @depends testWithin
+     */
+    public function testRunWithin()
+    {
+        $connection = $this->getConnection();
+
+        $query = new Query();
+        $results = $query->from('yii2_test_article_index')
+            ->groupBy(['author_id'])
+            ->within(['author_id' => SORT_ASC])
+            ->all($connection);
+
+        $this->assertNotEmpty($results);
+    }
 }

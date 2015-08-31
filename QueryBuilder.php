@@ -1053,7 +1053,7 @@ class QueryBuilder extends Object
             if ($direction instanceof Expression) {
                 $orders[] = $direction->expression;
             } else {
-                $orders[] = $this->db->quoteColumnName($name) . ($direction === SORT_DESC ? ' DESC' : '');
+                $orders[] = $this->db->quoteColumnName($name) . ($direction === SORT_DESC ? ' DESC' : ' ASC');
             }
         }
 
