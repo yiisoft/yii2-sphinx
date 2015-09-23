@@ -1,8 +1,8 @@
 Yii Framework 2 sphinx extension Change Log
 ===========================================
 
-2.0.5 under development
------------------------
+2.0.5 September 23, 2015
+------------------------
 
 - Bug #13: Fixed `yii\sphinx\ActiveDataProvider` breaks the pagination if `yii\data\Pagination::validatePage` enabled even, if `yii\sphinx\Query::showMeta` is not set (klimov-paul)
 - Bug #21: `yii\sphinx\Query` unable to retrieve facet named in camel-case notation (klimov-paul)
