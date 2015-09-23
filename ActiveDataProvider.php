@@ -70,6 +70,7 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
      */
     private $_facets;
 
+
     /**
      * @param array $facets query facet results.
      */

@@ -43,7 +43,6 @@ class Schema extends Object
      * @var Connection the Sphinx connection
      */
     public $db;
-
     /**
      * @var array list of ALL index names in the Sphinx
      */
