@@ -147,4 +147,4 @@ class ActiveFixture extends BaseActiveFixture
 
         return $this->_index;
     }
-} 
+}

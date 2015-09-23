@@ -406,4 +406,58 @@ class CommandTest extends TestCase
         $this->assertArrayHasKey('docs', $rows[0], 'No docs!');
         $this->assertArrayHasKey('hits', $rows[0], 'No hits!');
     }
+
+    /**
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/29
+     *
+     * @depends testInsert
+     * @depends testBatchInsert
+     */
+    public function testInsertNullValue()
+    {
+        $db = $this->getConnection();
+
+        $command = $db->createCommand()->insert('yii2_test_rt_index', [
+            'title' => 'Test title',
+            'content' => 'Test content',
+            'type_id' => null,
+            'category' => [1, 2],
+            'id' => 1,
+        ]);
+        $this->assertEquals(1, $command->execute(), 'Unable to execute insert with null value!');
+
+        $rows = $db->createCommand('SELECT * FROM yii2_test_rt_index')->queryAll();
+        $this->assertEquals(1, count($rows), 'No row inserted!');
+
+        $command = $db->createCommand()->batchInsert(
+            'yii2_test_rt_index',
+            [
+                'title',
+                'content',
+                'type_id',
+                'category',
+                'id',
+            ],
+            [
+                [
+                    'Test title 1',
+                    'Test content 1',
+                    null,
+                    [1, 2],
+                    2,
+                ],
+                [
+                    'Test title 2',
+                    'Test content 2',
+                    null,
+                    [3, 4],
+                    3,
+                ],
+            ]
+        );
+        $this->assertEquals(2, $command->execute(), 'Unable to execute batch insert!');
+
+        $rows = $db->createCommand('SELECT * FROM yii2_test_rt_index')->queryAll();
+        $this->assertEquals(3, count($rows), 'No rows inserted!');
+    }
 }

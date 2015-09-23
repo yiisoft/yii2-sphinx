@@ -18,3 +18,7 @@ $items = $results['hits'];
 $meta = $results['meta'];
 $totalItemCount = $results['meta']['total'];
 ```
+
+> Note: Total item count that can be extracted from 'meta' is limited to `max_matches` sphinx option.
+  If your index contains more records than `max_matches` value (usually - 1000), you should either raise up
+  `max_matches` via [[Query::options]] or use [[Query::count()]] to retrieve records count.

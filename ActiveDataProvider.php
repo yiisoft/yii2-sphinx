@@ -42,7 +42,6 @@ use yii\base\InvalidConfigException;
  *     'query' => Post::find()->showMeta(true),
  *     'pagination' => [
  *         'pageSize' => 20,
- *         'validatePage' => false,
  *     ],
  * ]);
  *
@@ -50,8 +49,12 @@ use yii\base\InvalidConfigException;
  * ~~~
  *
  * Note: when using 'meta' information results total count will be fetched after pagination limit applying,
- * which eliminates ability to verify if requested page number actually exist. You should disable `yii\data\Pagination::validatePage`
- * in case you are using this approach.
+ * which eliminates ability to verify if requested page number actually exist. Data provider disables `yii\data\Pagination::validatePage`
+ * automatically in this case.
+ *
+ * Note: because pagination offset and limit may exceed Sphinx 'max_matches' bounds, data provider will set 'max_matches'
+ * option automatically based on those values. However, if [[Query::showMeta]] is set, such adjustment is not performed
+ * as it will break total count calculation, so you'll have to deal with 'max_matches' bounds on your own.
  *
  * @property array $meta search query meta info in format: name => value.
  * @property array $facets query facet results.
@@ -85,7 +88,7 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
     public function getFacets()
     {
         if (!is_array($this->_facets)) {
-            $this->prepareModels();
+            $this->prepare();
         }
         return $this->_facets;
     }
@@ -104,7 +107,7 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
     public function getMeta()
     {
         if (!is_array($this->_meta)) {
-            $this->prepareModels();
+            $this->prepare();
         }
         return $this->_meta;
     }
@@ -134,7 +137,20 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
         }
         $query = clone $this->query;
         if (($pagination = $this->getPagination()) !== false) {
-            $query->limit($pagination->getLimit())->offset($pagination->getOffset());
+            if (empty($query->showMeta)) {
+                $pagination->totalCount = $this->getTotalCount();
+                $limit = $pagination->getLimit();
+                $offset = $pagination->getOffset();
+                // pagination may exceed 'max_matches' boundary producing query error
+                if (!isset($query->options['max_matches'])) {
+                    $query->options['max_matches'] = $offset + $limit;
+                }
+                $query->limit($limit)->offset($offset);
+            } else {
+                // pagination fails to validate page number, if total count is unknown at this stage
+                $pagination->validatePage = false;
+                $query->limit($pagination->getLimit())->offset($pagination->getOffset());
+            }
         }
         if (($sort = $this->getSort()) !== false) {
             $query->addOrderBy($sort->getOrders());
@@ -160,12 +176,19 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
             throw new InvalidConfigException('The "query" property must be an instance "' . Query::className() . '" or its subclasses.');
         }
 
-        $meta = $this->getMeta();
-        if (isset($meta['total'])) {
-            return (int) $meta['total'];
+        if (!empty($this->query->showMeta)) {
+            $meta = $this->getMeta();
+
+            if (isset($meta['total_found'])) {
+                return (int) $meta['total_found'];
+            }
+
+            if (isset($meta['total'])) {
+                return (int) $meta['total'];
+            }
         }
 
         $query = clone $this->query;
         return (int) $query->limit(-1)->offset(-1)->orderBy([])->facets([])->showMeta(false)->count('*', $this->db);
     }
-} 
+}

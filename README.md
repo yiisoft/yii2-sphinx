@@ -6,6 +6,8 @@ It supports all Sphinx features including [Runtime Indexes](http://sphinxsearch.
 
 For license information check the [LICENSE](LICENSE.md)-file.
 
+Documentation is at [docs/guide/README.md](docs/guide/README.md).
+
 [![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-sphinx/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-sphinx)
 [![Total Downloads](https://poser.pugx.org/yiisoft/yii2-sphinx/downloads.png)](https://packagist.org/packages/yiisoft/yii2-sphinx)
 [![Build Status](https://travis-ci.org/yiisoft/yii2-sphinx.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-sphinx)

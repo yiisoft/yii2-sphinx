@@ -105,7 +105,7 @@ class QueryBuilder extends Object
         $clauses = [
             $this->buildSelect($query->select, $params, $query->distinct, $query->selectOption),
             $this->buildFrom($from, $params),
-            $this->buildWhere($query->from, $query->where, $params, $query->match),
+            $this->buildWhere($from, $query->where, $params, $query->match),
             $this->buildGroupBy($query->groupBy),
             $this->buildWithin($query->within),
             $this->buildHaving($query->from, $query->having, $params),
@@ -193,6 +193,10 @@ class QueryBuilder extends Object
         $names = [];
         $placeholders = [];
         foreach ($columns as $name => $value) {
+            if ($value === null) {
+                // Sphinx does not allows inserting `null`, column should be skipped instead
+                continue;
+            }
             $names[] = $this->db->quoteColumnName($name);
             $placeholders[] = $this->composeColumnValue($indexSchemas, $name, $value, $params);
         }
@@ -271,21 +275,27 @@ class QueryBuilder extends Object
             $indexSchemas = [];
         }
 
-        foreach ($columns as $i => $name) {
-            $columns[$i] = $this->db->quoteColumnName($name);
-        }
-
+        $notNullColumns = [];
         $values = [];
         foreach ($rows as $row) {
             $vs = [];
             foreach ($row as $i => $value) {
+                if ($value === null) {
+                    continue;
+                } elseif (!in_array($columns[$i], $notNullColumns)) {
+                    $notNullColumns[] = $columns[$i];
+                }
                 $vs[] = $this->composeColumnValue($indexSchemas, $columns[$i], $value, $params);
             }
             $values[] = '(' . implode(', ', $vs) . ')';
         }
 
+        foreach ($notNullColumns as $i => $name) {
+            $notNullColumns[$i] = $this->db->quoteColumnName($name);
+        }
+
         return $statement . ' INTO ' . $this->db->quoteIndexName($index)
-            . ' (' . implode(', ', $columns) . ') VALUES ' . implode(', ', $values);
+            . ' (' . implode(', ', $notNullColumns) . ') VALUES ' . implode(', ', $values);
     }
 
     /**
@@ -686,7 +696,8 @@ class QueryBuilder extends Object
         } elseif (empty($condition)) {
             return '';
         }
-        if (isset($condition[0])) { // operator format: operator, operand 1, operand 2, ...
+        if (isset($condition[0])) {
+            // operator format: operator, operand 1, operand 2, ...
             $operator = strtoupper($condition[0]);
             if (isset($this->conditionBuilders[$operator])) {
                 $method = $this->conditionBuilders[$operator];
@@ -695,7 +706,8 @@ class QueryBuilder extends Object
             }
             array_shift($condition);
             return $this->$method($indexes, $operator, $condition, $params);
-        } else { // hash format: 'column1' => 'value1', 'column2' => 'value2', ...
+        } else {
+            // hash format: 'column1' => 'value1', 'column2' => 'value2', ...
             return $this->buildHashCondition($indexes, $condition, $params);
         }
     }
@@ -833,8 +845,18 @@ class QueryBuilder extends Object
 
         list($column, $values) = $operands;
 
-        if ($values === [] || $column === []) {
-            return $operator === 'IN' ? '0=1' : '';
+        if ($values === []) {
+            if ($operator === 'IN') {
+                if (empty($column)) {
+                    throw new Exception("Operator '$operator' requires column being specified.");
+                }
+                $column = $this->db->quoteColumnName($column);
+                return "({$column} = 0 AND {$column} = 1)";
+            }
+            return '';
+        }
+        if ($column === []) {
+            return '';
         }
 
         if ($values instanceof Query) {
@@ -1031,7 +1053,7 @@ class QueryBuilder extends Object
             if ($direction instanceof Expression) {
                 $orders[] = $direction->expression;
             } else {
-                $orders[] = $this->db->quoteColumnName($name) . ($direction === SORT_DESC ? ' DESC' : '');
+                $orders[] = $this->db->quoteColumnName($name) . ($direction === SORT_DESC ? ' DESC' : ' ASC');
             }
         }
 

@@ -1,8 +1,23 @@
 Yii Framework 2 sphinx extension Change Log
 ===========================================
 
-2.0.4 under development
+2.0.5 under development
 -----------------------
+
+- Bug #13: Fixed `yii\sphinx\ActiveDataProvider` breaks the pagination if `yii\data\Pagination::validatePage` enabled even, if `yii\sphinx\Query::showMeta` is not set (klimov-paul)
+- Bug #21: `yii\sphinx\Query` unable to retrieve facet named in camel-case notation (klimov-paul)
+- Bug #27: Fixed `yii\sphinx\ActiveQuery::search()` produces 'unbuffered query' error if 'facet' or 'show meta' are used (klimov-paul)
+- Bug #30: Fixed `yii\sphinx\ActiveQuery` does not perform typecast for condition values (klimov-paul)
+- Bug #31: Fixed `yii\sphinx\QueryBuilder::buildInCondition()` fails produces invalid SphinxQL for empty values (klimov-paul)
+- Bug #43: Fixed `yii\sphinx\QueryBuilder::buildWithin()` does not define sort order for `SORT_ASC` (klimov-paul)
+- Enh #11: `yii\sphinx\ActiveDataProvider` now disables `yii\data\Pagination::validatePage` automatically if `yii\sphinx\Query::showMeta` is set (klimov-paul)
+- Enh #11: `yii\sphinx\ActiveDataProvider` now disables `yii\data\Pagination::validatePage` automatically if `yii\sphinx\Query::showMeta` is set (klimov-paul)
+- Enh #17: Using total_found instead of total in `yii\sphinx\ActiveDataProvider::prepareTotalCount` (lmuzinic)
+- Enh #29: Added `yii\sphinx\Command` automatically skips `null` values while inserting data (klimov-paul)
+
+
+2.0.4 May 10, 2015
+------------------
 
 - Enh: Fetching 'SHOW META' info added to `yii\sphinx\Query` (klimov-paul)
 - Enh #2053: Added fixture support via `yii\sphinx\ActiveFixture` (klimov-paul)

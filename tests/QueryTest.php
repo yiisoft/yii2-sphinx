@@ -273,6 +273,25 @@ class QueryTest extends TestCase
 
     /**
      * @depends testRun
+     *
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/9
+     */
+    public function testRunAndWhere()
+    {
+        $connection = $this->getConnection();
+
+        $query = new Query;
+        $rows = $query->from('yii2_test_item_index')
+            ->where([
+                'category_id' => 2,
+                'id' => 2,
+            ])
+            ->all($connection);
+        $this->assertCount(1, $rows);
+    }
+
+    /**
+     * @depends testRun
      */
     public function testWhereSpecialCharValue()
     {
@@ -392,6 +411,22 @@ class QueryTest extends TestCase
             ->search($connection);
         $this->assertNotEmpty($results['hits'], 'Unable to query with complex facet');
         $this->assertNotEmpty($results['facets']['author_id'], 'Unable to fill up complex facet');
+
+        $query = new Query();
+        $results = $query->from('yii2_test_article_index')
+            ->match('about')
+            ->facets([
+                'range' => [
+                    'select' => 'INTERVAL(author_id,200,400,600,800) AS range',
+                ],
+                'authorId' => [
+                    'select' => [new Expression('author_id AS authorId')],
+                ],
+            ])
+            ->search($connection);
+        $this->assertNotEmpty($results['hits'], 'Unable to query with facet using custom select');
+        $this->assertNotEmpty($results['facets']['range'], 'Unable to fill up facet using function in select');
+        $this->assertNotEmpty($results['facets']['authorId'], 'Unable to fill up facet using `Expression` in select');
     }
 
     /**
@@ -439,5 +474,41 @@ class QueryTest extends TestCase
         $this->assertNotEmpty($results['hits'], 'Unable to query with facet');
         $this->assertNotEmpty($results['meta'], 'Unable to fill meta');
         $this->assertNotEmpty($results['facets']['author_id'], 'Unable to fill up facet');
+    }
+
+    /**
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/31
+     *
+     * @depends testRun
+     */
+    public function testWhereEmptyIn()
+    {
+        $connection = $this->getConnection();
+
+        $query = new Query();
+        $results = $query->from('yii2_test_article_index')
+            ->where(['id' => []])
+            ->all($connection);
+
+        $this->assertEmpty($results);
+    }
+
+    /**
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/43
+     *
+     * @depends testRun
+     * @depends testWithin
+     */
+    public function testRunWithin()
+    {
+        $connection = $this->getConnection();
+
+        $query = new Query();
+        $results = $query->from('yii2_test_article_index')
+            ->groupBy(['author_id'])
+            ->within(['author_id' => SORT_ASC])
+            ->all($connection);
+
+        $this->assertNotEmpty($results);
     }
 }

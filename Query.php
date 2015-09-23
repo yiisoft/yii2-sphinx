@@ -23,7 +23,7 @@ use yii\db\Expression;
  *
  * For example,
  *
- * ~~~
+ * ~~~php
  * $query = new Query;
  * $query->select('id, group_id')
  *     ->from('idx_item')
@@ -71,7 +71,8 @@ class Query extends \yii\db\Query
      * Such callback will receive array of query result rows as an argument and must return the
      * array of snippet source strings in the order, which match one of incoming rows.
      * For example:
-     * ~~~
+     *
+     * ~~~php
      * $query = new Query;
      * $query->from('idx_item')
      *     ->match('pencil')
@@ -101,13 +102,18 @@ class Query extends \yii\db\Query
      *         'order' => ['COUNT(*)' => SORT_ASC],
      *     ],
      *     'price' => [
-     *         'select' => 'INTERVAL(price,200,400,600,800) AS price_seg',
+     *         'select' => 'INTERVAL(price,200,400,600,800) AS price',
      *         'order' => ['FACET()' => SORT_ASC],
+     *     ],
+     *     'name_in_json' => [
+     *         'select' => [new Expression('json_attr.name AS name_in_json')],
      *     ],
      * ]
      * ~~~
      *
      * You need to use [[search()]] method in order to fetch facet results.
+     *
+     * Note: if you specify custom select for the facet, ensure facet name has corresponding column inside it.
      */
     public $facets = [];
     /**
@@ -126,7 +132,7 @@ class Query extends \yii\db\Query
 
     /**
      * @param Connection $connection Sphinx connection instance
-     * @return static the query object itself
+     * @return $this the query object itself
      */
     public function setConnection($connection)
     {
@@ -200,7 +206,7 @@ class Query extends \yii\db\Query
     {
         $command = $this->createCommand($db);
         $dataReader = $command->query();
-        $rows = $this->populate($dataReader->readAll());
+        $rawRows = $dataReader->readAll();
 
         $facets = [];
         foreach ($this->facets as $facetKey => $facetValue) {
@@ -225,7 +231,7 @@ class Query extends \yii\db\Query
             }
 
             foreach ($rawFacetResults as $rawFacetResult) {
-                $rawFacetResult['value'] = $rawFacetResult[$facet['value']];
+                $rawFacetResult['value'] = $rawFacetResult[strtolower($facet['value'])];
                 $rawFacetResult['count'] = $rawFacetResult[$facet['count']];
                 $facets[$facet['name']][] = $rawFacetResult;
             }
@@ -239,6 +245,9 @@ class Query extends \yii\db\Query
                 $meta[$rawMetaResult['Variable_name']] = $rawMetaResult['Value'];
             }
         }
+
+        // rows should be populated after all data read from cursor, avoiding possible 'unbuffered query' error
+        $rows = $this->populate($rawRows);
 
         return [
             'hits' => $rows,
@@ -260,7 +269,7 @@ class Query extends \yii\db\Query
      * ~~~
      *
      * @param string $query fulltext query text.
-     * @return static the query object itself
+     * @return $this the query object itself
      */
     public function match($query)
     {
@@ -303,7 +312,7 @@ class Query extends \yii\db\Query
     /**
      * Sets the query options.
      * @param array $options query options in format: optionName => optionValue
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see addOptions()
      */
     public function options($options)
@@ -316,7 +325,7 @@ class Query extends \yii\db\Query
     /**
      * Adds additional query options.
      * @param array $options query options in format: optionName => optionValue
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see options()
      */
     public function addOptions($options)
@@ -337,7 +346,7 @@ class Query extends \yii\db\Query
      * (e.g. `['id' => Query::SORT_ASC, 'name' => Query::SORT_DESC]`).
      * The method will automatically quote the column names unless a column contains some parenthesis
      * (which means the column contains a DB expression).
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see addWithin()
      */
     public function within($columns)
@@ -354,7 +363,7 @@ class Query extends \yii\db\Query
      * (e.g. `['id' => Query::SORT_ASC, 'name' => Query::SORT_DESC]`).
      * The method will automatically quote the column names unless a column contains some parenthesis
      * (which means the column contains a DB expression).
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see within()
      */
     public function addWithin($columns)
@@ -372,7 +381,7 @@ class Query extends \yii\db\Query
     /**
      * Sets FACET part of the query.
      * @param array $facets facet specifications.
-     * @return static the query object itself
+     * @return $this the query object itself
      */
     public function facets($facets)
     {
@@ -383,7 +392,7 @@ class Query extends \yii\db\Query
     /**
      * Adds additional FACET part of the query.
      * @param array $facets facet specifications.
-     * @return static the query object itself
+     * @return $this the query object itself
      */
     public function addFacets($facets)
     {
@@ -398,7 +407,7 @@ class Query extends \yii\db\Query
     /**
      * Sets whether to automatically perform 'SHOW META' for the search query.
      * @param boolean|string|Expression $showMeta whether to automatically perform 'SHOW META'
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see showMeta
      */
     public function showMeta($showMeta)
@@ -411,7 +420,7 @@ class Query extends \yii\db\Query
      * Sets the PHP callback, which should be used to retrieve the source data
      * for the snippets building.
      * @param callable $callback PHP callback, which should be used to fetch source data for the snippets.
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see snippetCallback
      */
     public function snippetCallback($callback)
@@ -424,7 +433,7 @@ class Query extends \yii\db\Query
     /**
      * Sets the call snippets query options.
      * @param array $options call snippet options in format: option_name => option_value
-     * @return static the query object itself
+     * @return $this the query object itself
      * @see snippetCallback
      */
     public function snippetOptions($options)
