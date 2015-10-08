@@ -30,7 +30,8 @@ class SchemaTest extends TestCase
         }
     }
 
-    public function testGetPrimaryKeySchema() {
+    public function testGetPrimaryKeySchema()
+    {
         $indexes = $this->getConnection()->schema->getIndexSchemas();
         foreach($indexes as $index) {
             foreach($index->columns as $column) {
