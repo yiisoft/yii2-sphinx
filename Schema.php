@@ -449,14 +449,28 @@ class Schema extends Object
      */
     protected function findColumns($index)
     {
-        $columns = $this->getIndexColumns($index->name);
-        if (!empty($columns[0]['Agent'])) {
-            $columns = $this->getIndexColumns($columns[0]['Agent']);
-        }
+        $indexName = $index->name;
+        do {
+            $next = false;
+            $sql = 'DESCRIBE ' . $this->quoteSimpleIndexName($indexName);
+            try {
+                $columns = $this->db->createCommand($sql)->queryAll();
+            } catch (\Exception $e) {
+                $previous = $e->getPrevious();
+                if ($previous instanceof \PDOException && strpos($previous->getMessage(), 'SQLSTATE[42S02') !== false) {
+                    // index does not exist
+                    // https://dev.mysql.com/doc/refman/5.5/en/error-messages-server.html#error_er_bad_table_error
+                    return false;
+                }
+                throw $e;
+            }
 
-        if (empty($columns)) {
-            return $columns;
-        }
+            // for distributed index
+            if (!empty($columns[0]['Agent'])) {
+                $indexName = $columns[0]['Agent'];
+                $next = true;
+            }
+        } while($next);
 
         foreach ($columns as $info) {
             $column = $this->loadColumnSchema($info);
@@ -467,31 +481,6 @@ class Schema extends Object
         }
 
         return true;
-    }
-
-
-    /**
-     * Return columns for index $name
-     * @param $name string index name
-     * @return array|bool
-     * @throws \Exception
-     */
-    protected function getIndexColumns($name) {
-        $sql = 'DESCRIBE ' . $this->quoteSimpleIndexName($name);
-        try {
-            $columns = $this->db->createCommand($sql)->queryAll();
-        } catch (\Exception $e) {
-            $previous = $e->getPrevious();
-            if ($previous instanceof \PDOException && strpos($previous->getMessage(), 'SQLSTATE[42S02') !== false) {
-                // index does not exist
-                // https://dev.mysql.com/doc/refman/5.5/en/error-messages-server.html#error_er_bad_table_error
-                return false;
-            }
-            throw $e;
-        }
-
-        return $columns;
-
     }
 
     /**
