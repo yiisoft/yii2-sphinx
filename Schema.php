@@ -451,7 +451,6 @@ class Schema extends Object
     {
         $indexName = $index->name;
         do {
-            $next = false;
             $sql = 'DESCRIBE ' . $this->quoteSimpleIndexName($indexName);
             try {
                 $columns = $this->db->createCommand($sql)->queryAll();
@@ -466,10 +465,10 @@ class Schema extends Object
             }
 
             // for distributed index
-            if (!empty($columns[0]['Agent'])) {
-                $indexName = $columns[0]['Agent'];
-                $next = true;
-            }
+            list($next, $indexName) = !empty($columns[0]['Agent'])
+                ? array(true, $columns[0]['Agent'])
+                : array(false, $indexName);
+
         } while($next);
 
         foreach ($columns as $info) {
