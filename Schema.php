@@ -473,6 +473,7 @@ class Schema extends Object
             // Distributed index :
             $agent = $this->getIndexSchema($columns[0]['Agent']);
             $index->columns = $agent->columns;
+            $index->primaryKey = $agent->primaryKey;
         }
 
         return true;

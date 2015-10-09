@@ -80,4 +80,20 @@ class SchemaTest extends TestCase
         $this->assertEquals('rt', $index->type);
         $this->assertTrue($index->isRuntime);
     }
+
+    /**
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/45
+     */
+    public function testGetSchemaPrimaryKey()
+    {
+        /* @var $indexSchema \yii\sphinx\IndexSchema */
+        $indexSchema = $this->getConnection()->schema->getIndexSchema('yii2_test_item_index');
+        $this->assertEquals('id', $indexSchema->primaryKey);
+
+        $indexSchema = $this->getConnection()->schema->getIndexSchema('yii2_test_rt_index');
+        $this->assertEquals('id', $indexSchema->primaryKey);
+
+        $indexSchema = $this->getConnection()->schema->getIndexSchema('yii2_test_distributed');
+        $this->assertEquals('id', $indexSchema->primaryKey);
+    }
 }
