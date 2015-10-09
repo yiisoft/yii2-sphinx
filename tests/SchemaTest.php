@@ -3,6 +3,7 @@
 namespace yiiunit\extensions\sphinx;
 
 use yii\caching\FileCache;
+use yii\sphinx\ColumnSchema;
 
 /**
  * @group sphinx
@@ -34,12 +35,10 @@ class SchemaTest extends TestCase
     {
         $indexes = $this->getConnection()->schema->getIndexSchemas();
         foreach($indexes as $index) {
-            foreach($index->columns as $column) {
-                if ($column->isPrimaryKey) {
-                    $this->assertEquals($index->primaryKey, $column->name);
-                    break;
-                }
-            }
+            $this->assertNotEmpty($index->primaryKey);
+            $this->assertArrayHasKey($index->primaryKey, $index->columns);
+            $this->assertInstanceOf(ColumnSchema::className(), $index->columns[$index->primaryKey]);
+            $this->assertTrue($index->columns[$index->primaryKey]->isPrimaryKey);
         }
     }
 
