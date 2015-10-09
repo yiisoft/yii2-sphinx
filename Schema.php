@@ -465,9 +465,11 @@ class Schema extends Object
             }
 
             // for distributed index
-            list($next, $indexName) = !empty($columns[0]['Agent'])
-                ? array(true, $columns[0]['Agent'])
-                : array(false, $indexName);
+            $next = false;
+            if (!empty($columns[0]['Agent'])) {
+                $next = true;
+                $indexName = $columns[0]['Agent'];
+            }
 
         } while($next);
 
