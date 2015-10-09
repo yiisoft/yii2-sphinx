@@ -448,31 +448,36 @@ class Schema extends Object
      */
     protected function findColumns($index)
     {
-        $sql = 'DESCRIBE ' . $this->quoteSimpleIndexName($index->name);
-        try {
-            $columns = $this->db->createCommand($sql)->queryAll();
-        } catch (\Exception $e) {
-            $previous = $e->getPrevious();
-            if ($previous instanceof \PDOException && strpos($previous->getMessage(), 'SQLSTATE[42S02') !== false) {
-                // index does not exist
-                // https://dev.mysql.com/doc/refman/5.5/en/error-messages-server.html#error_er_bad_table_error
-                return false;
-            }
-            throw $e;
-        }
-
-        if (empty($columns[0]['Agent'])) {
-            foreach ($columns as $info) {
-                $column = $this->loadColumnSchema($info);
-                $index->columns[$column->name] = $column;
-                if ($column->isPrimaryKey) {
-                    $index->primaryKey = $column->name;
+        $indexName = $index->name;
+        do {
+            $sql = 'DESCRIBE ' . $this->quoteSimpleIndexName($indexName);
+            try {
+                $columns = $this->db->createCommand($sql)->queryAll();
+            } catch (\Exception $e) {
+                $previous = $e->getPrevious();
+                if ($previous instanceof \PDOException && strpos($previous->getMessage(), 'SQLSTATE[42S02') !== false) {
+                    // index does not exist
+                    // https://dev.mysql.com/doc/refman/5.5/en/error-messages-server.html#error_er_bad_table_error
+                    return false;
                 }
+                throw $e;
             }
-        } else {
-            // Distributed index :
-            $agent = $this->getIndexSchema($columns[0]['Agent']);
-            $index->columns = $agent->columns;
+
+            // for distributed index
+            $next = false;
+            if (!empty($columns[0]['Agent'])) {
+                $next = true;
+                $indexName = $columns[0]['Agent'];
+            }
+
+        } while($next);
+
+        foreach ($columns as $info) {
+            $column = $this->loadColumnSchema($info);
+            $index->columns[$column->name] = $column;
+            if ($column->isPrimaryKey) {
+                $index->primaryKey = $column->name;
+            }
         }
 
         return true;
