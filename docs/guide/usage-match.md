@@ -8,7 +8,7 @@ condition, but if you are using `yii\sphinx\Query` you can do it via `yii\sphinx
 ```php
 use yii\sphinx\Query;
 
-$query = new Query;
+$query = new Query();
 $rows = $query->from('idx_item')
     ->match($_POST['search'])
     ->all();
@@ -22,7 +22,7 @@ its argument. So if you wish to use complex 'MATCH' statement, you should use `y
 use yii\sphinx\Query;
 use yii\db\Expression;
 
-$query = new Query;
+$query = new Query();
 $rows = $query->from('idx_item')
     ->match(new Expression(':match', ['match' => '@(content) ' . Yii::$app->sphinx->escapeMatchValue($_POST['search'])]))
     ->all();

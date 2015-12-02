@@ -13,13 +13,13 @@ class QueryTest extends TestCase
     public function testSelect()
     {
         // default
-        $query = new Query;
+        $query = new Query();
         $query->select('*');
         $this->assertEquals(['*'], $query->select);
         $this->assertNull($query->distinct);
         $this->assertEquals(null, $query->selectOption);
 
-        $query = new Query;
+        $query = new Query();
         $query->select('id, name', 'something')->distinct(true);
         $this->assertEquals(['id', 'name'], $query->select);
         $this->assertTrue($query->distinct);
@@ -28,14 +28,14 @@ class QueryTest extends TestCase
 
     public function testFrom()
     {
-        $query = new Query;
+        $query = new Query();
         $query->from('user');
         $this->assertEquals(['user'], $query->from);
     }
 
     public function testMatch()
     {
-        $query = new Query;
+        $query = new Query();
         $match = 'test match';
         $query->match($match);
         $this->assertEquals($match, $query->match);
@@ -47,7 +47,7 @@ class QueryTest extends TestCase
 
     public function testWhere()
     {
-        $query = new Query;
+        $query = new Query();
         $query->where('id = :id', [':id' => 1]);
         $this->assertEquals('id = :id', $query->where);
         $this->assertEquals([':id' => 1], $query->params);
@@ -64,7 +64,7 @@ class QueryTest extends TestCase
     public function testFilterWhere()
     {
         // should work with hash format
-        $query = new Query;
+        $query = new Query();
         $query->filterWhere([
             'id' => 0,
             'title' => '   ',
@@ -79,7 +79,7 @@ class QueryTest extends TestCase
         $this->assertEquals(['id' => 0], $query->where);
 
         // should work with operator format
-        $query = new Query;
+        $query = new Query();
         $condition = ['like', 'name', 'Alex'];
         $query->filterWhere($condition);
         $this->assertEquals($condition, $query->where);
@@ -121,7 +121,7 @@ class QueryTest extends TestCase
 
     public function testGroup()
     {
-        $query = new Query;
+        $query = new Query();
         $query->groupBy('team');
         $this->assertEquals(['team'], $query->groupBy);
 
@@ -134,7 +134,7 @@ class QueryTest extends TestCase
 
     public function testHaving()
     {
-        $query = new Query;
+        $query = new Query();
         $query->having('id = :id', [':id' => 1]);
         $this->assertEquals('id = :id', $query->having);
         $this->assertEquals([':id' => 1], $query->params);
@@ -150,7 +150,7 @@ class QueryTest extends TestCase
 
     public function testOrder()
     {
-        $query = new Query;
+        $query = new Query();
         $query->orderBy('team');
         $this->assertEquals(['team' => SORT_ASC], $query->orderBy);
 
@@ -169,7 +169,7 @@ class QueryTest extends TestCase
 
     public function testLimitOffset()
     {
-        $query = new Query;
+        $query = new Query();
         $query->limit(10)->offset(5);
         $this->assertEquals(10, $query->limit);
         $this->assertEquals(5, $query->offset);
@@ -177,7 +177,7 @@ class QueryTest extends TestCase
 
     public function testWithin()
     {
-        $query = new Query;
+        $query = new Query();
         $query->within('team');
         $this->assertEquals(['team' => SORT_ASC], $query->within);
 
@@ -196,7 +196,7 @@ class QueryTest extends TestCase
 
     public function testOptions()
     {
-        $query = new Query;
+        $query = new Query();
         $options = [
             'cutoff' => 50,
             'max_matches' => 50,
@@ -213,7 +213,7 @@ class QueryTest extends TestCase
     {
         $connection = $this->getConnection();
 
-        $query = new Query;
+        $query = new Query();
         $rows = $query->from('yii2_test_article_index')
             ->match('about')
             ->options([
@@ -247,7 +247,7 @@ class QueryTest extends TestCase
             'after_match' => ']',
         ];
 
-        $query = new Query;
+        $query = new Query();
         $rows = $query->from('yii2_test_article_index')
             ->match($match)
             ->snippetCallback($snippetCallback)
@@ -264,7 +264,7 @@ class QueryTest extends TestCase
     {
         $connection = $this->getConnection();
 
-        $query = new Query;
+        $query = new Query();
         $count = $query->from('yii2_test_article_index')
             ->match('about')
             ->count('*', $connection);
@@ -280,7 +280,7 @@ class QueryTest extends TestCase
     {
         $connection = $this->getConnection();
 
-        $query = new Query;
+        $query = new Query();
         $rows = $query->from('yii2_test_item_index')
             ->where([
                 'category_id' => 2,
@@ -297,7 +297,7 @@ class QueryTest extends TestCase
     {
         $connection = $this->getConnection();
 
-        $query = new Query;
+        $query = new Query();
         $rows = $query->from('yii2_test_article_index')
             ->andWhere(['author_id' => 'some"'])
             ->all($connection);
@@ -339,7 +339,7 @@ class QueryTest extends TestCase
     {
         $connection = $this->getConnection();
 
-        $query = new Query;
+        $query = new Query();
         $rows = $query->from('yii2_test_article_index')
             ->match('about' . $char)
             ->all($connection);
@@ -353,7 +353,7 @@ class QueryTest extends TestCase
     {
         $connection = $this->getConnection();
 
-        $query = new Query;
+        $query = new Query();
         $rows = $query->from('yii2_test_article_index')
             ->match(new Expression(':match', ['match' => '@(content) ' . $connection->escapeMatchValue('about\\"')]))
             ->all($connection);
@@ -369,7 +369,7 @@ class QueryTest extends TestCase
     {
         $connection = $this->getConnection();
 
-        $query = new Query;
+        $query = new Query();
         $rows = $query->from('yii2_test_distributed')
             ->match('about')
             ->options([

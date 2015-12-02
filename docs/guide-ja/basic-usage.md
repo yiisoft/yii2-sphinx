@@ -17,7 +17,7 @@ $rows = Yii::$app->sphinx->createCommand($sql, $params)->queryAll();
 ```php
 use yii\sphinx\Query;
 
-$query = new Query;
+$query = new Query();
 $rows = $query->select('id, price')
     ->from('idx_item')
     ->andWhere(['group_id' => 1])

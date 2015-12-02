@@ -7,7 +7,7 @@ You can use [[\yii\data\ActiveDataProvider]] with the [[\yii\sphinx\Query]] and 
 use yii\data\ActiveDataProvider;
 use yii\sphinx\Query;
 
-$query = new Query;
+$query = new Query();
 $query->from('yii2_test_article_index')->match('development');
 $provider = new ActiveDataProvider([
     'query' => $query,

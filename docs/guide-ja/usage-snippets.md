@@ -25,7 +25,7 @@ $snippets = Yii::$app->sphinx->createCommand($sql)->callSnippets('idx_item', $ro
 ```php
 use yii\sphinx\Query;
 
-$query = new Query;
+$query = new Query();
 $rows = $query->from('idx_item')
     ->match($_POST['search'])
     ->snippetCallback(function ($rows) {

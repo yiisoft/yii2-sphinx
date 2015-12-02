@@ -8,7 +8,7 @@ SphinxQL では、全文検索の機能は 'MATCH' 文によって提供され�
 ```php
 use yii\sphinx\Query;
 
-$query = new Query;
+$query = new Query();
 $rows = $query->from('idx_item')
     ->match($_POST['search'])
     ->all();
@@ -22,7 +22,7 @@ Sphinx の 'MATCH' 文の引数は、検索結果をより良く調整するた�
 use yii\sphinx\Query;
 use yii\db\Expression;
 
-$query = new Query;
+$query = new Query();
 $rows = $query->from('idx_item')
     ->match(new Expression(':match', ['match' => '@(content) ' . Yii::$app->sphinx->escapeMatchValue($_POST['search'])]))
     ->all();

@@ -24,7 +24,7 @@ use yii\db\Expression;
  * For example,
  *
  * ~~~php
- * $query = new Query;
+ * $query = new Query();
  * $query->select('id, group_id')
  *     ->from('idx_item')
  *     ->limit(10);
@@ -73,7 +73,7 @@ class Query extends \yii\db\Query
      * For example:
      *
      * ~~~php
-     * $query = new Query;
+     * $query = new Query();
      * $query->from('idx_item')
      *     ->match('pencil')
      *     ->snippetCallback(function ($rows) {
@@ -262,7 +262,7 @@ class Query extends \yii\db\Query
      * Note: this value will be processed by [[Connection::escapeMatchValue()]],
      * if you need to compose complex match condition use [[Expression]]:
      * ~~~
-     * $query = new Query;
+     * $query = new Query();
      * $query->from('my_index')
      *     ->match(new Expression(':match', ['match' => '@(content) ' . Yii::$app->sphinx->escapeMatchValue($matchValue)]))
      *     ->all();
