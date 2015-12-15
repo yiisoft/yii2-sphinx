@@ -28,4 +28,4 @@ $rows = $query->from('idx_item')
     ->all();
 ```
 
-> Note|注意: 'MATCH' の引数を作成する場合は、必ず `yii\sphinx\Connection::escapeMatchValue()` を使って、クエリを破壊する全ての特殊文字を正しくエスケープしてください。
+> Note: 'MATCH' の引数を作成する場合は、必ず `yii\sphinx\Connection::escapeMatchValue()` を使って、クエリを破壊する全ての特殊文字を正しくエスケープしてください。
