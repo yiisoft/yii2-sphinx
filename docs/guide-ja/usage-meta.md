@@ -18,5 +18,5 @@ $meta = $results['meta'];
 $totalItemCount = $results['meta']['total'];
 ```
 
-> Note|注意: 'meta' から抽出可能な総アイテム数は Sphinx の `max_matches` オプションの値に制限されることに注意してください。
+> Note: 'meta' から抽出可能な総アイテム数は Sphinx の `max_matches` オプションの値に制限されることに注意してください。
   あなたのインデックスが `max_matches` の値 (通常は 1000 以下) を超えるレコードを含んでいる場合は、レコード数を取得するためには、[[Query::options]] によって `max_matches` を引き上げるか、または [[Query::count()]] を使わなければなりません。
