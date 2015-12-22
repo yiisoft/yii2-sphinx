@@ -50,6 +50,9 @@ class MatchBuilder
      */
     public function buildMatchExpression($match, &$params)
     {
+        if($match instanceof Expression)
+            return $match;
+
         $matchExpression = $this->buildMatch($match, $params);
         $matchRaw = $this->replaceParams($matchExpression, $params);
         return new Expression(Yii::$app->sphinx->quoteValue($matchRaw));
