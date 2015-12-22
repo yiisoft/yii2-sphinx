@@ -540,7 +540,7 @@ class QueryBuilder extends Object
     public function buildWhere($indexes, $condition, &$params, $match = null)
     {
         if ($match !== null) {
-            $matchBuilder = new MatchBuilder();
+            $matchBuilder = new MatchBuilder(['db' => $this->db]);
             $matchWhere = 'MATCH(' . $matchBuilder->buildMatchExpression($match, $params) . ')';
 
             if ($condition === null) {

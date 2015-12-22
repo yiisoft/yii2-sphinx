@@ -5,16 +5,21 @@
 
 namespace yii\sphinx;
 
-use Yii;
 use yii\db\Expression;
 use yii\base\InvalidParamException;
 use yii\helpers\ArrayHelper;
+use yii\base\Object;
 
 /**
  * Match Builder
  */
-class MatchBuilder
+class MatchBuilder extends Object
 {
+    /**
+     * @var Connection the Sphinx connection.
+     */
+    public $db;
+
     /**
      * @var array map of query match to builder methods
      * These methods are used by [[buildMatch]] to build string inside SQL Match method.
@@ -55,7 +60,7 @@ class MatchBuilder
 
         $matchExpression = $this->buildMatch($match, $params);
         $matchRaw = $this->replaceParams($matchExpression, $params);
-        return new Expression(Yii::$app->sphinx->quoteValue($matchRaw));
+        return new Expression($this->db->quoteValue($matchRaw));
     }
 
     /**
@@ -295,7 +300,7 @@ class MatchBuilder
 
         foreach ($params as $name => $value) {
             $pattern = "/" . preg_quote($name, '/') . '\b/';
-            $sql = preg_replace($pattern, Yii::$app->sphinx->escapeMatchValue($value), $sql, -1, $cnt);
+            $sql = preg_replace($pattern, $this->db->escapeMatchValue($value), $sql, -1, $cnt);
             if ($cnt > 0) {
                 unset($params[$name]);
             }
