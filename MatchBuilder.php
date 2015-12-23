@@ -16,6 +16,11 @@ use yii\base\Object;
 class MatchBuilder extends Object
 {
     /**
+     * The prefix for automatically generated query binding parameters.
+     */
+    const PARAM_PREFIX = ':qp';
+
+    /**
      * @var Connection the Sphinx connection.
      */
     public $db;
@@ -48,19 +53,26 @@ class MatchBuilder extends Object
     ];
 
     /**
-     * Create Match Expression
+     * Create Match Where String
      * @param string|array $match
      * @param array $params the binding parameters to be populated
      * @return string the MATCH Expression
      */
-    public function buildMatchExpression($match, &$params)
+    public function buildMatchWhere($match, &$params)
     {
-        if($match instanceof Expression)
-            return $match;
+        if ($match instanceof Expression) {
+            $params = array_merge($params, $match->params);
+            return 'MATCH(' . $match->expression . ')';
+        } elseif(is_string($match)) {
+            $phName = self::PARAM_PREFIX . count($params);
+            $params[$phName] = $this->db->escapeMatchValue($match);
+            return 'MATCH(' . $phName . ')';
+        }
 
         $matchExpression = $this->buildMatch($match, $params);
         $matchRaw = $this->replaceParams($matchExpression, $params);
-        return new Expression($this->db->quoteValue($matchRaw));
+
+        return 'MATCH(' . $this->db->quoteValue($matchRaw) . ')';
     }
 
     /**
@@ -254,7 +266,7 @@ class MatchBuilder extends Object
                 $params = array_merge($params, $v->params);
                 $parts[] = $v->expression;
             } else {
-                $phName = QueryBuilder::PARAM_PREFIX . count($params);
+                $phName = self::PARAM_PREFIX . count($params);
                 $parts[] = '"' . $phName . '"';
                 $params[$phName] = $v;
             }
