@@ -471,7 +471,11 @@ class Schema extends Object
             }
         } else {
             // Distributed index :
-            $agent = $this->getIndexSchema($columns[0]['Agent']);
+            foreach($columns as $column) {
+                $agent = $this->getIndexSchema($column['Agent']);
+                if($agent)
+                    break;
+            }
             $index->columns = $agent->columns;
             $index->primaryKey = $agent->primaryKey;
         }
