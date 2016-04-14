@@ -257,23 +257,51 @@ class Query extends \yii\db\Query
     }
 
     /**
-     * Sets the fulltext query text. This text will be composed into
-     * MATCH operator inside the WHERE clause.
-     * Note: this value will be processed by [[Connection::escapeMatchValue()]],
-     * if you need to compose complex match condition use [[Expression]]:
-     * ~~~
-     * $query = new Query();
-     * $query->from('my_index')
-     *     ->match(new Expression(':match', ['match' => '@(content) ' . Yii::$app->sphinx->escapeMatchValue($matchValue)]))
-     *     ->all();
-     * ~~~
-     *
-     * @param string $query fulltext query text.
+     * Sets the MATCH part of the WHERE condition.
+     * @param  array|string|Expression $match
      * @return $this the query object itself
+     * @see andMatch()
+     * @see orMatch()
      */
-    public function match($query)
+    public function match($match)
     {
-        $this->match = $query;
+        $this->match = $match;
+        return $this;
+    }
+
+    /**
+     * Adds an additional MATCH condition to the existing one.
+     * The new condition and the existing one will be joined.
+     * @param  array|string|Expression $match
+     * @return $this the query object itself
+     * @see match()
+     * @see orMatch()
+     */
+    public function andMatch($match)
+    {
+        if ($this->match === null) {
+            $this->match = $match;
+        } else {
+            $this->match = ['and', $this->match, $match];
+        }
+        return $this;
+    }
+
+    /**
+     * Adds an additional MATCH condition to the existing one.
+     * The new condition and the existing one will be joined using the '|' operator.
+     * @param  array|string|Expression $match
+     * @return $this the query object itself
+     * @see match()
+     * @see andMatch()
+     */
+    public function orMatch($match)
+    {
+        if ($this->match === null) {
+            $this->match = $match;
+        } else {
+            $this->match = ['or', $this->match, $match];
+        }
         return $this;
     }
 
