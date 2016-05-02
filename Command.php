@@ -21,21 +21,21 @@ use yii\base\NotSupportedException;
  * use [[queryAll()]], [[queryOne()]], [[queryColumn()]], [[queryScalar()]], or [[query()]].
  * For example,
  *
- * ~~~
+ * ```php
  * $articles = $connection->createCommand("SELECT * FROM `idx_article` WHERE MATCH('programming')")->queryAll();
- * ~~~
+ * ```
  *
  * Command supports SQL statement preparation and parameter binding just as [[\yii\db\Command]] does.
  *
  * Command also supports building SQL statements by providing methods such as [[insert()]],
  * [[update()]], etc. For example,
  *
- * ~~~
+ * ```php
  * $connection->createCommand()->update('idx_article', [
  *     'genre_id' => 15,
  *     'author_id' => 157,
  * ])->execute();
- * ~~~
+ * ```
  *
  * To build SELECT SQL statements, please use [[Query]] and [[QueryBuilder]] instead.
  *
@@ -54,13 +54,13 @@ class Command extends \yii\db\Command
      * Creates a batch INSERT command.
      * For example,
      *
-     * ~~~
+     * ```php
      * $connection->createCommand()->batchInsert('idx_user', ['name', 'age'], [
      *     ['Tom', 30],
      *     ['Jane', 20],
      *     ['Linda', 25],
      * ])->execute();
-     * ~~~
+     * ```
      *
      * Note that the values in each row must match the corresponding column names.
      *
@@ -81,12 +81,12 @@ class Command extends \yii\db\Command
      * Creates an REPLACE command.
      * For example,
      *
-     * ~~~
+     * ```php
      * $connection->createCommand()->replace('idx_user', [
      *     'name' => 'Sam',
      *     'age' => 30,
      * ])->execute();
-     * ~~~
+     * ```
      *
      * The method will properly escape the column names, and bind the values to be replaced.
      *
@@ -108,13 +108,13 @@ class Command extends \yii\db\Command
      * Creates a batch REPLACE command.
      * For example,
      *
-     * ~~~
+     * ```php
      * $connection->createCommand()->batchReplace('idx_user', ['name', 'age'], [
      *     ['Tom', 30],
      *     ['Jane', 20],
      *     ['Linda', 25],
      * ])->execute();
-     * ~~~
+     * ```
      *
      * Note that the values in each row must match the corresponding column names.
      *
@@ -135,9 +135,9 @@ class Command extends \yii\db\Command
      * Creates an UPDATE command.
      * For example,
      *
-     * ~~~
+     * ```php
      * $connection->createCommand()->update('user', ['status' => 1], 'age > 30')->execute();
-     * ~~~
+     * ```
      *
      * The method will properly escape the column names and bind the values to be updated.
      *

@@ -129,13 +129,13 @@ class QueryBuilder extends Object
      * Creates an INSERT SQL statement.
      * For example,
      *
-     * ~~~
+     * ```php
      * $sql = $queryBuilder->insert('idx_user', [
      *     'name' => 'Sam',
      *     'age' => 30,
      *     'id' => 10,
      * ], $params);
-     * ~~~
+     * ```
      *
      * The method will properly escape the index and column names.
      *
@@ -154,13 +154,13 @@ class QueryBuilder extends Object
      * Creates an REPLACE SQL statement.
      * For example,
      *
-     * ~~~
+     * ```php
      * $sql = $queryBuilder->replace('idx_user', [
      *     'name' => 'Sam',
      *     'age' => 30,
      *     'id' => 10,
      * ], $params);
-     * ~~~
+     * ```
      *
      * The method will properly escape the index and column names.
      *
@@ -210,13 +210,13 @@ class QueryBuilder extends Object
      * Generates a batch INSERT SQL statement.
      * For example,
      *
-     * ~~~
+     * ```php
      * $sql = $queryBuilder->batchInsert('idx_user', ['id', 'name', 'age'], [
      *     [1, 'Tom', 30],
      *     [2, 'Jane', 20],
      *     [3, 'Linda', 25],
      * ], $params);
-     * ~~~
+     * ```
      *
      * Note that the values in each row must match the corresponding column names.
      *
@@ -236,13 +236,13 @@ class QueryBuilder extends Object
      * Generates a batch REPLACE SQL statement.
      * For example,
      *
-     * ~~~
+     * ```php
      * $sql = $queryBuilder->batchReplace('idx_user', ['id', 'name', 'age'], [
      *     [1, 'Tom', 30],
      *     [2, 'Jane', 20],
      *     [3, 'Linda', 25],
      * ], $params);
-     * ~~~
+     * ```
      *
      * Note that the values in each row must match the corresponding column names.
      *
@@ -302,10 +302,10 @@ class QueryBuilder extends Object
      * Creates an UPDATE SQL statement.
      * For example,
      *
-     * ~~~
+     * ```php
      * $params = [];
      * $sql = $queryBuilder->update('idx_user', ['status' => 1], 'age > 30', $params);
-     * ~~~
+     * ```
      *
      * The method will properly escape the index and column names.
      *
@@ -348,9 +348,9 @@ class QueryBuilder extends Object
      * Creates a DELETE SQL statement.
      * For example,
      *
-     * ~~~
+     * ```php
      * $sql = $queryBuilder->delete('idx_user', 'status = 0');
-     * ~~~
+     * ```
      *
      * The method will properly escape the index and column names.
      *

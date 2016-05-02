@@ -76,9 +76,9 @@ abstract class ActiveRecord extends BaseActiveRecord
      *
      * Below is an example:
      *
-     * ~~~
+     * ```php
      * $customers = Article::findBySql("SELECT * FROM `idx_article` WHERE MATCH('development')")->all();
-     * ~~~
+     * ```
      *
      * @param string $sql the SQL statement to be executed
      * @param array $params parameters to be bound to the SQL statement during execution.
@@ -96,9 +96,9 @@ abstract class ActiveRecord extends BaseActiveRecord
      * Updates the whole table using the provided attribute values and conditions.
      * For example, to change the status to be 1 for all articles which status is 2:
      *
-     * ~~~
+     * ```php
      * Article::updateAll(['status' => 1], 'status = 2');
-     * ~~~
+     * ```
      *
      * @param array $attributes attribute values (name-value pairs) to be saved into the table
      * @param string|array $condition the conditions that will be put in the WHERE part of the UPDATE SQL.
@@ -119,9 +119,9 @@ abstract class ActiveRecord extends BaseActiveRecord
      *
      * For example, to delete all articles whose status is 3:
      *
-     * ~~~
+     * ```php
      * Article::deleteAll('status = 3');
-     * ~~~
+     * ```
      *
      * @param string|array $condition the conditions that will be put in the WHERE part of the DELETE SQL.
      * Please refer to [[Query::where()]] on how to specify this parameter.
@@ -259,12 +259,14 @@ abstract class ActiveRecord extends BaseActiveRecord
      * Active Record instance.
      * Child classes must implement this method to return the actual snippet source text.
      * For example:
-     * ~~~
+     *
+     * ```php
      * public function getSnippetSource()
      * {
      *     return $this->snippetSourceRelation->content;
      * }
-     * ~~~
+     * ```
+     *
      * @return string snippet source string.
      * @throws \yii\base\NotSupportedException if this is not supported by the Active Record class
      */
@@ -283,7 +285,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      * in transactions. You can do so by overriding this method and returning the operations
      * that need to be transactional. For example,
      *
-     * ~~~
+     * ```php
      * return [
      *     'admin' => self::OP_INSERT,
      *     'api' => self::OP_INSERT | self::OP_UPDATE | self::OP_DELETE,
@@ -291,7 +293,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      *     // 'api' => self::OP_ALL,
      *
      * ];
-     * ~~~
+     * ```
      *
      * The above declaration specifies that in the "admin" scenario, the insert operation ([[insert()]])
      * should be done in a transaction; and in the "api" scenario, all the operations should be done
@@ -336,13 +338,13 @@ abstract class ActiveRecord extends BaseActiveRecord
      *
      * For example, to insert an article record:
      *
-     * ~~~
-     * $article = new Article;
+     * ```php
+     * $article = new Article();
      * $article->id = $id;
      * $article->genre_id = $genreId;
      * $article->content = $content;
      * $article->insert();
-     * ~~~
+     * ```
      *
      * @param boolean $runValidation whether to perform validation before saving the record.
      * If the validation fails, the record will not be inserted.
@@ -425,24 +427,24 @@ abstract class ActiveRecord extends BaseActiveRecord
      *
      * For example, to update an article record:
      *
-     * ~~~
+     * ```php
      * $article = Article::findOne($id);
      * $article->genre_id = $genreId;
      * $article->group_id = $groupId;
      * $article->update();
-     * ~~~
+     * ```
      *
      * Note that it is possible the update does not affect any row in the table.
      * In this case, this method will return 0. For this reason, you should use the following
      * code to check if update() is successful or not:
      *
-     * ~~~
+     * ```php
      * if ($this->update() !== false) {
      *     // update successful
      * } else {
      *     // update failed
      * }
-     * ~~~
+     * ```
      *
      * @param boolean $runValidation whether to perform validation before saving the record.
      * If the validation fails, the record will not be inserted into the database.

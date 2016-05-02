@@ -16,7 +16,7 @@ use yii\base\InvalidConfigException;
  *
  * The following is an example of using ActiveDataProvider to provide facet results:
  *
- * ~~~
+ * ```php
  * $provider = new ActiveDataProvider([
  *     'query' => Post::find()->facets(['author_id', 'category_id']),
  *     'pagination' => [
@@ -32,12 +32,12 @@ use yii\base\InvalidConfigException;
  *
  * // get particular facet
  * $authorFacet = $provider->getFacet('author_id');
- * ~~~
+ * ```
  *
  * In case [[Query::showMeta]] is set ActiveDataProvider will fetch total count value from the query meta information,
  * avoiding extra counting query:
  *
- * ~~~
+ * ```php
  * $provider = new ActiveDataProvider([
  *     'query' => Post::find()->showMeta(true),
  *     'pagination' => [
@@ -46,7 +46,7 @@ use yii\base\InvalidConfigException;
  * ]);
  *
  * $totalCount = $provider->getTotalCount(); // fetched from meta information
- * ~~~
+ * ```
  *
  * Note: when using 'meta' information results total count will be fetched after pagination limit applying,
  * which eliminates ability to verify if requested page number actually exist. Data provider disables `yii\data\Pagination::validatePage`

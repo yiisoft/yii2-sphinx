@@ -34,15 +34,15 @@ use yii\db\ActiveRelationTrait;
  *
  * These options can be configured using methods of the same name. For example:
  *
- * ~~~
+ * ```php
  * $articles = Article::find()->with('source')->asArray()->all();
- * ~~~
+ * ```
  *
  * ActiveQuery allows to build the snippets using sources provided by ActiveRecord.
  * You can use [[snippetByModel()]] method to enable this.
  * For example:
  *
- * ~~~
+ * ```php
  * class Article extends ActiveRecord
  * {
  *     public function getSource()
@@ -59,7 +59,7 @@ use yii\db\ActiveRelationTrait;
  * }
  *
  * $articles = Article::find()->with('source')->snippetByModel()->all();
- * ~~~
+ * ```
  *
  * Relational query
  * ----------------
@@ -126,7 +126,7 @@ class ActiveQuery extends Query implements ActiveQueryInterface
      * [[ActiveRecord::getSnippetSource()]].
      * For example:
      *
-     * ~~~
+     * ```php
      * class Article extends ActiveRecord
      * {
      *     public function getSnippetSource()
@@ -136,7 +136,7 @@ class ActiveQuery extends Query implements ActiveQueryInterface
      * }
      *
      * $articles = Article::find()->snippetByModel()->all();
-     * ~~~
+     * ```
      *
      * Warning: this option should NOT be used with [[asArray]] at the same time!
      * @return $this the query object itself

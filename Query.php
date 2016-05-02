@@ -23,7 +23,7 @@ use yii\db\Expression;
  *
  * For example,
  *
- * ~~~php
+ * ```php
  * $query = new Query();
  * $query->select('id, group_id')
  *     ->from('idx_item')
@@ -32,7 +32,7 @@ use yii\db\Expression;
  * $command = $query->createCommand();
  * // $command->sql returns the actual SQL
  * $rows = $command->queryAll();
- * ~~~
+ * ```
  *
  * Since Sphinx does not store the original indexed text, the snippets for the rows in query result
  * should be build separately via another query. You can simplify this workflow using [[snippetCallback]].
@@ -72,7 +72,7 @@ class Query extends \yii\db\Query
      * array of snippet source strings in the order, which match one of incoming rows.
      * For example:
      *
-     * ~~~php
+     * ```php
      * $query = new Query();
      * $query->from('idx_item')
      *     ->match('pencil')
@@ -84,7 +84,7 @@ class Query extends \yii\db\Query
      *         return $result;
      *     })
      *     ->all();
-     * ~~~
+     * ```
      */
     public $snippetCallback;
     /**
@@ -95,7 +95,7 @@ class Query extends \yii\db\Query
      * @var array facet search specifications.
      * For example:
      *
-     * ~~~php
+     * ```php
      * [
      *     'group_id',
      *     'brand_id' => [
@@ -109,7 +109,7 @@ class Query extends \yii\db\Query
      *         'select' => [new Expression('json_attr.name AS name_in_json')],
      *     ],
      * ]
-     * ~~~
+     * ```
      *
      * You need to use [[search()]] method in order to fetch facet results.
      *
@@ -261,12 +261,13 @@ class Query extends \yii\db\Query
      * MATCH operator inside the WHERE clause.
      * Note: this value will be processed by [[Connection::escapeMatchValue()]],
      * if you need to compose complex match condition use [[Expression]]:
-     * ~~~
+     *
+     * ```php
      * $query = new Query();
      * $query->from('my_index')
      *     ->match(new Expression(':match', ['match' => '@(content) ' . Yii::$app->sphinx->escapeMatchValue($matchValue)]))
      *     ->all();
-     * ~~~
+     * ```
      *
      * @param string $query fulltext query text.
      * @return $this the query object itself
