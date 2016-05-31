@@ -407,8 +407,16 @@ class QueryBuilder extends Object
         }
         $indexParamName = self::PARAM_PREFIX . count($params);
         $params[$indexParamName] = $index;
-        $matchParamName = self::PARAM_PREFIX . count($params);
-        $params[$matchParamName] = $match;
+
+        if ($match instanceof Expression) {
+            $matchSql = $match->expression;
+            $params = array_merge($params, $match->params);
+        } else {
+            $matchParamName = self::PARAM_PREFIX . count($params);
+            $params[$matchParamName] = $match;
+            $matchSql = $matchParamName;
+        }
+
         if (!empty($options)) {
             $optionParts = [];
             foreach ($options as $name => $value) {
@@ -425,7 +433,7 @@ class QueryBuilder extends Object
             $optionSql = '';
         }
 
-        return 'CALL SNIPPETS(' . $dataSql. ', ' . $indexParamName . ', ' . $matchParamName . $optionSql. ')';
+        return 'CALL SNIPPETS(' . $dataSql. ', ' . $indexParamName . ', ' . $matchSql . $optionSql. ')';
     }
 
     /**

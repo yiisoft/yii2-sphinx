@@ -258,6 +258,19 @@ class QueryTest extends TestCase
             $this->assertContains($snippetPrefix, $row['snippet'], 'Snippet source not present!');
             $this->assertContains($snippetOptions['before_match'] . $match, $row['snippet'] . $snippetOptions['after_match'], 'Options not applied!');
         }
+
+        // @see https://github.com/yiisoft/yii2-sphinx/issues/61
+        $query = new Query();
+        $rows = $query->from('yii2_test_article_index')
+            ->match(new Expression(':match', ['match' => '@(content) ' . $connection->escapeMatchValue('about')]))
+            ->snippetCallback($snippetCallback)
+            ->snippetOptions($snippetOptions)
+            ->all($connection);
+        $this->assertNotEmpty($rows);
+        foreach ($rows as $row) {
+            $this->assertContains($snippetPrefix, $row['snippet'], 'Snippet source not present!');
+            $this->assertContains($snippetOptions['before_match'] . $match, $row['snippet'] . $snippetOptions['after_match'], 'Options not applied!');
+        }
     }
 
     public function testCount()
