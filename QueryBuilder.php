@@ -106,7 +106,7 @@ class QueryBuilder extends Object
             $this->buildSelect($query->select, $params, $query->distinct, $query->selectOption),
             $this->buildFrom($from, $params),
             $this->buildWhere($from, $query->where, $params, $query->match),
-            $this->buildGroupBy($query->groupBy),
+            $this->buildGroupBy($query->groupBy, $query->groupLimit),
             $this->buildWithin($query->within),
             $this->buildHaving($query->from, $query->having, $params),
             $this->buildOrderBy($query->orderBy),
@@ -574,12 +574,23 @@ class QueryBuilder extends Object
     }
 
     /**
-     * @param array $columns
+     * @param array $columns group columns
+     * @param integer $limit group limit
      * @return string the GROUP BY clause
      */
-    public function buildGroupBy($columns)
+    public function buildGroupBy($columns, $limit)
     {
-        return empty($columns) ? '' : 'GROUP BY ' . $this->buildColumns($columns);
+        if (empty($columns)) {
+            return '';
+        }
+
+        if (is_string($limit) && ctype_digit($limit) || is_integer($limit) && $limit >= 0) {
+            $limitSql = ' ' . $limit;
+        } else {
+            $limitSql = '';
+        }
+
+        return 'GROUP' . $limitSql . ' BY ' . $this->buildColumns($columns);
     }
 
     /**

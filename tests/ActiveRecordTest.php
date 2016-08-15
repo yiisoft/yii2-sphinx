@@ -80,7 +80,7 @@ class ActiveRecordTest extends TestCase
         $this->assertEquals(1002, ArticleIndex::find()->select('COUNT(*)')->scalar());
 
         // scope
-        $this->assertEquals(1, ArticleIndex::find()->favoriteAuthor()->count());
+        $this->assertEquals(101, ArticleIndex::find()->favoriteAuthor()->count());
 
         // asArray
         $article = ArticleIndex::find()->where('id=2')->asArray()->one();
@@ -93,17 +93,17 @@ class ActiveRecordTest extends TestCase
 
         // indexBy
         $articles = ArticleIndex::find()->indexBy('author_id')->orderBy('id DESC')->all();
-        $this->assertEquals(20, count($articles));
-        $this->assertTrue($articles['1001'] instanceof ArticleIndex);
-        $this->assertTrue($articles['1002'] instanceof ArticleIndex);
+        $this->assertEquals(10, count($articles));
+        $this->assertTrue($articles['1'] instanceof ArticleIndex);
+        $this->assertTrue($articles['2'] instanceof ArticleIndex);
 
         // indexBy callable
         $articles = ArticleIndex::find()->indexBy(function ($article) {
             return $article->id . '-' . $article->author_id;
         })->orderBy('id DESC')->all();
         $this->assertEquals(20, count($articles));
-        $this->assertTrue($articles['1001-1001'] instanceof ArticleIndex);
-        $this->assertTrue($articles['1002-1002'] instanceof ArticleIndex);
+        $this->assertTrue($articles['1001-1'] instanceof ArticleIndex);
+        $this->assertTrue($articles['1002-2'] instanceof ArticleIndex);
     }
 
     public function testFindBySql()
@@ -111,16 +111,16 @@ class ActiveRecordTest extends TestCase
         // find one
         $article = ArticleIndex::findBySql('SELECT * FROM yii2_test_article_index ORDER BY id DESC')->one();
         $this->assertTrue($article instanceof ArticleIndex);
-        $this->assertEquals(1002, $article->author_id);
+        $this->assertEquals(2, $article->author_id);
 
         // find all
         $articles = ArticleIndex::findBySql('SELECT * FROM yii2_test_article_index')->all();
         $this->assertEquals(20, count($articles));
 
         // find with parameter binding
-        $article = ArticleIndex::findBySql('SELECT * FROM yii2_test_article_index WHERE id=:id', [':id' => 2])->one();
+        $article = ArticleIndex::findBySql('SELECT * FROM yii2_test_article_index WHERE id=:id', [':id' => 13])->one();
         $this->assertTrue($article instanceof ArticleIndex);
-        $this->assertEquals(2, $article->author_id);
+        $this->assertEquals(3, $article->author_id);
     }
 
     public function testInsert()

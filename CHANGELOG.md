@@ -6,6 +6,8 @@ Yii Framework 2 sphinx extension Change Log
 
 - Bug #45: Fixed `yii\sphinx\Schema` unable to determine primary key for distribute index (klimov-paul)
 - Bug #61: Fixed `yii\sphinx\QueryBuilder::callSnippets()` unable to handle 'match' specified as `yii\db\Expression` instance (klimov-paul)
+- Enh #26: Added `yii\sphinx\Query::groupLimit` allowing limit matches in 'group by' (klimov-paul)
+
 
 2.0.5 September 23, 2015
 ------------------------

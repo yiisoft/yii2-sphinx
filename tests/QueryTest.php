@@ -524,4 +524,24 @@ class QueryTest extends TestCase
 
         $this->assertNotEmpty($results);
     }
+
+    /**
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/26
+     *
+     * @depends testRun
+     * @depends testGroup
+     */
+    public function testGroupLimit()
+    {
+        $connection = $this->getConnection();
+
+        $query = new Query();
+        $results = $query->from('yii2_test_article_index')
+            ->andWhere(['author_id' => 1])
+            ->groupBy(['author_id'])
+            ->groupLimit(3)
+            ->all($connection);
+
+        $this->assertCount(3, $results);
+    }
 }

@@ -83,7 +83,7 @@ class ActiveDataProviderTest extends TestCase
         ]);
         $models = $provider->getModels();
         $this->assertEquals(20, count($models));
-        $this->assertEquals(20, count($provider->getFacet('author_id')));
+        $this->assertEquals(10, count($provider->getFacet('author_id')));
     }
 
     /**

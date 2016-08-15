@@ -123,6 +123,12 @@ class Query extends \yii\db\Query
      * You need to use [[search()]] method in order to fetch 'meta' results.
      */
     public $showMeta;
+    /**
+     * @var integer groups limit: to return (no more than) N top matches for each group.
+     * This option will take effect only if [[groupBy]] is set.
+     * @since 2.0.6
+     */
+    public $groupLimit;
 
     /**
      * @var Connection the Sphinx connection used to generate the SQL statements.
@@ -380,6 +386,19 @@ class Query extends \yii\db\Query
     }
 
     /**
+     * Sets groups limit: to return (no more than) N top matches for each group.
+     * This option will take effect only if [[groupBy]] is set.
+     * @param integer $limit group limit.
+     * @return $this the query object itself.
+     * @since 2.0.6
+     */
+    public function groupLimit($limit)
+    {
+        $this->groupLimit = $limit;
+        return $this;
+    }
+
+    /**
      * Sets FACET part of the query.
      * @param array $facets facet specifications.
      * @return $this the query object itself
@@ -549,6 +568,7 @@ class Query extends \yii\db\Query
             'union' => $from->union,
             'params' => $from->params,
             // Sphinx specifics :
+            'groupLimit' => $from->groupLimit,
             'options' => $from->options,
             'within' => $from->within,
             'match' => $from->match,
