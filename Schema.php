@@ -43,6 +43,7 @@ class Schema extends Object
      * @var Connection the Sphinx connection
      */
     public $db;
+
     /**
      * @var array list of ALL index names in the Sphinx
      */
@@ -81,19 +82,18 @@ class Schema extends Object
     /**
      * Loads the metadata for the specified index.
      * @param string $name index name
-     * @return IndexSchema driver dependent index metadata. Null if the index does not exist.
+     * @return IndexSchema|null driver dependent index metadata. `null` - if the index does not exist.
      */
     protected function loadIndexSchema($name)
     {
-        $index = new IndexSchema;
+        $index = new IndexSchema();
         $this->resolveIndexNames($index, $name);
         $this->resolveIndexType($index);
 
         if ($this->findColumns($index)) {
             return $index;
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**
@@ -121,7 +121,7 @@ class Schema extends Object
      * Obtains the metadata for the named index.
      * @param string $name index name. The index name may contain schema name if any. Do not quote the index name.
      * @param boolean $refresh whether to reload the index schema even if it is found in the cache.
-     * @return IndexSchema index metadata. Null if the named index does not exist.
+     * @return IndexSchema|null index metadata. `null` - if the named index does not exist.
      */
     public function getIndexSchema($name, $refresh = false)
     {
@@ -326,9 +326,8 @@ class Schema extends Object
     {
         if (is_string($str)) {
             return $this->db->getSlavePdo()->quote($str);
-        } else {
-            return $str;
         }
+        return $str;
     }
 
     /**
@@ -469,14 +468,45 @@ class Schema extends Object
                     $index->primaryKey = $column->name;
                 }
             }
-        } else {
-            // Distributed index :
-            $agent = $this->getIndexSchema($columns[0]['Agent']);
-            $index->columns = $agent->columns;
-            $index->primaryKey = $agent->primaryKey;
+
+            return true;
         }
 
+        // Distributed index :
+        foreach ($columns as $column) {
+            if (!empty($column['Type']) && strcasecmp('local', $column['Type']) !== 0) {
+                // skip type 'agent'
+                continue;
+            }
+
+            $agent = $this->getIndexSchema($column['Agent']);
+            if ($agent !== null) {
+                $index->columns = $agent->columns;
+                $index->primaryKey = $agent->primaryKey;
+                return true;
+            }
+        }
+
+        $this->applyDefaultColumns($index);
+
         return true;
+    }
+
+    /**
+     * Sets up the default columns for given index.
+     * This method should be used in case there is no way to find actual columns,
+     * like in some distributed indexes.
+     * @param IndexSchema $index the index metadata
+     * @since 2.0.6
+     */
+    protected function applyDefaultColumns($index)
+    {
+        $column = $this->loadColumnSchema([
+            'Field' => 'id',
+            'Type' => 'bigint',
+        ]);
+        $index->columns[$column->name] = $column;
+        $index->primaryKey = 'id';
     }
 
     /**
@@ -486,7 +516,7 @@ class Schema extends Object
      */
     protected function loadColumnSchema($info)
     {
-        $column = new ColumnSchema;
+        $column = new ColumnSchema();
 
         $column->name = $info['Field'];
         $column->dbType = $info['Type'];
@@ -521,11 +551,10 @@ class Schema extends Object
     {
         if ($e instanceof Exception) {
             return $e;
-        } else {
-            $message = $e->getMessage()  . "\nThe SQL being executed was: $rawSql";
-            $errorInfo = $e instanceof \PDOException ? $e->errorInfo : null;
-            return new Exception($message, $errorInfo, (int) $e->getCode(), $e);
         }
+        $message = $e->getMessage()  . "\nThe SQL being executed was: $rawSql";
+        $errorInfo = $e instanceof \PDOException ? $e->errorInfo : null;
+        return new Exception($message, $errorInfo, (int) $e->getCode(), $e);
     }
 
     /**
