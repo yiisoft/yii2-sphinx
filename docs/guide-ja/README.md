@@ -24,3 +24,4 @@ Yii 2 Sphinx エクステンション
 --------------
 
 * [Gii ジェネレータを使用する](topics-gii.md)
+* [Float params binding](topics-float-param-binding.md)

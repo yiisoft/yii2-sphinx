@@ -69,6 +69,13 @@ class Connection extends \yii\db\Connection
         'mysqli' => 'yii\sphinx\Schema',   // MySQL
         'mysql' => 'yii\sphinx\Schema',    // MySQL
     ];
+    /**
+     * @var boolean whether to enable conversion of the float query params into the direct literal SQL insertion.
+     * This allows processing of the float values, since PDO does not provide specific param type for float binding,
+     * while Sphinx is unable to process float values passed as quoted strings.
+     * @since 2.0.6
+     */
+    public $enableFloatConversion = true;
 
 
     /**

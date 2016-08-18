@@ -544,4 +544,47 @@ class QueryTest extends TestCase
 
         $this->assertCount(3, $results);
     }
+
+    /**
+     * @depends testRun
+     *
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/8
+     */
+    public function testFloatCondition()
+    {
+        $connection = $this->getConnection();
+
+        $query = new Query();
+        $rows = $query->from('yii2_test_item_index')
+            ->where('price > :price AND price < :priceMax', [
+                'price' => 2.1,
+                'priceMax' => 2.9,
+            ])
+            ->all($connection);
+        $this->assertCount(1, $rows);
+
+        $query = new Query();
+        $rows = $query->from('yii2_test_item_index')
+            ->where([
+                'price' => '2.5'
+            ])
+            ->all($connection);
+        $this->assertCount(1, $rows);
+
+        $query = new Query();
+        $rows = $query->from('yii2_test_item_index')
+            ->where([
+                'price' => 25000.956
+            ])
+            ->all($connection);
+        $this->assertCount(0, $rows);
+
+        $query = new Query();
+        $rows = $query->from('yii2_test_item_index')
+            ->where([
+                'price' => 2.5E-10
+            ])
+            ->all($connection);
+        $this->assertCount(0, $rows);
+    }
 }

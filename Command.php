@@ -202,6 +202,80 @@ class Command extends \yii\db\Command
         return $this->setSql($sql)->bindValues($params);
     }
 
+    // Float handling :
+
+    /**
+     * @var array list of 'float' type params, which should be inserted into SQL directly instead of binding.
+     * @since 2.0.6
+     */
+    private $floatParams = [];
+
+    /**
+     * @inheritdoc
+     */
+    public function bindValue($name, $value, $dataType = null)
+    {
+        if ($this->db->enableFloatConversion && $dataType === null && is_float($value)) {
+            $this->floatParams[$name] = $value;
+            return $this;
+        }
+        return parent::bindValue($name, $value, $dataType);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function bindValues($values)
+    {
+        if ($this->db->enableFloatConversion) {
+            if (empty($values)) {
+                return $this;
+            }
+
+            foreach ($values as $name => $value) {
+                if (is_float($value)) {
+                    $this->floatParams[$name] = $value;
+                    unset($values[$name]);
+                }
+            }
+        }
+
+        return parent::bindValues($values);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function prepare($forRead = null)
+    {
+        if (!empty($this->floatParams)) {
+            $params = $this->params;
+            $sql = $this->getSql() . ' ';
+
+            foreach ($this->floatParams as $name => $value) {
+                if (strncmp($name, ':', 1) !== 0) {
+                    $name = ':' . $name;
+                }
+
+                // unable to use `str_replace()` because particular param name may be a substring of another param name
+                $sql = preg_replace_callback(
+                    '/(' . preg_quote($name) . ')[^a-zA-Z0-9]/s',
+                    function ($matches) use ($value) {
+                        return $value . substr($matches[0], -1);
+                    },
+                    $sql
+                );
+            }
+
+            $this->floatParams = [];
+            $this->setSql(rtrim($sql));
+
+            parent::bindValues($params); // `setSql()` resets bound params
+        }
+
+        return parent::prepare($forRead);
+    }
+
     // Not Supported :
 
     /**

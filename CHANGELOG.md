@@ -4,6 +4,7 @@ Yii Framework 2 sphinx extension Change Log
 2.0.6 under development
 -----------------------
 
+- Bug #8: Fixed usage of the float values in SphinxQL bound params (klimov-paul)
 - Bug #45: Fixed `yii\sphinx\Schema` unable to determine primary key for distribute index (klimov-paul)
 - Bug #61: Fixed `yii\sphinx\QueryBuilder::callSnippets()` unable to handle 'match' specified as `yii\db\Expression` instance (klimov-paul)
 - Enh #26: Added `yii\sphinx\Query::groupLimit` allowing limit matches in 'group by' (klimov-paul)
