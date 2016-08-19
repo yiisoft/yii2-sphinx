@@ -463,6 +463,8 @@ class CommandTest extends TestCase
 
     /**
      * @depends testQuery
+     *
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/8
      */
     public function testFloatParams()
     {

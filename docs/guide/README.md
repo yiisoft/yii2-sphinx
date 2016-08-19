@@ -25,3 +25,4 @@ Additional topics
 
 * [Using Gii generator](topics-gii.md)
 * [Float params binding](topics-float-param-binding.md)
+* [Working with distributed indexes](distributed-indexes.md)
