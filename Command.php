@@ -9,6 +9,7 @@ namespace yii\sphinx;
 
 use Yii;
 use yii\base\NotSupportedException;
+use yii\db\Exception;
 
 /**
  * Command represents a SQL statement to be executed against a Sphinx.
@@ -206,6 +207,7 @@ class Command extends \yii\db\Command
 
     /**
      * @var array list of 'float' type params, which should be inserted into SQL directly instead of binding.
+     * @see Connection::enableFloatConversion
      * @since 2.0.6
      */
     private $floatParams = [];
@@ -248,32 +250,62 @@ class Command extends \yii\db\Command
      */
     public function prepare($forRead = null)
     {
-        if (!empty($this->floatParams)) {
-            $params = $this->params;
-            $sql = $this->getSql() . ' ';
-
-            foreach ($this->floatParams as $name => $value) {
-                if (strncmp($name, ':', 1) !== 0) {
-                    $name = ':' . $name;
-                }
-
-                // unable to use `str_replace()` because particular param name may be a substring of another param name
-                $sql = preg_replace_callback(
-                    '/(' . preg_quote($name) . ')[^a-zA-Z0-9]/s',
-                    function ($matches) use ($value) {
-                        return $value . substr($matches[0], -1);
-                    },
-                    $sql
-                );
-            }
-
-            $this->floatParams = [];
-            $this->setSql(rtrim($sql));
-
-            parent::bindValues($params); // `setSql()` resets bound params
+        if ($this->pdoStatement && empty($this->floatParams)) {
+            $this->bindPendingParams();
+            return;
         }
 
-        return parent::prepare($forRead);
+        $sql = $this->getSql();
+
+        if ($this->db->getTransaction()) {
+            // master is in a transaction. use the same connection.
+            $forRead = false;
+        }
+        if ($forRead || $forRead === null && $this->db->getSchema()->isReadQuery($sql)) {
+            $pdo = $this->db->getSlavePdo();
+        } else {
+            $pdo = $this->db->getMasterPdo();
+        }
+
+        if (!empty($this->floatParams)) {
+            $sql = $this->parseFloatParams($sql);
+        }
+
+        try {
+            $this->pdoStatement = $pdo->prepare($sql);
+            $this->bindPendingParams();
+        } catch (\Exception $e) {
+            $message = $e->getMessage() . "\nFailed to prepare SphinxQL: $sql";
+            $errorInfo = $e instanceof \PDOException ? $e->errorInfo : null;
+            throw new Exception($message, $errorInfo, (int) $e->getCode(), $e);
+        }
+    }
+
+    /**
+     * Parses given SQL replacing bound [[floatParams]] with their values.
+     * @param string $sql source SQL.
+     * @return string adjusted SQL.
+     */
+    private function parseFloatParams($sql)
+    {
+        $sql .= ' ';
+
+        foreach ($this->floatParams as $name => $value) {
+            if (strncmp($name, ':', 1) !== 0) {
+                $name = ':' . $name;
+            }
+
+            // unable to use `str_replace()` because particular param name may be a substring of another param name
+            $sql = preg_replace_callback(
+                '/(' . preg_quote($name) . ')[^a-zA-Z0-9]/s',
+                function ($matches) use ($value) {
+                    return $value . substr($matches[0], -1);
+                },
+                $sql
+            );
+        };
+
+        return rtrim($sql);
     }
 
     // Not Supported :

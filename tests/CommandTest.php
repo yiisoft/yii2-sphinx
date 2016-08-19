@@ -460,4 +460,24 @@ class CommandTest extends TestCase
         $rows = $db->createCommand('SELECT * FROM yii2_test_rt_index')->queryAll();
         $this->assertEquals(3, count($rows), 'No rows inserted!');
     }
+
+    /**
+     * @depends testQuery
+     */
+    public function testFloatParams()
+    {
+        $db = $this->getConnection();
+
+        $sql = 'SELECT * FROM yii2_test_item_index WHERE price < :maxPrice';
+        $params = ['maxPrice' => 5.5];
+        $command = $db->createCommand($sql, $params);
+
+        $rows = $command->queryAll();
+        $this->assertEquals(1, count($rows));
+
+        $params = ['maxPrice' => 200.7];
+        $command->bindValues($params);
+        $rows = $command->queryAll();
+        $this->assertEquals(2, count($rows));
+    }
 }
