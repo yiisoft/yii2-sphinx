@@ -288,24 +288,15 @@ class Command extends \yii\db\Command
      */
     private function parseFloatParams($sql)
     {
-        $sql .= ' ';
-
         foreach ($this->floatParams as $name => $value) {
             if (strncmp($name, ':', 1) !== 0) {
                 $name = ':' . $name;
             }
-
             // unable to use `str_replace()` because particular param name may be a substring of another param name
-            $sql = preg_replace_callback(
-                '/(' . preg_quote($name) . ')[^a-zA-Z0-9_]/s',
-                function ($matches) use ($value) {
-                    return $value . substr($matches[0], -1);
-                },
-                $sql
-            );
+            $sql = preg_replace('/' . preg_quote($name) . '\b/s', $value, $sql);
         };
 
-        return rtrim($sql);
+        return $sql;
     }
 
     // Not Supported :
