@@ -297,7 +297,7 @@ class Command extends \yii\db\Command
 
             // unable to use `str_replace()` because particular param name may be a substring of another param name
             $sql = preg_replace_callback(
-                '/(' . preg_quote($name) . ')[^a-zA-Z0-9]/s',
+                '/(' . preg_quote($name) . ')[^a-zA-Z0-9_]/s',
                 function ($matches) use ($value) {
                     return $value . substr($matches[0], -1);
                 },
