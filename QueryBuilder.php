@@ -20,6 +20,8 @@ use yii\db\Expression;
  * QueryBuilder can also be used to build SQL statements such as INSERT, REPLACE, UPDATE, DELETE,
  * from a [[Query]] object.
  *
+ * @property MatchBuilder $matchBuilder match builder. This property is read-only.
+ *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0
  */
@@ -63,6 +65,12 @@ class QueryBuilder extends Object
         'NOT' => 'buildNotCondition',
     ];
 
+    /**
+     * @var MatchBuilder match builder
+     * @since 2.0.6
+     */
+    private $_matchBuilder;
+
 
     /**
      * Constructor.
@@ -73,6 +81,18 @@ class QueryBuilder extends Object
     {
         $this->db = $connection;
         parent::__construct($config);
+    }
+
+    /**
+     * @return MatchBuilder match builder.
+     * @since 2.0.6
+     */
+    public function getMatchBuilder()
+    {
+        if ($this->_matchBuilder === null) {
+            $this->_matchBuilder = new MatchBuilder($this->db);
+        }
+        return $this->_matchBuilder;
     }
 
     /**
@@ -408,14 +428,7 @@ class QueryBuilder extends Object
         $indexParamName = self::PARAM_PREFIX . count($params);
         $params[$indexParamName] = $index;
 
-        if ($match instanceof Expression) {
-            $matchSql = $match->expression;
-            $params = array_merge($params, $match->params);
-        } else {
-            $matchParamName = self::PARAM_PREFIX . count($params);
-            $params[$matchParamName] = $match;
-            $matchSql = $matchParamName;
-        }
+        $matchSql = $this->buildMatch($match, $params);
 
         if (!empty($options)) {
             $optionParts = [];
@@ -539,6 +552,27 @@ class QueryBuilder extends Object
     }
 
     /**
+     * @param string|Expression|MatchExpression $match match condition
+     * @param array $params the binding parameters to be populated
+     * @return string generated MATCH expression
+     */
+    public function buildMatch($match, &$params)
+    {
+        if ($match instanceof Expression) {
+            $params = array_merge($params, $match->params);
+            return $match->expression;
+        }
+
+        if ($match instanceof MatchExpression) {
+            return $this->getMatchBuilder()->build($match, $params);
+        }
+
+        $phName = self::PARAM_PREFIX . count($params);
+        $params[$phName] = $this->db->escapeMatchValue($match);
+        return $phName;
+    }
+
+    /**
      * @param string[] $indexes list of index names, which affected by query
      * @param string|array $condition
      * @param array $params the binding parameters to be populated
@@ -548,15 +582,7 @@ class QueryBuilder extends Object
     public function buildWhere($indexes, $condition, &$params, $match = null)
     {
         if ($match !== null) {
-            if ($match instanceof Expression) {
-                $matchWhere = 'MATCH(' . $match->expression . ')';
-                $params = array_merge($params, $match->params);
-            } else {
-                $phName = self::PARAM_PREFIX . count($params);
-                $params[$phName] = $this->db->escapeMatchValue($match);
-                $matchWhere = 'MATCH(' . $phName . ')';
-            }
-
+            $matchWhere = 'MATCH(' . $this->buildMatch($match, $params) . ')';
             if ($condition === null) {
                 $condition = $matchWhere;
             } else {
@@ -715,6 +741,7 @@ class QueryBuilder extends Object
         } elseif (empty($condition)) {
             return '';
         }
+
         if (isset($condition[0])) {
             // operator format: operator, operand 1, operand 2, ...
             $operator = strtoupper($condition[0]);
@@ -725,10 +752,10 @@ class QueryBuilder extends Object
             }
             array_shift($condition);
             return $this->$method($indexes, $operator, $condition, $params);
-        } else {
-            // hash format: 'column1' => 'value1', 'column2' => 'value2', ...
-            return $this->buildHashCondition($indexes, $condition, $params);
         }
+
+        // hash format: 'column1' => 'value1', 'column2' => 'value2', ...
+        return $this->buildHashCondition($indexes, $condition, $params);
     }
 
     /**
