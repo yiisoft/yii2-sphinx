@@ -34,8 +34,8 @@ class MatchBuilder extends Object
     public $db;
 
     /**
-     * @var array map of query match to builder methods
-     * These methods are used by [[buildMatch]] to build string inside SQL Match method.
+     * @var array map of MATCH keywords to builder methods.
+     * These methods are used by [[buildMatch]] to build MATCH expression from array syntax.
      */
     protected $matchBuilders = [
         'AND' => 'buildAndMatch',
@@ -49,8 +49,8 @@ class MatchBuilder extends Object
         'ZONESPAN' => 'buildZoneMatch',
     ];
     /**
-     * @var array map of match's operators
-     * These operators are used for replacement regular SQL operators
+     * @var array map of MATCH operators.
+     * These operators are used for replacement of verbose operators.
      */
     protected $matchOperators = [
         'AND' => ' ',
@@ -58,6 +58,7 @@ class MatchBuilder extends Object
         'NOT' => ' !',
         '=' => ' ',
     ];
+
 
     /**
      * Constructor.
@@ -71,8 +72,9 @@ class MatchBuilder extends Object
     }
 
     /**
+     * Generates the MATCH expression from given [[MatchExpression]] object.
      * @param MatchExpression $match the [[MatchExpression]] object from which the MATCH expression will be generated.
-     * @return string generated MATCH expression
+     * @return string generated MATCH expression.
      */
     public function build($match)
     {
@@ -82,9 +84,9 @@ class MatchBuilder extends Object
     }
 
     /**
-     * Create Match clause
-     * @param string|array $match
-     * @param array $params the binding parameters to be populated
+     * Create MATCH expression.
+     * @param string|array $match MATCH specification.
+     * @param array $params the expression parameters to be populated
      * @return string the MATCH expression
      */
     public function buildMatch($match, &$params)
@@ -118,9 +120,9 @@ class MatchBuilder extends Object
     }
 
     /**
-     * Creates a match based on column-value pairs.
+     * Creates a MATCH based on column-value pairs.
      * @param array $match the match condition
-     * @param array $params the binding parameters to be populated
+     * @param array $params the expression parameters to be populated
      * @return string the MATCH expression
      */
     public function buildHashMatch($match, &$params)
@@ -138,7 +140,7 @@ class MatchBuilder extends Object
      * Connects two or more MATCH expressions with the `AND` or `OR` operator
      * @param string $operator the operator which is used for connecting the given operands
      * @param array $operands the Match expressions to connect
-     * @param array $params the binding parameters to be populated
+     * @param array $params the expression parameters to be populated
      * @return string the MATCH expression
      */
     public function buildAndMatch($operator, $operands, &$params)
@@ -162,10 +164,10 @@ class MatchBuilder extends Object
     }
 
     /**
-     * Create Maybe, Sentence or Paragraph Match expressions
+     * Create MAYBE, SENTENCE or PARAGRAPH expressions.
      * @param  string $operator the operator which is used for Create Match expressions
      * @param  array $operands the Match expressions
-     * @param  array &$params the binding parameters to be populated
+     * @param  array &$params the expression parameters to be populated
      * @return string the MATCH expression
      */
     public function buildMultipleMatch($operator, $operands, &$params)
@@ -186,10 +188,10 @@ class MatchBuilder extends Object
     }
 
     /**
-     * Create Match expressions for zones
+     * Create MATCH expressions for zones.
      * @param string $operator the operator which is used for Create Match expressions
      * @param array $operands the Match expressions
-     * @param array &$params the binding parameters to be populated
+     * @param array &$params the expression parameters to be populated
      * @return string the MATCH expression
      */
     public function buildZoneMatch($operator, $operands, &$params)
@@ -204,10 +206,10 @@ class MatchBuilder extends Object
     }
 
     /**
-     * Create Proximity Match expressions
+     * Create PROXIMITY expressions
      * @param string $operator the operator which is used for Create Match expressions
      * @param array $operands the Match expressions
-     * @param array &$params the binding parameters to be populated
+     * @param array &$params the expression parameters to be populated
      * @return string the MATCH expression
      */
     public function buildProximityMatch($operator, $operands, &$params)
@@ -222,10 +224,10 @@ class MatchBuilder extends Object
     }
 
     /**
-     * Create Ignored Match expressions
+     * Create ignored MATCH expressions
      * @param  string $operator the operator which is used for Create Match expressions
      * @param  array $operands the Match expressions
-     * @param  array &$params the binding parameters to be populated
+     * @param  array &$params the expression parameters to be populated
      * @return string the MATCH expression
      */
     public function buildIgnoreMatch($operator, $operands, &$params)
@@ -243,9 +245,9 @@ class MatchBuilder extends Object
      * Creates an Match expressions like `"column" operator value`.
      * @param string $operator the operator to use. Anything could be used e.g. `>`, `<=`, etc.
      * @param array $operands contains two column names.
-     * @param array $params the binding parameters to be populated
-     * @return string the Created SQL expression
-     * @throws InvalidParamException if count($operands) is not 2
+     * @param array $params the expression parameters to be populated
+     * @return string the MATCH expression
+     * @throws InvalidParamException on invalid operands count.
      */
     public function buildSimpleMatch($operator, $operands, &$params)
     {
@@ -263,9 +265,9 @@ class MatchBuilder extends Object
     }
 
     /**
-     * Create placeholder for expression of Match
+     * Create placeholder for expression of MATCH
      * @param string|array|Expression $value
-     * @param array &$params the binding parameters to be populated
+     * @param array $params the expression parameters to be populated
      * @return string the MATCH expression
      */
     protected function buildMatchValue($value, &$params)
@@ -295,10 +297,10 @@ class MatchBuilder extends Object
     }
 
     /**
-     * Created column as string for expression of Match
-     * @param string $column
-     * @param boolean $ignored
-     * @return string the column as string
+     * Created column as string for expression of MATCH
+     * @param string $column column specification.
+     * @param boolean $ignored whether column should be specified as 'ignored'.
+     * @return string the column statement.
      */
     protected function buildMatchColumn($column, $ignored = false)
     {
@@ -314,12 +316,12 @@ class MatchBuilder extends Object
     }
 
     /**
-     * Returns the expression of Match by inserting parameter values into the corresponding placeholders.
+     * Returns the actual MATCH expression by inserting parameter values into the corresponding placeholders.
      * @param string $expression the expression string which is needed to prepare.
      * @param array $params the binding parameters for inserting.
      * @return string parsed expression.
      */
-    protected function parseParams($expression, &$params)
+    protected function parseParams($expression, $params)
     {
         if (empty($params)) {
             return $expression;
@@ -333,9 +335,6 @@ class MatchBuilder extends Object
             $pattern = "/" . preg_quote($name, '/') . '\b/';
             $value = '"' . $this->db->escapeMatchValue($value) . '"';
             $expression = preg_replace($pattern, $value, $expression, -1, $cnt);
-            if ($cnt > 0) {
-                unset($params[$name]);
-            }
         }
 
         return $expression;

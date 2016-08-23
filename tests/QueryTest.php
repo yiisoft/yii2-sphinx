@@ -383,10 +383,7 @@ class QueryTest extends TestCase
 
         $query = new Query();
         $rows = $query->from('yii2_test_article_index')
-            ->match(
-                (new MatchExpression())
-                    ->match('cats')
-            )
+            ->match(new MatchExpression(':match', ['match' => 'cats']))
             ->all($connection);
         $this->assertCount(1, $rows);
 
