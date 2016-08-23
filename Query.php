@@ -275,8 +275,8 @@ class Query extends \yii\db\Query
      *     ->all();
      * ```
      *
-     * @param string $query fulltext query text.
-     * @return $this the query object itself
+     * @param string|Expression|MatchExpression $query fulltext query text.
+     * @return $this the query object itself.
      */
     public function match($query)
     {
