@@ -3,6 +3,7 @@
 namespace yiiunit\extensions\sphinx;
 
 use yii\db\Expression;
+use yii\sphinx\MatchExpression;
 use yii\sphinx\Query;
 
 /**
@@ -371,6 +372,30 @@ class QueryTest extends TestCase
             ->match(new Expression(':match', ['match' => '@(content) ' . $connection->escapeMatchValue('about\\"')]))
             ->all($connection);
         $this->assertNotEmpty($rows);
+    }
+
+    /**
+     * @depends testMatchComplex
+     */
+    public function testMatchExpression()
+    {
+        $connection = $this->getConnection();
+
+        $query = new Query();
+        $rows = $query->from('yii2_test_article_index')
+            ->match(new MatchExpression(':match', ['match' => 'cats']))
+            ->all($connection);
+        $this->assertCount(1, $rows);
+
+        $query = new Query();
+        $rows = $query->from('yii2_test_article_index')
+            ->match(
+                (new MatchExpression())
+                    ->andMatch(['title' => 'cats'])
+                    ->orMatch(['content' => 'dogs'])
+            )
+            ->all($connection);
+        $this->assertCount(2, $rows);
     }
 
     /**
