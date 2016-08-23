@@ -19,12 +19,13 @@ use yii\db\Expression;
 class MatchExpression extends Object
 {
     /**
-     * @var string|array|Expression
+     * @var string|array|Expression match expression
      */
     public $match;
     /**
-     * @var array list of query parameter values indexed by parameter placeholders.
+     * @var array list of match expression parameter values indexed by parameter placeholders.
      * For example, `[':name' => 'Dan', ':age' => 31]`.
+     * These parameters will be automatically escaped using [[Connection::escapeMatchValue]] and inserted into match expression.
      */
     public $params = [];
 

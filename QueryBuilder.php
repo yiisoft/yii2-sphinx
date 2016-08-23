@@ -564,7 +564,9 @@ class QueryBuilder extends Object
         }
 
         if ($match instanceof MatchExpression) {
-            return $this->getMatchBuilder()->build($match, $params);
+            $phName = self::PARAM_PREFIX . count($params);
+            $params[$phName] = $this->getMatchBuilder()->build($match);
+            return $phName;
         }
 
         $phName = self::PARAM_PREFIX . count($params);

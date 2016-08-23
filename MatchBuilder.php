@@ -12,7 +12,10 @@ use yii\base\Object;
 use yii\db\Expression;
 
 /**
- * MatchBuilder
+ * MatchBuilder builds a MATCH SphinxQL expression based on the specification given as a [[MatchExpression]] object.
+ *
+ * @see MatchExpression
+ * @see http://sphinxsearch.com/docs/current.html#extended-syntax
  *
  * @author Kirichenko Sergey <sa-kirch@yandex.ru>
  * @author Paul Klimov <klimov.paul@gmail.com>
@@ -69,12 +72,13 @@ class MatchBuilder extends Object
 
     /**
      * @param MatchExpression $match the [[MatchExpression]] object from which the MATCH expression will be generated.
-     * @param array $params the binding parameters to be populated.
      * @return string generated MATCH expression
      */
-    public function build($match, &$params)
+    public function build($match)
     {
-        return $this->buildMatch($match->match, $params);
+        $params = $match->params;
+        $expression = $this->buildMatch($match->match, $params);
+        return $this->parseParams($expression, $params);
     }
 
     /**
@@ -89,8 +93,12 @@ class MatchBuilder extends Object
             return '';
         }
 
-        if ($match instanceof Expression || !is_array($match)) {
-            return $this->composeMatchValue($match, $params);
+        if ($match instanceof Expression) {
+            return $this->buildMatchValue($match, $params);
+        }
+
+        if (!is_array($match)) {
+            return $match;
         }
 
         if (isset($match[0])) {
@@ -120,7 +128,7 @@ class MatchBuilder extends Object
         $parts = [];
 
         foreach ($match as $column => $value) {
-            $parts[] = $this->buildMatchColumn($column) . ' ' . $this->composeMatchValue($value, $params);
+            $parts[] = $this->buildMatchColumn($column) . ' ' . $this->buildMatchValue($value, $params);
         }
 
         return count($parts) === 1 ? $parts[0] : '(' . implode(') (', $parts) . ')';
@@ -136,7 +144,6 @@ class MatchBuilder extends Object
     public function buildAndMatch($operator, $operands, &$params)
     {
         $parts = [];
-
         foreach ($operands as $operand) {
             if (is_array($operand) || is_object($operand)) {
                 $operand = $this->buildMatch($operand, $params);
@@ -147,11 +154,11 @@ class MatchBuilder extends Object
             }
         }
 
-        if (!empty($parts)) {
-            return '(' . implode(") " . ($operator === 'OR' ? '|' : '') . " (", $parts) . ')';
+        if (empty($parts)) {
+            return '';
         }
 
-        return '';
+        return '(' . implode(')' . ($operator === 'OR' ? ' | ' : ' ') . '(', $parts) . ')';
     }
 
     /**
@@ -172,7 +179,7 @@ class MatchBuilder extends Object
         $phNames = [];
 
         foreach ($operands as $operand) {
-            $phNames[] = $this->composeMatchValue($operand, $params);
+            $phNames[] = $this->buildMatchValue($operand, $params);
         }
 
         return $this->buildMatchColumn($column) . ' ' . implode(' ' . $operator . ' ', $phNames);
@@ -180,9 +187,9 @@ class MatchBuilder extends Object
 
     /**
      * Create Match expressions for zones
-     * @param  string $operator the operator which is used for Create Match expressions
-     * @param  array $operands the Match expressions
-     * @param  array &$params the binding parameters to be populated
+     * @param string $operator the operator which is used for Create Match expressions
+     * @param array $operands the Match expressions
+     * @param array &$params the binding parameters to be populated
      * @return string the MATCH expression
      */
     public function buildZoneMatch($operator, $operands, &$params)
@@ -191,20 +198,16 @@ class MatchBuilder extends Object
             throw new InvalidParamException("Operator '$operator' requires exactly one operand.");
         }
 
-        $phNames = [];
+        $zones = (array)$operands[0];
 
-        foreach ((array)$operands[0] as $zone) {
-            $phNames[] = $this->composeMatchValue($zone, $params);
-        }
-
-        return "$operator: (" . implode(',', $phNames) . ")";
+        return "$operator: (" . implode(',', $zones) . ")";
     }
 
     /**
      * Create Proximity Match expressions
-     * @param  string $operator the operator which is used for Create Match expressions
-     * @param  array $operands the Match expressions
-     * @param  array &$params the binding parameters to be populated
+     * @param string $operator the operator which is used for Create Match expressions
+     * @param array $operands the Match expressions
+     * @param array &$params the binding parameters to be populated
      * @return string the MATCH expression
      */
     public function buildProximityMatch($operator, $operands, &$params)
@@ -215,7 +218,7 @@ class MatchBuilder extends Object
 
         list($column, $value, $proximity) = $operands;
 
-        return $this->buildMatchColumn($column) . ' ' . $this->composeMatchValue($value, $params) . '~' . (int) $proximity;
+        return $this->buildMatchColumn($column) . ' ' . $this->buildMatchValue($value, $params) . '~' . (int) $proximity;
     }
 
     /**
@@ -233,7 +236,7 @@ class MatchBuilder extends Object
 
         list($column, $value) = $operands;
 
-        return $this->buildMatchColumn($column, true) . ' ' . $this->composeMatchValue($value, $params);
+        return $this->buildMatchColumn($column, true) . ' ' . $this->buildMatchValue($value, $params);
     }
 
     /**
@@ -256,16 +259,16 @@ class MatchBuilder extends Object
             $operator = $this->matchOperators[$operator];
         }
 
-        return $this->buildMatchColumn($column) . $operator . $this->composeMatchValue($value, $params);
+        return $this->buildMatchColumn($column) . $operator . $this->buildMatchValue($value, $params);
     }
 
     /**
      * Create placeholder for expression of Match
-     * @param string|array|Expression $value   [description]
+     * @param string|array|Expression $value
      * @param array &$params the binding parameters to be populated
      * @return string the MATCH expression
      */
-    protected function composeMatchValue($value, &$params)
+    protected function buildMatchValue($value, &$params)
     {
         if (empty($value)) {
             return '""';
@@ -284,7 +287,7 @@ class MatchBuilder extends Object
             } else {
                 $phName = self::PARAM_PREFIX . count($params);
                 $parts[] = $phName;
-                $params[$phName] = $this->db->escapeMatchValue($v);
+                $params[$phName] = $v;
             }
         }
 
@@ -293,8 +296,8 @@ class MatchBuilder extends Object
 
     /**
      * Created column as string for expression of Match
-     * @param  string  $column
-     * @param  boolean $ignored
+     * @param string $column
+     * @param boolean $ignored
      * @return string the column as string
      */
     protected function buildMatchColumn($column, $ignored = false)
@@ -307,10 +310,34 @@ class MatchBuilder extends Object
             return '@*';
         }
 
-        return '@' . ($ignored ? '!' : '') .
-            (strpos($column, ',') === false
-                ? $column
-                : '(' . $column . ')'
-            );
+        return '@' . ($ignored ? '!' : '') . (strpos($column, ',') === false ? $column : '(' . $column . ')');
+    }
+
+    /**
+     * Returns the expression of Match by inserting parameter values into the corresponding placeholders.
+     * @param string $expression the expression string which is needed to prepare.
+     * @param array $params the binding parameters for inserting.
+     * @return string parsed expression.
+     */
+    protected function parseParams($expression, &$params)
+    {
+        if (empty($params)) {
+            return $expression;
+        }
+
+        foreach ($params as $name => $value) {
+            if (strncmp($name, ':', 1) !== 0) {
+                $name = ':' . $name;
+            }
+            // unable to use `str_replace()` because particular param name may be a substring of another param name
+            $pattern = "/" . preg_quote($name, '/') . '\b/';
+            $value = '"' . $this->db->escapeMatchValue($value) . '"';
+            $expression = preg_replace($pattern, $value, $expression, -1, $cnt);
+            if ($cnt > 0) {
+                unset($params[$name]);
+            }
+        }
+
+        return $expression;
     }
 }
