@@ -14,9 +14,9 @@ $rows = $query->from('idx_item')
     ->all();
 ```
 
-Sphinx の 'MATCH' 文の引数は、検索結果をより良く調整するために、複雑な内部的構文を使用することに注意してください。
-デフォルトでは、`yii\sphinx\Query::match()` の引数から、この構文に関連する全ての特殊文字がエスケープされます。
-従って、複雑な 'MATCH' 文を使用したい場合は、そのために `yii\db\Expression` を使わなければなりません。
+Sphinx は、検索のより良いチューニングのために、'MATCH' 文の引数に、複雑な内部的構文を使用することに注意してください。
+デフォルトでは、`yii\sphinx\Query::match()` の引数の中の、内部的構文に関わる全ての特殊文字がエスケープされます。
+従って、複雑な 'MATCH' 文を使用したい場合は、引数のために `yii\db\Expression` を使わなければなりません。
 
 ```php
 use yii\sphinx\Query;
@@ -28,25 +28,25 @@ $rows = $query->from('idx_item')
     ->all();
 ```
 
-> Note: 'MATCH' の引数を作成する場合は、必ず `yii\sphinx\Connection::escapeMatchValue()` を使って、クエリを破壊する全ての特殊文字を正しくエスケープしてください。
+> Note: 'MATCH' の引数を作成する場合は、必ず `yii\sphinx\Connection::escapeMatchValue()` を使って全ての特殊文字を適切にエスケープしてください。
+  そうしないと、クエリが破壊されます。
 
-Since version 2.0.6 you can use [[\yii\sphinx\MatchExpression]] for the 'MATCH' statement composition.
-It allows composition of the 'MATCH' expression using placeholders in similar way as bound parameters, which
-values will be automatically escaped using [[\yii\sphinx\Connection::escapeMatchValue()]].
-For examples:
+バージョン 2.0.6 以降は、'MATCH' 文の作成に [[\yii\sphinx\MatchExpression]] を使うことが出来ます。
+これを使うと、パラメータバインディングと同じ方法のプレースホルダを使うことが出来、引数の値が [[\yii\sphinx\Connection::escapeMatchValue()]] を使って自動的にエスケープされるようになります。
+例えば、
 
 ```php
 use yii\sphinx\Query;
 use yii\sphinx\MatchExpression;
 
 $rows = (new Query())
-    ->match(new MatchExpression('@title :title', ['title' => 'Yii'])) // value of ':title' will be escaped automatically
+    ->match(new MatchExpression('@title :title', ['title' => 'Yii'])) // ':title' の値が自動的にエスケープされる
     ->all();
 ```
 
-You may use [[match()]], [[andMatch()]] and [[orMatch()]] to combine several conditions.
-Each condition can be specified using array syntax similar to the one used for [[\yii\sphinx\Query:where]].
-For example:
+[[match()]]、[[andMatch()]] および [[orMatch()]] を使って、複数の条件を結合することが出来ます。
+各条件は、[[\yii\sphinx\Query:where]] で使われているのと同じ配列構文を使って指定することが出来ます。
+例えば、
 
 ```php
 use yii\sphinx\Query;
@@ -54,7 +54,7 @@ use yii\sphinx\MatchExpression;
 
 $rows = (new Query())
     ->match(
-        // produces '((@title "Yii") (@author "Paul")) | (@content "Sphinx")' :
+        // '((@title "Yii") (@author "Paul")) | (@content "Sphinx")' を生成
         (new MatchExpression())
             ->match(['title' => 'Yii'])
             ->andMatch(['author' => 'Paul'])
@@ -63,8 +63,8 @@ $rows = (new Query())
     ->all();
 ```
 
-You may as well compose expressions with special operators like 'MAYBE', 'PROXIMITY' etc.
-For example:
+'MAYBE'、'PROXIMITY' など、特殊な演算子を使って式を作成することも可能です。
+例えば、
 
 ```php
 use yii\sphinx\Query;
@@ -72,7 +72,7 @@ use yii\sphinx\MatchExpression;
 
 $rows = (new Query())
     ->match(
-        // produces '@title "Yii" MAYBE "Sphinx"' :
+        // '@title "Yii" MAYBE "Sphinx"' を生成
         (new MatchExpression())->match([
             'maybe',
             'title',
@@ -84,7 +84,7 @@ $rows = (new Query())
 
 $rows = (new Query())
     ->match(
-        // produces '@title "Yii"~10' :
+        // '@title "Yii"~10' を生成
         (new MatchExpression())->match([
             'proximity',
             'title',
