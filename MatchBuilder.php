@@ -165,9 +165,9 @@ class MatchBuilder extends Object
 
     /**
      * Create MAYBE, SENTENCE or PARAGRAPH expressions.
-     * @param  string $operator the operator which is used for Create Match expressions
-     * @param  array $operands the Match expressions
-     * @param  array &$params the expression parameters to be populated
+     * @param string $operator the operator which is used for Create Match expressions
+     * @param array $operands the Match expressions
+     * @param array &$params the expression parameters to be populated
      * @return string the MATCH expression
      */
     public function buildMultipleMatch($operator, $operands, &$params)
@@ -225,9 +225,9 @@ class MatchBuilder extends Object
 
     /**
      * Create ignored MATCH expressions
-     * @param  string $operator the operator which is used for Create Match expressions
-     * @param  array $operands the Match expressions
-     * @param  array &$params the expression parameters to be populated
+     * @param string $operator the operator which is used for Create Match expressions
+     * @param array $operands the Match expressions
+     * @param array &$params the expression parameters to be populated
      * @return string the MATCH expression
      */
     public function buildIgnoreMatch($operator, $operands, &$params)

@@ -24,7 +24,7 @@ use yii\test\BaseActiveFixture;
  *
  * Note: only runtime indexes are supported.
  *
- * @property IndexSchema $indexSchema The schema information of the Sphinx index associated with this
+ * @property IndexSchema $indexSchema The schema information of the database table associated with this
  * fixture. This property is read-only.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>

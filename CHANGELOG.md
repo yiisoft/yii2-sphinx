@@ -1,8 +1,8 @@
 Yii Framework 2 sphinx extension Change Log
 ===========================================
 
-2.0.6 under development
------------------------
+2.0.6 September 02, 2016
+------------------------
 
 - Bug #8: Fixed usage of the float values in SphinxQL bound params (klimov-paul)
 - Bug #45: Fixed `yii\sphinx\Schema` unable to determine primary key for distribute index (klimov-paul)

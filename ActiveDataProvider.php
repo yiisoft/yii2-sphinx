@@ -56,8 +56,8 @@ use yii\base\InvalidConfigException;
  * option automatically based on those values. However, if [[Query::showMeta]] is set, such adjustment is not performed
  * as it will break total count calculation, so you'll have to deal with 'max_matches' bounds on your own.
  *
- * @property array $meta search query meta info in format: name => value.
- * @property array $facets query facet results.
+ * @property array $facets Query facet results.
+ * @property array $meta Search query meta info.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0.4
