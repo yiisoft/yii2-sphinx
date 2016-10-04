@@ -612,4 +612,38 @@ class QueryTest extends TestCase
             ->all($connection);
         $this->assertCount(0, $rows);
     }
+
+    /**
+     * @depends testRun
+     */
+    public function testColumn()
+    {
+        $db = $this->getConnection();
+        $result = (new Query)
+            ->select('category_id')
+            ->from('yii2_test_item_index')
+            ->orderBy(['id' => SORT_DESC])
+            ->column($db);
+        $this->assertEquals([2, 1], $result);
+
+        // https://github.com/yiisoft/yii2/issues/7515
+        $result = (new Query)
+            ->select('category_id')
+            ->from('yii2_test_item_index')
+            ->orderBy(['id' => SORT_DESC])
+            ->indexBy('id')
+            ->column($db);
+        $this->assertEquals([2 => 2, 1 => 1], $result);
+
+        // https://github.com/yiisoft/yii2/issues/12649
+        $result = (new Query)
+            ->select(['category_id', 'id'])
+            ->from('yii2_test_item_index')
+            ->orderBy(['id' => SORT_DESC])
+            ->indexBy(function ($row) {
+                return $row['id'] * 2;
+            })
+            ->column($db);
+        $this->assertEquals([4 => 2, 2 => 1], $result);
+    }
 }
