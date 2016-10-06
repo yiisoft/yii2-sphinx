@@ -2,6 +2,7 @@
 
 namespace yiiunit\extensions\sphinx;
 
+use Yii;
 use yii\db\Expression;
 use yii\sphinx\MatchExpression;
 use yii\sphinx\Query;
@@ -618,6 +619,11 @@ class QueryTest extends TestCase
      */
     public function testColumn()
     {
+        if (version_compare(Yii::getVersion(), '2.0.10', '<')) {
+            // @todo remove after yii 2.0.10 release
+            $this->markTestSkipped("Yii version >= 2.0.10 required");
+        }
+
         $db = $this->getConnection();
         $result = (new Query)
             ->select('category_id')
