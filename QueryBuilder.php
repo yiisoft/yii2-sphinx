@@ -603,7 +603,7 @@ class QueryBuilder extends Object
 
     /**
      * @param array $columns group columns
-     * @param integer $limit group limit
+     * @param int $limit group limit
      * @return string the GROUP BY clause
      */
     public function buildGroupBy($columns, $limit)
@@ -612,7 +612,7 @@ class QueryBuilder extends Object
             return '';
         }
 
-        if (is_string($limit) && ctype_digit($limit) || is_integer($limit) && $limit >= 0) {
+        if (is_string($limit) && ctype_digit($limit) || is_int($limit) && $limit >= 0) {
             $limitSql = ' ' . $limit;
         } else {
             $limitSql = '';
@@ -643,8 +643,8 @@ class QueryBuilder extends Object
      * Builds the ORDER BY and LIMIT/OFFSET clauses and appends them to the given SQL.
      * @param string $sql the existing SQL (without ORDER BY/LIMIT/OFFSET)
      * @param array $orderBy the order by columns. See [[Query::orderBy]] for more details on how to specify this parameter.
-     * @param integer $limit the limit number. See [[Query::limit]] for more details.
-     * @param integer $offset the offset number. See [[Query::offset]] for more details.
+     * @param int $limit the limit number. See [[Query::limit]] for more details.
+     * @param int $offset the offset number. See [[Query::offset]] for more details.
      * @return string the SQL completed with ORDER BY/LIMIT/OFFSET (if any)
      */
     public function buildOrderByAndLimit($sql, $orderBy, $limit, $offset)
@@ -682,17 +682,17 @@ class QueryBuilder extends Object
     }
 
     /**
-     * @param integer $limit
-     * @param integer $offset
+     * @param int $limit
+     * @param int $offset
      * @return string the LIMIT and OFFSET clauses built from [[query]].
      */
     public function buildLimit($limit, $offset)
     {
         $sql = '';
-        if (is_integer($offset) && $offset > 0 || is_string($offset) && ctype_digit($offset) && $offset !== '0') {
+        if (is_int($offset) && $offset > 0 || is_string($offset) && ctype_digit($offset) && $offset !== '0') {
             $sql = 'LIMIT ' . $offset;
         }
-        if (is_string($limit) && ctype_digit($limit) || is_integer($limit) && $limit >= 0) {
+        if (is_string($limit) && ctype_digit($limit) || is_int($limit) && $limit >= 0) {
             $sql = $sql === '' ? "LIMIT $limit" : "$sql,$limit";
         } elseif ($sql !== '') {
             $sql .= ',1000';  // this is the default limit by sphinx

@@ -271,14 +271,16 @@ class Schema extends Object
     /**
      * Determines the PDO type for the given PHP data value.
      * @param mixed $data the data whose PDO type is to be determined
-     * @return integer the PDO type
+     * @return int the PDO type
      * @see http://www.php.net/manual/en/pdo.constants.php
      */
     public function getPdoType($data)
     {
         static $typeMap = [
             // php type => PDO type
+            'bool' => \PDO::PARAM_BOOL,
             'boolean' => \PDO::PARAM_BOOL,
+            'int' => \PDO::PARAM_INT,
             'integer' => \PDO::PARAM_INT,
             'string' => \PDO::PARAM_STR,
             'resource' => \PDO::PARAM_LOB,

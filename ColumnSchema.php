@@ -99,8 +99,10 @@ class ColumnSchema extends Object
             case 'resource':
             case 'string':
                 return is_resource($value) ? $value : (string) $value;
+            case 'int':
             case 'integer':
                 return (int) $value;
+            case 'bool':
             case 'boolean':
                 return (bool) $value;
             case 'double':

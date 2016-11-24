@@ -124,7 +124,7 @@ class Query extends \yii\db\Query
      */
     public $showMeta;
     /**
-     * @var integer groups limit: to return (no more than) N top matches for each group.
+     * @var int groups limit: to return (no more than) N top matches for each group.
      * This option will take effect only if [[groupBy]] is set.
      * @since 2.0.6
      */
@@ -388,7 +388,7 @@ class Query extends \yii\db\Query
     /**
      * Sets groups limit: to return (no more than) N top matches for each group.
      * This option will take effect only if [[groupBy]] is set.
-     * @param integer $limit group limit.
+     * @param int $limit group limit.
      * @return $this the query object itself.
      * @since 2.0.6
      */
