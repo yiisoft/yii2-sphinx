@@ -38,19 +38,19 @@ class ColumnSchema extends Object
      */
     public $dbType;
     /**
-     * @var boolean whether this column is a primary key
+     * @var bool whether this column is a primary key
      */
     public $isPrimaryKey;
     /**
-     * @var boolean whether this column is an attribute
+     * @var bool whether this column is an attribute
      */
     public $isAttribute;
     /**
-     * @var boolean whether this column is a indexed field
+     * @var bool whether this column is a indexed field
      */
     public $isField;
     /**
-     * @var boolean whether this column is a multi value attribute (MVA)
+     * @var bool whether this column is a multi value attribute (MVA)
      */
     public $isMva;
 

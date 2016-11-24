@@ -192,7 +192,7 @@ class Command extends \yii\db\Command
      * Returns tokenized and normalized forms of the keywords, and, optionally, keyword statistics.
      * @param string $index the name of the index from which to take the text processing settings
      * @param string $text the text to break down to keywords.
-     * @param boolean $fetchStatistic whether to return document and hit occurrence statistics
+     * @param bool $fetchStatistic whether to return document and hit occurrence statistics
      * @return $this the command object itself
      */
     public function callKeywords($index, $text, $fetchStatistic = false)

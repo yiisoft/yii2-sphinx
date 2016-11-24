@@ -299,7 +299,7 @@ class MatchBuilder extends Object
     /**
      * Created column as string for expression of MATCH
      * @param string $column column specification.
-     * @param boolean $ignored whether column should be specified as 'ignored'.
+     * @param bool $ignored whether column should be specified as 'ignored'.
      * @return string the column statement.
      */
     protected function buildMatchColumn($column, $ignored = false)

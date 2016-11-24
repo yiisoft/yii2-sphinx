@@ -117,7 +117,7 @@ class Query extends \yii\db\Query
      */
     public $facets = [];
     /**
-     * @var boolean|string|Expression whether to automatically perform 'SHOW META' query against main one.
+     * @var bool|string|Expression whether to automatically perform 'SHOW META' query against main one.
      * You may set this value to be string or [[Expression]] instance, in this case its value will be used
      * as 'LIKE' condition for 'SHOW META' statement.
      * You need to use [[search()]] method in order to fetch 'meta' results.
@@ -426,7 +426,7 @@ class Query extends \yii\db\Query
 
     /**
      * Sets whether to automatically perform 'SHOW META' for the search query.
-     * @param boolean|string|Expression $showMeta whether to automatically perform 'SHOW META'
+     * @param bool|string|Expression $showMeta whether to automatically perform 'SHOW META'
      * @return $this the query object itself
      * @see showMeta
      */

@@ -111,8 +111,8 @@ class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param  boolean                $reset whether to clean up the test database
-     * @param  boolean                $open  whether to open test database
+     * @param bool $reset whether to clean up the test database
+     * @param bool $open whether to open test database
      * @return \yii\sphinx\Connection
      */
     public function getConnection($reset = false, $open = true)
@@ -149,8 +149,8 @@ class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param  boolean            $reset whether to clean up the test database
-     * @param  boolean            $open  whether to open and populate test database
+     * @param bool $reset whether to clean up the test database
+     * @param bool $open whether to open and populate test database
      * @return \yii\db\Connection
      */
     public function getDbConnection($reset = true, $open = true)

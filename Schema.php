@@ -119,7 +119,7 @@ class Schema extends Object
     /**
      * Obtains the metadata for the named index.
      * @param string $name index name. The index name may contain schema name if any. Do not quote the index name.
-     * @param boolean $refresh whether to reload the index schema even if it is found in the cache.
+     * @param bool $refresh whether to reload the index schema even if it is found in the cache.
      * @return IndexSchema|null index metadata. `null` - if the named index does not exist.
      */
     public function getIndexSchema($name, $refresh = false)
@@ -183,7 +183,7 @@ class Schema extends Object
 
     /**
      * Returns the metadata for all indexes in the database.
-     * @param boolean $refresh whether to fetch the latest available index schemas. If this is false,
+     * @param bool $refresh whether to fetch the latest available index schemas. If this is false,
      * cached data may be returned if available.
      * @return IndexSchema[] the metadata for all indexes in the Sphinx.
      * Each array element is an instance of [[IndexSchema]] or its child class.
@@ -202,7 +202,7 @@ class Schema extends Object
 
     /**
      * Returns all index names in the Sphinx.
-     * @param boolean $refresh whether to fetch the latest available index names. If this is false,
+     * @param bool $refresh whether to fetch the latest available index names. If this is false,
      * index names fetched previously (if available) will be returned.
      * @return string[] all index names in the Sphinx.
      */
@@ -217,7 +217,7 @@ class Schema extends Object
 
     /**
      * Returns all index types in the Sphinx.
-     * @param boolean $refresh whether to fetch the latest available index types. If this is false,
+     * @param bool $refresh whether to fetch the latest available index types. If this is false,
      * index types fetched previously (if available) will be returned.
      * @return array all index types in the Sphinx in format: index name => index type.
      */
@@ -443,7 +443,7 @@ class Schema extends Object
     /**
      * Collects the metadata of index columns.
      * @param IndexSchema $index the index metadata
-     * @return boolean whether the index exists in the database
+     * @return bool whether the index exists in the database
      * @throws \Exception if DB query fails
      */
     protected function findColumns($index)
@@ -561,7 +561,7 @@ class Schema extends Object
     /**
      * Returns a value indicating whether a SQL statement is for read purpose.
      * @param string $sql the SQL statement
-     * @return boolean whether a SQL statement is for read purpose.
+     * @return bool whether a SQL statement is for read purpose.
      */
     public function isReadQuery($sql)
     {

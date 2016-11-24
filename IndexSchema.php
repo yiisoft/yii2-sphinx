@@ -28,7 +28,7 @@ class IndexSchema extends Object
      */
     public $type;
     /**
-     * @var boolean whether this index is a runtime index.
+     * @var bool whether this index is a runtime index.
      */
     public $isRuntime;
     /**

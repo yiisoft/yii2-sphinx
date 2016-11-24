@@ -454,7 +454,7 @@ class QueryBuilder extends Object
      * optionally, keyword statistics.
      * @param string $index the name of the index from which to take the text processing settings
      * @param string $text the text to break down to keywords.
-     * @param boolean $fetchStatistic whether to return document and hit occurrence statistics
+     * @param bool $fetchStatistic whether to return document and hit occurrence statistics
      * @param array $params the binding parameters that will be modified by this method
      * so that they can be bound to the Sphinx command later.
      * @return string the SQL statement for call keywords.
@@ -472,7 +472,7 @@ class QueryBuilder extends Object
     /**
      * @param array $columns
      * @param array $params the binding parameters to be populated
-     * @param boolean $distinct
+     * @param bool $distinct
      * @param string $selectOption
      * @return string the SELECT clause built from [[query]].
      */
@@ -1202,7 +1202,7 @@ class QueryBuilder extends Object
 
     /**
      * Builds SHOW META query.
-     * @param boolean|string|Expression $showMeta show meta specification.
+     * @param bool|string|Expression $showMeta show meta specification.
      * @param array $params the binding parameters to be populated
      * @return string SHOW META query, if it does not required - empty string.
      */

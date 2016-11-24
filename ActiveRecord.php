@@ -209,7 +209,7 @@ abstract class ActiveRecord extends BaseActiveRecord
     /**
      * Returns tokenized and normalized forms of the keywords, and, optionally, keyword statistics.
      * @param string $text the text to break down to keywords.
-     * @param boolean $fetchStatistic whether to return document and hit occurrence statistics
+     * @param bool $fetchStatistic whether to return document and hit occurrence statistics
      * @return array keywords and statistics
      */
     public static function callKeywords($text, $fetchStatistic = false)
@@ -346,11 +346,11 @@ abstract class ActiveRecord extends BaseActiveRecord
      * $article->insert();
      * ```
      *
-     * @param boolean $runValidation whether to perform validation before saving the record.
+     * @param bool $runValidation whether to perform validation before saving the record.
      * If the validation fails, the record will not be inserted.
      * @param array $attributes list of attributes that need to be saved. Defaults to null,
      * meaning all attributes that are loaded from index will be saved.
-     * @return boolean whether the attributes are valid and the record is inserted successfully.
+     * @return bool whether the attributes are valid and the record is inserted successfully.
      * @throws \Exception in case insert failed.
      */
     public function insert($runValidation = true, $attributes = null)
@@ -446,7 +446,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      * }
      * ```
      *
-     * @param boolean $runValidation whether to perform validation before saving the record.
+     * @param bool $runValidation whether to perform validation before saving the record.
      * If the validation fails, the record will not be inserted into the database.
      * @param array $attributeNames list of attributes that need to be saved. Defaults to null,
      * meaning all attributes that are loaded from DB will be saved.
@@ -611,7 +611,7 @@ abstract class ActiveRecord extends BaseActiveRecord
      * The comparison is made by comparing the index names and the primary key values of the two active records.
      * If one of the records [[isNewRecord|is new]] they are also considered not equal.
      * @param ActiveRecord $record record to compare to
-     * @return boolean whether the two active records refer to the same row in the same index.
+     * @return bool whether the two active records refer to the same row in the same index.
      */
     public function equals($record)
     {

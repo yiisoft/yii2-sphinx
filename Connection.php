@@ -70,7 +70,7 @@ class Connection extends \yii\db\Connection
         'mysql' => 'yii\sphinx\Schema',    // MySQL
     ];
     /**
-     * @var boolean whether to enable conversion of the float query params into the direct literal SQL insertion.
+     * @var bool whether to enable conversion of the float query params into the direct literal SQL insertion.
      * This allows processing of the float values, since PDO does not provide specific param type for float binding,
      * while Sphinx is unable to process float values passed as quoted strings.
      * @since 2.0.6
@@ -81,7 +81,7 @@ class Connection extends \yii\db\Connection
     /**
      * Obtains the schema information for the named index.
      * @param string $name index name.
-     * @param boolean $refresh whether to reload the table schema even if it is found in the cache.
+     * @param bool $refresh whether to reload the table schema even if it is found in the cache.
      * @return IndexSchema index schema information. Null if the named index does not exist.
      */
     public function getIndexSchema($name, $refresh = false)
