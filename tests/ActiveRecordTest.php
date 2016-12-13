@@ -267,4 +267,71 @@ class ActiveRecordTest extends TestCase
         $model = ArticleIndex::findOne('1');
         $this->assertTrue($model instanceof ArticleIndex);
     }
+
+    public function testEmulateExecution()
+    {
+        if (!ArticleIndex::find()->hasMethod('emulateExecution')) {
+            $this->markTestSkipped('"yii2" version 2.0.11 or higher required');
+        }
+
+        $this->assertGreaterThan(0, ArticleIndex::find()->count());
+
+        $rows = ArticleIndex::find()
+            ->emulateExecution()
+            ->all();
+        $this->assertSame([], $rows);
+
+        $row = ArticleIndex::find()
+            ->emulateExecution()
+            ->one();
+        $this->assertSame(null, $row);
+
+        $exists = ArticleIndex::find()
+            ->emulateExecution()
+            ->exists();
+        $this->assertSame(false, $exists);
+
+        $count = ArticleIndex::find()
+            ->emulateExecution()
+            ->count();
+        $this->assertSame(0, $count);
+
+        $sum = ArticleIndex::find()
+            ->emulateExecution()
+            ->sum('id');
+        $this->assertSame(0, $sum);
+
+        $sum = ArticleIndex::find()
+            ->from('customer')
+            ->emulateExecution()
+            ->average('id');
+        $this->assertSame(0, $sum);
+
+        $max = ArticleIndex::find()
+            ->emulateExecution()
+            ->max('id');
+        $this->assertSame(null, $max);
+
+        $min = ArticleIndex::find()
+            ->emulateExecution()
+            ->min('id');
+        $this->assertSame(null, $min);
+
+        $scalar = ArticleIndex::find()
+            ->select(['id'])
+            ->emulateExecution()
+            ->scalar();
+        $this->assertSame(null, $scalar);
+
+        $column = ArticleIndex::find()
+            ->select(['id'])
+            ->emulateExecution()
+            ->column();
+        $this->assertSame([], $column);
+
+        $rows = ArticleIndex::find()
+            ->emulateExecution()
+            ->search();
+        $this->assertSame(['hits' => [], 'facets' => [], 'meta' => []], $rows);
+    }
 }

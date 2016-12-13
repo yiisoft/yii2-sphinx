@@ -210,6 +210,14 @@ class Query extends \yii\db\Query
      */
     public function search($db = null)
     {
+        if (!empty($this->emulateExecution)) {
+            return [
+                'hits' => [],
+                'facets' => [],
+                'meta' => [],
+            ];
+        }
+
         $command = $this->createCommand($db);
         $dataReader = $command->query();
         $rawRows = $dataReader->readAll();
@@ -521,6 +529,10 @@ class Query extends \yii\db\Query
      */
     protected function queryScalar($selectExpression, $db)
     {
+        if (!empty($this->emulateExecution)) {
+            return null;
+        }
+
         $select = $this->select;
         $limit = $this->limit;
         $offset = $this->offset;
@@ -536,12 +548,12 @@ class Query extends \yii\db\Query
 
         if (empty($this->groupBy) && empty($this->union) && !$this->distinct) {
             return $command->queryScalar();
-        } else {
-            return (new Query)->select([$selectExpression])
-                ->from(['c' => $this])
-                ->createCommand($command->db)
-                ->queryScalar();
         }
+
+        return (new Query)->select([$selectExpression])
+            ->from(['c' => $this])
+            ->createCommand($command->db)
+            ->queryScalar();
     }
 
     /**

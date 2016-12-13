@@ -4,7 +4,7 @@ Yii Framework 2 sphinx extension Change Log
 2.0.7 under development
 -----------------------
 
-- no changes in this release.
+- Enh #67: Added support for `yii\db\QueryInterface::emulateExecution()` to force returning an empty result for a query (klimov-paul)
 
 
 2.0.6 September 02, 2016

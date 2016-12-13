@@ -652,4 +652,84 @@ class QueryTest extends TestCase
             ->column($db);
         $this->assertEquals([4 => 2, 2 => 1], $result);
     }
+
+    public function testEmulateExecution()
+    {
+        $query = new Query();
+        if (!$query->hasMethod('emulateExecution')) {
+            $this->markTestSkipped('"yii2" version 2.0.11 or higher required');
+        }
+
+        $db = $this->getConnection();
+
+        $this->assertGreaterThan(0, $query->from('yii2_test_article_index')->count('*', $db));
+
+        $rows = (new Query())
+            ->from('yii2_test_article_index')
+            ->emulateExecution()
+            ->all($db);
+        $this->assertSame([], $rows);
+
+        $row = (new Query())
+            ->from('yii2_test_article_index')
+            ->emulateExecution()
+            ->one($db);
+        $this->assertSame(false, $row);
+
+        $exists = (new Query())
+            ->from('yii2_test_article_index')
+            ->emulateExecution()
+            ->exists($db);
+        $this->assertSame(false, $exists);
+
+        $count = (new Query())
+            ->from('yii2_test_article_index')
+            ->emulateExecution()
+            ->count('*', $db);
+        $this->assertSame(0, $count);
+
+        $sum = (new Query())
+            ->from('yii2_test_article_index')
+            ->emulateExecution()
+            ->sum('id', $db);
+        $this->assertSame(0, $sum);
+
+        $sum = (new Query())
+            ->from('yii2_test_article_index')
+            ->emulateExecution()
+            ->average('id', $db);
+        $this->assertSame(0, $sum);
+
+        $max = (new Query())
+            ->from('yii2_test_article_index')
+            ->emulateExecution()
+            ->max('id', $db);
+        $this->assertSame(null, $max);
+
+        $min = (new Query())
+            ->from('yii2_test_article_index')
+            ->emulateExecution()
+            ->min('id', $db);
+        $this->assertSame(null, $min);
+
+        $scalar = (new Query())
+            ->select(['id'])
+            ->from('yii2_test_article_index')
+            ->emulateExecution()
+            ->scalar($db);
+        $this->assertSame(null, $scalar);
+
+        $column = (new Query())
+            ->select(['id'])
+            ->from('yii2_test_article_index')
+            ->emulateExecution()
+            ->column($db);
+        $this->assertSame([], $column);
+
+        $results = (new Query())
+            ->from('yii2_test_article_index')
+            ->emulateExecution()
+            ->search($db);
+        $this->assertSame(['hits' => [], 'facets' => [], 'meta' => []], $results);
+    }
 }
