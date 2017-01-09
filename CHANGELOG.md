@@ -4,6 +4,7 @@ Yii Framework 2 sphinx extension Change Log
 2.0.7 under development
 -----------------------
 
+- Bug #69: Fixed `yii\sphinx\Query::andFilterWhere()` quotes integer column value in case comparison operator is used (klimov-paul)
 - Enh #67: Added support for `yii\db\QueryInterface::emulateExecution()` to force returning an empty result for a query (klimov-paul)
 
 

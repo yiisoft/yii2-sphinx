@@ -1069,22 +1069,13 @@ class QueryBuilder extends Object
 
         list($column, $value) = $operands;
 
+        $value = $this->composeColumnValue($indexes, $column, $value, $params);
+
         if (strpos($column, '(') === false) {
             $column = $this->db->quoteColumnName($column);
         }
 
-        if ($value === null) {
-            return "$column $operator NULL";
-        } elseif ($value instanceof Expression) {
-            foreach ($value->params as $n => $v) {
-                $params[$n] = $v;
-            }
-            return "$column $operator {$value->expression}";
-        } else {
-            $phName = self::PARAM_PREFIX . count($params);
-            $params[$phName] = $value;
-            return "$column $operator $phName";
-        }
+        return "$column $operator $value";
     }
 
     /**
@@ -1245,7 +1236,6 @@ class QueryBuilder extends Object
             return 'NULL';
         } elseif ($value instanceof Expression) {
             $params = array_merge($params, $value->params);
-
             return $value->expression;
         }
         foreach ($indexes as $index) {
@@ -1272,7 +1262,6 @@ class QueryBuilder extends Object
         } else {
             $phName = self::PARAM_PREFIX . count($params);
             $params[$phName] = (isset($columnSchema)) ? $columnSchema->dbTypecast($value) : $value;
-
             return $phName;
         }
     }

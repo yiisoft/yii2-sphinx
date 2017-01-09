@@ -732,4 +732,32 @@ class QueryTest extends TestCase
             ->search($db);
         $this->assertSame(['hits' => [], 'facets' => [], 'meta' => []], $results);
     }
+
+    /**
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/69
+     *
+     * @depends testFilterWhere
+     */
+    public function testRunFilterWhere()
+    {
+        $db = $this->getConnection();
+
+        $rows = (new Query())
+            ->from('yii2_test_item_index')
+            ->andFilterWhere(['category_id' => '2'])
+            ->all($db);
+        $this->assertCount(1, $rows);
+
+        $rows = (new Query())
+            ->from('yii2_test_item_index')
+            ->andFilterWhere(['>', 'category_id', '1'])
+            ->all($db);
+        $this->assertCount(1, $rows);
+
+        $rows = (new Query())
+            ->from('yii2_test_item_index')
+            ->andFilterWhere(['>', 'category_id', new Expression('1')])
+            ->all($db);
+        $this->assertCount(1, $rows);
+    }
 }
