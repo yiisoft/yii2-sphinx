@@ -216,4 +216,190 @@ class MatchExpression extends Object
         }
         return $this;
     }
+
+    /**
+     * Sets the MATCH part of the query but ignores [[isEmpty()|empty operands]].
+     *
+     * This method is similar to [[match()]]. The main difference is that this method will
+     * remove [[isEmpty()|empty query operands]]. As a result, this method is best suited
+     * for building query conditions based on filter values entered by users.
+     *
+     * The following code shows the difference between this method and [[match()]]:
+     *
+     * ```php
+     * // MATCH (@title :title)
+     * $query->filterMatch(['name' => null, 'title' => 'foo']);
+     * // MATCH (@title :title)
+     * $query->match(['title' => 20]);
+     * // MATCH (@name :name @title :title)
+     * $query->match(['name' => null, 'age' => 20]);
+     * ```
+     *
+     * Note that unlike [[match()]], you cannot pass binding parameters to this method.
+     *
+     * @param array $condition the conditions that should be put in the MATCH part.
+     * See [[match()]] on how to specify this parameter.
+     * @return $this the query object itself
+     * @see where()
+     * @see andFilterMatch()
+     * @see orFilterMatch()
+     * @since 2.0.7
+     */
+    public function filterMatch(array $condition)
+    {
+        $condition = $this->filterCondition($condition);
+        if ($condition !== []) {
+            $this->match($condition);
+        }
+        return $this;
+    }
+
+    /**
+     * Adds an additional MATCH condition to the existing one but ignores [[isEmpty()|empty operands]].
+     * The new condition and the existing one will be joined using the 'AND' operator.
+     *
+     * This method is similar to [[andMatch()]]. The main difference is that this method will
+     * remove [[isEmpty()|empty query operands]]. As a result, this method is best suited
+     * for building query conditions based on filter values entered by users.
+     *
+     * @param array $condition the new MATCH condition. Please refer to [[match()]]
+     * on how to specify this parameter.
+     * @return $this the query object itself
+     * @see filterMatch()
+     * @see orFilterMatch()
+     * @since 2.0.7
+     */
+    public function andFilterMatch(array $condition)
+    {
+        $condition = $this->filterCondition($condition);
+        if ($condition !== []) {
+            $this->andMatch($condition);
+        }
+        return $this;
+    }
+
+    /**
+     * Adds an additional MATCH condition to the existing one but ignores [[isEmpty()|empty operands]].
+     * The new condition and the existing one will be joined using the 'OR' operator.
+     *
+     * This method is similar to [[orMatch()]]. The main difference is that this method will
+     * remove [[isEmpty()|empty query operands]]. As a result, this method is best suited
+     * for building query conditions based on filter values entered by users.
+     *
+     * @param array $condition the new MATCH condition. Please refer to [[match()]]
+     * on how to specify this parameter.
+     * @return $this the query object itself
+     * @see filterMatch()
+     * @see andFilterMatch()
+     * @since 2.0.7
+     */
+    public function orFilterMatch(array $condition)
+    {
+        $condition = $this->filterCondition($condition);
+        if ($condition !== []) {
+            $this->orMatch($condition);
+        }
+        return $this;
+    }
+
+    /**
+     * Removes [[isEmpty()|empty operands]] from the given query condition.
+     *
+     * @param array $condition the original condition
+     * @return array the condition with [[isEmpty()|empty operands]] removed.
+     * @since 2.0.7
+     */
+    protected function filterCondition($condition)
+    {
+        if (!is_array($condition)) {
+            return $condition;
+        }
+
+        if (!isset($condition[0])) {
+            // hash format: 'column1' => 'value1', 'column2' => 'value2', ...
+            foreach ($condition as $name => $value) {
+                if ($this->isEmpty($value)) {
+                    unset($condition[$name]);
+                }
+            }
+            return $condition;
+        }
+
+        // operator format: operator, operand 1, operand 2, ...
+
+        $operator = array_shift($condition);
+
+        switch (strtoupper($operator)) {
+            case 'NOT':
+            case 'AND':
+            case 'OR':
+                foreach ($condition as $i => $operand) {
+                    $subCondition = $this->filterCondition($operand);
+                    if ($this->isEmpty($subCondition)) {
+                        unset($condition[$i]);
+                    } else {
+                        $condition[$i] = $subCondition;
+                    }
+                }
+
+                if (empty($condition)) {
+                    return [];
+                }
+                break;
+            case 'SENTENCE':
+            case 'PARAGRAPH':
+                $column = array_shift($condition);
+                foreach ($condition as $i => $operand) {
+                    if ($this->isEmpty($operand)) {
+                        unset($condition[$i]);
+                    }
+                }
+
+                if (empty($condition)) {
+                    return [];
+                }
+
+                array_unshift($condition, $column);
+                break;
+            case 'ZONE':
+            case 'ZONESPAN':
+                foreach ($condition as $i => $operand) {
+                    if ($this->isEmpty($operand)) {
+                        unset($condition[$i]);
+                    }
+                }
+
+                if (empty($condition)) {
+                    return [];
+                }
+                break;
+            default:
+                if (array_key_exists(1, $condition) && $this->isEmpty($condition[1])) {
+                    return [];
+                }
+        }
+
+        array_unshift($condition, $operator);
+
+        return $condition;
+    }
+
+    /**
+     * Returns a value indicating whether the give value is "empty".
+     *
+     * The value is considered "empty", if one of the following conditions is satisfied:
+     *
+     * - it is `null`,
+     * - an empty string (`''`),
+     * - a string containing only whitespace characters,
+     * - or an empty array.
+     *
+     * @param mixed $value
+     * @return bool if the value is empty
+     * @since 2.0.7
+     */
+    protected function isEmpty($value)
+    {
+        return $value === '' || $value === [] || $value === null || is_string($value) && trim($value) === '';
+    }
 }

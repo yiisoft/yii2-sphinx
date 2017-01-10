@@ -47,4 +47,69 @@ class MatchExpressionTest extends TestCase
         $match->params(['new' => 'value']);
         $this->assertEquals(['new' => 'value'], $match->params);
     }
+
+    /**
+     * @depends testMatch
+     */
+    public function testFilterMatch()
+    {
+        // should work with hash format
+        $match = new MatchExpression();
+        $match->filterMatch([
+            'id' => 0,
+            'title' => '   ',
+            'author_ids' => [],
+        ]);
+        $this->assertEquals(['id' => 0], $match->match);
+
+        $match->andFilterMatch(['status' => null]);
+        $this->assertEquals(['id' => 0], $match->match);
+
+        $match->orFilterMatch(['name' => '']);
+        $this->assertEquals(['id' => 0], $match->match);
+
+        // should work with operator format
+        $match = new MatchExpression();
+        $condition = ['and', ['name' => 'Alex']];
+        $match->filterMatch($condition);
+        $this->assertEquals($condition, $match->match);
+
+        $match->andFilterMatch(['and', ['name' => '']]);
+        $this->assertEquals($condition, $match->match);
+
+        $match->orFilterMatch(['and', ['name' => '']]);
+        $this->assertEquals($condition, $match->match);
+
+        // @see MatchBuilder::buildMultipleMatch()
+        $match = new MatchExpression();
+        $match->andFilterMatch(['sentence', 'name', null, '']);
+        $this->assertEmpty($match->match);
+        $condition = ['sentence', 'name', 'v1', 'v2'];
+        $match->andFilterMatch($condition);
+        $this->assertEquals($condition, $match->match);
+
+        // @see MatchBuilder::buildZoneMatch()
+        $match = new MatchExpression();
+        $match->andFilterMatch(['zone', null, '']);
+        $this->assertEmpty($match->match);
+        $condition = ['zone', 'h1', 'h2'];
+        $match->andFilterMatch($condition);
+        $this->assertEquals($condition, $match->match);
+
+        // @see MatchBuilder::buildIgnoreMatch()
+        $match = new MatchExpression();
+        $match->andFilterMatch(['ignore', 'name', '']);
+        $this->assertEmpty($match->match);
+        $condition = ['ignore', 'name', 'fake'];
+        $match->andFilterMatch($condition);
+        $this->assertEquals($condition, $match->match);
+
+        // @see MatchBuilder::buildProximityMatch()
+        $match = new MatchExpression();
+        $match->andFilterMatch(['proximity', 'name', '', 4]);
+        $this->assertEmpty($match->match);
+        $condition = ['proximity', 'name', 'fake', 4];
+        $match->andFilterMatch($condition);
+        $this->assertEquals($condition, $match->match);
+    }
 }
