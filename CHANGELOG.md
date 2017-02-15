@@ -1,7 +1,7 @@
 Yii Framework 2 sphinx extension Change Log
 ===========================================
 
-2.0.7 under development
+2.0.7 February 15, 2017
 -----------------------
 
 - Bug #69: Fixed `yii\sphinx\Query::andFilterWhere()` quotes integer column value in case comparison operator is used (klimov-paul)
