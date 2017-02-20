@@ -424,13 +424,14 @@ class Schema extends Object
             'smallint' => 'integer',
             'integer' => 'integer',
             'bigint' => 'integer',
+            'timestamp' => 'integer',
             'boolean' => 'boolean',
             'float' => 'double',
         ];
         if (isset($typeMap[$column->type])) {
             if ($column->type === 'bigint') {
                 return PHP_INT_SIZE == 8 ? 'integer' : 'string';
-            } elseif ($column->type === 'integer') {
+            } elseif ($column->type === 'integer' || $column->type === 'timestamp') {
                 return PHP_INT_SIZE == 4 ? 'string' : 'integer';
             } else {
                 return $typeMap[$column->type];

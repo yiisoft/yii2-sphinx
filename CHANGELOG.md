@@ -4,7 +4,7 @@ Yii Framework 2 sphinx extension Change Log
 2.0.8 under development
 -----------------------
 
-- no changes in this release.
+- Bug #71: Fixed PHP type for `sql_attr_timestamp` attribute incorrectly detected as string (klimov-paul)
 
 
 2.0.7 February 15, 2017

@@ -734,9 +734,38 @@ class QueryTest extends TestCase
     }
 
     /**
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/71
+     *
+     * @depends testWhere
+     */
+    public function testWhereCompare()
+    {
+        $db = $this->getConnection();
+
+        $rows = (new Query())
+            ->from('yii2_test_item_index')
+            ->andWhere(['>', 'category_id', '1'])
+            ->all($db);
+        $this->assertCount(1, $rows);
+
+        $rows = (new Query())
+            ->from('yii2_test_item_index')
+            ->andWhere(['>', 'add_date', time() + 1])
+            ->all($db);
+        $this->assertCount(0, $rows);
+
+        $rows = (new Query())
+            ->from('yii2_test_item_index')
+            ->andWhere(['<', 'add_date', time() + 1])
+            ->all($db);
+        $this->assertCount(2, $rows);
+    }
+
+    /**
      * @see https://github.com/yiisoft/yii2-sphinx/issues/69
      *
      * @depends testFilterWhere
+     * @depends testWhereCompare
      */
     public function testRunFilterWhere()
     {
