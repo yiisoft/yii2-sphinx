@@ -36,7 +36,7 @@ class ConnectionTest extends TestCase
 
         $connection = new Connection;
         $connection->dsn = 'unknown::memory:';
-        $this->setExpectedException('yii\db\Exception');
+        $this->expectException('yii\db\Exception');
         $connection->open();
     }
 }

@@ -78,7 +78,7 @@ class CommandTest extends TestCase
         $this->assertEquals(1, $command->queryScalar());
 
         $command = $db->createCommand('bad SQL');
-        $this->setExpectedException('\yii\db\Exception');
+        $this->expectException('\yii\db\Exception');
         $command->execute();
     }
 
@@ -139,7 +139,7 @@ class CommandTest extends TestCase
         $this->assertFalse($command->queryScalar());
 
         $command = $db->createCommand('bad SQL');
-        $this->setExpectedException('\yii\db\Exception');
+        $this->expectException('\yii\db\Exception');
         $command->query();
     }
 
