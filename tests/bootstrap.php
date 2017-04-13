@@ -13,3 +13,5 @@ require_once(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 
 Yii::setAlias('@yiiunit/extensions/sphinx', __DIR__);
 Yii::setAlias('@yii/sphinx', dirname(__DIR__));
+
+require_once(__DIR__ . '/compatibility.php');
