@@ -182,4 +182,98 @@ class ActiveDataProviderTest extends TestCase
 
         $this->assertEquals(29, $provider->getTotalCount());
     }
+
+    /**
+     * @group feature
+     */
+    public function testSequenceModelsMeta()
+    {
+        $mockedQuery = $this->getMockBuilder('\yii\sphinx\Query')
+            ->setMethods(['search'])
+            ->getMock();
+
+        $mockedQuery->method('search')
+            ->willReturn([
+                'hits' => [
+                    [
+                        'id' => '1',
+                        'author_id' => '1',
+                        'add_date' => '1382486400',
+                        'tag' => '1,2,3'
+                    ]
+                ],
+                'facets' => [
+
+                ],
+                'meta' => [
+                    'total' => "1000",
+                    'total_found' => "1002",
+                    'time' => "0.000",
+                ],
+            ]);
+
+        $mockedQuery->expects($this->once())
+            ->method('search');
+
+        $mockedQuery->from('yii2_test_article_index');
+        $mockedQuery->showMeta(true);
+
+        $provider = new \yii\sphinx\ActiveDataProvider([
+            'query' => $mockedQuery,
+            'db' => $this->getConnection(),
+            'pagination' => [
+                'pageSize' => 1,
+            ]
+        ]);
+
+        $models = $provider->getModels();
+        $meta = $provider->getMeta();
+    }
+
+    /**
+     * @group feature
+     */
+    public function testSequenceMetaModels()
+    {
+        $mockedQuery = $this->getMockBuilder('\yii\sphinx\Query')
+            ->setMethods(['search'])
+            ->getMock();
+
+        $mockedQuery->method('search')
+            ->willReturn([
+                'hits' => [
+                    [
+                        'id' => '1',
+                        'author_id' => '1',
+                        'add_date' => '1382486400',
+                        'tag' => '1,2,3'
+                    ]
+                ],
+                'facets' => [
+
+                ],
+                'meta' => [
+                    'total' => "1000",
+                    'total_found' => "1002",
+                    'time' => "0.000",
+                ],
+            ]);
+
+        $mockedQuery->expects($this->once())
+            ->method('search');
+
+        $mockedQuery->from('yii2_test_article_index');
+        $mockedQuery->showMeta(true);
+
+        $provider = new \yii\sphinx\ActiveDataProvider([
+            'query' => $mockedQuery,
+            'db' => $this->getConnection(),
+            'pagination' => [
+                'pageSize' => 1,
+            ]
+        ]);
+
+        $meta = $provider->getMeta();
+        $models = $provider->getModels();
+    }
 }
