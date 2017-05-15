@@ -1,6 +1,12 @@
 Yii Framework 2 sphinx extension Change Log
 ===========================================
 
+2.0.9 under development
+-----------------------
+
+- no changes in this release.
+
+
 2.0.8 May 15, 2017
 ------------------
 
