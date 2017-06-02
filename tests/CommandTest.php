@@ -11,7 +11,7 @@ class CommandTest extends TestCase
 {
     protected function tearDown()
     {
-        $this->truncateRuntimeIndex('yii2_test_rt_index');
+        $this->truncateIndex('yii2_test_rt_index');
         parent::tearDown();
     }
 

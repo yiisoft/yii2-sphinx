@@ -113,7 +113,7 @@ class Schema extends Object
     {
         $indexTypes = $this->getIndexTypes();
         $index->type = array_key_exists($index->name, $indexTypes) ? $indexTypes[$index->name] : 'unknown';
-        $index->isRuntime = ($index->type == 'rt');
+        $index->isRt = ($index->type == 'rt');
     }
 
     /**

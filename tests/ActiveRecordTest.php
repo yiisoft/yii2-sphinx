@@ -5,7 +5,7 @@ namespace yiiunit\extensions\sphinx;
 use yii\sphinx\ActiveQuery;
 use yiiunit\extensions\sphinx\data\ar\ActiveRecord;
 use yiiunit\extensions\sphinx\data\ar\ArticleIndex;
-use yiiunit\extensions\sphinx\data\ar\RuntimeIndex;
+use yiiunit\extensions\sphinx\data\ar\RtIndex;
 
 /**
  * @group sphinx
@@ -20,7 +20,7 @@ class ActiveRecordTest extends TestCase
 
     protected function tearDown()
     {
-        $this->truncateRuntimeIndex('yii2_test_rt_index');
+        $this->truncateIndex('yii2_test_rt_index');
         parent::tearDown();
     }
 
@@ -125,7 +125,7 @@ class ActiveRecordTest extends TestCase
 
     public function testInsert()
     {
-        $record = new RuntimeIndex;
+        $record = new RtIndex;
         $record->id = 15;
         $record->title = 'test title';
         $record->content = 'test content';
@@ -145,7 +145,7 @@ class ActiveRecordTest extends TestCase
      */
     public function testUpdate()
     {
-        $record = new RuntimeIndex;
+        $record = new RtIndex;
         $record->id = 2;
         $record->title = 'test title';
         $record->content = 'test content';
@@ -154,8 +154,8 @@ class ActiveRecordTest extends TestCase
         $record->save();
 
         // save
-        $record = RuntimeIndex::findOne(2);
-        $this->assertTrue($record instanceof RuntimeIndex);
+        $record = RtIndex::findOne(2);
+        $this->assertTrue($record instanceof RtIndex);
         $this->assertEquals(7, $record->type_id);
         $this->assertFalse($record->isNewRecord);
 
@@ -163,24 +163,24 @@ class ActiveRecordTest extends TestCase
         $record->save();
         $this->assertEquals(9, $record->type_id);
         $this->assertFalse($record->isNewRecord);
-        $record2 = RuntimeIndex::findOne(['id' => 2]);
+        $record2 = RtIndex::findOne(['id' => 2]);
         $this->assertEquals(9, $record2->type_id);
 
         // replace
         $query = 'replace';
-        $rows = RuntimeIndex::find()->match($query)->all();
+        $rows = RtIndex::find()->match($query)->all();
         $this->assertEmpty($rows);
-        $record = RuntimeIndex::findOne(2);
+        $record = RtIndex::findOne(2);
         $record->content = 'Test content with ' . $query;
         $record->save();
-        $rows = RuntimeIndex::find()->match($query);
+        $rows = RtIndex::find()->match($query);
         $this->assertNotEmpty($rows);
 
         // updateAll
         $pk = ['id' => 2];
-        $ret = RuntimeIndex::updateAll(['type_id' => 55], $pk);
+        $ret = RtIndex::updateAll(['type_id' => 55], $pk);
         $this->assertEquals(1, $ret);
-        $record = RuntimeIndex::findOne($pk);
+        $record = RtIndex::findOne($pk);
         $this->assertEquals(55, $record->type_id);
     }
 
@@ -190,7 +190,7 @@ class ActiveRecordTest extends TestCase
     public function testDelete()
     {
         // delete
-        $record = new RuntimeIndex;
+        $record = new RtIndex;
         $record->id = 2;
         $record->title = 'test title';
         $record->content = 'test content';
@@ -198,13 +198,13 @@ class ActiveRecordTest extends TestCase
         $record->category = [1, 2];
         $record->save();
 
-        $record = RuntimeIndex::findOne(2);
+        $record = RtIndex::findOne(2);
         $record->delete();
-        $record = RuntimeIndex::findOne(2);
+        $record = RtIndex::findOne(2);
         $this->assertNull($record);
 
         // deleteAll
-        $record = new RuntimeIndex;
+        $record = new RtIndex;
         $record->id = 2;
         $record->title = 'test title';
         $record->content = 'test content';
@@ -212,9 +212,9 @@ class ActiveRecordTest extends TestCase
         $record->category = [1, 2];
         $record->save();
 
-        $ret = RuntimeIndex::deleteAll('id = 2');
+        $ret = RtIndex::deleteAll('id = 2');
         $this->assertEquals(1, $ret);
-        $records = RuntimeIndex::find()->all();
+        $records = RtIndex::find()->all();
         $this->assertEquals(0, count($records));
     }
 

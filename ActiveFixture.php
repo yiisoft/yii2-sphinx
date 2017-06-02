@@ -141,7 +141,7 @@ class ActiveFixture extends BaseActiveFixture
         if ($this->_index === null) {
             throw new InvalidConfigException("Index does not exist: {$indexName}");
         }
-        if (!$this->_index->isRuntime) {
+        if (!$this->_index->isRt) {
             throw new InvalidConfigException("'{$indexName}' is not a runtime index. Only runtime indexes are supported.'");
         }
 

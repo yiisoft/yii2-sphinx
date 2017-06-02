@@ -4,7 +4,7 @@ Yii Framework 2 sphinx extension Change Log
 2.0.9 under development
 -----------------------
 
-- no changes in this release.
+- Enh #73: `isRuntime` field of `yii\sphinx\IndexSchema` renamed to `isRt` for consistency with official docs (klimov-paul)
 
 
 2.0.8 May 15, 2017

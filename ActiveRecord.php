@@ -500,7 +500,7 @@ abstract class ActiveRecord extends BaseActiveRecord
         // Replace is supported only by runtime indexes and necessary only for field update
         $useReplace = false;
         $indexSchema = $this->getIndexSchema();
-        if ($this->getIndexSchema()->isRuntime) {
+        if ($this->getIndexSchema()->isRt) {
             foreach ($values as $name => $value) {
                 $columnSchema = $indexSchema->getColumn($name);
                 if ($columnSchema->isField) {

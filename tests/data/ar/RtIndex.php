@@ -2,7 +2,7 @@
 
 namespace yiiunit\extensions\sphinx\data\ar;
 
-class RuntimeIndex extends ActiveRecord
+class RtIndex extends ActiveRecord
 {
     public static function indexName()
     {
