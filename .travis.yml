@@ -32,6 +32,9 @@ matrix:
       script:
         - vendor/bin/phpunit --verbose $PHPUNIT_FLAGS
 
+services:
+  - mysql
+
 # faster builds on new travis setup not using sudo
 sudo: false
 
