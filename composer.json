@@ -22,6 +22,12 @@
         "ext-pdo": "*",
         "ext-pdo_mysql": "*"
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
     "autoload": {
         "psr-4": { "yii\\sphinx\\": "" }
     },
