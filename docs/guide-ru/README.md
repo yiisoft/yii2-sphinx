@@ -2,7 +2,7 @@
 ==========================
 
 Это расширение добавляет полнотекстовый поисковый движок [Sphinx](http://sphinxsearch.com/docs) для фреймворка Yii 2.
-Он поддерживае все функции Sphinx, включая [Runtime индексы](http://sphinxsearch.com/docs/current.html#rt-indexes).
+Он поддерживае все функции Sphinx, включая [Real-time индексы](http://sphinxsearch.com/docs/current.html#rt-indexes).
 
 Как нчать
 ---------------

@@ -1,18 +1,17 @@
 Связывание параметров с плавающей точкой
 ====================
 
-There are issue related to float values binding using PDO and SphinxQL.
-PDO does not provide a way to bind a float parameter in prepared statement mode, thus float values are passed
-with mode `PDO::PARAM_STR` and thus are bound to the statement as quoted strings, e.g. `'9.85'`.
-Unfortunally, SphinxQL is unable to recognize float values passed in this way, producing following error:
+Существуют проблемы, связанные с привязкой значений float используя PDO и SphinxQL.
+PDO не обеспечивает способ привязки параметра float в режиме подготовленных операторов, поэтому значения float передаются в режиме `PDO::PARAM_STR` и, таким образом, привязаны к оператору в виде цитируемых строк, например. ` '9.85'`.
+К сожалению, SphinxQL не может распознать значения float, переданные таким образом, создавая следующую ошибку:
 
 > syntax error, unexpected QUOTED_STRING, expecting CONST_INT or CONST_FLOAT
 
-In order to bypass this problem any parameter bind to the [[\yii\sphinx\Command]], which PHP type is exactly 'float',
-will be inserted to the SphinxQL content as literal instead of being bound.
+Чтобы обойти эту проблему, любой параметр связывается с [[\yii\sphinx\Command]], какой точно PHP тип 'float',
+Будет вставляться в содержимое SphinxQL как литерал вместо привязки.
 
-This feature works only if value is a native PHP float (strings containing floats do not work).
-For example:
+Эта функция работает только в том случае, если значение является оригинальным PHP float (строки, содержащие float, не работают).
+Например:
 
 ```php
 use yii\sphinx\Query;
@@ -34,8 +33,7 @@ $rows = (new Query())->from('item_index')
     ->all();
 ```
 
-However, in case you are using 'hash' conditions over the index fields declared as 'float', the type conversion will be
-performed automatically:
+Однако, если вы используете условия 'hash' над полями индекса, объявленными как 'float', преобразование типа будет выполняется автоматически:
 
 ```php
 use yii\sphinx\Query;
@@ -48,7 +46,6 @@ $rows = (new Query())->from('item_index')
     ->all();
 ```
 
-> Note: it could be by the time you are reading this float param binding is already fixed at Sphinx server side, or there
-  are other concerns about this functionality, which make it undesirable. In this case you can disable automatic
-  float params conversion via [[\yii\sphinx\Connection::enableFloatConversion]].
+> Note: к тому моменту, когда вы это читаете, эта привязка к плавающей запятой, может быть уже уже исправлена на стороне сервера Sphinx, или есть другие опасения по поводу этой функции, что делает ее нежелательной. В этом случае вы можете отключить автоматическое преобразование параметров float через
+[[\yii\sphinx\Connection::enableFloatConversion]].
 

@@ -1,10 +1,10 @@
 Работа с распределенными индексами
 ================================
 
-This extension uses `DESCRIBE` query in order to fetch information about Sphinx index structure (field names and types).
-However for the [distributed indexes](http://sphinxsearch.com/docs/current.html#distributed) it is not always possible.
-Schema of such index can be found only, if its declaration contains at list one available local index.
-For example:
+Это расширение использует запрос `DESCRIBE` для получения информации о структуре индекса Sphinx (имена полей и типы).
+Однако для [распределенных индексов](http://sphinxsearch.com/docs/current.html#distributed) это не всегда возможно.
+Схема такого индекса может быть найдена только, если его объявление содержит в списке один доступный локальный индекс.
+Например:
 
 ```php
 index item_distributed
@@ -21,13 +21,11 @@ index item_distributed
 }
 ```
 
-It is recommended to have at least one local index in the distributed index declaration. You are not forced ot actually
-use it - this local index may be empty, it is needed for the schema declaration only.
+Рекомендуется иметь по крайней мере один локальный индекс в объявлении распределенного индекса. Вы не обязаны его фактически использовать - этот локальный индекс может быть пустым, он необходим только для объявления схемы.
 
-Still it is allowed to specify distributed index without local one. For such index the default dummy schema will be used.
-However in this case automatic typecasting for the index fields will be unavailable and you should perform data typecast
-on your own.
-For example:
+Тем не менее, разрешено указывать распределенный индекс без локального. Для такого индекса будет использоваться схема-заглушка по умолчанию.
+Однако в этом случае автоматическое преобразование типов для полей индекса будет недоступно, и вы должны выполнить типизацию данных самостоятельно.
+Например:
 
 ```php
 use yii\sphinx\Query;
