@@ -19,7 +19,7 @@ $results = $query->from('idx_item')
         'brand_id',
         'categories',
     ])
-    ->search($connection); // retrieve all rows and facets
+    ->search($connection); // получить все строки и фасеты
 
 $items = $results['hits'];
 $facets = $results['facets'];
@@ -31,7 +31,7 @@ foreach ($results['facets']['brand_id'] as $frame) {
 }
 ```
 
-> Note: убедитесь, что вы используете сервер Sphinx версии 2.2.3 или выше, прежде чем пытаться использовать функцию фасетов.
+> Note: убедитесь, что вы используете сервер Sphinx версии 2.2.3 или выше, прежде чем пытаться использовать особенности фасетов.
 
 Вы можете указать дополнительные опции фасета, такие как `select` или `order` используя формат массива:
 
@@ -47,7 +47,7 @@ $results = $query->from('idx_item')
             'order' => ['FACET()' => SORT_ASC],
         ],
         'name_in_json' => [
-            'select' => [new Expression('json_attr.name AS name_in_json')], // have to use `Expression` to avoid unnecessary quoting
+            'select' => [new Expression('json_attr.name AS name_in_json')], // необходимо использовать `Expression`, чтобы избежать ненужного цитирования
         ],
     ])
     ->search($connection);

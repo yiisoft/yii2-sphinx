@@ -15,7 +15,7 @@
 
 * [Составление инструкции 'MATCH'](usage-match.md)
 * [Использование ActiveRecord](usage-ar.md)
-* [Извлечение запроса META информации](usage-meta.md)
+* [Извлечение META информации](usage-meta.md)
 * [Фасетный поиск](usage-facets.md)
 * [Работа с провайдерами данных](usage-data-providers.md)
 * [Создание снипетов (Выдержки)](usage-snippets.md)

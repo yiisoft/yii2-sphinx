@@ -1,24 +1,21 @@
-Извлечение запроса META информации
+Извлечение META информации
 ===============================
 
-Sphinx allows fetching statistical information about last performed query via [SHOW META](http://sphinxsearch.com/docs/current.html#sphinxql-show-meta) SphinxQL statement.
-This information is commonly used to get total count of rows in the index without extra `SELECT COUNT(*) ...` query.
-Although you can always run such query manually, `yii\sphinx\Query` allows you to do this automatically without extra efforts.
-All you need to do is enable `yii\sphinx\Query::showMeta` and use `yii\sphinx\Query::search()` to fetch all rows and
-meta information:
+Sphinx позволяет получать статистическую информацию о последнем выполненном запросе с помощью инструкции [SHOW META](http://sphinxsearch.com/docs/current.html#sphinxql-show-meta) SphinxQL.
+Эта информация обычно используется для получения общего количества строк в индексе без дополнительного запроса `SELECT COUNT (*) ...`.
+Хотя вы всегда можете запустить такой запрос вручную, `yii\sphinx\Query` позволяет вам делать это автоматически без дополнительных усилий.
+Все, что вам нужно сделать, это включить `yii\sphinx\Query::showMeta` и использовать `yii\sphinx\Query::search()` для извлечения всех строк и метаинформации:
 
 ```php
 $query = new Query();
 $results = $query->from('idx_item')
     ->match('foo')
-    ->showMeta(true) // enable automatic 'SHOW META' query
-    ->search(); // retrieve all rows and META information
+    ->showMeta(true) // включить автоматический запрос 'SHOW META'
+    ->search(); // извлечь все строки и META информацию
 
 $items = $results['hits'];
 $meta = $results['meta'];
 $totalItemCount = $results['meta']['total'];
 ```
 
-> Note: Total item count that can be extracted from 'meta' is limited to `max_matches` sphinx option.
-  If your index contains more records than `max_matches` value (usually - 1000), you should either raise up
-  `max_matches` via [[Query::options]] or use [[Query::count()]] to retrieve records count.
+> Note: Общее количество элементов, которое может быть извлечено из 'meta', ограничено опцией sphinx `max_matches`. Если ваш индекс содержит больше записей, чем значение `max_matches` (обычно - 1000), вы должны либо поднять` max_matches` через [[Query::options]], либо использовать [[Query::count()]], чтобы получить количество записей.

@@ -30,17 +30,17 @@ index item_distributed
 ```php
 use yii\sphinx\Query;
 
-// distributed index with local
+// распределенный индекс с локальным
 $rows = (new Query())->from('item_distributed_with_local')
-    ->where(['category_id' => '12']) // works fine string `'12'` - converted to integer `12`
+    ->where(['category_id' => '12']) // отлично работает строка `'12'` - преобразуется в целое число `12`
     ->all();
 
-// distributed index without local
+// распределенный индекс без локального
 $rows = (new Query())->from('item_distributed_without_local')
     ->where(['category_id' => '12']) // produces SphinxQL error: 'syntax error, unexpected QUOTED_STRING, expecting CONST_INT'
     ->all();
 
 $rows = (new Query())->from('item_distributed_without_local')
-    ->where(['category_id' => (int)'12']) // need to perform typecasting
+    ->where(['category_id' => (int)'12']) // необходимо выполнить приведение типов
     ->all();
 ```
