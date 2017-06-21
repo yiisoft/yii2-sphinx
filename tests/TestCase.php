@@ -141,7 +141,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
      * Truncates the runtime index.
      * @param string $indexName index name.
      */
-    protected function truncateRuntimeIndex($indexName)
+    protected function truncateIndex($indexName)
     {
         if ($this->sphinx) {
             $this->sphinx->createCommand('TRUNCATE RTINDEX ' . $indexName)->execute();

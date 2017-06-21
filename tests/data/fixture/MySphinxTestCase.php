@@ -3,7 +3,7 @@
 namespace yiiunit\extensions\sphinx\data\fixture;
 
 use yii\test\FixtureTrait;
-use yiiunit\extensions\sphinx\data\fixture\RuntimeIndexFixture;
+use yiiunit\extensions\sphinx\data\fixture\RtIndexFixture;
 
 class MySphinxTestCase
 {
@@ -22,7 +22,7 @@ class MySphinxTestCase
     public function fixtures()
     {
         return [
-            'runtimeIndex' => RuntimeIndexFixture::className(),
+            'runtimeIndex' => RtIndexFixture::className(),
         ];
     }
 }

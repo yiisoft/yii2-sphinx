@@ -13,6 +13,7 @@ use yii\base\Object;
  * IndexSchema represents the metadata of a Sphinx index.
  *
  * @property array $columnNames List of column names. This property is read-only.
+ * @property bool $isRuntime whether this index is a real-time index. This property is deprecated, use [[isRt]] instead.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0
@@ -28,9 +29,9 @@ class IndexSchema extends Object
      */
     public $type;
     /**
-     * @var bool whether this index is a runtime index.
+     * @var bool whether this index is a real-time index.
      */
-    public $isRuntime;
+    public $isRt;
     /**
      * @var string primary key of this index.
      */
@@ -59,5 +60,27 @@ class IndexSchema extends Object
     public function getColumnNames()
     {
         return array_keys($this->columns);
+    }
+
+    /**
+     * @deprecated
+     * This method is deprecated, use [[isRt]] instead.
+     * @return bool whether this index is a real-time index.
+     * @since 2.0.9
+     */
+    public function isIsRuntime()
+    {
+        return $this->isRt;
+    }
+
+    /**
+     * @deprecated
+     * This method is deprecated, use [[isRt]] instead.
+     * @param bool $isRuntime whether this index is a real-time index.
+     * @since 2.0.9
+     */
+    public function setIsRuntime($isRuntime)
+    {
+        $this->isRt = $isRuntime;
     }
 }

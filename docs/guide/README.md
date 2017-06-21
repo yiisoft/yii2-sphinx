@@ -2,7 +2,7 @@ Sphinx Extension for Yii 2
 ==========================
 
 This extension adds [Sphinx](http://sphinxsearch.com/docs) full text search engine extension for the Yii 2 framework.
-It supports all Sphinx features including [Runtime Indexes](http://sphinxsearch.com/docs/current.html#rt-indexes).
+It supports all Sphinx features including [Real-time Indexes](http://sphinxsearch.com/docs/current.html#rt-indexes).
 
 Getting Started
 ---------------

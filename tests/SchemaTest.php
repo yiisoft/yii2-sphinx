@@ -74,11 +74,11 @@ class SchemaTest extends TestCase
 
         $index = $schema->getIndexSchema('yii2_test_article_index');
         $this->assertEquals('local', $index->type);
-        $this->assertFalse($index->isRuntime);
+        $this->assertFalse($index->isRt);
 
         $index = $schema->getIndexSchema('yii2_test_rt_index');
         $this->assertEquals('rt', $index->type);
-        $this->assertTrue($index->isRuntime);
+        $this->assertTrue($index->isRt);
     }
 
     /**

@@ -5,10 +5,37 @@ php:
   - 5.5
   - 5.6
   - 7.0
-  - hhvm
+  - 7.1
 
-env:
-  - CUBRID_VERSION=9.3.0/CUBRID-9.3.0.0206 CUBRID_PDO_VERSION=9.3.0.0001
+# run build against hhvm but allow them to fail
+# http://docs.travis-ci.com/user/build-configuration/#Rows-That-are-Allowed-To-Fail
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: hhvm
+  include:
+    # test against the latest HHVM version by using a newer image
+    - php: hhvm
+      sudo: true
+      dist: trusty
+      group: edge # Use edge image until the next travis CI image update
+      addons:
+        apt:
+          packages:
+            - mysql-server-5.6
+            - mysql-client-core-5.6
+            - mysql-client-5.6
+          services:
+            - mysql
+      before_install:
+        - composer require --prefer-dist --no-interaction 'phpunit/phpunit:<6.0'
+        - mysql -e "CREATE USER 'travis'@'localhost' IDENTIFIED WITH mysql_native_password;";
+        - mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'travis'@'localhost' WITH GRANT OPTION;";
+      script:
+        - vendor/bin/phpunit --verbose $PHPUNIT_FLAGS
+
+services:
+  - mysql
 
 # faster builds on new travis setup not using sudo
 sudo: false
@@ -20,7 +47,6 @@ cache:
 
 install:
   - travis_retry composer self-update && composer --version
-  - travis_retry composer global require "fxp/composer-asset-plugin:~1.1.1"
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - travis_retry composer install --prefer-dist --no-interaction
 
@@ -29,7 +55,7 @@ before_script:
   - mysql --version
 
   # initialize databases
-  - mysql -e 'CREATE DATABASE yiitest;';
+  - travis_retry mysql -e 'CREATE DATABASE `yiitest`;';
   - tests/data/travis/sphinx-setup.sh
   - |
     if [ $TRAVIS_PHP_VERSION = '5.6' ]; then
