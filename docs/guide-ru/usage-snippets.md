@@ -1,10 +1,8 @@
 Создание снипетов (Выдержки)
 ============================
 
-Snippet (excerpt) - is a fragment of the index source text, which contains highlighted words from fulltext search
-condition. Sphinx has a powerful build-in mechanism to compose snippets. However, since Sphinx does not store the
-original indexed text, the snippets for the rows in query result should be build separately via another query.
-Such query may be performed via `yii\sphinx\Command::callSnippets()`:
+Сниппет (выдержка) - фрагмент исходного текста индекса, который содержит выделенные слова изсостояния полнотекстового поиска. Sphinx имеет мощный встроенный механизм для создания фрагментов. Однако, поскольку Sphinx не сохраняет исходный проиндексированный текст, фрагменты для строк в результате запроса должны быть построены отдельно через другой запрос.
+Такой запрос может быть выполнен с помощью `yii\sphinx\Command::callSnippets()`:
 
 ```php
 $sql = "SELECT * FROM idx_item WHERE MATCH('about')";
@@ -18,10 +16,9 @@ foreach ($rows as $row) {
 $snippets = Yii::$app->sphinx->createCommand($sql)->callSnippets('idx_item', $rowSnippetSources, 'about');
 ```
 
-You can simplify this workflow using [[yii\sphinx\Query::snippetCallback]].
-It is a PHP callback, which receives array of query result rows as an argument and must return the
-array of snippet source strings in the order, which match one of incoming rows.
-Example:
+Вы можете упростить этот рабочий процесс, используя [[yii\sphinx\Query::snippetCallback]].
+Это PHP колбек, который получает массив строк результата запроса в качестве аргумента и должен возвращать массив строк источника фрагмента в порядке, который соответствует одной из входящих строк.
+Например:
 
 ```php
 use yii\sphinx\Query;
@@ -43,9 +40,9 @@ foreach ($rows as $row) {
 }
 ```
 
-If you are using Active Record, you can [[yii\sphinx\ActiveQuery::snippetByModel()]] to compose a snippets.
-This method retrieves snippet source per each row calling `getSnippetSource()` method of the result model.
-All you need to do is implement it in your Active Record class, so it return the correct value:
+Если вы используете Active Record, вы можете создать фрагменты [[yii\sphinx\ActiveQuery::snippetByModel()]].
+Этот метод извлекает источник фрагмента для каждой строки, вызывающий метод `getSnippetSource()` модели результата.
+Все, что вам нужно сделать, это реализовать его в классе Active Record, чтобы он вернул правильное значение:
 
 ```php
 use yii\sphinx\ActiveRecord;
