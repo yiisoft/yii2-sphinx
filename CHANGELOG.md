@@ -4,6 +4,7 @@ Yii Framework 2 sphinx extension Change Log
 2.0.9 under development
 -----------------------
 
+- Bug #75: Fixed empty MVA field value is fetches as array with null element instead of empty array (batyrmastyr, klimov-paul)
 - Enh #73: `isRuntime` field of `yii\sphinx\IndexSchema` renamed to `isRt` for consistency with official docs (klimov-paul)
 
 

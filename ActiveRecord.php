@@ -631,8 +631,12 @@ abstract class ActiveRecord extends BaseActiveRecord
         foreach ($row as $name => $value) {
             if (isset($columns[$name])) {
                 if ($columns[$name]->isMva) {
-                    $mvaValue = explode(',', $value);
-                    $row[$name] = array_map([$columns[$name], 'phpTypecast'], $mvaValue);
+                    if (empty($value)) {
+                        $row[$name] = [];
+                    } else {
+                        $mvaValue = explode(',', $value);
+                        $row[$name] = array_map([$columns[$name], 'phpTypecast'], $mvaValue);
+                    }
                 } else {
                     $row[$name] = $columns[$name]->phpTypecast($value);
                 }

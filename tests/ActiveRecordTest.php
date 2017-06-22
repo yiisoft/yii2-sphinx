@@ -218,6 +218,24 @@ class ActiveRecordTest extends TestCase
         $this->assertEquals(0, count($records));
     }
 
+    /**
+     * @depends testInsert
+     *
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/75
+     */
+    public function testEmptyMva()
+    {
+        // delete
+        $record = new RtIndex;
+        $record->id = 3;
+        $record->title = 'test empty MVA';
+        $record->category = [];
+        $record->save();
+
+        $record = RtIndex::findOne(3);
+        $this->assertEquals([], $record->category);
+    }
+
     public function testCallSnippets()
     {
         $query = 'pencil';
