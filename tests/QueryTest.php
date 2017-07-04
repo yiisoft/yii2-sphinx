@@ -63,6 +63,20 @@ class QueryTest extends TestCase
         $this->assertEquals([':id' => 1, ':name' => 'something', ':age' => '30'], $query->params);
     }
 
+    /**
+     * @depends testWhere
+     */
+    public function testWhereExpression()
+    {
+        $query = new Query();
+        $expression = new Expression('name = :name', ['name' => 'foo']);
+        $query->where($expression);
+
+        $command = $query->createCommand($this->getConnection(false));
+        $this->assertContains($expression->expression, $command->getSql());
+        $this->assertEquals($expression->params, $command->params);
+    }
+
     public function testFilterWhere()
     {
         // should work with hash format

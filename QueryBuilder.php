@@ -738,7 +738,12 @@ class QueryBuilder extends Object
      */
     public function buildCondition($indexes, $condition, &$params)
     {
-        if (!is_array($condition)) {
+        if ($condition instanceof Expression) {
+            foreach ($condition->params as $n => $v) {
+                $params[$n] = $v;
+            }
+            return $condition->expression;
+        } elseif (!is_array($condition)) {
             return (string) $condition;
         } elseif (empty($condition)) {
             return '';

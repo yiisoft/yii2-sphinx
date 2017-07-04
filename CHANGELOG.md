@@ -5,6 +5,7 @@ Yii Framework 2 sphinx extension Change Log
 -----------------------
 
 - Bug #75: Fixed empty MVA field value is fetches as array with null element instead of empty array (batyrmastyr, klimov-paul)
+- Bug #78: Fixed `yii\sphinx\Query::where()` does not add params from directly passed `yii\db\Expression` (klimov-paul)
 - Enh #73: `isRuntime` field of `yii\sphinx\IndexSchema` renamed to `isRt` for consistency with official docs (klimov-paul)
 
 
