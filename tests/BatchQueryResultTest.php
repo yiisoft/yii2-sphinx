@@ -42,6 +42,8 @@ class BatchQueryResultTest extends TestCase
         $this->assertCount(20, $allRows);
         $this->assertEquals(1, $allRows[0]['author_id']);
         $this->assertEquals(2, $allRows[1]['author_id']);
+        $this->assertEquals(3, $allRows[2]['author_id']);
+        $this->assertEquals(4, $allRows[3]['author_id']);
 
         // rewind
         $allRows = [];
@@ -77,6 +79,8 @@ class BatchQueryResultTest extends TestCase
         $this->assertCount(4, $allRows);
         $this->assertEquals(1, $allRows[1]['author_id']);
         $this->assertEquals(2, $allRows[2]['author_id']);
+        $this->assertEquals(3, $allRows[3]['author_id']);
+        $this->assertEquals(4, $allRows[4]['author_id']);
 
         // each
         $query = (new Query())
@@ -89,6 +93,8 @@ class BatchQueryResultTest extends TestCase
         $this->assertCount(20, $allRows);
         $this->assertEquals(1, $allRows[0]['author_id']);
         $this->assertEquals(2, $allRows[1]['author_id']);
+        $this->assertEquals(3, $allRows[2]['author_id']);
+        $this->assertEquals(4, $allRows[3]['author_id']);
 
         // each with key
         $query = (new Query())
@@ -118,6 +124,8 @@ class BatchQueryResultTest extends TestCase
         $this->assertCount(20, $allModels);
         $this->assertEquals(1, $allModels[0]->author_id);
         $this->assertEquals(2, $allModels[1]->author_id);
+        $this->assertEquals(3, $allModels[2]->author_id);
+        $this->assertEquals(4, $allModels[3]->author_id);
 
         // batch with eager loading
         $query = ArticleIndex::find()
