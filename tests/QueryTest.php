@@ -633,13 +633,8 @@ class QueryTest extends TestCase
      */
     public function testColumn()
     {
-        if (version_compare(Yii::getVersion(), '2.0.10', '<')) {
-            // @todo remove after yii 2.0.10 release
-            $this->markTestSkipped("Yii version >= 2.0.10 required");
-        }
-
         $db = $this->getConnection();
-        $result = (new Query)
+        $result = (new Query())
             ->select('category_id')
             ->from('yii2_test_item_index')
             ->orderBy(['id' => SORT_DESC])
@@ -647,7 +642,7 @@ class QueryTest extends TestCase
         $this->assertEquals([2, 1], $result);
 
         // https://github.com/yiisoft/yii2/issues/7515
-        $result = (new Query)
+        $result = (new Query())
             ->select('category_id')
             ->from('yii2_test_item_index')
             ->orderBy(['id' => SORT_DESC])
@@ -656,7 +651,7 @@ class QueryTest extends TestCase
         $this->assertEquals([2 => 2, 1 => 1], $result);
 
         // https://github.com/yiisoft/yii2/issues/12649
-        $result = (new Query)
+        $result = (new Query())
             ->select(['category_id', 'id'])
             ->from('yii2_test_item_index')
             ->orderBy(['id' => SORT_DESC])

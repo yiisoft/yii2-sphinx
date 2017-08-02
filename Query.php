@@ -325,6 +325,16 @@ class Query extends \yii\db\Query
     }
 
     /**
+     * @inheritdoc
+     * @since 2.0.9
+     */
+    public function getTablesUsedInFrom()
+    {
+        // feature not supported, returning a stub:
+        return [];
+    }
+
+    /**
      * Sets the query options.
      * @param array $options query options in format: optionName => optionValue
      * @return $this the query object itself
