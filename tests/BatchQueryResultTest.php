@@ -82,6 +82,16 @@ class BatchQueryResultTest extends TestCase
         $this->assertEquals(3, $allRows[3]['author_id']);
         $this->assertEquals(4, $allRows[4]['author_id']);
 
+        // limit increase :
+        $query = (new Query())
+            ->from('yii2_test_article_index')
+            ->limit(200);
+        $allRows = [];
+        foreach ($query->batch(100, $db) as $rows) {
+            $allRows = array_merge($allRows, $rows);
+        }
+        $this->assertCount(200, $allRows);
+
         // each
         $query = (new Query())
             ->from('yii2_test_article_index')
