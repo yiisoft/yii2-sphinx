@@ -13,6 +13,9 @@ use yiiunit\extensions\sphinx\data\ar\TagDb;
  */
 class ExternalActiveRelationTest extends TestCase
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function setUp()
     {
         parent::setUp();

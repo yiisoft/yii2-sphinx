@@ -125,7 +125,7 @@ class ActiveRecordTest extends TestCase
 
     public function testInsert()
     {
-        $record = new RtIndex;
+        $record = new RtIndex();
         $record->id = 15;
         $record->title = 'test title';
         $record->content = 'test content';
@@ -145,7 +145,7 @@ class ActiveRecordTest extends TestCase
      */
     public function testUpdate()
     {
-        $record = new RtIndex;
+        $record = new RtIndex();
         $record->id = 2;
         $record->title = 'test title';
         $record->content = 'test content';
@@ -190,7 +190,7 @@ class ActiveRecordTest extends TestCase
     public function testDelete()
     {
         // delete
-        $record = new RtIndex;
+        $record = new RtIndex();
         $record->id = 2;
         $record->title = 'test title';
         $record->content = 'test content';
@@ -204,7 +204,7 @@ class ActiveRecordTest extends TestCase
         $this->assertNull($record);
 
         // deleteAll
-        $record = new RtIndex;
+        $record = new RtIndex();
         $record->id = 2;
         $record->title = 'test title';
         $record->content = 'test content';
@@ -226,7 +226,7 @@ class ActiveRecordTest extends TestCase
     public function testEmptyMva()
     {
         // delete
-        $record = new RtIndex;
+        $record = new RtIndex();
         $record->id = 3;
         $record->title = 'test empty MVA';
         $record->category = [];

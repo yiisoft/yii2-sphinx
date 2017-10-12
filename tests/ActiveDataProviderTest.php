@@ -91,9 +91,9 @@ class ActiveDataProviderTest extends TestCase
      */
     public function testTotalCountFromMeta()
     {
-        $query = new Query();
-        $query->from('yii2_test_article_index');
-        $query->showMeta(true);
+        $query = (new Query())
+            ->from('yii2_test_article_index')
+            ->showMeta(true);
 
         $provider = new ActiveDataProvider([
             'query' => $query,
@@ -118,10 +118,10 @@ class ActiveDataProviderTest extends TestCase
         $request->setQueryParams(['page' => 2]);
         Yii::$app->set('request', $request);
 
-        $query = new Query();
-        $query->from('yii2_test_article_index');
-        $query->orderBy(['id' => SORT_ASC]);
-        $query->showMeta(true);
+        $query = (new Query())
+            ->from('yii2_test_article_index')
+            ->orderBy(['id' => SORT_ASC])
+            ->showMeta(true);
 
         $provider = new ActiveDataProvider([
             'query' => $query,
@@ -145,9 +145,9 @@ class ActiveDataProviderTest extends TestCase
         $request->setQueryParams(['page' => 99999]);
         Yii::$app->set('request', $request);
 
-        $query = new Query();
-        $query->from('yii2_test_article_index');
-        $query->orderBy(['id' => SORT_ASC]);
+        $query = (new Query())
+            ->from('yii2_test_article_index')
+            ->orderBy(['id' => SORT_ASC]);
 
         $provider = new ActiveDataProvider([
             'query' => $query,
@@ -163,9 +163,9 @@ class ActiveDataProviderTest extends TestCase
 
     public function testMatch()
     {
-        $query = new Query();
-        $query->from('yii2_test_article_index');
-        $query->match('Repeated');
+        $query = (new Query())
+            ->from('yii2_test_article_index')
+            ->match('Repeated');
 
         $provider = new ActiveDataProvider([
             'query' => $query,
