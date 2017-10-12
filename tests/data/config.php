@@ -8,7 +8,7 @@
 
 $config = [
     'sphinx' => [
-        'dsn' => 'mysql:host=127.0.0.1;port=9306;',
+        'dsn' => 'mysql:host=127.0.0.1;port=19306;',
         'username' => 'travis',
         'password' => '',
     ],

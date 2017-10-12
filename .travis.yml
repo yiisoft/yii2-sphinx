@@ -37,8 +37,7 @@ matrix:
 services:
   - mysql
 
-# faster builds on new travis setup not using sudo
-sudo: false
+sudo: true
 
 # cache vendor dirs
 cache:
