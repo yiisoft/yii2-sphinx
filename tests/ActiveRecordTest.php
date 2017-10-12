@@ -165,6 +165,7 @@ class ActiveRecordTest extends TestCase
         $this->assertFalse($record->isNewRecord);
         $record2 = RtIndex::findOne(['id' => 2]);
         $this->assertEquals(9, $record2->type_id);
+        $this->assertSame([1, 2], $record->category);
 
         // replace
         $query = 'replace';
@@ -175,6 +176,10 @@ class ActiveRecordTest extends TestCase
         $record->save();
         $rows = RtIndex::find()->match($query);
         $this->assertNotEmpty($rows);
+
+        $record = RtIndex::findOne(2);
+        $this->assertSame(9, $record->type_id);
+        $this->assertSame([1, 2], $record->category);
 
         // updateAll
         $pk = ['id' => 2];

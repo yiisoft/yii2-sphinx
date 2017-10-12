@@ -511,7 +511,11 @@ abstract class ActiveRecord extends BaseActiveRecord
         }
 
         if ($useReplace) {
-            $values = array_merge($values, $this->getOldPrimaryKey(true));
+            $values = array_merge(
+                $this->getAttributes(),
+                $values,
+                $this->getOldPrimaryKey(true)
+            );
             $command = static::getDb()->createCommand();
             $command->replace(static::indexName(), $values);
             // We do not check the return value of replace because it's possible
