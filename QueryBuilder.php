@@ -497,7 +497,11 @@ class QueryBuilder extends Object
         }
         foreach ($columns as $i => $column) {
             if ($column instanceof Expression) {
-                $columns[$i] = $column->expression;
+                if (is_int($i)) {
+                    $columns[$i] = $column->expression;
+                } else {
+                    $columns[$i] = $column->expression . ' AS ' . $this->db->quoteColumnName($i);
+                }
                 $params = array_merge($params, $column->params);
             } elseif (is_string($i)) {
                 if (strpos($column, '(') === false) {

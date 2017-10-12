@@ -798,4 +798,28 @@ class QueryTest extends TestCase
             ->all($db);
         $this->assertCount(1, $rows);
     }
+
+    /**
+     * @depends testRun
+     *
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/82
+     */
+    public function testSelectExpression()
+    {
+        $connection = $this->getConnection();
+
+        $row = (new Query())
+            ->select([new Expression('author_id AS author')])
+            ->from('yii2_test_article_index')
+            ->limit(1)
+            ->one($connection);
+        $this->assertNotEmpty($row['author']);
+
+        $row = (new Query())
+            ->select(['author' => new Expression('author_id')])
+            ->from('yii2_test_article_index')
+            ->limit(1)
+            ->one($connection);
+        $this->assertNotEmpty($row['author']);
+    }
 }
