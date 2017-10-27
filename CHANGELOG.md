@@ -8,6 +8,7 @@ Yii Framework 2 sphinx extension Change Log
 - Bug #78: Fixed `yii\sphinx\Query::where()` does not add params from directly passed `yii\db\Expression` (klimov-paul)
 - Bug #82: Fixed `yii\sphinx\Query::select()` does not apply alias for `yii\db\Expression` value (klimov-paul)
 - Bug #83: Fixed `yii\sphinx\ActiveRecord::update()` causes attribute value lost in case of field update (klimov-paul)
+- Bug #87: Fixed `yii\sphinx\Command::getRawSql()` does not parse float params (klimov-paul)
 - Enh #73: `isRuntime` field of `yii\sphinx\IndexSchema` renamed to `isRt` for consistency with official docs (klimov-paul)
 
 

@@ -299,6 +299,14 @@ class Command extends \yii\db\Command
         return $sql;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getRawSql()
+    {
+        return $this->parseFloatParams(parent::getRawSql());
+    }
+
     // Not Supported :
 
     /**
