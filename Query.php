@@ -183,7 +183,7 @@ class Query extends \yii\db\Query
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function populate($rows)
     {
@@ -191,7 +191,7 @@ class Query extends \yii\db\Query
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function one($db = null)
     {
@@ -293,7 +293,7 @@ class Query extends \yii\db\Query
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function join($type, $table, $on = '', $params = [])
     {
@@ -301,7 +301,7 @@ class Query extends \yii\db\Query
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function innerJoin($table, $on = '', $params = [])
     {
@@ -309,7 +309,7 @@ class Query extends \yii\db\Query
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function leftJoin($table, $on = '', $params = [])
     {
@@ -317,7 +317,7 @@ class Query extends \yii\db\Query
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rightJoin($table, $on = '', $params = [])
     {
@@ -325,7 +325,7 @@ class Query extends \yii\db\Query
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      * @since 2.0.9
      */
     public function getTablesUsedInFrom()
@@ -535,7 +535,7 @@ class Query extends \yii\db\Query
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function queryScalar($selectExpression, $db)
     {

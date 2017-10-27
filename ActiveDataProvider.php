@@ -128,7 +128,7 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function prepareModels()
     {
@@ -168,7 +168,7 @@ class ActiveDataProvider extends \yii\data\ActiveDataProvider
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function prepareTotalCount()
     {

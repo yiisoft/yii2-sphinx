@@ -7,7 +7,7 @@ class ArticleIndex extends ActiveRecord
     public $custom_column;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function indexName()
     {
@@ -30,7 +30,7 @@ class ArticleIndex extends ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getSnippetSource()
     {

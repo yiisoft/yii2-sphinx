@@ -10,7 +10,7 @@ class RtIndexFixture extends ActiveFixture
     public $modelClass = 'yiiunit\extensions\sphinx\data\ar\RtIndex';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function init()
     {
