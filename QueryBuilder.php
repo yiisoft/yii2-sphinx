@@ -10,7 +10,7 @@ namespace yii\sphinx;
 use yii\base\InvalidConfigException;
 use yii\base\InvalidParamException;
 use yii\base\NotSupportedException;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\db\Exception;
 use yii\db\Expression;
 
@@ -25,7 +25,7 @@ use yii\db\Expression;
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0
  */
-class QueryBuilder extends Object
+class QueryBuilder extends BaseObject
 {
     /**
      * The prefix for automatically generated query binding parameters.

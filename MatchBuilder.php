@@ -8,7 +8,7 @@
 namespace yii\sphinx;
 
 use yii\base\InvalidParamException;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\db\Expression;
 
 /**
@@ -21,7 +21,7 @@ use yii\db\Expression;
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0.6
  */
-class MatchBuilder extends Object
+class MatchBuilder extends BaseObject
 {
     /**
      * The prefix for automatically generated query binding parameters.

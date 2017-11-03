@@ -7,7 +7,7 @@
 
 namespace yii\sphinx;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\db\Expression;
 
 /**
@@ -16,7 +16,7 @@ use yii\db\Expression;
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0
  */
-class ColumnSchema extends Object
+class ColumnSchema extends BaseObject
 {
     /**
      * @var string name of this column (without quotes).

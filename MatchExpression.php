@@ -7,7 +7,7 @@
 
 namespace yii\sphinx;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\db\Expression;
 
 /**
@@ -84,7 +84,7 @@ use yii\db\Expression;
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0.6
  */
-class MatchExpression extends Object
+class MatchExpression extends BaseObject
 {
     /**
      * @var string|array|Expression MATCH expression.

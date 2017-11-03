@@ -7,7 +7,7 @@
 
 namespace yii\sphinx;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\caching\Cache;
 use Yii;
 use yii\caching\TagDependency;
@@ -26,7 +26,7 @@ use yii\db\Exception;
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0
  */
-class Schema extends Object
+class Schema extends BaseObject
 {
     /**
      * The following are the supported abstract column data types.

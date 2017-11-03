@@ -4,6 +4,7 @@ Yii Framework 2 sphinx extension Change Log
 2.0.9 under development
 -----------------------
 
+- Bug: Usage of deprecated `yii\base\Object` changed to `yii\base\BaseObject` allowing compatibility with PHP 7.2 (klimov-paul)
 - Bug #75: Fixed empty MVA field value is fetches as array with null element instead of empty array (batyrmastyr, klimov-paul)
 - Bug #78: Fixed `yii\sphinx\Query::where()` does not add params from directly passed `yii\db\Expression` (klimov-paul)
 - Bug #82: Fixed `yii\sphinx\Query::select()` does not apply alias for `yii\db\Expression` value (klimov-paul)

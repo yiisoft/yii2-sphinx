@@ -7,7 +7,7 @@
 
 namespace yii\sphinx;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * IndexSchema represents the metadata of a Sphinx index.
@@ -18,7 +18,7 @@ use yii\base\Object;
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0
  */
-class IndexSchema extends Object
+class IndexSchema extends BaseObject
 {
     /**
      * @var string name of this index.
