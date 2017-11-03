@@ -482,4 +482,23 @@ class CommandTest extends TestCase
         $rows = $command->queryAll();
         $this->assertEquals(2, count($rows));
     }
+
+    /**
+     * @depends testFloatParams
+     *
+     * @see https://github.com/yiisoft/yii2-sphinx/issues/87
+     */
+    public function testGetRawSql()
+    {
+        $db = $this->getConnection();
+
+        $sql = 'SELECT * FROM yii2_test_item_index WHERE category_id != :excludedCategory price < :maxPrice';
+        $params = [
+            'excludedCategory' => 12,
+            'maxPrice' => 5.5
+        ];
+        $command = $db->createCommand($sql, $params);
+
+        $this->assertSame('SELECT * FROM yii2_test_item_index WHERE category_id != 12 price < 5.5', $command->getRawSql());
+    }
 }

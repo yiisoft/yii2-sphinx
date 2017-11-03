@@ -64,7 +64,7 @@ use yii\base\NotSupportedException;
 class Connection extends \yii\db\Connection
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public $schemaMap = [
         'mysqli' => 'yii\sphinx\Schema',   // MySQL
