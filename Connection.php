@@ -56,7 +56,6 @@ use yii\base\NotSupportedException;
  *
  * @property string $lastInsertID The row ID of the last row inserted, or the last value retrieved from the
  * sequence object. This property is read-only.
- * @property Schema $schema The schema information for the Sphinx connection. This property is read-only.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0
