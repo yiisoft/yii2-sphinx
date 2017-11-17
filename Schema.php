@@ -464,8 +464,17 @@ class Schema extends BaseObject
 
         if (empty($columns[0]['Agent'])) {
             foreach ($columns as $info) {
-                $column = $this->loadColumnSchema($info);
+
+                if(array_key_exists($info['Field'], $index->columns)) {
+                    $column = $index->columns[$info['Field']];
+                    $this->updateColumnSchema($column,$info);
+                }
+                else {
+                    $column = $this->loadColumnSchema($info);
+                }
+
                 $index->columns[$column->name] = $column;
+
                 if ($column->isPrimaryKey) {
                     $index->primaryKey = $column->name;
                 }
@@ -541,6 +550,34 @@ class Schema extends BaseObject
 
         return $column;
     }
+
+    /**
+     * Updates a [[ColumnSchema]] object with additional column information.
+     * @param ColumnSchema the column schema object
+     * @param array $info column information
+     */
+    protected function updateColumnSchema($column,$info)
+    {
+        if($info['Type'] == 'field') {
+            $column->isField = true;
+        }
+        else {
+            $column->dbType = $info['Type'];
+            $type = $info['Type'];
+            if (isset($this->typeMap[$type])) {
+                $column->type = $this->typeMap[$type];
+            } else {
+                $column->type = self::TYPE_STRING;
+            }
+            $column->phpType = $this->getColumnPhpType($column);
+            $column->isAttribute = true;
+        }
+
+        if($type == 'mva') {
+            $column->isMva = true;
+        }
+    }
+
 
     /**
      * Converts a DB exception to a more concrete one if possible.
