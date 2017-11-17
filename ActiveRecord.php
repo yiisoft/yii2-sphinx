@@ -503,7 +503,7 @@ abstract class ActiveRecord extends BaseActiveRecord
         if ($this->getIndexSchema()->isRt) {
             foreach ($values as $name => $value) {
                 $columnSchema = $indexSchema->getColumn($name);
-                if ($columnSchema->isField) {
+                if ($columnSchema->type === 'string' || $columnSchema->type === 'json') {
                     $useReplace = true;
                     break;
                 }
