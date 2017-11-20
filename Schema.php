@@ -465,6 +465,9 @@ class Schema extends BaseObject
         if (empty($columns[0]['Agent'])) {
             foreach ($columns as $info) {
                 $column = $this->loadColumnSchema($info);
+                if (isset($index->columns[$column->name])) {
+                    $column = $this->mergeColumnSchema($index->columns[$column->name], $column);
+                }
                 $index->columns[$column->name] = $column;
                 if ($column->isPrimaryKey) {
                     $index->primaryKey = $column->name;
@@ -523,7 +526,7 @@ class Schema extends BaseObject
         $column->name = $info['Field'];
         $column->dbType = $info['Type'];
 
-        $column->isPrimaryKey = ($column->name == 'id');
+        $column->isPrimaryKey = ($column->name === 'id');
 
         $type = $info['Type'];
         if (isset($this->typeMap[$type])) {
@@ -532,14 +535,41 @@ class Schema extends BaseObject
             $column->type = self::TYPE_STRING;
         }
 
-        $column->isField = ($type == 'field');
+        $column->isField = ($type === 'field');
         $column->isAttribute = !$column->isField;
 
-        $column->isMva = ($type == 'mva');
+        $column->isMva = ($type === 'mva');
 
         $column->phpType = $this->getColumnPhpType($column);
 
         return $column;
+    }
+
+    /**
+     * Merges two column schemas into a single one.
+     * @param ColumnSchema $origin original column schema.
+     * @param ColumnSchema $override column schema to be applied over original one.
+     * @return ColumnSchema merge result.
+     * @since 2.0.10
+     */
+    protected function mergeColumnSchema($origin, $override)
+    {
+        $override->dbType .= ',' . $override->dbType;
+
+        if ($override->isField) {
+            $origin->isField = true;
+        }
+        if ($override->isAttribute) {
+            $origin->isAttribute = true;
+            $origin->type = $override->type;
+            $origin->phpType = $override->phpType;
+
+            if ($override->isMva) {
+                $origin->isMva = true;
+            }
+        }
+
+        return $origin;
     }
 
     /**

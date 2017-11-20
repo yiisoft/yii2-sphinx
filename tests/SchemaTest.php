@@ -11,7 +11,7 @@ class SchemaTest extends TestCase
 {
     public function testFindIndexNames()
     {
-        $schema = $this->getConnection()->schema;
+        $schema = $this->getConnection()->getSchema();
 
         $indexes = $schema->getIndexNames();
         $this->assertContains('yii2_test_article_index', $indexes);
@@ -21,7 +21,7 @@ class SchemaTest extends TestCase
 
     public function testGetIndexSchemas()
     {
-        $schema = $this->getConnection()->schema;
+        $schema = $this->getConnection()->getSchema();
 
         $indexes = $schema->getIndexSchemas();
         $this->assertEquals(count($schema->getIndexNames()), count($indexes));
@@ -32,12 +32,12 @@ class SchemaTest extends TestCase
 
     public function testGetNonExistingIndexSchema()
     {
-        $this->assertNull($this->getConnection()->schema->getIndexSchema('non_existing_index'));
+        $this->assertNull($this->getConnection()->getSchema()->getIndexSchema('non_existing_index'));
     }
 
     public function testSchemaRefresh()
     {
-        $schema = $this->getConnection()->schema;
+        $schema = $this->getConnection()->getSchema();
 
         $schema->db->enableSchemaCache = true;
         $schema->db->schemaCache = new FileCache();
@@ -60,7 +60,7 @@ class SchemaTest extends TestCase
             [$fp = fopen(__FILE__, 'rb'), \PDO::PARAM_LOB],
         ];
 
-        $schema = $this->getConnection()->schema;
+        $schema = $this->getConnection()->getSchema();
 
         foreach ($values as $value) {
             $this->assertEquals($value[1], $schema->getPdoType($value[0]));
@@ -70,7 +70,7 @@ class SchemaTest extends TestCase
 
     public function testIndexType()
     {
-        $schema = $this->getConnection()->schema;
+        $schema = $this->getConnection()->getSchema();
 
         $index = $schema->getIndexSchema('yii2_test_article_index');
         $this->assertEquals('local', $index->type);
@@ -87,13 +87,13 @@ class SchemaTest extends TestCase
     public function testGetSchemaPrimaryKey()
     {
         /* @var $indexSchema \yii\sphinx\IndexSchema */
-        $indexSchema = $this->getConnection()->schema->getIndexSchema('yii2_test_item_index');
+        $indexSchema = $this->getConnection()->getSchema()->getIndexSchema('yii2_test_item_index');
         $this->assertEquals('id', $indexSchema->primaryKey);
 
-        $indexSchema = $this->getConnection()->schema->getIndexSchema('yii2_test_rt_index');
+        $indexSchema = $this->getConnection()->getSchema()->getIndexSchema('yii2_test_rt_index');
         $this->assertEquals('id', $indexSchema->primaryKey);
 
-        $indexSchema = $this->getConnection()->schema->getIndexSchema('yii2_test_distributed');
+        $indexSchema = $this->getConnection()->getSchema()->getIndexSchema('yii2_test_distributed');
         $this->assertEquals('id', $indexSchema->primaryKey);
     }
 }

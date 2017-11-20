@@ -181,6 +181,20 @@ class ActiveRecordTest extends TestCase
         $this->assertSame(9, $record->type_id);
         $this->assertSame([1, 2], $record->category);
 
+        // replace field + attribute
+        $query = 'attribute';
+        $rows = RtIndex::find()->match($query)->all();
+        $this->assertEmpty($rows);
+        $record = RtIndex::findOne(2);
+        $record->title = 'Test content with ' . $query;
+        $record->save();
+        $rows = RtIndex::find()->match($query);
+        $this->assertNotEmpty($rows);
+
+        $record = RtIndex::findOne(2);
+        $this->assertSame(9, $record->type_id);
+        $this->assertSame([1, 2], $record->category);
+
         // updateAll
         $pk = ['id' => 2];
         $ret = RtIndex::updateAll(['type_id' => 55], $pk);
