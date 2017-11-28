@@ -780,7 +780,7 @@ class QueryBuilder extends BaseObject
     {
         $parts = [];
         foreach ($condition as $column => $value) {
-            if (is_array($value) || $value instanceof Query) {
+            if (is_array($value) || $value instanceof \Traversable || $value instanceof Query) {
                 // IN condition
                 $parts[] = $this->buildInCondition($indexes, 'IN', [$column, $value], $params);
             } else {
@@ -812,7 +812,7 @@ class QueryBuilder extends BaseObject
     {
         $parts = [];
         foreach ($operands as $operand) {
-            if (is_array($operand)) {
+            if (is_array($operand) || $operand instanceof Expression) {
                 $operand = $this->buildCondition($indexes, $operand, $params);
             }
             if ($operand !== '') {
@@ -821,9 +821,9 @@ class QueryBuilder extends BaseObject
         }
         if (!empty($parts)) {
             return '(' . implode(") $operator (", $parts) . ')';
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     /**
@@ -842,7 +842,7 @@ class QueryBuilder extends BaseObject
         }
 
         $operand = reset($operands);
-        if (is_array($operand)) {
+        if (is_array($operand) || $operand instanceof Expression) {
             $operand = $this->buildCondition($indexes, $operand, $params);
         }
         if ($operand === '') {
@@ -902,16 +902,6 @@ class QueryBuilder extends BaseObject
 
         list($column, $values) = $operands;
 
-        if ($values === []) {
-            if ($operator === 'IN') {
-                if (empty($column)) {
-                    throw new Exception("Operator '$operator' requires column being specified.");
-                }
-                $column = $this->db->quoteColumnName($column);
-                return "({$column} = 0 AND {$column} = 1)";
-            }
-            return '';
-        }
         if ($column === []) {
             return '';
         }
@@ -935,31 +925,46 @@ class QueryBuilder extends BaseObject
             }
         }
 
-        $values = (array) $values;
-
-        if (count($column) > 1) {
-            return $this->buildCompositeInCondition($indexes, $operator, $column, $values, $params);
+        if (!is_array($values) && !$values instanceof \Traversable) {
+            // ensure values is an array
+            $values = (array) $values;
         }
-        if (is_array($column)) {
+
+        if ($column instanceof \Traversable || ((is_array($column) || $column instanceof \Countable) && count($column) > 1)) {
+            return $this->buildCompositeInCondition($indexes, $operator, $column, $values, $params);
+        } elseif (is_array($column)) {
             $column = reset($column);
         }
+
+        $sqlValues = [];
         foreach ($values as $i => $value) {
             if (is_array($value)) {
                 $value = isset($value[$column]) ? $value[$column] : null;
             }
-            $values[$i] = $this->composeColumnValue($indexes, $column, $value, $params);
+            $sqlValues[$i] = $this->composeColumnValue($indexes, $column, $value, $params);
         }
+
         if (strpos($column, '(') === false) {
             $column = $this->db->quoteColumnName($column);
         }
 
-        if (count($values) > 1) {
-            return "$column $operator (" . implode(', ', $values) . ')';
-        } else {
-            $operator = $operator === 'IN' ? '=' : '<>';
-
-            return $column . $operator . reset($values);
+        if ($sqlValues === []) {
+            if ($operator === 'IN') {
+                if (empty($column)) {
+                    throw new Exception("Operator '$operator' requires column being specified.");
+                }
+                $column = $this->db->quoteColumnName($column);
+                return "({$column} = 0 AND {$column} = 1)";
+            }
+            return '';
         }
+
+        if (count($sqlValues) > 1) {
+            return "$column $operator (" . implode(', ', $sqlValues) . ')';
+        }
+
+        $operator = $operator === 'IN' ? '=' : '<>';
+        return $column . $operator . reset($sqlValues);
     }
 
     /**
@@ -984,13 +989,15 @@ class QueryBuilder extends BaseObject
             }
             $vss[] = '(' . implode(', ', $vs) . ')';
         }
+
+        $sqlColumns = [];
         foreach ($columns as $i => $column) {
             if (strpos($column, '(') === false) {
-                $columns[$i] = $this->db->quoteColumnName($column);
+                $sqlColumns[$i] = $this->db->quoteColumnName($column);
             }
         }
 
-        return '(' . implode(', ', $columns) . ") $operator (" . implode(', ', $vss) . ')';
+        return '(' . implode(', ', $sqlColumns) . ") $operator (" . implode(', ', $vss) . ')';
     }
 
     /**
