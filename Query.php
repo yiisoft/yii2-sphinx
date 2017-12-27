@@ -511,7 +511,11 @@ class Query extends \yii\db\Query
      */
     protected function callSnippets(array $source)
     {
-        return $this->callSnippetsInternal($source, $this->from[0]);
+        $noNulls = [];
+        foreach ($source as $value) {
+            $noNulls []= $value !== null ? $value : '';
+        }
+        return $this->callSnippetsInternal($noNulls, $this->from[0]);
     }
 
     /**
