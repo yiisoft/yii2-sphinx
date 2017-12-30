@@ -416,7 +416,7 @@ class QueryBuilder extends BaseObject
             $dataSqlParts = [];
             foreach ($source as $sourceRow) {
                 $phName = self::PARAM_PREFIX . count($params);
-                $params[$phName] = $sourceRow;
+                $params[$phName] = (string)$sourceRow;
                 $dataSqlParts[] = $phName;
             }
             $dataSql = '(' . implode(',', $dataSqlParts) . ')';

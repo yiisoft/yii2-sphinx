@@ -6,6 +6,7 @@ Yii Framework 2 sphinx extension Change Log
 
 - Bug #90: Fixed `yii\sphinx\Schema::findColumns()` unable to merge 'field' and 'attribute' columns with same name (maz0717, klimov-paul)
 - Bug #92: Fixed `yii\sphinx\QueryBuilder::buildInCondition()` incompatibility with PHP 7.2 (klimov-paul)
+- Enh #93: `yii\sphinx\QueryBuilder::callSnippets()` now automatically casts snippet source to string (klimov-paul)
 - Enh: `yii\sphinx\QueryBuilder` now supports `Traversable` objects for use in `in` conditions (klimov-paul)
 
 
