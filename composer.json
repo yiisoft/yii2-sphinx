@@ -29,7 +29,7 @@
         }
     ],
     "autoload": {
-        "psr-4": { "yii\\sphinx\\": "" }
+        "psr-4": { "yii\\sphinx\\": "src" }
     },
     "extra": {
         "branch-alias": {
