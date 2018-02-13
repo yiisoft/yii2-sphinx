@@ -1,7 +1,7 @@
 Yii Framework 2 sphinx extension Change Log
 ===========================================
 
-2.0.10 under development
+2.0.10 February 13, 2018
 ------------------------
 
 - Bug #90: Fixed `yii\sphinx\Schema::findColumns()` unable to merge 'field' and 'attribute' columns with same name (maz0717, klimov-paul)
