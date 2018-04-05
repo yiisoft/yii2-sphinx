@@ -12,7 +12,7 @@ $params = [
 $rows = Yii::$app->sphinx->createCommand($sql, $params)->queryAll();
 ```
 
-クエリビルダを使用することも出来ます。
+クエリ・ビルダを使用することも出来ます。
 
 ```php
 use yii\sphinx\Query;

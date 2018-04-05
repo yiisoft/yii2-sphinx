@@ -1,5 +1,5 @@
-データプロバイダを扱う
-======================
+データ・プロバイダを扱う
+========================
 
 [[\yii\sphinx\Query]] および [[\yii\sphinx\ActiveQuery]] とともに [[\yii\data\ActiveDataProvider]] を使うことが出来ます。
 
@@ -56,5 +56,5 @@ $models = $provider->getModels();
 $facets = $provider->getFacets();
 $brandIdFacet = $provider->getFacet('brand_id');
 ```
-> Note: ページネーションのオフセットとリミットが Sphinx の 'max_matches' の境界を超える可能性があるため、データプロバイダはそれらの値に基づいて 'max_matches' オプションを自動的に設定します。
+> Note: ページネーションのオフセットとリミットが Sphinx の 'max_matches' の境界を超える可能性があるため、データ・プロバイダはそれらの値に基づいて 'max_matches' オプションを自動的に設定します。
 ただし、[[Query::showMeta]] が設定されている場合は、総数の計算結果を損なうことになるため、そのような調整は実行されませんので、あなた自身が 'max_matches' の境界を操作しなければなりません。
