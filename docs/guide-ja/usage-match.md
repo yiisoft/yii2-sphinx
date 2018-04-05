@@ -32,7 +32,7 @@ $rows = $query->from('idx_item')
   そうしないと、クエリが破壊されます。
 
 バージョン 2.0.6 以降は、'MATCH' 文の作成に [[\yii\sphinx\MatchExpression]] を使うことが出来ます。
-これを使うと、パラメータバインディングと同じ方法のプレースホルダを使うことが出来、引数の値が [[\yii\sphinx\Connection::escapeMatchValue()]] を使って自動的にエスケープされるようになります。
+これを使うと、パラメータ・バインディングと同じ方法のプレースホルダを使うことが出来、引数の値が [[\yii\sphinx\Connection::escapeMatchValue()]] を使って自動的にエスケープされるようになります。
 例えば、
 
 ```php

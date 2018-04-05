@@ -17,12 +17,12 @@ Yii 2 Sphinx エクステンション
 * [アクティブレコードを使用する](usage-ar.md)
 * [クエリのメタ情報を取得する](usage-meta.md)
 * [ファセット検索](usage-facets.md)
-* [データプロバイダを扱う](usage-data-providers.md)
+* [データ・プロバイダを扱う](usage-data-providers.md)
 * [スニペット (抜粋) を構築する](usage-snippets.md)
 
 追加のトピック
 --------------
 
 * [Gii ジェネレータを使用する](topics-gii.md)
-* [Float params binding](topics-float-param-binding.md)
-* [Working with distributed indexes](distributed-indexes.md)
+* [float のパラメタ・バインディング](topics-float-param-binding.md)
+* [分散型インデックスを扱う](distributed-indexes.md)

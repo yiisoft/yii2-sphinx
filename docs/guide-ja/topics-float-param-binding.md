@@ -1,23 +1,23 @@
-Float params binding
-====================
+float のパラメタ・バインディング
+=================================
 
-There are issue related to float values binding using PDO and SphinxQL.
-PDO does not provide a way to bind a float parameter in prepared statement mode, thus float values are passed
-with mode `PDO::PARAM_STR` and thus are bound to the statement as quoted strings, e.g. `'9.85'`.
-Unfortunally, SphinxQL is unable to recognize float values passed in this way, producing following error:
+PDO と SphinxQL を使う場合、浮動小数点数のパラメタ・バインディングに関連する問題があります。
+PDO はプリペアド・ステートメントで浮動小数点数のパラメタをバインドする方法を提供していません。
+従って、浮動小数点数は `PDO::PARAM_STR` のモードで渡され、引用符で囲まれた文字列 (例えば `'9.85'`) としてステートメントにバインドされます。
+不幸なことに、SphinxQL はこのようにして渡された浮動小数点数の値を認識することが出来ず、次のようなエラーを発生させます。
 
 > syntax error, unexpected QUOTED_STRING, expecting CONST_INT or CONST_FLOAT
 
-In order to bypass this problem any parameter bind to the [[\yii\sphinx\Command]], which PHP type is exactly 'float',
-will be inserted to the SphinxQL content as literal instead of being bound.
+この問題を回避するために、[[\yii\sphinx\Command]] にバインドされる値の PHP タイプが厳密に `float` である場合は、
+SphinxQL のコンテントに、バインドされるのでなく、リテラルとして直接に書き込まれます。
 
-This feature works only if value is a native PHP float (strings containing floats do not work).
-For example:
+この機能は値が PHP のネイティブな float である場合にだけ働きます。浮動小数点数を表す文字列では動作しません。
+例えば、
 
 ```php
 use yii\sphinx\Query;
 
-// following code works fine:
+// 次のコードは問題なく動作する
 $rows = (new Query())->from('item_index')
     ->where('price > :price AND price < :priceMax', [
         'price' => 2.1,
@@ -25,7 +25,7 @@ $rows = (new Query())->from('item_index')
     ])
     ->all();
 
-// this one produces an error:
+// 次のコードはエラーになる
 $rows = (new Query())->from('item_index')
     ->where('price > :price AND price < :priceMax', [
         'price' => '2.1',
@@ -34,13 +34,13 @@ $rows = (new Query())->from('item_index')
     ->all();
 ```
 
-However, in case you are using 'hash' conditions over the index fields declared as 'float', the type conversion will be
-performed automatically:
+しかし、'float' と宣言されたインデックス・フィールドに対して 'hash' 形式の条件を使う場合は、
+自動的に型の変換が実行されます。
 
 ```php
 use yii\sphinx\Query;
 
-// following code works fine in case 'price' is a float field in 'item_index':
+// 'price' が 'item_index' で float のフィールドであれば、次のコードは動作する
 $rows = (new Query())->from('item_index')
     ->where([
         'price' => '2.5'
@@ -48,7 +48,7 @@ $rows = (new Query())->from('item_index')
     ->all();
 ```
 
-> Note: it could be by the time you are reading this float param binding is already fixed at Sphinx server side, or there
-  are other concerns about this functionality, which make it undesirable. In this case you can disable automatic
-  float params conversion via [[\yii\sphinx\Connection::enableFloatConversion]].
+> Note: あなたがこの文を読んでいる頃までには、float のパラメタ・バインディングの問題は Sphinx のサーバ・サイドで解決されているかもしれません。
+  または、他に何か懸念があって、この機能を使いたくないかもしれません。
+  その場合は、[[\yii\sphinx\Connection::enableFloatConversion]] によって、自動的な float パラメータの変換を無効にすることが出来ます。
 

@@ -2,7 +2,7 @@
 ============================
 
 このエクステンションは [[\yii\db\ActiveRecord]] と類似したアクティブレコードのソリューションを提供しています。
-アクティブレコードクラスを宣言するためには、[[\yii\sphinx\ActiveRecord]] から拡張して、`indexName` メソッドを実装する必要があります。
+アクティブレコード・クラスを宣言するためには、[[\yii\sphinx\ActiveRecord]] から拡張して、`indexName` メソッドを実装する必要があります。
 
 ```php
 use yii\sphinx\ActiveRecord;
