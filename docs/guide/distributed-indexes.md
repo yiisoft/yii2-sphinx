@@ -21,7 +21,7 @@ index item_distributed
 }
 ```
 
-It is recommended to have at least one local index in the distributed index declaration. You are not forced ot actually
+It is recommended to have at least one local index in the distributed index declaration. You are not forced to actually
 use it - this local index may be empty, it is needed for the schema declaration only.
 
 Still it is allowed to specify distributed index without local one. For such index the default dummy schema will be used.
