@@ -31,7 +31,8 @@ $provider = new ActiveDataProvider([
 $models = $provider->getModels();
 ```
 
-しかし、[ファセットの機能](usage-facets.md) または [クエリのメタ情報](usage-meta.md) を利用したい場合は、`yii\sphinx\ActiveDataProvider` を使用する必要があります。
+しかし、[ファセットの機能](usage-facets.md) または [クエリのメタ情報](usage-meta.md) を利用したい場合は、
+`yii\sphinx\ActiveDataProvider` を使用する必要があります。
 これを使えば、クエリのメタ情報を使ってアイテムの総数を準備したり、ファセット検索の結果を取得したりすることが出来ます。
 
 ```php
@@ -56,5 +57,7 @@ $models = $provider->getModels();
 $facets = $provider->getFacets();
 $brandIdFacet = $provider->getFacet('brand_id');
 ```
-> Note: ページネーションのオフセットとリミットが Sphinx の 'max_matches' の境界を超える可能性があるため、データ・プロバイダはそれらの値に基づいて 'max_matches' オプションを自動的に設定します。
-ただし、[[Query::showMeta]] が設定されている場合は、総数の計算結果を損なうことになるため、そのような調整は実行されませんので、あなた自身が 'max_matches' の境界を操作しなければなりません。
+
+> Note: ページネーションのオフセットとリミットが Sphinx の 'max_matches' の境界を超える可能性があるため、
+  データ・プロバイダはそれらの値に基づいて 'max_matches' オプションを自動的に設定します。
+  ただし、[[Query::showMeta]] が設定されている場合は、総数の計算結果を損なうことになるため、そのような調整は実行されませんので、あなた自身が 'max_matches' の境界を操作しなければなりません。

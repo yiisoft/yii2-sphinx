@@ -13,6 +13,8 @@ SELECT * FROM idx_item FACET brand_id FACET categories;
 例えば、
 
 ```php
+use yii\sphinx\Query;
+
 $query = new Query();
 $results = $query->from('idx_item')
     ->facets([
@@ -54,4 +56,5 @@ $results = $query->from('idx_item')
 ```
 
 > Note: ファセットにカスタム・セレクトを指定する場合は、必ずセレクト文の中にファセット名に対応するカラムを含めてください。
-  つまり、'my_facet' というファセットを指定した場合は、そのセレクト文は 'my_facet' という属性か、'my_facet' というエイリアスを持つ式 ('expr() AS my_facet') を含んでいなければなりません。
+  つまり、'my_facet' というファセットを指定した場合は、そのセレクト文は 'my_facet' という属性か、
+  'my_facet' というエイリアスを持つ式 ('expr() AS my_facet') を含んでいなければなりません。
