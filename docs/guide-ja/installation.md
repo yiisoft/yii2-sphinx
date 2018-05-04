@@ -16,11 +16,13 @@
 php composer.phar require --prefer-dist yiisoft/yii2-sphinx
 ```
 
-または、あなたの `composer.json` ファイルの `require` セクションに、下記を追加してください。
+または、あなたの `composer.json` ファイルの `require` セクションに、
 
 ```
 "yiisoft/yii2-sphinx": "~2.0.0"
 ```
+
+を追加してください。
 
 ## 構成
 

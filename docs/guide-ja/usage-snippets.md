@@ -19,7 +19,8 @@ $snippets = Yii::$app->sphinx->createCommand($sql)->callSnippets('idx_item', $ro
 ```
 
 このワークフローは、[[yii\sphinx\Query::snippetCallback]] を使って、単純化することが出来ます。
-これは、クエリ結果の行の配列を引数として取り、入力された行の順序にしたがってスニペットのソース文字列の配列を返す PHP コールバックです。
+これは、クエリ結果の行の配列を引数として取り、
+入力された行の順序にしたがってスニペットのソース文字列の配列を返す PHP コールバックです。
 例えば、
 
 ```php
