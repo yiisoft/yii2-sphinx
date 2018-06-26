@@ -191,6 +191,7 @@ class ActiveQuery extends Query implements ActiveQueryInterface
             return [];
         }
 
+        $models = $this->createModels($rows);
         if (!empty($this->with)) {
             $this->findWith($this->with, $models);
         }
