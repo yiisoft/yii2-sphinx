@@ -33,7 +33,7 @@ class ActiveQueryTest extends TestCase
 
     public function testIndexBy() 
     {
-        $results = ArticleIndex::find()->indexBy('id')->all();
+        $results = ArticleIndex::find()->indexBy(['id'])->all();
         $result = reset($results);
         $this->assertTrue($result->id == key($results), 'Unable to index results by column');
     }
