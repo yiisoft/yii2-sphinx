@@ -3,7 +3,7 @@
 namespace yiiunit\extensions\sphinx;
 
 use yiiunit\extensions\sphinx\data\ar\ArticleIndex;
-use yiiunit\extensions\sphinx\data\ar\ActiveRecord;
+use yiiunit\extensions\sphinx\data\ar\ActiveRecord; 
 
 /**
  * @group sphinx
@@ -33,8 +33,8 @@ class ActiveQueryTest extends TestCase
 
     public function testIndexBy() 
     {
-        $results = ArticleIndex::find()->indexBy(['id'])->all();
-        $result = reset($results);
+        $results = ArticleIndex::find()->indexBy('id')->all();
+        $result = reset($results); 
         $this->assertTrue($result->id == key($results), 'Unable to index results by column');
     }
 }
