@@ -160,7 +160,7 @@ class ActiveQuery extends Query implements ActiveQueryInterface
             return [];
         }
         $rows = $this->createCommand($db)->queryAll();
-        return $this->populate($this->fillUpSnippets($rows));
+        return $this->populate($rows);
     }
 
     /**
@@ -175,7 +175,7 @@ class ActiveQuery extends Query implements ActiveQueryInterface
     {
         $row = parent::one($db);
         if ($row !== false) {
-            $models = $this->populate($this->fillUpSnippets([$row]));
+            $models = $this->populate([$row]);
             return reset($models) ?: null;
         } else {
             return null;
