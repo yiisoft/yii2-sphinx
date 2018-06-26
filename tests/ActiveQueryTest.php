@@ -30,4 +30,11 @@ class ActiveQueryTest extends TestCase
         $this->assertNotEmpty($results['facets']['author_id'], 'Unable to fill up facet');
         $this->assertTrue($results['hits'][0] instanceof ArticleIndex, 'Unable to populate results as AR object');
     }
+
+    public function testIndexBy() 
+    {
+        $results = ArticleIndex::find()->indexBy(['id'])->all();
+        $result = reset($results);
+        $this->assertTrue($result->id == key($results), 'Unable to index results by column');
+    }
 }
