@@ -185,6 +185,14 @@ class Query extends \yii\db\Query
     /**
      * {@inheritdoc}
      */
+    public function all($db = null)
+    {
+        return $this->fillUpSnippets(parent::all($db));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function one($db = null)
     {
         $row = parent::one($db);
