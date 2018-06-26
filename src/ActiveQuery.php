@@ -197,7 +197,7 @@ class ActiveQuery extends Query implements ActiveQueryInterface
         if (!empty($this->with)) {
             $this->findWith($this->with, $models);
         }
-        $rows = $this->fillUpSnippets($models);
+        $models = $this->fillUpSnippets($models);
         if (!$this->asArray) {
             foreach ($models as $model) {
                 $model->afterFind();
