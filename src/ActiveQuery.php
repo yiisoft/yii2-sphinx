@@ -171,11 +171,23 @@ class ActiveQuery extends Query implements ActiveQueryInterface
     {
         $row = parent::one($db);
         if ($row !== false) {
-            $models = $this->populate([$row]);
+            $models = $this->populate($this->fillUpSnippets([$row]));
             return reset($models) ?: null;
         } else {
             return null;
         }
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function all($db = null)
+    {
+        if ($this->emulateExecution) {
+            return [];
+        }
+        $rows = $this->createCommand($db)->queryAll();
+        return $this->populate($this->fillUpSnippets([$row]));
     }
 
     /**
@@ -186,19 +198,21 @@ class ActiveQuery extends Query implements ActiveQueryInterface
         if (empty($rows)) {
             return [];
         }
+        
+        $rows = $this->fillUpSnippets($rows);
 
         $models = $this->createModels($rows);
         if (!empty($this->with)) {
             $this->findWith($this->with, $models);
         }
-        $models = $this->fillUpSnippets($models);
+        
         if (!$this->asArray) {
             foreach ($models as $model) {
                 $model->afterFind();
             }
         }
 
-        return $models;
+        return parent::populate($models);
     }
 
     /**

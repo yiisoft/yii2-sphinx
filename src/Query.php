@@ -180,15 +180,7 @@ class Query extends \yii\db\Query
         list ($sql, $params) = $db->getQueryBuilder()->build($this);
 
         return $db->createCommand($sql, $params);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function populate($rows)
-    {
-        return parent::populate($this->fillUpSnippets($rows));
-    }
+    }    
 
     /**
      * {@inheritdoc}
@@ -260,8 +252,8 @@ class Query extends \yii\db\Query
             }
         }
 
-        // rows should be populated after all data read from cursor, avoiding possible 'unbuffered query' error
-        $rows = $this->populate($rawRows);
+        // rows should be populated after all data read from cursor, avoiding possible 'unbuffered query' error      
+        $rows = $this->populate($this->fillUpSnippets($rawRows));
 
         return [
             'hits' => $rows,
