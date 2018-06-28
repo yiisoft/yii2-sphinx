@@ -3,7 +3,7 @@
 namespace yiiunit\extensions\sphinx;
 
 use yiiunit\extensions\sphinx\data\ar\ArticleIndex;
-use yiiunit\extensions\sphinx\data\ar\ActiveRecord; 
+use yiiunit\extensions\sphinx\data\ar\ActiveRecord;
 
 /**
  * @group sphinx
