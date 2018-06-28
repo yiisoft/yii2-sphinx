@@ -180,7 +180,7 @@ class Query extends \yii\db\Query
         list ($sql, $params) = $db->getQueryBuilder()->build($this);
 
         return $db->createCommand($sql, $params);
-    }    
+    }
 
     /**
      * {@inheritdoc}
@@ -260,7 +260,7 @@ class Query extends \yii\db\Query
             }
         }
 
-        // rows should be populated after all data read from cursor, avoiding possible 'unbuffered query' error      
+        // rows should be populated after all data read from cursor, avoiding possible 'unbuffered query' error
         $rows = $this->populate($this->fillUpSnippets($rawRows));
 
         return [
