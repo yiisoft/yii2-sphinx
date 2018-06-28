@@ -156,7 +156,7 @@ class ActiveQuery extends Query implements ActiveQueryInterface
      */
     public function all($db = null)
     {
-	if ($this->emulateExecution) {
+        if ($this->emulateExecution) {
             return [];
         }
         $rows = $this->createCommand($db)->queryAll();
