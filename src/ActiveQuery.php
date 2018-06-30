@@ -156,7 +156,11 @@ class ActiveQuery extends Query implements ActiveQueryInterface
      */
     public function all($db = null)
     {
-        return parent::all($db);
+        if ($this->emulateExecution) {
+            return [];
+        }
+        $rows = $this->createCommand($db)->queryAll();
+        return $this->populate($rows);
     }
 
     /**
@@ -198,7 +202,7 @@ class ActiveQuery extends Query implements ActiveQueryInterface
             }
         }
 
-        return $models;
+        return parent::populate($models);
     }
 
     /**

@@ -185,9 +185,9 @@ class Query extends \yii\db\Query
     /**
      * {@inheritdoc}
      */
-    public function populate($rows)
+    public function all($db = null)
     {
-        return parent::populate($this->fillUpSnippets($rows));
+        return $this->fillUpSnippets(parent::all($db));
     }
 
     /**
@@ -261,7 +261,7 @@ class Query extends \yii\db\Query
         }
 
         // rows should be populated after all data read from cursor, avoiding possible 'unbuffered query' error
-        $rows = $this->populate($rawRows);
+        $rows = $this->populate($this->fillUpSnippets($rawRows));
 
         return [
             'hits' => $rows,
