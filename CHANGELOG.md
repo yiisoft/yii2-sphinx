@@ -1,8 +1,8 @@
 Yii Framework 2 sphinx extension Change Log
 ===========================================
 
-2.0.11 under development
-------------------------
+2.0.11 September 23, 2018
+-------------------------
 
 - Bug #101: Fixed `yii\sphinx\ActiveQuery::all()` unable to follow instructions given by method `indexBy()` (bitdevelopment)
 
