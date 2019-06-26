@@ -503,7 +503,7 @@ class QueryBuilder extends BaseObject
                     $columns[$i] = $column->expression . ' AS ' . $this->db->quoteColumnName($i);
                 }
                 $params = array_merge($params, $column->params);
-            } elseif (is_string($i)) {
+            } elseif (is_string($i) && $i !== $column) {
                 if (strpos($column, '(') === false) {
                     $column = $this->db->quoteColumnName($column);
                 }
