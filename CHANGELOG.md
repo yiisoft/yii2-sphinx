@@ -1,8 +1,8 @@
 Yii Framework 2 sphinx extension Change Log
 ===========================================
 
-2.0.12 under development
-------------------------
+2.0.12 July 02, 2019
+--------------------
 
 - Bug #111: Fixed SQL error when running Yii 2.0.21+ (brandonkelly)
 
