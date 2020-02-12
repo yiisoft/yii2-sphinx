@@ -152,15 +152,11 @@ class ActiveQuery extends Query implements ActiveQueryInterface
      * Executes query and returns all results as an array.
      * @param Connection $db the DB connection used to create the DB command.
      * If null, the DB connection returned by [[modelClass]] will be used.
-     * @return array the query results. If the query results in nothing, an empty array will be returned.
+     * @return array|ActiveRecord[] the query results. If the query results in nothing, an empty array will be returned.
      */
     public function all($db = null)
     {
-        if ($this->emulateExecution) {
-            return [];
-        }
-        $rows = $this->createCommand($db)->queryAll();
-        return $this->populate($rows);
+        return parent::all($db);
     }
 
     /**
@@ -195,14 +191,14 @@ class ActiveQuery extends Query implements ActiveQueryInterface
         if (!empty($this->with)) {
             $this->findWith($this->with, $models);
         }
-        $models = $this->fillUpSnippets($models);
+        $models = parent::populate($models);
         if (!$this->asArray) {
             foreach ($models as $model) {
                 $model->afterFind();
             }
         }
 
-        return parent::populate($models);
+        return $models;
     }
 
     /**
