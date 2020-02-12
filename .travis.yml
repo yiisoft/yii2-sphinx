@@ -14,6 +14,10 @@ services:
 
 sudo: true
 
+# xenial doesn't support PHP 5.4 - 5.5 (https://travis-ci.community/t/php-5-4-and-5-5-archives-missing/3723)
+# and can't install sphinxsearch
+dist: trusty
+
 # cache vendor dirs
 cache:
   directories:
