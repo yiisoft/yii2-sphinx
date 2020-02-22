@@ -1,7 +1,7 @@
 Yii Framework 2 sphinx extension Change Log
 ===========================================
 
-2.0.13 under development
+2.0.13 February 22, 2020
 ------------------------
 
 - Bug #114: Fixes exception "Call to a member function getSnippetSource() on array" when call `\yii\sphinx\ActiveQuery::search` broken by v2.0.11 (miketsoft)
