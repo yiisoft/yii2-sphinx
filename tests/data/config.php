@@ -9,13 +9,13 @@
 $config = [
     'sphinx' => [
         'dsn' => 'mysql:host=127.0.0.1;port=19306;',
-        'username' => 'travis',
-        'password' => '',
+        'username' => 'root',
+        'password' => 'root',
     ],
     'db' => [
         'dsn' => 'mysql:host=127.0.0.1;dbname=yiitest',
-        'username' => 'travis',
-        'password' => '',
+        'username' => 'root',
+        'password' => 'root',
         'fixture' => __DIR__ . '/source.sql',
     ],
 ];
