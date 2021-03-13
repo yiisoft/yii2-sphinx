@@ -4,7 +4,7 @@ Yii Framework 2 sphinx extension Change Log
 2.0.14 under development
 ------------------------
 
-- no changes in this release.
+- Bug #120: Added `connectionClass` property for `yii\sphinx\ActiveDataProvider` for compatibility with `yii\data\ActiveDataProvider` (bizley)
 
 
 2.0.13 February 22, 2020
