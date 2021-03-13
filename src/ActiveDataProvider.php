@@ -65,6 +65,12 @@ use yii\base\InvalidConfigException;
 class ActiveDataProvider extends \yii\data\ActiveDataProvider
 {
     /**
+     * {@inheritdoc}
+     * @since 2.0.14
+     */
+    public $connectionClass = 'yii\sphinx\Connection';
+
+    /**
      * @var array search query meta info in format: name => value.
      */
     private $_meta;
