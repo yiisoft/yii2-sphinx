@@ -44,6 +44,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
 
         $this->sphinxConfig = self::getParam('sphinx');
         $this->dbConfig = self::getParam('db');
+        
+        $this->assertTrue(extension_loaded('pdo') && extension_loaded('pdo_mysql'), 'pdo and pdo_mysql extension are required.');
 
         // check whether sphinx is running
         if (preg_match('/host=([\w.]+)/i', $this->sphinxConfig['dsn'], $hm) && preg_match('/port=(\d+)/i', $this->sphinxConfig['dsn'], $pm)) {
