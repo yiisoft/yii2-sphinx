@@ -1299,4 +1299,78 @@ class QueryBuilder extends BaseObject
         }
         return $indexSchemas;
     }
+    
+    /**
+     * Builds a SQL statement for creating a new index table.
+     *
+     * The columns in the new index should be specified as name-definition pairs (e.g. 'name' => 'string'),
+     * where name stands for a column name which will be properly quoted by the method, and definition
+     * stands for the column type which can contain an abstract DB type.
+     *
+     * For example,
+     *
+     * ```php
+     * $sql = $queryBuilder->createTable('user', [
+     *  'id' => 'pk',
+     *  'name' => 'string',
+     *  'age' => 'integer',
+     * ]);
+     * ```
+     *
+     * @param string $table the name of the index to be created. The name will be properly quoted by the method.
+     * @param array $columns the columns (name => definition) in the new index.
+     * @param string $options additional SQL fragment that will be appended to the generated SQL.
+     * @return string the SQL statement for creating a new index.
+     */    
+    public function createTable($table, $columns, $options = null)
+    {
+        $cols = [];
+        foreach ($columns as $name => $type) {
+            if (is_string($name)) {
+                $cols[] = "\t" . $this->db->quoteColumnName($name) . ' ' . $type;
+            } else {
+                $cols[] = "\t" . $type;
+            }
+        }
+        $sql = 'CREATE TABLE ' . $this->db->quoteTableName($table) . " (\n" . implode(",\n", $cols) . "\n)";
+
+        return $options === null ? $sql : $sql . ' ' . $options;
+    }
+    
+    /**
+     * Builds a SQL statement for dropping a index.
+     * @param string $table the table to be dropped. The name will be properly quoted by the method.
+     * @return string the SQL statement for dropping a index.
+     */
+    public function dropTable($table)
+    {
+        return 'DROP TABLE ' . $this->db->quoteTableName($table);
+    }
+    
+    /**
+     * Builds a SQL statement for adding a new index column.
+     * @param string $table the index that the new column will be added to. The index name will be properly quoted by the method.
+     * @param string $column the name of the new column. The name will be properly quoted by the method.
+     * @param string $type the column type.
+     * @return string the SQL statement for adding a new column.
+     */
+    public function addColumn($table, $column, $type)
+    {
+        return 'ALTER TABLE ' . $this->db->quoteTableName($table)
+            . ' ADD COLUMN ' . $this->db->quoteColumnName($column) . ' '
+            . $type;
+    }
+    
+    /**
+     * Builds a SQL statement for dropping a index column.
+     * @param string $table the index whose column is to be dropped. The name will be properly quoted by the method.
+     * @param string $column the name of the column to be dropped. The name will be properly quoted by the method.
+     * @return string the SQL statement for dropping a index column.
+     */
+    public function dropColumn($table, $column)
+    {
+        return 'ALTER TABLE ' . $this->db->quoteTableName($table)
+            . ' DROP COLUMN ' . $this->db->quoteColumnName($column);
+    }
+        
 }

@@ -314,7 +314,9 @@ class Command extends \yii\db\Command
      */
     public function createTable($table, $columns, $options = null)
     {
-        throw new NotSupportedException('"' . __METHOD__ . '" is not supported.');
+        $sql = $this->db->getQueryBuilder()->createTable($table, $columns, $options);
+
+        return $this->setSql($sql);
     }
 
     /**
@@ -330,7 +332,9 @@ class Command extends \yii\db\Command
      */
     public function dropTable($table)
     {
-        throw new NotSupportedException('"' . __METHOD__ . '" is not supported.');
+        $sql = $this->db->getQueryBuilder()->dropTable($table);
+
+        return $this->setSql($sql);
     }
 
     /**
@@ -338,15 +342,19 @@ class Command extends \yii\db\Command
      */
     public function truncateTable($table)
     {
-        throw new NotSupportedException('"' . __METHOD__ . '" is not supported.');
-    }
+        $sql = $this->db->getQueryBuilder()->truncateIndex($table);
 
+        return $this->setSql($sql);
+    }
+        
     /**
      * {@inheritdoc}
      */
     public function addColumn($table, $column, $type)
     {
-        throw new NotSupportedException('"' . __METHOD__ . '" is not supported.');
+        $sql = $this->db->getQueryBuilder()->addColumn($table, $column, $type);
+
+        return $this->setSql($sql);;
     }
 
     /**
@@ -354,7 +362,9 @@ class Command extends \yii\db\Command
      */
     public function dropColumn($table, $column)
     {
-        throw new NotSupportedException('"' . __METHOD__ . '" is not supported.');
+        $sql = $this->db->getQueryBuilder()->dropColumn($table, $column);
+
+        return $this->setSql($sql);
     }
 
     /**
