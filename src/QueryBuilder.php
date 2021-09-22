@@ -1321,6 +1321,7 @@ class QueryBuilder extends BaseObject
      * @param array $columns the columns (name => definition) in the new index.
      * @param string $options additional SQL fragment that will be appended to the generated SQL.
      * @return string the SQL statement for creating a new index.
+     * @since 2.0.14
      */    
     public function createTable($table, $columns, $options = null)
     {
@@ -1341,6 +1342,7 @@ class QueryBuilder extends BaseObject
      * Builds a SQL statement for dropping a index.
      * @param string $table the table to be dropped. The name will be properly quoted by the method.
      * @return string the SQL statement for dropping a index.
+     * @since 2.0.14
      */
     public function dropTable($table)
     {
@@ -1353,6 +1355,7 @@ class QueryBuilder extends BaseObject
      * @param string $column the name of the new column. The name will be properly quoted by the method.
      * @param string $type the column type.
      * @return string the SQL statement for adding a new column.
+     * @since 2.0.14
      */
     public function addColumn($table, $column, $type)
     {
@@ -1366,6 +1369,7 @@ class QueryBuilder extends BaseObject
      * @param string $table the index whose column is to be dropped. The name will be properly quoted by the method.
      * @param string $column the name of the column to be dropped. The name will be properly quoted by the method.
      * @return string the SQL statement for dropping a index column.
+     * @since 2.0.14
      */
     public function dropColumn($table, $column)
     {
