@@ -60,7 +60,9 @@ jobs:
           mysql -D yiitest -uroot -proot < tests/data/source.sql
 
       - name: Install sphinx
-        run: cd tests/data/actions && sh sphinx-setup.sh
+        run: |
+            sudo apt-get install libmysqlclient-dev
+            cd tests/data/actions && sh sphinx-setup.sh
 
       - name: Run tests with phpunit
         if: matrix.php != '7.4'
