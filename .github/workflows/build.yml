@@ -61,7 +61,7 @@ jobs:
 
       - name: Install sphinx
         run: |
-            sudo apt-get install libmysqlclient-dev
+            sudo apt-get install -y libmysqlclient20
             cd tests/data/actions && sh sphinx-setup.sh
 
       - name: Run tests with phpunit
