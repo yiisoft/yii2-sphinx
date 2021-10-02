@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-latest
+          - ubuntu-18.04
 
         php:
           - "5.4"
@@ -60,9 +60,7 @@ jobs:
           mysql -D yiitest -uroot -proot < tests/data/source.sql
 
       - name: Install sphinx
-        run: |
-            sudo apt-get install -y libmysqlclient20
-            cd tests/data/actions && sh sphinx-setup.sh
+        run: cd tests/data/actions && sh sphinx-setup.sh
 
       - name: Run tests with phpunit
         if: matrix.php != '7.4'
