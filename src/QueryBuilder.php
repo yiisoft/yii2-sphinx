@@ -1322,7 +1322,7 @@ class QueryBuilder extends BaseObject
      * @param string $options additional SQL fragment that will be appended to the generated SQL.
      * @return string the SQL statement for creating a new index.
      * @since 2.0.14
-     */    
+     */
     public function createTable($table, $columns, $options = null)
     {
         $cols = [];

@@ -1,7 +1,7 @@
 Yii Framework 2 sphinx extension Change Log
 ===========================================
 
-2.0.14 under development
+2.0.14 December 30, 2021
 ------------------------
 
 - Enh #123: Added implementation of methods for creating, deleting and updating real-time index schema for Sphinx version 3 (troizet)
