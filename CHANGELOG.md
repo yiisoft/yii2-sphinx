@@ -4,7 +4,7 @@ Yii Framework 2 sphinx extension Change Log
 2.0.15 under development
 ------------------------
 
-- no changes in this release.
+- Bug #127: Fixed warning "Undefined array key" in Query at facets collecting when moving to PHP 8.1 (kulikov6)
 
 
 2.0.14 December 30, 2021

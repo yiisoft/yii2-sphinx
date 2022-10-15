@@ -245,7 +245,7 @@ class Query extends \yii\db\Query
             }
 
             foreach ($rawFacetResults as $rawFacetResult) {
-                $rawFacetResult['value'] = $rawFacetResult[strtolower($facet['value'])];
+                $rawFacetResult['value'] = isset($rawFacetResult[strtolower($facet['value'])]) ? $rawFacetResult[strtolower($facet['value'])] : null;
                 $rawFacetResult['count'] = $rawFacetResult[$facet['count']];
                 $facets[$facet['name']][] = $rawFacetResult;
             }
