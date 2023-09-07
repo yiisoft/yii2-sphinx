@@ -2,7 +2,7 @@ Working with distributed indexes
 ================================
 
 This extension uses `DESCRIBE` query in order to fetch information about Sphinx index structure (field names and types).
-However for the [distributed indexes](http://sphinxsearch.com/docs/current.html#distributed) it is not always possible.
+However for the [distributed indexes](https://sphinxsearch.com/docs/current.html#distributed) it is not always possible.
 Schema of such index can be found only, if its declaration contains at list one available local index.
 For example:
 

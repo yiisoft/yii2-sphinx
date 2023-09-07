@@ -7,7 +7,7 @@
 
 ## Получение с помощью Composer
 
-Предпочтительный способ установки расширения через [composer](http://getcomposer.org/download/).
+Предпочтительный способ установки расширения через [composer](https://getcomposer.org/download/).
 
 Для этого запустите
 
@@ -25,7 +25,7 @@ php composer.phar require --prefer-dist yiisoft/yii2-sphinx
 
 ## Конфигурация
 
-Это расширение взаимодействует с демоном поиска Sphinx, используя протокол MySQL и язык запросов [SphinxQL](http://sphinxsearch.com/docs/current.html#sphinxql).
+Это расширение взаимодействует с демоном поиска Sphinx, используя протокол MySQL и язык запросов [SphinxQL](https://sphinxsearch.com/docs/current.html#sphinxql).
 Чтобы настроить Sphinx "searchd" для поддержки протокола MySQL, необходимо добавить следующую конфигурацию:
 
 ```

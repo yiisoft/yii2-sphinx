@@ -1,8 +1,8 @@
 Yii 2 Sphinx エクステンション
 =============================
 
-このエクステンションは Yii 2 フレームワークに [Sphinx](http://sphinxsearch.com/docs) 全文検索エンジンのサポートを追加します。
-このエクステンションは、[実行時インデックス](http://sphinxsearch.com/docs/current.html#rt-indexes) も含めて、Sphinx の全ての機能をサポートしています。
+このエクステンションは Yii 2 フレームワークに [Sphinx](https://sphinxsearch.com/docs) 全文検索エンジンのサポートを追加します。
+このエクステンションは、[実行時インデックス](https://sphinxsearch.com/docs/current.html#rt-indexes) も含めて、Sphinx の全ての機能をサポートしています。
 
 始めよう
 --------

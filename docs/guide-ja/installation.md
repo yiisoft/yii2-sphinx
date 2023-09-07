@@ -8,7 +8,7 @@
 
 ## Composer パッケージを取得する
 
-このエクステンションをインストールするのに推奨される方法は [composer](http://getcomposer.org/download/) によるものです。
+このエクステンションをインストールするのに推奨される方法は [composer](https://getcomposer.org/download/) によるものです。
 
 下記のコマンドを実行してください。
 
@@ -26,7 +26,7 @@ php composer.phar require --prefer-dist yiisoft/yii2-sphinx
 
 ## 構成
 
-このエクステンションは、MySQL プロトコルと [SphinxQL](http://sphinxsearch.com/docs/current.html#sphinxql) クエリ言語を使用して Sphinx 検索デーモンとやりとりをします。
+このエクステンションは、MySQL プロトコルと [SphinxQL](https://sphinxsearch.com/docs/current.html#sphinxql) クエリ言語を使用して Sphinx 検索デーモンとやりとりをします。
 Sphinx の "searchd" が MySQL プロトコルをサポートするように設定するために、下記の構成情報を追加しなければなりません。
 
 ```
