@@ -8,7 +8,7 @@ higher is required.
 
 ## Getting Composer package
 
-The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
+The preferred way to install this extension is through [composer](https://getcomposer.org/download/).
 
 Either run
 
@@ -26,7 +26,7 @@ to the require section of your composer.json.
 
 ## Configuration
 
-This extension interacts with Sphinx search daemon using MySQL protocol and [SphinxQL](http://sphinxsearch.com/docs/current.html#sphinxql) query language.
+This extension interacts with Sphinx search daemon using MySQL protocol and [SphinxQL](https://sphinxsearch.com/docs/current.html#sphinxql) query language.
 In order to setup Sphinx "searchd" to support MySQL protocol following configuration should be added:
 
 ```
