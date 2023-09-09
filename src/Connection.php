@@ -11,7 +11,7 @@ use yii\base\NotSupportedException;
 
 /**
  * Connection represents the Sphinx connection via MySQL protocol.
- * This class uses [PDO](http://www.php.net/manual/en/ref.pdo.php) to maintain such connection.
+ * This class uses [PDO](https://www.php.net/manual/en/ref.pdo.php) to maintain such connection.
  * Note: although PDO supports numerous database drivers, this class supports only MySQL.
  *
  * In order to setup Sphinx "searchd" to support MySQL protocol following configuration should be added:

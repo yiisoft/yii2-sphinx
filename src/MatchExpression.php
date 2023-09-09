@@ -79,7 +79,7 @@ use yii\db\Expression;
  * using [[Connection::escapeMatchValue()]].
  *
  * @see MatchBuilder
- * @see http://sphinxsearch.com/docs/current.html#extended-syntax
+ * @see https://sphinxsearch.com/docs/current.html#extended-syntax
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0.6
