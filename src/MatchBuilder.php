@@ -15,7 +15,7 @@ use yii\db\Expression;
  * MatchBuilder builds a MATCH SphinxQL expression based on the specification given as a [[MatchExpression]] object.
  *
  * @see MatchExpression
- * @see http://sphinxsearch.com/docs/current.html#extended-syntax
+ * @see https://sphinxsearch.com/docs/current.html#extended-syntax
  *
  * @author Kirichenko Sergey <sa-kirch@yandex.ru>
  * @author Paul Klimov <klimov.paul@gmail.com>

@@ -272,7 +272,7 @@ class Schema extends BaseObject
      * Determines the PDO type for the given PHP data value.
      * @param mixed $data the data whose PDO type is to be determined
      * @return int the PDO type
-     * @see http://www.php.net/manual/en/pdo.constants.php
+     * @see https://www.php.net/manual/en/pdo.constants.php
      */
     public function getPdoType($data)
     {
@@ -321,7 +321,7 @@ class Schema extends BaseObject
      * Note that if the parameter is not a string, it will be returned without change.
      * @param string $str string to be quoted
      * @return string the properly quoted string
-     * @see http://www.php.net/manual/en/function.PDO-quote.php
+     * @see https://www.php.net/manual/en/function.PDO-quote.php
      */
     public function quoteValue($str)
     {
