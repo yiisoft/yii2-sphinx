@@ -2,7 +2,7 @@
 SCRIPT=$(readlink -f "$0")
 CWD=$(dirname "$SCRIPT")
 
-# install sphinx from http://sphinxsearch.com/downloads/release/
+# install sphinx from https://sphinxsearch.com/downloads/release/
 wget http://sphinxsearch.com/files/sphinxsearch_2.2.11-release-1~trusty_amd64.deb
 sudo dpkg -i sphinxsearch_2.2.11-release-1~trusty_amd64.deb
 
