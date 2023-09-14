@@ -1,13 +1,13 @@
 <p align="center">
-    <a href="http://sphinxsearch.com" target="_blank" rel="external">
-        <img src="http://sphinxsearch.com/images/logo.png" height="55px">
+    <a href="https://sphinxsearch.com" target="_blank" rel="external">
+        <img src="https://sphinxsearch.com/images/logo.png" height="55px">
     </a>
     <h1 align="center">Sphinx Extension for Yii 2</h1>
     <br>
 </p>
 
-This extension adds [Sphinx](http://sphinxsearch.com/docs) full text search engine extension for the [Yii framework 2.0](http://www.yiiframework.com).
-It supports all Sphinx features including [Real-time Indexes](http://sphinxsearch.com/docs/current.html#rt-indexes).
+This extension adds [Sphinx](https://sphinxsearch.com/docs) full text search engine extension for the [Yii framework 2.0](https://www.yiiframework.com).
+It supports all Sphinx features including [Real-time Indexes](https://sphinxsearch.com/docs/current.html#rt-indexes).
 
 For license information check the [LICENSE](LICENSE.md)-file.
 
@@ -28,7 +28,7 @@ higher is required.
 Installation
 ------------
 
-The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
+The preferred way to install this extension is through [composer](https://getcomposer.org/download/).
 
 Either run
 
@@ -48,7 +48,7 @@ to the require section of your composer.json.
 Configuration
 -------------
 
-This extension interacts with Sphinx search daemon using MySQL protocol and [SphinxQL](http://sphinxsearch.com/docs/current.html#sphinxql) query language.
+This extension interacts with Sphinx search daemon using MySQL protocol and [SphinxQL](https://sphinxsearch.com/docs/current.html#sphinxql) query language.
 In order to setup Sphinx "searchd" to support MySQL protocol following configuration should be added:
 
 ```
