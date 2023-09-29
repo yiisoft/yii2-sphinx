@@ -18,8 +18,8 @@ class QueryTest extends TestCase
         $query = new Query();
         $query->select('*');
         $this->assertEquals(['*' => '*'], $query->select);
-        $this->assertNull($query->distinct);
-        $this->assertEquals(null, $query->selectOption);
+        $this->assertFalse($query->distinct);
+        $this->assertNull($query->selectOption);
 
         $query = new Query();
         $query->select('id, name', 'something')->distinct(true);
@@ -43,7 +43,7 @@ class QueryTest extends TestCase
         $this->assertEquals($match, $query->match);
 
         $command = $query->createCommand($this->getConnection(false));
-        $this->assertContains('MATCH(', $command->getSql(), 'No MATCH operator present!');
+        $this->assertStringContainsString('MATCH(', $command->getSql(), 'No MATCH operator present!');
         $this->assertContains($match, $command->params, 'No match query among params!');
     }
 
@@ -73,7 +73,7 @@ class QueryTest extends TestCase
         $query->where($expression);
 
         $command = $query->createCommand($this->getConnection(false));
-        $this->assertContains($expression->expression, $command->getSql());
+        $this->assertStringContainsString($expression->expression, $command->getSql());
         $this->assertEquals($expression->params, $command->params);
     }
 
@@ -271,8 +271,11 @@ class QueryTest extends TestCase
             ->all($connection);
         $this->assertNotEmpty($rows);
         foreach ($rows as $row) {
-            $this->assertContains($snippetPrefix, $row['snippet'], 'Snippet source not present!');
-            $this->assertContains($snippetOptions['before_match'] . $match, $row['snippet'] . $snippetOptions['after_match'], 'Options not applied!');
+            $this->assertStringContainsString($snippetPrefix, $row['snippet'], 'Snippet source not present!');
+            $this->assertStringContainsString(
+                $snippetOptions['before_match'] . $match, $row['snippet'] . $snippetOptions['after_match'],
+                'Options not applied!',
+            );
         }
 
         // @see https://github.com/yiisoft/yii2-sphinx/issues/61
@@ -284,8 +287,11 @@ class QueryTest extends TestCase
             ->all($connection);
         $this->assertNotEmpty($rows);
         foreach ($rows as $row) {
-            $this->assertContains($snippetPrefix, $row['snippet'], 'Snippet source not present!');
-            $this->assertContains($snippetOptions['before_match'] . $match, $row['snippet'] . $snippetOptions['after_match'], 'Options not applied!');
+            $this->assertStringContainsString($snippetPrefix, $row['snippet'], 'Snippet source not present!');
+            $this->assertStringContainsString(
+                $snippetOptions['before_match'] . $match, $row['snippet'] . $snippetOptions['after_match'],
+                'Options not applied!',
+            );
         }
 
         // @see https://github.com/yiisoft/yii2-sphinx/pull/93

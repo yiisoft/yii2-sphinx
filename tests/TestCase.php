@@ -38,13 +38,13 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     protected $db;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->sphinxConfig = self::getParam('sphinx');
         $this->dbConfig = self::getParam('db');
-        
+
         $this->assertTrue(extension_loaded('pdo') && extension_loaded('pdo_mysql'), 'pdo and pdo_mysql extension are required.');
 
         // check whether sphinx is running
@@ -57,7 +57,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $this->mockApplication();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if ($this->sphinx) {
             $this->sphinx->close();

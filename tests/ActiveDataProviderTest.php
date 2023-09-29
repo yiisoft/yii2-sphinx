@@ -14,7 +14,7 @@ use yiiunit\extensions\sphinx\data\ar\ArticleIndex;
  */
 class ActiveDataProviderTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         ActiveRecord::$db = $this->getConnection();

@@ -1,6 +1,23 @@
 on:
-  - pull_request
-  - push
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - '.gitignore'
+      - '.gitattributes'
+      - 'infection.json.dist'
+      - 'psalm.xml'
+
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - '.gitignore'
+      - '.gitattributes'
+      - 'infection.json.dist'
+      - 'psalm.xml'
 
 name: build
 
@@ -17,23 +34,20 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-18.04
+          - ubuntu-latest
 
         php:
-          - "5.4"
-          - "5.5"
-          - "5.6"
-          - "7.0"
-          - "7.1"
-          - "7.2"
-          - "7.3"
-          - "7.4"
+          - 7.4
+          - 8.0
+          - 8.1
+          - 8.2
+          - 8.3
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2.3.4
+      - name: Checkout.
+        uses: actions/checkout@v3
 
-      - name: Install PHP
+      - name: Install PHP.
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
@@ -42,36 +56,32 @@ jobs:
           coverage: pcov
           tools: composer:v2
 
-      - name: Update composer
+      - name: Update composer.
         run: composer self-update
 
-      - name: Install dependencies with composer php < 8.0
-        if: matrix.php != '8.0'
+      - name: Install dependencies with composer.
         run: composer update --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
 
-      - name: Install dependencies with composer php 8.0
-        if: matrix.php == '8.0'
-        run: composer update --ignore-platform-reqs --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
-
-      - name: Setup source database
+      - name: Setup source database.
         run: |
           sudo /etc/init.d/mysql start
           mysql -uroot -proot -e 'CREATE DATABASE `yiitest`;'
           mysql -D yiitest -uroot -proot < tests/data/source.sql
 
-      - name: Install sphinx
+      - name: Install sphinx.
         run: cd tests/data/actions && sh sphinx-setup.sh
 
-      - name: Run tests with phpunit
-        if: matrix.php != '7.4'
+      - name: Run tests with phpunit.
+        if: matrix.php != '8.1'
         run: vendor/bin/phpunit --colors=always
 
-      - name: Run tests with phpunit
-        if: matrix.php == '7.4'
-        run: vendor/bin/phpunit --coverage-clover=clover.xml --colors=always
+      - name: Run tests with phpunit and generate coverage.
+        if: matrix.php == '8.1'
+        run: vendor/bin/phpunit --coverage-clover=coverage.xml --colors=always
 
-      - name: Upload code coverage scrutinizer
-        if: matrix.php == '7.4'
-        run: |
-          wget https://scrutinizer-ci.com/ocular.phar
-          php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+      - name: Upload coverage to Codecov.
+        if: matrix.php == '8.1'
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.xml

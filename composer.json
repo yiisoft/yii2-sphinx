@@ -18,12 +18,13 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "~2.0.13",
+        "php": ">=7.3",
         "ext-pdo": "*",
-        "ext-pdo_mysql": "*"
+        "ext-pdo_mysql": "*",
+        "yiisoft/yii2": "~2.0.13"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.8.27|~5.7.21|^6.2"
+        "phpunit/phpunit": "^9.6"
     },
     "repositories": [
         {
@@ -37,6 +38,11 @@
     "extra": {
         "branch-alias": {
             "dev-master": "2.0.x-dev"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
         }
     }
 }

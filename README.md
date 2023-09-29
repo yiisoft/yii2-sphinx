@@ -16,14 +16,15 @@ Documentation is at [docs/guide/README.md](docs/guide/README.md).
 [![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-sphinx/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-sphinx)
 [![Total Downloads](https://poser.pugx.org/yiisoft/yii2-sphinx/downloads.png)](https://packagist.org/packages/yiisoft/yii2-sphinx)
 [![Build status](https://github.com/yiisoft/yii2-sphinx/workflows/build/badge.svg)](https://github.com/yiisoft/yii2-sphinx/actions?query=workflow%3Abuild)
+[![codecov](https://codecov.io/gh/yiisoft/yii2-sphinx/graph/badge.svg?token=eEgiSUaKxc)](https://codecov.io/gh/yiisoft/yii2-sphinx)
 
 
 Requirements
 ------------
 
-At least Sphinx version 2.0 is required. However, in order to use all extension features, Sphinx version 2.2.3 or
+- PHP 7.3 or higher.
+- At least Sphinx version 2.0 is required. However, in order to use all extension features, Sphinx version 2.2.3 or
 higher is required.
-
 
 Installation
 ------------
