@@ -77,10 +77,11 @@ jobs:
 
         - name: Run tests with phpunit
           if: matrix.php == '8.1'
-          run: vendor/bin/phpunit --coverage-clover=coverage.xml--colors=always
+          run: vendor/bin/phpunit --coverage-clover=coverage.xml --colors=always
 
         - name: Upload coverage to Codecov.
           if: matrix.php == '8.1'
           uses: codecov/codecov-action@v3
           with:
-            files: ./coverage.xml
+            token: ${{ secrets.CODECOV_TOKEN }}
+            file: ./coverage.xml
