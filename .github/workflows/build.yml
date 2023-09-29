@@ -1,87 +1,87 @@
 on:
-    pull_request:
-      paths-ignore:
-        - 'docs/**'
-        - 'README.md'
-        - 'CHANGELOG.md'
-        - '.gitignore'
-        - '.gitattributes'
-        - 'infection.json.dist'
-        - 'psalm.xml'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - '.gitignore'
+      - '.gitattributes'
+      - 'infection.json.dist'
+      - 'psalm.xml'
 
-    push:
-      paths-ignore:
-        - 'docs/**'
-        - 'README.md'
-        - 'CHANGELOG.md'
-        - '.gitignore'
-        - '.gitattributes'
-        - 'infection.json.dist'
-        - 'psalm.xml'
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - '.gitignore'
+      - '.gitattributes'
+      - 'infection.json.dist'
+      - 'psalm.xml'
 
 name: build
 
 jobs:
-    tests:
-      name: PHP ${{ matrix.php }}-${{ matrix.os }}
+  tests:
+    name: PHP ${{ matrix.php }}-${{ matrix.os }}
 
-      env:
-        extensions: pdo, pdo_mysql
-        key: cache-v1
+    env:
+      extensions: pdo, pdo_mysql
+      key: cache-v1
 
-      runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
 
-      strategy:
-        matrix:
-          os:
-            - ubuntu-latest
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
 
-          php:
-            - 7.4
-            - 8.0
-            - 8.1
-            - 8.2
-            - 8.3
+        php:
+          - 7.4
+          - 8.0
+          - 8.1
+          - 8.2
+          - 8.3
 
-      steps:
-        - name: Checkout.
-          uses: actions/checkout@v3
+    steps:
+      - name: Checkout.
+        uses: actions/checkout@v3
 
-        - name: Install PHP.
-          uses: shivammathur/setup-php@v2
-          with:
-            php-version: ${{ matrix.php }}
-            extensions: ${{ env.extensions }}
-            ini-values: date.timezone='UTC'
-            coverage: pcov
-            tools: composer:v2
+      - name: Install PHP.
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: ${{ env.extensions }}
+          ini-values: date.timezone='UTC'
+          coverage: pcov
+          tools: composer:v2
 
-        - name: Update composer.
-          run: composer self-update
+      - name: Update composer.
+        run: composer self-update
 
-        - name: Install dependencies with composer.
-          run: composer update --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
+      - name: Install dependencies with composer.
+        run: composer update --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
 
-        - name: Setup source database.
-          run: |
-            sudo /etc/init.d/mysql start
-            mysql -uroot -proot -e 'CREATE DATABASE `yiitest`;'
-            mysql -D yiitest -uroot -proot < tests/data/source.sql
+      - name: Setup source database.
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -uroot -proot -e 'CREATE DATABASE `yiitest`;'
+          mysql -D yiitest -uroot -proot < tests/data/source.sql
 
-        - name: Install sphinx.
-          run: cd tests/data/actions && sh sphinx-setup.sh
+      - name: Install sphinx.
+        run: cd tests/data/actions && sh sphinx-setup.sh
 
-        - name: Run tests with phpunit.
-          if: matrix.php != '8.1'
-          run: vendor/bin/phpunit --colors=always
+      - name: Run tests with phpunit.
+        if: matrix.php != '8.1'
+        run: vendor/bin/phpunit --colors=always
 
-        - name: Run tests with phpunit and generate coverage.
-          if: matrix.php == '8.1'
-          run: vendor/bin/phpunit --coverage-clover=coverage.xml --colors=always
+      - name: Run tests with phpunit and generate coverage.
+        if: matrix.php == '8.1'
+        run: vendor/bin/phpunit --coverage-clover=coverage.xml --colors=always
 
-        - name: Upload coverage to Codecov.
-          if: matrix.php == '8.1'
-          uses: codecov/codecov-action@v3
-          with:
-            token: ${{ secrets.CODECOV_TOKEN }}
-            file: ./coverage.xml
+      - name: Upload coverage to Codecov.
+        if: matrix.php == '8.1'
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.xml
