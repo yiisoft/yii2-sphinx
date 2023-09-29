@@ -2,6 +2,14 @@
 SCRIPT=$(readlink -f "$0")
 CWD=$(dirname "$SCRIPT")
 
+# install mysql client library
+echo 'deb http://security.ubuntu.com/ubuntu xenial-security main' | sudo tee /etc/apt/sources.list.d/xenial-security.list
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
+sudo apt update
+sudo apt install libmysqlclient20
+sudo apt-get install libodbc1
+
 # install sphinx from https://sphinxsearch.com/downloads/release/
 wget http://sphinxsearch.com/files/sphinxsearch_2.2.11-release-1~xenial_amd64.deb
 sudo dpkg -i sphinxsearch_2.2.11-release-1~xenial_amd64.deb

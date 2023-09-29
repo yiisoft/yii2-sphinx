@@ -9,7 +9,7 @@ use yii\db\DataReader;
  */
 class CommandTest extends TestCase
 {
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->truncateIndex('yii2_test_rt_index');
         parent::tearDown();
@@ -373,7 +373,7 @@ class CommandTest extends TestCase
 
         $rows = $db->createCommand()->callSnippets('yii2_test_item_index', $source, $query)->queryColumn();
         $this->assertNotEmpty($rows, 'Unable to call snippets!');
-        $this->assertContains('<b>' . $query . '</b>', $rows[0], 'Query not present in the snippet!');
+        $this->assertStringContainsString('<b>' . $query . '</b>', $rows[0], 'Query not present in the snippet!');
 
         $rows = $db->createCommand()->callSnippets('yii2_test_item_index', [$source], $query)->queryColumn();
         $this->assertNotEmpty($rows, 'Unable to call snippets for array source!');
@@ -384,7 +384,11 @@ class CommandTest extends TestCase
             'limit' => 20,
         ];
         $snippet = $db->createCommand()->callSnippets('yii2_test_item_index', $source, $query, $options)->queryScalar();
-        $this->assertContains($options['before_match'] . $query . $options['after_match'], $snippet, 'Unable to apply options!');
+        $this->assertStringContainsString(
+            $options['before_match'] . $query . $options['after_match'],
+            $snippet,
+            'Unable to apply options!',
+        );
     }
 
     /**

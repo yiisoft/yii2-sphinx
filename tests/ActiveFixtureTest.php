@@ -11,7 +11,7 @@ use yiiunit\extensions\sphinx\data\fixture\RtIndexFixture;
 
 class ActiveFixtureTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         \Yii::$app->set('sphinx', $this->getConnection());

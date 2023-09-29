@@ -10,7 +10,7 @@ use yiiunit\extensions\sphinx\data\ar\ArticleIndex;
 
 class BatchQueryResultTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         ActiveRecord::$db = $this->getConnection();

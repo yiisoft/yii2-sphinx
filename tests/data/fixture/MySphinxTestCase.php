@@ -5,17 +5,17 @@ namespace yiiunit\extensions\sphinx\data\fixture;
 use yii\test\FixtureTrait;
 use yiiunit\extensions\sphinx\data\fixture\RtIndexFixture;
 
-class MySphinxTestCase
+class MySphinxTestCase extends \yiiunit\extensions\sphinx\TestCase
 {
     use FixtureTrait;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->unloadFixtures();
         $this->loadFixtures();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 

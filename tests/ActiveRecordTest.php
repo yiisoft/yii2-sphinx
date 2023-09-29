@@ -12,13 +12,13 @@ use yiiunit\extensions\sphinx\data\ar\RtIndex;
  */
 class ActiveRecordTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         ActiveRecord::$db = $this->getConnection();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->truncateIndex('yii2_test_rt_index');
         parent::tearDown();
@@ -262,11 +262,11 @@ class ActiveRecordTest extends TestCase
 
         $snippet = ArticleIndex::callSnippets($source, $query);
         $this->assertNotEmpty($snippet, 'Unable to call snippets!');
-        $this->assertContains('<b>' . $query . '</b>', $snippet, 'Query not present in the snippet!');
+        $this->assertStringContainsString('<b>' . $query . '</b>', $snippet, 'Query not present in the snippet!');
 
         $rows = ArticleIndex::callSnippets([$source], $query);
         $this->assertNotEmpty($rows, 'Unable to call snippets!');
-        $this->assertContains('<b>' . $query . '</b>', $rows[0], 'Query not present in the snippet!');
+        $this->assertStringContainsString('<b>' . $query . '</b>', $rows[0], 'Query not present in the snippet!');
     }
 
     public function testCallKeywords()
