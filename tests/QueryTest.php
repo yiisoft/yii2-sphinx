@@ -18,7 +18,7 @@ class QueryTest extends TestCase
         $query = new Query();
         $query->select('*');
         $this->assertEquals(['*' => '*'], $query->select);
-        $this->assertNull($query->distinct);
+        $this->assertFalse($query->distinct);
         $this->assertEquals(null, $query->selectOption);
 
         $query = new Query();
