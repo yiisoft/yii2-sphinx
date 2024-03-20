@@ -33,6 +33,15 @@ jobs:
         #  - "2.2.11"
           - "3.5.1"
 
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: yiitest
+        ports:
+          - 3306:3306
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4
@@ -62,9 +71,6 @@ jobs:
 
       - name: Setup source database
         run: |
-            sudo systemctl start mysql.service
-            echo -e '[mysqld]\ndefault_authentication_plugin=mysql_native_password' > "$HOME/.my.cnf"
-            mysql -uroot -proot -e 'ALTER USER "root"@"localhost" IDENTIFIED WITH mysql_native_password BY "root";FLUSH PRIVILEGES;'
             mysql -uroot -proot -e 'CREATE DATABASE `yiitest`;'
             mysql -D yiitest -uroot -proot < tests/data/source.sql
 
