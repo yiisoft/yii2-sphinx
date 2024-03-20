@@ -68,8 +68,8 @@ jobs:
       - name: Run sphinx 3
         if: matrix.sphinx != '2.2.11'
         run: |
-            /opt/sphinx/indexer --config tests/data/sphinx-${{ matrix.sphinx }}.conf --all
-            /opt/sphinx/searchd --config tests/data/sphinx-${{ matrix.sphinx }}.conf
+            /opt/sphinx/sphinx-${{ matrix.sphinx }}/bin/indexer --config tests/data/sphinx-${{ matrix.sphinx }}.conf --all
+            /opt/sphinx/sphinx-${{ matrix.sphinx }}/bin/searchd --config tests/data/sphinx-${{ matrix.sphinx }}.conf
 
       - name: Run tests with phpunit
         if: matrix.php != '7.4'
