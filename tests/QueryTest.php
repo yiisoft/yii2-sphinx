@@ -458,8 +458,6 @@ class QueryTest extends TestCase
     {
         $connection = $this->getConnection();
 
-        $sphinxVersion = $connection->createCommand("SHOW GLOBAL VARIABLES LIKE 'version'")->queryOne()['Value'];
-var_dump($sphinxVersion);
         $query = new Query();
         $results = $query->from('yii2_test_article_index')
             ->match('about')
@@ -486,22 +484,24 @@ var_dump($sphinxVersion);
             ->from('yii2_test_article_index')
             ->match('about');
 
-        if (strpos($sphinxVersion, '2.') === 0) {
-            $query = $query
-                ->facets([
-                    'range' => [
-                        'select' => 'INTERVAL(author_id,200,400,600,800) AS range',
-                    ],
-                    'authorId' => [
-                        'select' => [new Expression('author_id AS authorId')],
-                    ],
-                ]);
-        } else {
+        try {
+            // Sphinx ^3
             $query = $query
                 ->select(new Expression('INTERVAL(author_id,200,400,600,800) AS range'))
                 ->facets([
                     'range' => [
                         'select' => 'range',
+                    ],
+                    'authorId' => [
+                        'select' => [new Expression('author_id AS authorId')],
+                    ],
+                ]);
+        } catch (\PDOException $e) {
+            // Sphinx ^2
+            $query = $query
+                ->facets([
+                    'range' => [
+                        'select' => 'INTERVAL(author_id,200,400,600,800) AS range',
                     ],
                     'authorId' => [
                         'select' => [new Expression('author_id AS authorId')],
