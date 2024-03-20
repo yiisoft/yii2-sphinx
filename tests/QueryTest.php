@@ -458,6 +458,8 @@ class QueryTest extends TestCase
     {
         $connection = $this->getConnection();
 
+        $sphinxVersion = $connection->createCommand("SHOW GLOBAL VARIABLES LIKE 'version'")->queryOne()['Value'];
+
         $query = new Query();
         $results = $query->from('yii2_test_article_index')
             ->match('about')
@@ -480,19 +482,33 @@ class QueryTest extends TestCase
         $this->assertNotEmpty($results['hits'], 'Unable to query with complex facet');
         $this->assertNotEmpty($results['facets']['author_id'], 'Unable to fill up complex facet');
 
-        $query = new Query();
-        $results = $query->from('yii2_test_article_index')
-            ->match('about')
-            ->select(new Expression('INTERVAL(author_id,200,400,600,800) AS range'))
-            ->facets([
-                'range' => [
-                    'select' => 'range',
-                ],
-                'authorId' => [
-                    'select' => [new Expression('author_id AS authorId')],
-                ],
-            ])
-            ->search($connection);
+        $query = (new Query())
+            ->from('yii2_test_article_index')
+            ->match('about');
+
+        if (strpos($sphinxVersion, '2.') === 0) {
+            $query = $query
+                ->facets([
+                    'range' => [
+                        'select' => 'INTERVAL(author_id,200,400,600,800) AS range',
+                    ],
+                    'authorId' => [
+                        'select' => [new Expression('author_id AS authorId')],
+                    ],
+                ]);
+        } else {
+            $query = $query
+                ->select(new Expression('INTERVAL(author_id,200,400,600,800) AS range'))
+                ->facets([
+                    'range' => [
+                        'select' => 'range',
+                    ],
+                    'authorId' => [
+                        'select' => [new Expression('author_id AS authorId')],
+                    ],
+                ]);
+        }
+        $results = $query->search($connection);
         $this->assertNotEmpty($results['hits'], 'Unable to query with facet using custom select');
         $this->assertNotEmpty($results['facets']['range'], 'Unable to fill up facet using function in select');
         $this->assertNotEmpty($results['facets']['authorId'], 'Unable to fill up facet using `Expression` in select');
