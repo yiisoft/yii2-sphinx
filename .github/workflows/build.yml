@@ -71,7 +71,6 @@ jobs:
 
       - name: Setup source database
         run: |
-            mysql -h127.0.0.1 -uroot -proot -e 'CREATE DATABASE `yiitest`;'
             mysql -h127.0.0.1 -D yiitest -uroot -proot < tests/data/source.sql
 
       - name: Run sphinx 2.2.11
