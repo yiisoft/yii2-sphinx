@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `yii2_test_article` (
   `author_id` int(11) NOT NULL,
   `create_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
 
 CREATE TABLE IF NOT EXISTS `yii2_test_item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -23,19 +23,19 @@ CREATE TABLE IF NOT EXISTS `yii2_test_item` (
   `category_id` int(11) NOT NULL,
   `price` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
 
 CREATE TABLE IF NOT EXISTS `yii2_test_tag` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=5;
 
 CREATE TABLE IF NOT EXISTS `yii2_test_article_tag` (
   `article_id` int(11) NOT NULL,
   `tag_id` int(11) NOT NULL,
   PRIMARY KEY (`article_id`,`tag_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 INSERT INTO `yii2_test_article` (`id`, `title`, `content`, `author_id`, `create_date`) VALUES
 (1, 'About cats', 'This article is about cats. Repeated.', 1, '2013-10-23 00:00:00'),
