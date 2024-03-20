@@ -289,6 +289,10 @@ class Schema extends BaseObject
         ];
         $type = gettype($data);
 
+        if (!isset($typeMap[$type])) {
+            var_dump($type);
+        }
+
         return isset($typeMap[$type]) ? $typeMap[$type] : \PDO::PARAM_STR;
     }
 
