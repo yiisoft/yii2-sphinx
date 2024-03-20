@@ -8,7 +8,7 @@ name: build
 
 jobs:
   tests:
-    name: PHP ${{ matrix.php }}-${{ matrix.os }}
+    name: PHP ${{ matrix.php }}-${{ matrix.sphinx }}-${{ matrix.os }}
 
     env:
       extensions: pdo, pdo_mysql
