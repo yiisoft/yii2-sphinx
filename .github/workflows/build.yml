@@ -50,7 +50,7 @@ jobs:
 
       - name: Setup source database
         run: |
-          cd tests/data/actions && sh libmysqlclient20.sh
+          sh tests/data/actions/libmysqlclient20.sh
           echo -e '[client]\ndefault-character-set=utf8\n[mysql]\ndefault-character-set=utf8\n[mysqld]\ncollation-server=utf8_unicode_ci\ncharacter-set-server=utf8' > "$HOME/.my.cnf"
           sudo /etc/init.d/mysql start
           mysql -uroot -proot -e 'CREATE DATABASE `yiitest`;'
