@@ -52,7 +52,7 @@ jobs:
         run: |
           sudo /etc/init.d/mysql start
           mysql -uroot -proot -e 'CREATE DATABASE `yiitest`;'
-          mysql -D yiitest -uroot -proot < tests/data/source.sql
+          mysql --default-character-set=utf8 -D yiitest -uroot -proot < tests/data/source.sql
 
       - name: Install sphinx
         run: cd tests/data/actions && sh sphinx-setup.sh
