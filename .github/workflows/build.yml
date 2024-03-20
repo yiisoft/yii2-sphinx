@@ -22,7 +22,7 @@ jobs:
           - ubuntu-20.04
 
         php:
-          - "5.4"
+          - "7.2"
 
     steps:
       - name: Checkout
