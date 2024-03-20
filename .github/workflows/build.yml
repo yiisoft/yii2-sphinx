@@ -51,8 +51,8 @@ jobs:
       - name: Setup source database
         run: |
           sh tests/data/actions/libmysqlclient20.sh
+          echo -e '[client]\ndefault-character-set=utf8\n[mysql]\ndefault-character-set=utf8\n[mysqld]\ndefault_authentication_plugin=mysql_native_password\ncollation-server=utf8_unicode_ci\ncharacter-set-server=utf8' > "$HOME/.my.cnf"
           sudo /etc/init.d/mysql start
-          mysql -uroot -proot -e 'SET GLOBAL default_authentication_plugin=mysql_native_password;FLUSH PRIVILEGES;'
           mysql -uroot -proot -e 'CREATE DATABASE `yiitest`;'
           mysql --default-character-set=utf8 -D yiitest -uroot -proot < tests/data/source.sql
 
