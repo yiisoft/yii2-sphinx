@@ -63,7 +63,8 @@ jobs:
       - name: Setup source database
         run: |
             sudo systemctl start mysql.service
-            mysql -uroot -proot -e 'ALTER USER "root@localhost" IDENTIFIED WITH mysql_native_password BY "root";FLUSH PRIVILEGES;'
+            echo -e '[mysqld]\ndefault_authentication_plugin=mysql_native_password' > "$HOME/.my.cnf"
+            mysql -uroot -proot -e 'ALTER USER "root"@"localhost" IDENTIFIED WITH mysql_native_password BY "root";FLUSH PRIVILEGES;'
             mysql -uroot -proot -e 'CREATE DATABASE `yiitest`;'
             mysql -D yiitest -uroot -proot < tests/data/source.sql
 
