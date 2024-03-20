@@ -59,6 +59,11 @@ jobs:
             mysql -uroot -proot -e 'CREATE DATABASE `yiitest`;'
             mysql -D yiitest -uroot -proot < tests/data/source.sql
 
+      - name: Run sphinx
+        run: |
+            indexer --config tests/data/sphinx-${{ matrix.sphinx }}.conf --all
+            searchd --config tests/data/sphinx-${{ matrix.sphinx }}.conf
+
       - name: Run tests with phpunit
         if: matrix.php != '7.4'
         run: vendor/bin/phpunit --colors=always
