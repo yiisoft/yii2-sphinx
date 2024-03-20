@@ -8,7 +8,7 @@ name: build
 
 jobs:
   tests:
-    name: PHP ${{ matrix.php }}-${{ matrix.sphinx }}-${{ matrix.os }}
+    name: PHP ${{ matrix.php }}-sphinx-${{ matrix.sphinx }}-${{ matrix.os }}
 
     env:
       extensions: pdo, pdo_mysql
@@ -59,10 +59,17 @@ jobs:
             mysql -uroot -proot -e 'CREATE DATABASE `yiitest`;'
             mysql -D yiitest -uroot -proot < tests/data/source.sql
 
-      - name: Run sphinx
+      - name: Run sphinx 2.2.11
+        if: matrix.sphinx == '2.2.11'
         run: |
             indexer --config tests/data/sphinx-${{ matrix.sphinx }}.conf --all
             searchd --config tests/data/sphinx-${{ matrix.sphinx }}.conf
+
+      - name: Run sphinx 3
+        if: matrix.sphinx != '2.2.11'
+        run: |
+            /opt/sphinx/indexer --config tests/data/sphinx-${{ matrix.sphinx }}.conf --all
+            /opt/sphinx/searchd --config tests/data/sphinx-${{ matrix.sphinx }}.conf
 
       - name: Run tests with phpunit
         if: matrix.php != '7.4'
