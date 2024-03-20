@@ -483,9 +483,10 @@ class QueryTest extends TestCase
         $query = new Query();
         $results = $query->from('yii2_test_article_index')
             ->match('about')
+            ->select(new Expression('INTERVAL(author_id,200,400,600,800) AS range'))
             ->facets([
                 'range' => [
-                    'select' => 'INTERVAL(author_id,200,400,600,800) AS range',
+                    'select' => 'range',
                 ],
                 'authorId' => [
                     'select' => [new Expression('author_id AS authorId')],
