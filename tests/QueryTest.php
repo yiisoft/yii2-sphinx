@@ -459,7 +459,7 @@ class QueryTest extends TestCase
         $connection = $this->getConnection();
 
         $sphinxVersion = $connection->createCommand("SHOW GLOBAL VARIABLES LIKE 'version'")->queryOne()['Value'];
-
+var_dump($sphinxVersion);
         $query = new Query();
         $results = $query->from('yii2_test_article_index')
             ->match('about')
