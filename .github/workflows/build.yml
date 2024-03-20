@@ -23,7 +23,7 @@ jobs:
         php:
           - "7.2"
         sphinx:
-          - "2.2.11"
+          - "3.5.1"
 
     steps:
       - name: Checkout
