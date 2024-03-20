@@ -7,6 +7,11 @@ echo 'deb http://security.ubuntu.com/ubuntu xenial-security main' | sudo tee /et
 sudo apt update
 sudo apt install libmysqlclient20
 
+touch /etc/my.cnf
+echo "[client]" > /etc/my.cnf
+echo "default-character-set=utf8" > /etc/my.cnf
+cat /etc/my.cnf
+
 # install sphinx from https://sphinxsearch.com/downloads/release/
 wget http://sphinxsearch.com/files/sphinxsearch_2.2.11-release-1~xenial_amd64.deb
 sudo dpkg -i sphinxsearch_2.2.11-release-1~xenial_amd64.deb
