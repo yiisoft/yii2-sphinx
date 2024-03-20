@@ -486,7 +486,7 @@ class QueryTest extends TestCase
 
         try {
             // Sphinx ^3
-            $query = $query
+            $results = $query
                 ->select(new Expression('INTERVAL(author_id,200,400,600,800) AS range'))
                 ->facets([
                     'range' => [
@@ -495,10 +495,11 @@ class QueryTest extends TestCase
                     'authorId' => [
                         'select' => [new Expression('author_id AS authorId')],
                     ],
-                ]);
+                ])
+                ->search($connection);
         } catch (\PDOException $e) {
             // Sphinx ^2
-            $query = $query
+            $results = $query
                 ->facets([
                     'range' => [
                         'select' => 'INTERVAL(author_id,200,400,600,800) AS range',
@@ -506,9 +507,9 @@ class QueryTest extends TestCase
                     'authorId' => [
                         'select' => [new Expression('author_id AS authorId')],
                     ],
-                ]);
+                ])
+                ->search($connection);
         }
-        $results = $query->search($connection);
         $this->assertNotEmpty($results['hits'], 'Unable to query with facet using custom select');
         $this->assertNotEmpty($results['facets']['range'], 'Unable to fill up facet using function in select');
         $this->assertNotEmpty($results['facets']['authorId'], 'Unable to fill up facet using `Expression` in select');
