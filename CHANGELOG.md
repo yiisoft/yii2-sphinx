@@ -1,6 +1,12 @@
 Yii Framework 2 sphinx extension Change Log
 ===========================================
 
+2.0.17 under development
+------------------------
+
+- no changes in this release.
+
+
 2.0.16 March 21, 2024
 ---------------------
 
