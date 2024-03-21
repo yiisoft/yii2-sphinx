@@ -12,8 +12,8 @@ use yii\base\BaseObject;
 /**
  * IndexSchema represents the metadata of a Sphinx index.
  *
- * @property array $columnNames List of column names. This property is read-only.
- * @property bool $isRuntime Whether this index is a real-time index. This property is write-only.
+ * @property-read array $columnNames List of column names.
+ * @property-write bool $isRuntime Whether this index is a real-time index.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0

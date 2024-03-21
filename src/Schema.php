@@ -16,12 +16,11 @@ use yii\db\Exception;
 /**
  * Schema represents the Sphinx schema information.
  *
- * @property string[] $indexNames All index names in the Sphinx. This property is read-only.
- * @property IndexSchema[] $indexSchemas The metadata for all indexes in the Sphinx. Each array element is an
- * instance of [[IndexSchema]] or its child class. This property is read-only.
- * @property array $indexTypes All index types in the Sphinx in format: index name => index type. This
- * property is read-only.
- * @property QueryBuilder $queryBuilder The query builder for this connection. This property is read-only.
+ * @property-read string[] $indexNames All index names in the Sphinx.
+ * @property-read IndexSchema[] $indexSchemas The metadata for all indexes in the Sphinx. Each array element
+ * is an instance of [[IndexSchema]] or its child class.
+ * @property-read array $indexTypes All index types in the Sphinx in format: index name => index type.
+ * @property-read QueryBuilder $queryBuilder The query builder for this connection.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0

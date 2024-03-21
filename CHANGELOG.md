@@ -1,8 +1,8 @@
 Yii Framework 2 sphinx extension Change Log
 ===========================================
 
-2.0.16 under development
-------------------------
+2.0.16 March 21, 2024
+---------------------
 
 - Enh #144: Add `UINT_SET` attribute type support (@vjik)
 

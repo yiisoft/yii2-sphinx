@@ -54,8 +54,8 @@ use yii\base\NotSupportedException;
  * @method \yii\sphinx\Schema getSchema() The schema information for this Sphinx connection
  * @method \yii\sphinx\QueryBuilder getQueryBuilder() the query builder for this Sphinx connection
  *
- * @property string $lastInsertID The row ID of the last row inserted, or the last value retrieved from the
- * sequence object. This property is read-only.
+ * @property-read string $lastInsertID The row ID of the last row inserted, or the last value retrieved from
+ * the sequence object.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0

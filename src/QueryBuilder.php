@@ -20,7 +20,7 @@ use yii\db\Expression;
  * QueryBuilder can also be used to build SQL statements such as INSERT, REPLACE, UPDATE, DELETE,
  * from a [[Query]] object.
  *
- * @property MatchBuilder $matchBuilder Match builder. This property is read-only.
+ * @property-read MatchBuilder $matchBuilder Match builder.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0
