@@ -76,6 +76,7 @@ class Schema extends BaseObject
         'bool' => self::TYPE_BOOLEAN,
         'float' => self::TYPE_FLOAT,
         'mva' => self::TYPE_INTEGER,
+        'uint_set' => self::TYPE_INTEGER,
     ];
 
     /**
@@ -538,7 +539,7 @@ class Schema extends BaseObject
         $column->isField = ($type === 'field');
         $column->isAttribute = !$column->isField;
 
-        $column->isMva = ($type === 'mva');
+        $column->isMva = $type === 'mva' || $type === 'uint_set';
 
         $column->phpType = $this->getColumnPhpType($column);
 
