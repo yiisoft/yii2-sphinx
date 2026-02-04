@@ -2083,12 +2083,6 @@ parameters:
 			path: src/gii/model/form.php
 
 		-
-			message: '#^Call to method yiiunit\\extensions\\sphinx\\data\\fixture\\MySphinxTestCase\:\:tearDown\(\) on a separate line has no effect\.$#'
-			identifier: method.resultUnused
-			count: 2
-			path: tests/ActiveFixtureTest.php
-
-		-
 			message: '#^Cannot access offset ''row1'' on yii\\test\\Fixture\|null\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 2
@@ -2209,7 +2203,7 @@ parameters:
 			path: tests/ActiveRecordTest.php
 
 		-
-			message: '#^Parameter \#2 \$haystack of method PHPUnit\\Framework\\Assert\:\:assertContains\(\) expects iterable, array\|string given\.$#'
+			message: '#^Parameter \#2 \$haystack of method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, array\|string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/ActiveRecordTest.php
@@ -2323,7 +2317,7 @@ parameters:
 			path: tests/CommandTest.php
 
 		-
-			message: '#^Parameter \#2 \$haystack of method PHPUnit\\Framework\\Assert\:\:assertContains\(\) expects iterable, int\|string\|false\|null given\.$#'
+			message: '#^Parameter \#2 \$haystack of method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, int\|string\|false\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/CommandTest.php
@@ -2401,12 +2395,6 @@ parameters:
 			path: tests/QueryBuilderTest.php
 
 		-
-			message: '#^Binary operation "\." between array\|Traversable and ''\]'' results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 2
-			path: tests/QueryTest.php
-
-		-
 			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
@@ -2428,12 +2416,6 @@ parameters:
 			message: '#^Method yiiunit\\extensions\\sphinx\\QueryTest\:\:dataProviderMatchSpecialCharValue\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
-			path: tests/QueryTest.php
-
-		-
-			message: '#^Parameter \#2 \$haystack of method PHPUnit\\Framework\\Assert\:\:assertContains\(\) expects iterable, string given\.$#'
-			identifier: argument.type
-			count: 2
 			path: tests/QueryTest.php
 
 		-
@@ -2617,20 +2599,8 @@ parameters:
 			path: tests/data/ar/RtIndex.php
 
 		-
-			message: '#^Method yiiunit\\extensions\\sphinx\\data\\fixture\\MySphinxTestCase\:\:fixtures\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/data/fixture/MySphinxTestCase.php
-
-		-
-			message: '#^Method yiiunit\\extensions\\sphinx\\data\\fixture\\MySphinxTestCase\:\:setUp\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/data/fixture/MySphinxTestCase.php
-
-		-
-			message: '#^Method yiiunit\\extensions\\sphinx\\data\\fixture\\MySphinxTestCase\:\:tearDown\(\) has no return type specified\.$#'
-			identifier: missingType.return
+			message: '#^Method yiiunit\\extensions\\sphinx\\data\\fixture\\MySphinxTestCase\:\:fixtures\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: tests/data/fixture/MySphinxTestCase.php
 
