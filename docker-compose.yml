@@ -16,11 +16,6 @@ services:
       bash -c "
       docker-php-ext-enable xdebug;
       apache2-foreground"
-    depends_on:
-      sphinx:
-        condition: service_healthy
-      mysql:
-        condition: service_healthy
 
   mysql:
     image: mysql:5.7.44

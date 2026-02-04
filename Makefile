@@ -5,9 +5,8 @@ start:			## Start services
 	docker compose up -d
 
 test:			## Run tests. Params: {{ v=8.1 }}.
-	PHP_VERSION=$(filter-out $@,$(v)) docker compose build --pull yii2-sphinx-php
-	PHP_VERSION=$(filter-out $@,$(v)) docker compose up -d
-	PHP_VERSION=$(filter-out $@,$(v)) docker compose exec yii2-sphinx-php sh -c "php -v && composer update && vendor/bin/phpunit --coverage-clover=coverage.xml"
+	PHP_VERSION=$(filter-out $@,$(v)) docker compose up -d --build
+	docker exec yii2-sphinx-php-1 sh -c "php -v && composer update && vendor/bin/phpunit --coverage-clover=coverage.xml"
 	make down
 
 build:			## Build an image from a docker-compose file. Params: {{ v=8.1 }}.
