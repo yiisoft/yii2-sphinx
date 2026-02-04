@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
@@ -346,7 +347,7 @@ class Command extends \yii\db\Command
 
         return $this->setSql($sql);
     }
-        
+
     /**
      * {@inheritdoc}
      */
@@ -354,7 +355,7 @@ class Command extends \yii\db\Command
     {
         $sql = $this->db->getQueryBuilder()->addColumn($table, $column, $type);
 
-        return $this->setSql($sql);;
+        return $this->setSql($sql);
     }
 
     /**

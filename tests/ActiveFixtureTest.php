@@ -11,19 +11,19 @@ use yiiunit\extensions\sphinx\data\fixture\RtIndexFixture;
 
 class ActiveFixtureTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         \Yii::$app->set('sphinx', $this->getConnection());
         ActiveRecord::$db = $this->getConnection();
     }
 
-    public function testGetData()
+    public function testGetData(): void
     {
         $test = new MySphinxTestCase();
         $test->setUp();
         $fixture = $test->getFixture('runtimeIndex');
-        $this->assertEquals(RtIndexFixture::className(), get_class($fixture));
+        $this->assertEquals(RtIndexFixture::class, get_class($fixture));
         $this->assertEquals(2, count($fixture));
         $this->assertEquals(1, $fixture['row1']['id']);
         $this->assertEquals('title1', $fixture['row1']['title']);
@@ -32,12 +32,12 @@ class ActiveFixtureTest extends TestCase
         $test->tearDown();
     }
 
-    public function testGetModel()
+    public function testGetModel(): void
     {
         $test = new MySphinxTestCase();
         $test->setUp();
         $fixture = $test->getFixture('runtimeIndex');
-        $this->assertEquals(RtIndex::className(), get_class($fixture->getModel('row1')));
+        $this->assertEquals(RtIndex::class, get_class($fixture->getModel('row1')));
         $this->assertEquals(1, $fixture->getModel('row1')->id);
         $this->assertEquals(1, $fixture->getModel('row1')->type_id);
         $this->assertEquals(2, $fixture->getModel('row2')->id);

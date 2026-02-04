@@ -12,13 +12,13 @@ use yiiunit\extensions\sphinx\data\ar\RtIndex;
  */
 class ActiveRecordTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         ActiveRecord::$db = $this->getConnection();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->truncateIndex('yii2_test_rt_index');
         parent::tearDown();
@@ -26,7 +26,7 @@ class ActiveRecordTest extends TestCase
 
     // Tests :
 
-    public function testFind()
+    public function testFind(): void
     {
         // find one
         $result = ArticleIndex::find();
@@ -106,7 +106,7 @@ class ActiveRecordTest extends TestCase
         $this->assertTrue($articles['1002-2'] instanceof ArticleIndex);
     }
 
-    public function testFindBySql()
+    public function testFindBySql(): void
     {
         // find one
         $article = ArticleIndex::findBySql('SELECT * FROM yii2_test_article_index ORDER BY id DESC')->one();
@@ -123,7 +123,7 @@ class ActiveRecordTest extends TestCase
         $this->assertEquals(3, $article->author_id);
     }
 
-    public function testInsert()
+    public function testInsert(): void
     {
         $record = new RtIndex();
         $record->id = 15;
@@ -143,7 +143,7 @@ class ActiveRecordTest extends TestCase
     /**
      * @depends testInsert
      */
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $record = new RtIndex();
         $record->id = 2;
@@ -206,7 +206,7 @@ class ActiveRecordTest extends TestCase
     /**
      * @depends testInsert
      */
-    public function testDelete()
+    public function testDelete(): void
     {
         // delete
         $record = new RtIndex();
@@ -242,7 +242,7 @@ class ActiveRecordTest extends TestCase
      *
      * @see https://github.com/yiisoft/yii2-sphinx/issues/75
      */
-    public function testEmptyMva()
+    public function testEmptyMva(): void
     {
         // delete
         $record = new RtIndex();
@@ -255,21 +255,21 @@ class ActiveRecordTest extends TestCase
         $this->assertEquals([], $record->category);
     }
 
-    public function testCallSnippets()
+    public function testCallSnippets(): void
     {
         $query = 'pencil';
         $source = 'Some data sentence about ' . $query;
 
         $snippet = ArticleIndex::callSnippets($source, $query);
         $this->assertNotEmpty($snippet, 'Unable to call snippets!');
-        $this->assertContains('<b>' . $query . '</b>', $snippet, 'Query not present in the snippet!');
+        $this->assertStringContainsString('<b>' . $query . '</b>', $snippet, 'Query not present in the snippet!');
 
         $rows = ArticleIndex::callSnippets([$source], $query);
         $this->assertNotEmpty($rows, 'Unable to call snippets!');
-        $this->assertContains('<b>' . $query . '</b>', $rows[0], 'Query not present in the snippet!');
+        $this->assertStringContainsString('<b>' . $query . '</b>', $rows[0], 'Query not present in the snippet!');
     }
 
-    public function testCallKeywords()
+    public function testCallKeywords(): void
     {
         $text = 'table pencil';
         $rows = ArticleIndex::callKeywords($text);
@@ -283,7 +283,7 @@ class ActiveRecordTest extends TestCase
      *
      * @depends testFind
      */
-    public function testFindQueryReuse()
+    public function testFindQueryReuse(): void
     {
         $result = ArticleIndex::find()->andWhere(['author_id' => 1]);
         $this->assertTrue($result->one() instanceof ArticleIndex);
@@ -299,13 +299,13 @@ class ActiveRecordTest extends TestCase
      *
      * @depends testFind
      */
-    public function testFindByStringPk()
+    public function testFindByStringPk(): void
     {
         $model = ArticleIndex::findOne('1');
         $this->assertTrue($model instanceof ArticleIndex);
     }
 
-    public function testEmulateExecution()
+    public function testEmulateExecution(): void
     {
         if (!ArticleIndex::find()->hasMethod('emulateExecution')) {
             $this->markTestSkipped('"yii2" version 2.0.11 or higher required');

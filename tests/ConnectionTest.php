@@ -9,7 +9,7 @@ use yii\sphinx\Connection;
  */
 class ConnectionTest extends TestCase
 {
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $connection = $this->getConnection(false);
         $params = $this->sphinxConfig;
@@ -19,7 +19,7 @@ class ConnectionTest extends TestCase
         $this->assertEquals($params['password'], $connection->password);
     }
 
-    public function testOpenClose()
+    public function testOpenClose(): void
     {
         $connection = $this->getConnection(false, false);
 

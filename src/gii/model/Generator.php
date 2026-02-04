@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
@@ -53,7 +54,9 @@ class Generator extends \yii\gii\Generator
     {
         return array_merge(parent::rules(), [
             [['db', 'ns', 'indexName', 'modelClass', 'baseClass'], 'filter', 'filter' => 'trim'],
-            [['ns'], 'filter', 'filter' => function($value) { return trim($value, '\\'); }],
+            [['ns'], 'filter', 'filter' => function ($value) {
+                return trim($value, '\\');
+            }],
 
             [['db', 'ns', 'indexName', 'baseClass'], 'required'],
             [['db', 'modelClass'], 'match', 'pattern' => '/^\w+$/', 'message' => 'Only word characters are allowed.'],
@@ -63,7 +66,7 @@ class Generator extends \yii\gii\Generator
             [['ns'], 'validateNamespace'],
             [['indexName'], 'validateIndexName'],
             [['modelClass'], 'validateModelClass', 'skipOnEmpty' => false],
-            [['baseClass'], 'validateClass', 'params' => ['extends' => ActiveRecord::className()]],
+            [['baseClass'], 'validateClass', 'params' => ['extends' => ActiveRecord::class]],
             [['enableI18N'], 'boolean'],
             [['useIndexPrefix'], 'boolean'],
             [['messageCategory'], 'validateMessageCategory', 'skipOnEmpty' => false],

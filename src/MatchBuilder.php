@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
@@ -26,7 +27,7 @@ class MatchBuilder extends BaseObject
     /**
      * The prefix for automatically generated query binding parameters.
      */
-    const PARAM_PREFIX = ':mp';
+    public const PARAM_PREFIX = ':mp';
 
     /**
      * @var Connection the Sphinx connection.
@@ -202,7 +203,7 @@ class MatchBuilder extends BaseObject
 
         $zones = (array)$operands[0];
 
-        return "$operator: (" . implode(',', $zones) . ")";
+        return "$operator: (" . implode(',', $zones) . ')';
     }
 
     /**
@@ -332,7 +333,7 @@ class MatchBuilder extends BaseObject
                 $name = ':' . $name;
             }
             // unable to use `str_replace()` because particular param name may be a substring of another param name
-            $pattern = "/" . preg_quote($name, '/') . '\b/';
+            $pattern = '/' . preg_quote($name, '/') . '\b/';
             $value = '"' . $this->db->escapeMatchValue($value) . '"';
             $expression = preg_replace($pattern, $value, $expression, -1, $cnt);
         }

@@ -12,7 +12,7 @@ use yiiunit\extensions\sphinx\data\ar\ArticleDb;
  */
 class ActiveRelationTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         ActiveRecord::$db = $this->getConnection();
@@ -21,7 +21,7 @@ class ActiveRelationTest extends TestCase
 
     // Tests :
 
-    public function testFindLazy()
+    public function testFindLazy(): void
     {
         /* @var $article ArticleDb */
         $article = ArticleDb::findOne(['id' => 2]);
@@ -33,7 +33,7 @@ class ActiveRelationTest extends TestCase
         $this->assertEquals($article->id, $index->id);
     }
 
-    public function testFindEager()
+    public function testFindEager(): void
     {
         $articles = ArticleDb::find()->with('index')->all();
         $this->assertEquals(1002, count($articles));
@@ -46,7 +46,7 @@ class ActiveRelationTest extends TestCase
     /**
      * @see https://github.com/yiisoft/yii2/issues/4018
      */
-    public function testFindCompositeLink()
+    public function testFindCompositeLink(): void
     {
         $articles = ArticleIndex::find()->with('sourceCompositeLink')->all();
         $this->assertEquals(20, count($articles));

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
@@ -47,7 +48,7 @@ use yii\db\ActiveRelationTrait;
  * {
  *     public function getSource()
  *     {
- *         return $this->hasOne('db', ArticleDb::className(), ['id' => 'id']);
+ *         return $this->hasOne('db', ArticleDb::class, ['id' => 'id']);
  *     }
  *
  *     public function getSnippetSource()
@@ -88,7 +89,7 @@ class ActiveQuery extends Query implements ActiveQueryInterface
     /**
      * @event Event an event that is triggered when the query is initialized via [[init()]].
      */
-    const EVENT_INIT = 'init';
+    public const EVENT_INIT = 'init';
 
     /**
      * @var string the SQL statement to be executed for retrieving AR records.

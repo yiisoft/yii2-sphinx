@@ -1,10 +1,11 @@
 Yii Framework 2 sphinx extension Change Log
 ===========================================
 
-2.0.17 under development
+3.0.0 under development
 ------------------------
 
-- no changes in this release.
+- Enh #: Applying Yii2 coding standards (@s1lver)
+- Enh #: Raise min version to PHP 7.4 (@s1lver)
 
 
 2.0.16 March 21, 2024

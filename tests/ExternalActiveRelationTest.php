@@ -16,7 +16,7 @@ class ExternalActiveRelationTest extends TestCase
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         ActiveRecord::$db = $this->getConnection();
@@ -25,7 +25,7 @@ class ExternalActiveRelationTest extends TestCase
 
     // Tests :
 
-    public function testFindLazy()
+    public function testFindLazy(): void
     {
         /* @var $article ArticleIndex */
         $article = ArticleIndex::findOne(['id' => 2]);
@@ -48,7 +48,7 @@ class ExternalActiveRelationTest extends TestCase
         }
     }
 
-    public function testFindEager()
+    public function testFindEager(): void
     {
         // has one :
         $articles = ArticleIndex::find()->with('source')->all();
@@ -78,7 +78,7 @@ class ExternalActiveRelationTest extends TestCase
     /**
      * @depends testFindEager
      */
-    public function testFindWithSnippets()
+    public function testFindWithSnippets(): void
     {
         $articles = ArticleIndex::find()
             ->match('about')

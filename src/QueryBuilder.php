@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
@@ -30,7 +31,7 @@ class QueryBuilder extends BaseObject
     /**
      * The prefix for automatically generated query binding parameters.
      */
-    const PARAM_PREFIX = ':qp';
+    public const PARAM_PREFIX = ':qp';
 
     /**
      * @var Connection the Sphinx connection.
@@ -40,12 +41,12 @@ class QueryBuilder extends BaseObject
      * @var string the separator between different fragments of a SQL statement.
      * Defaults to an empty space. This is mainly used by [[build()]] when generating a SQL statement.
      */
-    public $separator = " ";
+    public $separator = ' ';
     /**
      * @var string separator between different SQL queries.
      * This is mainly used by [[build()]] when generating a SQL statement.
      */
-    public $querySeparator = "; ";
+    public $querySeparator = '; ';
 
     /**
      * @var array map of query condition to builder methods.
@@ -446,7 +447,7 @@ class QueryBuilder extends BaseObject
             $optionSql = '';
         }
 
-        return 'CALL SNIPPETS(' . $dataSql. ', ' . $indexParamName . ', ' . $matchSql . $optionSql. ')';
+        return 'CALL SNIPPETS(' . $dataSql . ', ' . $indexParamName . ', ' . $matchSql . $optionSql . ')';
     }
 
     /**
@@ -1027,7 +1028,7 @@ class QueryBuilder extends BaseObject
             throw new InvalidParamException("Operator '$operator' requires two operands.");
         }
 
-        $escape = isset($operands[2]) ? $operands[2] : ['%'=>'\%', '_'=>'\_', '\\'=>'\\\\'];
+        $escape = isset($operands[2]) ? $operands[2] : ['%' => '\%', '_' => '\_', '\\' => '\\\\'];
         unset($operands[2]);
 
         list($column, $values) = $operands;
@@ -1230,7 +1231,7 @@ class QueryBuilder extends BaseObject
             $phName = $showMeta->expression;
         } else {
             $phName = self::PARAM_PREFIX . count($params);
-            $escape = ['%'=>'\%', '_'=>'\_', '\\'=>'\\\\'];
+            $escape = ['%' => '\%', '_' => '\_', '\\' => '\\\\'];
             $params[$phName] = '%' . strtr($showMeta, $escape) . '%';
         }
 
@@ -1299,7 +1300,7 @@ class QueryBuilder extends BaseObject
         }
         return $indexSchemas;
     }
-    
+
     /**
      * Builds a SQL statement for creating a new index table.
      *
@@ -1337,7 +1338,7 @@ class QueryBuilder extends BaseObject
 
         return $options === null ? $sql : $sql . ' ' . $options;
     }
-    
+
     /**
      * Builds a SQL statement for dropping a index.
      * @param string $table the table to be dropped. The name will be properly quoted by the method.
@@ -1348,7 +1349,7 @@ class QueryBuilder extends BaseObject
     {
         return 'DROP TABLE ' . $this->db->quoteTableName($table);
     }
-    
+
     /**
      * Builds a SQL statement for adding a new index column.
      * @param string $table the index that the new column will be added to. The index name will be properly quoted by the method.
@@ -1363,7 +1364,7 @@ class QueryBuilder extends BaseObject
             . ' ADD COLUMN ' . $this->db->quoteColumnName($column) . ' '
             . $type;
     }
-    
+
     /**
      * Builds a SQL statement for dropping a index column.
      * @param string $table the index whose column is to be dropped. The name will be properly quoted by the method.
@@ -1376,5 +1377,4 @@ class QueryBuilder extends BaseObject
         return 'ALTER TABLE ' . $this->db->quoteTableName($table)
             . ' DROP COLUMN ' . $this->db->quoteColumnName($column);
     }
-        
 }
