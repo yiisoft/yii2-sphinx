@@ -12,8 +12,6 @@ on:
       - '.gitignore'
       - '.gitattributes'
       - '.editorconfig'
-      - 'docker-compose.yml'
-      - 'Makefile'
 
   push: *ignore-paths
 
