@@ -4,7 +4,6 @@ namespace yiiunit\extensions\sphinx;
 
 use yii\helpers\ArrayHelper;
 use yii\sphinx\Connection;
-use Yii;
 
 /**
  * Base class for the Sphinx test cases.

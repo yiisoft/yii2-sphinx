@@ -2,7 +2,6 @@
 
 namespace yiiunit\extensions\sphinx;
 
-use Yii;
 use yii\db\Expression;
 use yii\sphinx\MatchExpression;
 use yii\sphinx\Query;

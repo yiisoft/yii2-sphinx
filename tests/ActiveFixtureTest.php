@@ -2,8 +2,6 @@
 
 namespace yiiunit\extensions\sphinx;
 
-use yii\sphinx\ActiveFixture;
-use yii\test\FixtureTrait;
 use yiiunit\extensions\sphinx\data\ar\ActiveRecord;
 use yiiunit\extensions\sphinx\data\ar\RtIndex;
 use yiiunit\extensions\sphinx\data\fixture\MySphinxTestCase;
