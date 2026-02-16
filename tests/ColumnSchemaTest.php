@@ -13,7 +13,7 @@ class ColumnSchemaTest extends TestCase
      * Data provider for [[testTypeCast]]
      * @return array test data.
      */
-    public function dataProviderTypeCast()
+    public function dataProviderTypeCast(): array
     {
         return [
             [
@@ -45,7 +45,7 @@ class ColumnSchemaTest extends TestCase
      * @param $value
      * @param $expectedResult
      */
-    public function testTypeCast($type, $phpType, $value, $expectedResult)
+    public function testTypeCast($type, $phpType, $value, $expectedResult): void
     {
         $columnSchema = new ColumnSchema();
         $columnSchema->type = $type;

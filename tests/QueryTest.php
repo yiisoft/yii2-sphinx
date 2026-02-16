@@ -2,7 +2,6 @@
 
 namespace yiiunit\extensions\sphinx;
 
-use Yii;
 use yii\db\Expression;
 use yii\sphinx\MatchExpression;
 use yii\sphinx\Query;
@@ -12,7 +11,7 @@ use yii\sphinx\Query;
  */
 class QueryTest extends TestCase
 {
-    public function testSelect()
+    public function testSelect(): void
     {
         // default
         $query = new Query();
@@ -28,14 +27,14 @@ class QueryTest extends TestCase
         $this->assertEquals('something', $query->selectOption);
     }
 
-    public function testFrom()
+    public function testFrom(): void
     {
         $query = new Query();
         $query->from('user');
         $this->assertEquals(['user'], $query->from);
     }
 
-    public function testMatch()
+    public function testMatch(): void
     {
         $query = new Query();
         $match = 'test match';
@@ -43,11 +42,11 @@ class QueryTest extends TestCase
         $this->assertEquals($match, $query->match);
 
         $command = $query->createCommand($this->getConnection(false));
-        $this->assertContains('MATCH(', $command->getSql(), 'No MATCH operator present!');
+        $this->assertStringContainsString('MATCH(', $command->getSql(), 'No MATCH operator present!');
         $this->assertContains($match, $command->params, 'No match query among params!');
     }
 
-    public function testWhere()
+    public function testWhere(): void
     {
         $query = new Query();
         $query->where('id = :id', [':id' => 1]);
@@ -66,18 +65,18 @@ class QueryTest extends TestCase
     /**
      * @depends testWhere
      */
-    public function testWhereExpression()
+    public function testWhereExpression(): void
     {
         $query = new Query();
         $expression = new Expression('name = :name', ['name' => 'foo']);
         $query->where($expression);
 
         $command = $query->createCommand($this->getConnection(false));
-        $this->assertContains($expression->expression, $command->getSql());
+        $this->assertStringContainsString($expression->expression, $command->getSql());
         $this->assertEquals($expression->params, $command->params);
     }
 
-    public function testFilterWhere()
+    public function testFilterWhere(): void
     {
         // should work with hash format
         $query = new Query();
@@ -128,14 +127,14 @@ class QueryTest extends TestCase
         $this->assertEquals($condition, $query->where);
     }
 
-    public function testFilterWhereRecursively()
+    public function testFilterWhereRecursively(): void
     {
         $query = new Query();
         $query->filterWhere(['and', ['like', 'name', ''], ['like', 'title', ''], ['id' => 1], ['not', ['like', 'name', '']]]);
         $this->assertEquals(['and', ['id' => 1]], $query->where);
     }
 
-    public function testGroup()
+    public function testGroup(): void
     {
         $query = new Query();
         $query->groupBy('team');
@@ -148,7 +147,7 @@ class QueryTest extends TestCase
         $this->assertEquals(['team', 'company', 'age'], $query->groupBy);
     }
 
-    public function testHaving()
+    public function testHaving(): void
     {
         $query = new Query();
         $query->having('id = :id', [':id' => 1]);
@@ -164,7 +163,7 @@ class QueryTest extends TestCase
         $this->assertEquals([':id' => 1, ':name' => 'something', ':age' => '30'], $query->params);
     }
 
-    public function testOrder()
+    public function testOrder(): void
     {
         $query = new Query();
         $query->orderBy('team');
@@ -183,7 +182,7 @@ class QueryTest extends TestCase
         $this->assertEquals(['team' => SORT_ASC, 'company' => SORT_DESC, 'age' => SORT_ASC], $query->orderBy);
     }
 
-    public function testLimitOffset()
+    public function testLimitOffset(): void
     {
         $query = new Query();
         $query->limit(10)->offset(5);
@@ -191,7 +190,7 @@ class QueryTest extends TestCase
         $this->assertEquals(5, $query->offset);
     }
 
-    public function testWithin()
+    public function testWithin(): void
     {
         $query = new Query();
         $query->within('team');
@@ -210,7 +209,7 @@ class QueryTest extends TestCase
         $this->assertEquals(['team' => SORT_ASC, 'company' => SORT_DESC, 'age' => SORT_ASC], $query->within);
     }
 
-    public function testOptions()
+    public function testOptions(): void
     {
         $query = new Query();
         $options = [
@@ -225,7 +224,7 @@ class QueryTest extends TestCase
         $this->assertEquals($newMaxMatches, $query->options['max_matches']);
     }
 
-    public function testRun()
+    public function testRun(): void
     {
         $connection = $this->getConnection();
 
@@ -246,7 +245,7 @@ class QueryTest extends TestCase
     /**
      * @depends testRun
      */
-    public function testSnippet()
+    public function testSnippet(): void
     {
         $connection = $this->getConnection();
 
@@ -271,8 +270,8 @@ class QueryTest extends TestCase
             ->all($connection);
         $this->assertNotEmpty($rows);
         foreach ($rows as $row) {
-            $this->assertContains($snippetPrefix, $row['snippet'], 'Snippet source not present!');
-            $this->assertContains($snippetOptions['before_match'] . $match, $row['snippet'] . $snippetOptions['after_match'], 'Options not applied!');
+            $this->assertStringContainsString($snippetPrefix, $row['snippet'], 'Snippet source not present!');
+            $this->assertStringContainsString($snippetOptions['before_match'] . $match, $row['snippet'] . $snippetOptions['after_match'], 'Options not applied!');
         }
 
         // @see https://github.com/yiisoft/yii2-sphinx/issues/61
@@ -284,8 +283,8 @@ class QueryTest extends TestCase
             ->all($connection);
         $this->assertNotEmpty($rows);
         foreach ($rows as $row) {
-            $this->assertContains($snippetPrefix, $row['snippet'], 'Snippet source not present!');
-            $this->assertContains($snippetOptions['before_match'] . $match, $row['snippet'] . $snippetOptions['after_match'], 'Options not applied!');
+            $this->assertStringContainsString($snippetPrefix, $row['snippet'], 'Snippet source not present!');
+            $this->assertStringContainsString($snippetOptions['before_match'] . $match, $row['snippet'] . $snippetOptions['after_match'], 'Options not applied!');
         }
 
         // @see https://github.com/yiisoft/yii2-sphinx/pull/93
@@ -304,7 +303,7 @@ class QueryTest extends TestCase
         $this->assertSame('', $rows[1]['snippet']);
     }
 
-    public function testCount()
+    public function testCount(): void
     {
         $connection = $this->getConnection();
 
@@ -320,7 +319,7 @@ class QueryTest extends TestCase
      *
      * @see https://github.com/yiisoft/yii2-sphinx/issues/9
      */
-    public function testRunAndWhere()
+    public function testRunAndWhere(): void
     {
         $connection = $this->getConnection();
 
@@ -337,7 +336,7 @@ class QueryTest extends TestCase
     /**
      * @depends testRun
      */
-    public function testWhereSpecialCharValue()
+    public function testWhereSpecialCharValue(): void
     {
         $connection = $this->getConnection();
 
@@ -352,7 +351,7 @@ class QueryTest extends TestCase
      * Data provider for [[testMatchSpecialCharValue()]]
      * @return array test data
      */
-    public function dataProviderMatchSpecialCharValue()
+    public function dataProviderMatchSpecialCharValue(): array
     {
         return [
             ["'"],
@@ -379,7 +378,7 @@ class QueryTest extends TestCase
      *
      * @see https://github.com/yiisoft/yii2/issues/3668
      */
-    public function testMatchSpecialCharValue($char)
+    public function testMatchSpecialCharValue($char): void
     {
         $connection = $this->getConnection();
 
@@ -393,7 +392,7 @@ class QueryTest extends TestCase
     /**
      * @depends testMatchSpecialCharValue
      */
-    public function testMatchComplex()
+    public function testMatchComplex(): void
     {
         $connection = $this->getConnection();
 
@@ -407,7 +406,7 @@ class QueryTest extends TestCase
     /**
      * @depends testMatchComplex
      */
-    public function testMatchExpression()
+    public function testMatchExpression(): void
     {
         $connection = $this->getConnection();
 
@@ -433,7 +432,7 @@ class QueryTest extends TestCase
      *
      * @see https://github.com/yiisoft/yii2/issues/4375
      */
-    public function testRunOnDistributedIndex()
+    public function testRunOnDistributedIndex(): void
     {
         $connection = $this->getConnection();
 
@@ -454,7 +453,7 @@ class QueryTest extends TestCase
     /**
      * @depends testRun
      */
-    public function testFacets()
+    public function testFacets(): void
     {
         $connection = $this->getConnection();
 
@@ -518,7 +517,7 @@ class QueryTest extends TestCase
     /**
      * @depends testRun
      */
-    public function testShowMeta()
+    public function testShowMeta(): void
     {
         $connection = $this->getConnection();
 
@@ -545,7 +544,7 @@ class QueryTest extends TestCase
      * @depends testFacets
      * @depends testShowMeta
      */
-    public function testShowMetaWithFacet()
+    public function testShowMetaWithFacet(): void
     {
         $connection = $this->getConnection();
 
@@ -567,7 +566,7 @@ class QueryTest extends TestCase
      *
      * @depends testRun
      */
-    public function testWhereEmptyIn()
+    public function testWhereEmptyIn(): void
     {
         $connection = $this->getConnection();
 
@@ -585,7 +584,7 @@ class QueryTest extends TestCase
      * @depends testRun
      * @depends testWithin
      */
-    public function testRunWithin()
+    public function testRunWithin(): void
     {
         $connection = $this->getConnection();
 
@@ -604,7 +603,7 @@ class QueryTest extends TestCase
      * @depends testRun
      * @depends testGroup
      */
-    public function testGroupLimit()
+    public function testGroupLimit(): void
     {
         $connection = $this->getConnection();
 
@@ -623,7 +622,7 @@ class QueryTest extends TestCase
      *
      * @see https://github.com/yiisoft/yii2-sphinx/issues/8
      */
-    public function testFloatCondition()
+    public function testFloatCondition(): void
     {
         $connection = $this->getConnection();
 
@@ -664,7 +663,7 @@ class QueryTest extends TestCase
     /**
      * @depends testRun
      */
-    public function testColumn()
+    public function testColumn(): void
     {
         $db = $this->getConnection();
         $result = (new Query())
@@ -695,7 +694,7 @@ class QueryTest extends TestCase
         $this->assertEquals([4 => 2, 2 => 1], $result);
     }
 
-    public function testEmulateExecution()
+    public function testEmulateExecution(): void
     {
         $query = new Query();
         if (!$query->hasMethod('emulateExecution')) {
@@ -780,7 +779,7 @@ class QueryTest extends TestCase
      *
      * @depends testWhere
      */
-    public function testWhereCompare()
+    public function testWhereCompare(): void
     {
         $db = $this->getConnection();
 
@@ -809,7 +808,7 @@ class QueryTest extends TestCase
      * @depends testFilterWhere
      * @depends testWhereCompare
      */
-    public function testRunFilterWhere()
+    public function testRunFilterWhere(): void
     {
         $db = $this->getConnection();
 
@@ -837,7 +836,7 @@ class QueryTest extends TestCase
      *
      * @see https://github.com/yiisoft/yii2-sphinx/issues/82
      */
-    public function testSelectExpression()
+    public function testSelectExpression(): void
     {
         $connection = $this->getConnection();
 

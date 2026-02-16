@@ -10,7 +10,7 @@ use yiiunit\extensions\sphinx\data\ar\ActiveRecord;
  */
 class ActiveQueryTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         ActiveRecord::$db = $this->getConnection();
@@ -18,7 +18,7 @@ class ActiveQueryTest extends TestCase
 
     // Tests :
 
-    public function testFacet()
+    public function testFacet(): void
     {
         $results = ArticleIndex::find()
             ->match('about')
@@ -31,10 +31,10 @@ class ActiveQueryTest extends TestCase
         $this->assertTrue($results['hits'][0] instanceof ArticleIndex, 'Unable to populate results as AR object');
     }
 
-    public function testIndexBy() 
+    public function testIndexBy(): void
     {
         $results = ArticleIndex::find()->indexBy('id')->all();
-        $result = reset($results); 
+        $result = reset($results);
         $this->assertTrue($result->id == key($results), 'Unable to index results by column');
     }
 }

@@ -1,0 +1,69 @@
+---
+
+services:
+
+  php:
+    image: "yiisoftware/yii2-php:${PHP_VERSION:-8.1}-apache"
+    networks:
+      - yii2-sphinx
+    volumes:
+      - .:/app # Mount source-code for development
+    environment:
+      XDEBUG_MODE: ${XDEBUG_MODE:-coverage} # Setup "debug" to enable debugging
+      XDEBUG_CONFIG: "client_host=host.docker.internal"
+      XDEBUG_TRIGGER: ${XDEBUG_TRIGGER:-yes}
+    command: >
+      bash -c "
+      docker-php-ext-enable xdebug;
+      apache2-foreground"
+
+  mysql:
+    image: mysql:5.7.44
+    platform: linux/amd64
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_USER: yiitest
+      MYSQL_PASSWORD: yiitest
+      MYSQL_DATABASE: yiitest
+    volumes:
+      - ./tests/data/source.sql:/docker-entrypoint-initdb.d/source.sql
+    networks:
+      - yii2-sphinx
+    ports:
+      - '3306:3306'
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 5s
+      retries: 2
+
+  sphinx:
+    image: macbre/sphinxsearch:3.5.1
+    platform: linux/amd64
+    networks:
+      - yii2-sphinx
+    ports:
+      - '19306:19306'
+    volumes:
+      - ./runtime/data:/opt/sphinx/index
+      - ./tests/data/sphinx-3.5.1.conf:/opt/sphinx/conf/sphinx.conf
+    environment:
+      - SPHINX_BASE_DIR=/opt/sphinx/sphinx
+    entrypoint: >
+      sh -c "
+        cp /opt/sphinx/conf/sphinx.conf /tmp/sphinx.conf &&
+        sed \"s~SPHINX_BASE_DIR~$${SPHINX_BASE_DIR}~g\" /tmp/sphinx.conf > /opt/sphinx/conf/sphinx.conf &&
+        indexer --config /opt/sphinx/conf/sphinx.conf --all &&
+        exec searchd --config /opt/sphinx/conf/sphinx.conf --nodetach
+      "
+    healthcheck:
+      test: [ "CMD", "searchd", "--status" ]
+      timeout: 4s
+      retries: 3
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+networks:
+  yii2-sphinx:
+    driver: bridge
+    name: yii2-sphinx

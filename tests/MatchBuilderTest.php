@@ -18,7 +18,7 @@ class MatchBuilderTest extends TestCase
 
     // Tests :
 
-    public function testPlainString()
+    public function testPlainString(): void
     {
         $builder = $this->createMatchBuilder();
 
@@ -29,7 +29,7 @@ class MatchBuilderTest extends TestCase
         $this->assertEquals('@name "foo"', $builder->build($match));
     }
 
-    public function testHash()
+    public function testHash(): void
     {
         $builder = $this->createMatchBuilder();
 
@@ -42,7 +42,7 @@ class MatchBuilderTest extends TestCase
     /**
      * @depends testHash
      */
-    public function testAndMatch()
+    public function testAndMatch(): void
     {
         $builder = $this->createMatchBuilder();
 
@@ -56,7 +56,7 @@ class MatchBuilderTest extends TestCase
     /**
      * @depends testHash
      */
-    public function testOrMatch()
+    public function testOrMatch(): void
     {
         $builder = $this->createMatchBuilder();
 
@@ -70,7 +70,7 @@ class MatchBuilderTest extends TestCase
     /**
      * @depends testAndMatch
      */
-    public function testEscapeParams()
+    public function testEscapeParams(): void
     {
         $builder = $this->createMatchBuilder();
 
@@ -86,7 +86,7 @@ class MatchBuilderTest extends TestCase
     /**
      * @depends testAndMatch
      */
-    public function testNotMatch()
+    public function testNotMatch(): void
     {
         $builder = $this->createMatchBuilder();
 
@@ -102,7 +102,7 @@ class MatchBuilderTest extends TestCase
     /**
      * @depends testAndMatch
      */
-    public function testIgnoreMatch()
+    public function testIgnoreMatch(): void
     {
         $builder = $this->createMatchBuilder();
 
@@ -118,7 +118,7 @@ class MatchBuilderTest extends TestCase
     /**
      * @depends testAndMatch
      */
-    public function testProximityMatch()
+    public function testProximityMatch(): void
     {
         $builder = $this->createMatchBuilder();
 
@@ -135,7 +135,7 @@ class MatchBuilderTest extends TestCase
     /**
      * @depends testAndMatch
      */
-    public function testMaybeMatch()
+    public function testMaybeMatch(): void
     {
         $builder = $this->createMatchBuilder();
 
@@ -152,7 +152,7 @@ class MatchBuilderTest extends TestCase
     /**
      * @depends testAndMatch
      */
-    public function testSentenceMatch()
+    public function testSentenceMatch(): void
     {
         $builder = $this->createMatchBuilder();
 
@@ -170,7 +170,7 @@ class MatchBuilderTest extends TestCase
     /**
      * @depends testAndMatch
      */
-    public function testParagraphMatch()
+    public function testParagraphMatch(): void
     {
         $builder = $this->createMatchBuilder();
 
@@ -187,7 +187,7 @@ class MatchBuilderTest extends TestCase
     /**
      * @depends testAndMatch
      */
-    public function testZoneMatch()
+    public function testZoneMatch(): void
     {
         $builder = $this->createMatchBuilder();
 
@@ -209,7 +209,7 @@ class MatchBuilderTest extends TestCase
     /**
      * @depends testAndMatch
      */
-    public function testZoneSpanMatch()
+    public function testZoneSpanMatch(): void
     {
         $builder = $this->createMatchBuilder();
 

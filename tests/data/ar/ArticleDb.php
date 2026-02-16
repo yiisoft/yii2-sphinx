@@ -13,7 +13,7 @@ class ArticleDb extends ActiveRecordDb
 
     public function getIndex()
     {
-        return new ActiveQuery(ArticleIndex::className(), [
+        return new ActiveQuery(ArticleIndex::class, [
             'primaryModel' => $this,
             'link' => ['id' => 'id'],
             'multiple' => false,

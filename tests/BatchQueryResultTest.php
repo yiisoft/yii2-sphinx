@@ -10,14 +10,14 @@ use yiiunit\extensions\sphinx\data\ar\ArticleIndex;
 
 class BatchQueryResultTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         ActiveRecord::$db = $this->getConnection();
         ActiveRecordDb::$db = $this->getDbConnection();
     }
 
-    public function testQuery()
+    public function testQuery(): void
     {
         $db = $this->getConnection();
 
@@ -26,7 +26,7 @@ class BatchQueryResultTest extends TestCase
             ->from('yii2_test_article_index')
             ->orderBy('id');
         $result = $query->batch(2, $db);
-        $this->assertInstanceOf(BatchQueryResult::className(), $result);
+        $this->assertInstanceOf(BatchQueryResult::class, $result);
         $this->assertEquals(2, $result->batchSize);
         $this->assertSame($result->query, $query);
 
@@ -121,7 +121,7 @@ class BatchQueryResultTest extends TestCase
         $this->assertEquals(2, $allRows[2]['author_id']);
     }
 
-    public function testActiveQuery()
+    public function testActiveQuery(): void
     {
         $db = $this->getConnection();
 

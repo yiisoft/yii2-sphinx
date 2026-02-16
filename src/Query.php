@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
@@ -526,7 +527,7 @@ class Query extends \yii\db\Query
         $connection = $this->getConnection();
         $match = $this->match;
         if ($match === null) {
-            throw new InvalidCallException('Unable to call snippets: "' . $this->className() . '::match" should be specified.');
+            throw new InvalidCallException('Unable to call snippets: "' . self::class . '::match" should be specified.');
         }
 
         return $connection->createCommand()
@@ -560,7 +561,7 @@ class Query extends \yii\db\Query
             return $command->queryScalar();
         }
 
-        return (new Query)->select([$selectExpression])
+        return (new Query())->select([$selectExpression])
             ->from(['c' => $this])
             ->createCommand($command->db)
             ->queryScalar();

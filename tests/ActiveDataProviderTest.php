@@ -14,7 +14,7 @@ use yiiunit\extensions\sphinx\data\ar\ArticleIndex;
  */
 class ActiveDataProviderTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         ActiveRecord::$db = $this->getConnection();
@@ -22,7 +22,7 @@ class ActiveDataProviderTest extends TestCase
 
     // Tests :
 
-    public function testQuery()
+    public function testQuery(): void
     {
         $query = new Query();
         $query->from('yii2_test_article_index');
@@ -45,7 +45,7 @@ class ActiveDataProviderTest extends TestCase
         $this->assertEquals(1, count($models));
     }
 
-    public function testActiveQuery()
+    public function testActiveQuery(): void
     {
         $provider = new ActiveDataProvider([
             'query' => ArticleIndex::find()->orderBy('id ASC'),
@@ -69,7 +69,7 @@ class ActiveDataProviderTest extends TestCase
     /**
      * @depends testQuery
      */
-    public function testFacetQuery()
+    public function testFacetQuery(): void
     {
         $query = new Query();
         $query->from('yii2_test_article_index');
@@ -89,7 +89,7 @@ class ActiveDataProviderTest extends TestCase
     /**
      * @depends testQuery
      */
-    public function testTotalCountFromMeta()
+    public function testTotalCountFromMeta(): void
     {
         $query = (new Query())
             ->from('yii2_test_article_index')
@@ -112,7 +112,7 @@ class ActiveDataProviderTest extends TestCase
      *
      * @see https://github.com/yiisoft/yii2-sphinx/issues/11
      */
-    public function testAutoAdjustPagination()
+    public function testAutoAdjustPagination(): void
     {
         $request = new Request();
         $request->setQueryParams(['page' => 2]);
@@ -139,7 +139,7 @@ class ActiveDataProviderTest extends TestCase
      *
      * @see https://github.com/yiisoft/yii2-sphinx/issues/12
      */
-    public function testAutoAdjustMaxMatches()
+    public function testAutoAdjustMaxMatches(): void
     {
         $request = new Request();
         $request->setQueryParams(['page' => 99999]);
@@ -161,7 +161,7 @@ class ActiveDataProviderTest extends TestCase
         $this->assertEmpty($models); // no exception
     }
 
-    public function testMatch()
+    public function testMatch(): void
     {
         $query = (new Query())
             ->from('yii2_test_article_index')

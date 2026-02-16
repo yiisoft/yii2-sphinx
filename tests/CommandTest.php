@@ -9,7 +9,7 @@ use yii\db\DataReader;
  */
 class CommandTest extends TestCase
 {
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->truncateIndex('yii2_test_rt_index');
         parent::tearDown();
@@ -17,7 +17,7 @@ class CommandTest extends TestCase
 
     // Tests :
 
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $db = $this->getConnection(false);
 
@@ -35,7 +35,7 @@ class CommandTest extends TestCase
         $this->assertEquals($params, $command->params);
     }
 
-    public function testGetSetSql()
+    public function testGetSetSql(): void
     {
         $db = $this->getConnection(false);
 
@@ -48,16 +48,16 @@ class CommandTest extends TestCase
         $this->assertEquals($sql2, $command->sql);
     }
 
-    public function testAutoQuoting()
+    public function testAutoQuoting(): void
     {
         $db = $this->getConnection(false);
 
         $sql = 'SELECT [[id]], [[t.name]] FROM {{yii2_test_item_index}} t';
         $command = $db->createCommand($sql);
-        $this->assertEquals("SELECT `id`, `t`.`name` FROM `yii2_test_item_index` t", $command->sql);
+        $this->assertEquals('SELECT `id`, `t`.`name` FROM `yii2_test_item_index` t', $command->sql);
     }
 
-    public function testPrepareCancel()
+    public function testPrepareCancel(): void
     {
         $db = $this->getConnection(false);
 
@@ -69,7 +69,7 @@ class CommandTest extends TestCase
         $this->assertEquals(null, $command->pdoStatement);
     }
 
-    public function testExecute()
+    public function testExecute(): void
     {
         $db = $this->getConnection();
 
@@ -82,7 +82,7 @@ class CommandTest extends TestCase
         $command->execute();
     }
 
-    public function testQuery()
+    public function testQuery(): void
     {
         $db = $this->getConnection();
 
@@ -146,7 +146,7 @@ class CommandTest extends TestCase
     /**
      * @depends testQuery
      */
-    public function testInsert()
+    public function testInsert(): void
     {
         $db = $this->getConnection();
 
@@ -166,7 +166,7 @@ class CommandTest extends TestCase
     /**
      * @depends testInsert
      */
-    public function testBatchInsert()
+    public function testBatchInsert(): void
     {
         $db = $this->getConnection();
 
@@ -205,7 +205,7 @@ class CommandTest extends TestCase
     /**
      * @depends testInsert
      */
-    public function testReplace()
+    public function testReplace(): void
     {
         $db = $this->getConnection();
 
@@ -236,7 +236,7 @@ class CommandTest extends TestCase
     /**
      * @depends testReplace
      */
-    public function testBatchReplace()
+    public function testBatchReplace(): void
     {
         $db = $this->getConnection();
 
@@ -284,7 +284,7 @@ class CommandTest extends TestCase
     /**
      * @depends testInsert
      */
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $db = $this->getConnection();
 
@@ -313,7 +313,7 @@ class CommandTest extends TestCase
     /**
      * @depends testUpdate
      */
-    public function testUpdateWithOptions()
+    public function testUpdateWithOptions(): void
     {
         $db = $this->getConnection();
 
@@ -343,7 +343,7 @@ class CommandTest extends TestCase
     /**
      * @depends testInsert
      */
-    public function testDelete()
+    public function testDelete(): void
     {
         $db = $this->getConnection();
 
@@ -364,7 +364,7 @@ class CommandTest extends TestCase
     /**
      * @depends testQuery
      */
-    public function testCallSnippets()
+    public function testCallSnippets(): void
     {
         $db = $this->getConnection();
 
@@ -373,7 +373,7 @@ class CommandTest extends TestCase
 
         $rows = $db->createCommand()->callSnippets('yii2_test_item_index', $source, $query)->queryColumn();
         $this->assertNotEmpty($rows, 'Unable to call snippets!');
-        $this->assertContains('<b>' . $query . '</b>', $rows[0], 'Query not present in the snippet!');
+        $this->assertStringContainsString('<b>' . $query . '</b>', $rows[0], 'Query not present in the snippet!');
 
         $rows = $db->createCommand()->callSnippets('yii2_test_item_index', [$source], $query)->queryColumn();
         $this->assertNotEmpty($rows, 'Unable to call snippets for array source!');
@@ -384,13 +384,13 @@ class CommandTest extends TestCase
             'limit' => 20,
         ];
         $snippet = $db->createCommand()->callSnippets('yii2_test_item_index', $source, $query, $options)->queryScalar();
-        $this->assertContains($options['before_match'] . $query . $options['after_match'], $snippet, 'Unable to apply options!');
+        $this->assertStringContainsString($options['before_match'] . $query . $options['after_match'], $snippet, 'Unable to apply options!');
     }
 
     /**
      * @depends testQuery
      */
-    public function testCallKeywords()
+    public function testCallKeywords(): void
     {
         $db = $this->getConnection();
 
@@ -413,7 +413,7 @@ class CommandTest extends TestCase
      * @depends testInsert
      * @depends testBatchInsert
      */
-    public function testInsertNullValue()
+    public function testInsertNullValue(): void
     {
         $db = $this->getConnection();
 
@@ -466,7 +466,7 @@ class CommandTest extends TestCase
      *
      * @see https://github.com/yiisoft/yii2-sphinx/issues/8
      */
-    public function testFloatParams()
+    public function testFloatParams(): void
     {
         $db = $this->getConnection();
 
@@ -488,7 +488,7 @@ class CommandTest extends TestCase
      *
      * @see https://github.com/yiisoft/yii2-sphinx/issues/87
      */
-    public function testGetRawSql()
+    public function testGetRawSql(): void
     {
         $db = $this->getConnection();
 

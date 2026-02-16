@@ -19,7 +19,7 @@ class QueryBuilderTest extends TestCase
     /**
      * @return array test data.
      */
-    public function dataProviderBuildCondition()
+    public function dataProviderBuildCondition(): array
     {
         $conditions = [
             // empty values
@@ -110,7 +110,7 @@ class QueryBuilderTest extends TestCase
      * @param string $expected
      * @param array $expectedParams
      */
-    public function testBuildCondition($condition, $expected, $expectedParams)
+    public function testBuildCondition($condition, $expected, $expectedParams): void
     {
         $query = (new Query())->where($condition);
         list($sql, $params) = $this->createQueryBuilder()->build($query);

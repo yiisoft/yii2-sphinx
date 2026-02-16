@@ -9,7 +9,7 @@ use yii\caching\FileCache;
  */
 class SchemaTest extends TestCase
 {
-    public function testFindIndexNames()
+    public function testFindIndexNames(): void
     {
         $schema = $this->getConnection()->getSchema();
 
@@ -19,7 +19,7 @@ class SchemaTest extends TestCase
         $this->assertContains('yii2_test_rt_index', $indexes);
     }
 
-    public function testGetIndexSchemas()
+    public function testGetIndexSchemas(): void
     {
         $schema = $this->getConnection()->getSchema();
 
@@ -30,12 +30,12 @@ class SchemaTest extends TestCase
         }
     }
 
-    public function testGetNonExistingIndexSchema()
+    public function testGetNonExistingIndexSchema(): void
     {
         $this->assertNull($this->getConnection()->getSchema()->getIndexSchema('non_existing_index'));
     }
 
-    public function testSchemaRefresh()
+    public function testSchemaRefresh(): void
     {
         $schema = $this->getConnection()->getSchema();
 
@@ -46,7 +46,7 @@ class SchemaTest extends TestCase
         $this->assertEquals($noCacheIndex, $cachedIndex);
     }
 
-    public function testGetPDOType()
+    public function testGetPDOType(): void
     {
         $values = [
             [null, \PDO::PARAM_NULL],
@@ -68,7 +68,7 @@ class SchemaTest extends TestCase
         fclose($fp);
     }
 
-    public function testIndexType()
+    public function testIndexType(): void
     {
         $schema = $this->getConnection()->getSchema();
 
@@ -84,7 +84,7 @@ class SchemaTest extends TestCase
     /**
      * @see https://github.com/yiisoft/yii2-sphinx/issues/45
      */
-    public function testGetSchemaPrimaryKey()
+    public function testGetSchemaPrimaryKey(): void
     {
         /* @var $indexSchema \yii\sphinx\IndexSchema */
         $indexSchema = $this->getConnection()->getSchema()->getIndexSchema('yii2_test_item_index');

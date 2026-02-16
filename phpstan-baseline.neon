@@ -1,0 +1,2611 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: src/ActiveDataProvider.php
+
+		-
+			message: '#^Cannot call method getOrders\(\) on yii\\data\\Sort\|true\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/ActiveDataProvider.php
+
+		-
+			message: '#^Class yii\\sphinx\\ActiveDataProvider has PHPDoc tag @property for property \$facets with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveDataProvider.php
+
+		-
+			message: '#^Class yii\\sphinx\\ActiveDataProvider has PHPDoc tag @property for property \$meta with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveDataProvider.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveDataProvider\:\:getFacet\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveDataProvider.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveDataProvider\:\:getFacets\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveDataProvider.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveDataProvider\:\:getMeta\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveDataProvider.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveDataProvider\:\:prepareModels\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveDataProvider.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveDataProvider\:\:setFacets\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/ActiveDataProvider.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveDataProvider\:\:setFacets\(\) has parameter \$facets with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveDataProvider.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveDataProvider\:\:setMeta\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/ActiveDataProvider.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveDataProvider\:\:setMeta\(\) has parameter \$meta with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveDataProvider.php
+
+		-
+			message: '#^Parameter \#1 \$db of method yii\\sphinx\\Query\:\:search\(\) expects yii\\sphinx\\Connection\|null, array\|string\|yii\\db\\Connection\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/ActiveDataProvider.php
+
+		-
+			message: '#^Parameter \#2 \$db of method yii\\db\\Query\:\:count\(\) expects yii\\db\\Connection\|null, array\|string\|yii\\db\\Connection\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/ActiveDataProvider.php
+
+		-
+			message: '#^Property yii\\sphinx\\ActiveDataProvider\:\:\$_facets type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveDataProvider.php
+
+		-
+			message: '#^Property yii\\sphinx\\ActiveDataProvider\:\:\$_meta type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveDataProvider.php
+
+		-
+			message: '#^Cannot call method createCommand\(\) on array\|string\|yii\\sphinx\\Connection\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/ActiveFixture.php
+
+		-
+			message: '#^Cannot call method getSchema\(\) on array\|string\|yii\\sphinx\\Connection\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/ActiveFixture.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveFixture\:\:getData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveFixture.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveFixture\:\:init\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/ActiveFixture.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveFixture\:\:load\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/ActiveFixture.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveFixture\:\:resetIndex\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/ActiveFixture.php
+
+		-
+			message: '#^Parameter \#1 \$path of function dirname expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/ActiveFixture.php
+
+		-
+			message: '#^Property yii\\sphinx\\ActiveFixture\:\:\$_index \(yii\\sphinx\\IndexSchema\) does not accept yii\\sphinx\\IndexSchema\|null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/ActiveFixture.php
+
+		-
+			message: '#^Property yii\\sphinx\\ActiveFixture\:\:\$db type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveFixture.php
+
+		-
+			message: '#^Property yii\\sphinx\\ActiveFixture\:\:\$indexName \(string\) in isset\(\) is not nullable\.$#'
+			identifier: isset.property
+			count: 1
+			path: src/ActiveFixture.php
+
+		-
+			message: '#^Property yii\\test\\BaseActiveFixture\:\:\$modelClass \(string\) in isset\(\) is not nullable\.$#'
+			identifier: isset.property
+			count: 1
+			path: src/ActiveFixture.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 1
+			path: src/ActiveFixture.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/ActiveFixture.php
+
+		-
+			message: '#^Call to an undefined static method yii\\db\\ActiveRecordInterface\:\:indexName\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: src/ActiveQuery.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveQuery\:\:__construct\(\) has parameter \$config with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveQuery.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveQuery\:\:__construct\(\) has parameter \$modelClass with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveQuery.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveQuery\:\:callSnippets\(\) has parameter \$source with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveQuery.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveQuery\:\:callSnippets\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveQuery.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveQuery\:\:fetchSnippetSourceFromModels\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveQuery.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveQuery\:\:init\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/ActiveQuery.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveQuery\:\:one\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveQuery.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveQuery\:\:populate\(\) has parameter \$rows with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveQuery.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveQuery\:\:populate\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveQuery.php
+
+		-
+			message: '#^Parameter \#1 \$connection of method yii\\sphinx\\Query\:\:setConnection\(\) expects yii\\sphinx\\Connection, yii\\sphinx\\Connection\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/ActiveQuery.php
+
+		-
+			message: '#^Property yii\\sphinx\\ActiveQuery\:\:\$modelClass \(class\-string\<yii\\db\\ActiveRecordInterface\>\) does not accept array\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/ActiveQuery.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:attributes\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:callKeywords\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:callSnippets\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:callSnippets\(\) has parameter \$source with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:callSnippets\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:callSnippets\(\) should return array\|string but returns int\|string\|false\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:deleteAll\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:deleteAll\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:fetchSnippet\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:fetchSnippet\(\) should return string but returns array\|string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:findBySql\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:getDb\(\) should return yii\\sphinx\\Connection but returns object\.$#'
+			identifier: return.type
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:getSnippet\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:insert\(\) has parameter \$attributes with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:insertInternal\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:insertInternal\(\) has parameter \$attributes with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:populateRecord\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:populateRecord\(\) has parameter \$row with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:setSnippet\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:transactions\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:update\(\) has parameter \$attributeNames with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:updateAll\(\) has parameter \$attributes with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:updateAll\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:updateAll\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Method yii\\sphinx\\ActiveRecord\:\:updateInternal\(\) has parameter \$attributes with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between yii\\sphinx\\IndexSchema and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
+			message: '#^Call to preg_quote\(\) is missing delimiter / to be effective\.$#'
+			identifier: argument.invalidPregQuote
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Cannot call method prepare\(\) on PDO\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:addForeignKey\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:addForeignKey\(\) has parameter \$refColumns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:addPrimaryKey\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:batchInsert\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:batchInsert\(\) has parameter \$rows with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:batchReplace\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:batchReplace\(\) has parameter \$rows with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:bindValues\(\) has parameter \$values with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:callSnippets\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:callSnippets\(\) has parameter \$source with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:createIndex\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:createTable\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:parseFloatParams\(\) should return string but returns string\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:prepare\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:replace\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:update\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:update\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:update\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Command\:\:update\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Parameter \#3 \$code of class yii\\db\\Exception constructor expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Parameter \#3 \$subject of function preg_replace expects array\<float\|int\|string\>\|string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Property yii\\sphinx\\Command\:\:\$floatParams type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Command.php
+
+		-
+			message: '#^Method yii\\sphinx\\Connection\:\:createCommand\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Connection.php
+
+		-
+			message: '#^Method yii\\sphinx\\Connection\:\:getIndexSchema\(\) should return yii\\sphinx\\IndexSchema but returns yii\\sphinx\\IndexSchema\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Connection.php
+
+		-
+			message: '#^Property yii\\sphinx\\Connection\:\:\$schemaMap type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Connection.php
+
+		-
+			message: '#^Class yii\\sphinx\\IndexSchema has PHPDoc tag @property\-read for property \$columnNames with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IndexSchema.php
+
+		-
+			message: '#^Method yii\\sphinx\\IndexSchema\:\:getColumn\(\) should return yii\\sphinx\\ColumnSchema but returns yii\\sphinx\\ColumnSchema\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/IndexSchema.php
+
+		-
+			message: '#^Method yii\\sphinx\\IndexSchema\:\:getColumnNames\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/IndexSchema.php
+
+		-
+			message: '#^Method yii\\sphinx\\IndexSchema\:\:setIsRuntime\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/IndexSchema.php
+
+		-
+			message: '#^Instanceof between array\|string and yii\\db\\Expression will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:__construct\(\) has parameter \$config with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildAndMatch\(\) has parameter \$operands with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildAndMatch\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildHashMatch\(\) has parameter \$match with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildHashMatch\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildIgnoreMatch\(\) has parameter \$operands with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildIgnoreMatch\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildMatch\(\) has parameter \$match with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildMatch\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildMatchValue\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildMatchValue\(\) has parameter \$value with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildMultipleMatch\(\) has parameter \$operands with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildMultipleMatch\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildProximityMatch\(\) has parameter \$operands with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildProximityMatch\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildSimpleMatch\(\) has parameter \$operands with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildSimpleMatch\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildZoneMatch\(\) has parameter \$operands with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:buildZoneMatch\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:parseParams\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchBuilder\:\:parseParams\(\) should return string but returns string\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Parameter \#1 \$match of method yii\\sphinx\\MatchBuilder\:\:buildMatch\(\) expects array\|string, array\<mixed, mixed\>\|object given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Parameter \#3 \$subject of function preg_replace expects array\<float\|int\|string\>\|string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Property yii\\sphinx\\MatchBuilder\:\:\$matchBuilders type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Property yii\\sphinx\\MatchBuilder\:\:\$matchOperators type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchBuilder.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchExpression\:\:__construct\(\) has parameter \$config with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchExpression\:\:__construct\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchExpression\:\:addParams\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchExpression\:\:andFilterMatch\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchExpression\:\:andMatch\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchExpression\:\:andMatch\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchExpression\:\:filterCondition\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchExpression\:\:filterCondition\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchExpression\:\:filterMatch\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchExpression\:\:match\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchExpression\:\:match\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchExpression\:\:orFilterMatch\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchExpression\:\:orMatch\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchExpression\:\:orMatch\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Method yii\\sphinx\\MatchExpression\:\:params\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Property yii\\sphinx\\MatchExpression\:\:\$match \(array\|string\|yii\\db\\Expression\) does not accept string\|null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Property yii\\sphinx\\MatchExpression\:\:\$match type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Property yii\\sphinx\\MatchExpression\:\:\$params type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MatchExpression.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 2
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:addFacets\(\) has parameter \$facets with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:addOptions\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:addWithin\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:callSnippets\(\) has parameter \$source with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:callSnippets\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:callSnippetsInternal\(\) has parameter \$source with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:callSnippetsInternal\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:defaultConnection\(\) should return yii\\sphinx\\Connection but returns object\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:facets\(\) has parameter \$facets with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:fillUpSnippets\(\) has parameter \$rows with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:innerJoin\(\) has parameter \$on with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:innerJoin\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:innerJoin\(\) has parameter \$table with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:join\(\) has parameter \$on with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:join\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:join\(\) has parameter \$table with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:leftJoin\(\) has parameter \$on with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:leftJoin\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:leftJoin\(\) has parameter \$table with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:one\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:one\(\) should return array\|bool but returns yii\\sphinx\\ActiveRecord\|false\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:options\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:populate\(\) has parameter \$rows with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:populate\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:queryScalar\(\) should return bool\|string\|null but returns int\|string\|false\|null\.$#'
+			identifier: return.type
+			count: 2
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:rightJoin\(\) has parameter \$on with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:rightJoin\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:rightJoin\(\) has parameter \$table with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:search\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:snippetOptions\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Method yii\\sphinx\\Query\:\:within\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Offset 0 might not exist on array\|null\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Parameter \#1 \$arr1 of function array_merge expects array, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Parameter \#1 \$connection of method yii\\sphinx\\Query\:\:setConnection\(\) expects yii\\sphinx\\Connection, yii\\sphinx\\Connection\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Parameter \#1 \$db of method yii\\sphinx\\Query\:\:createCommand\(\) expects yii\\sphinx\\Connection\|null, yii\\db\\Connection\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Property yii\\sphinx\\Query\:\:\$facets type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Property yii\\sphinx\\Query\:\:\$match \(string\|yii\\db\\Expression\) does not accept string\|yii\\db\\Expression\|yii\\sphinx\\MatchExpression\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Property yii\\sphinx\\Query\:\:\$options type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Property yii\\sphinx\\Query\:\:\$snippetOptions type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Property yii\\sphinx\\Query\:\:\$within \(string\) does not accept array\.$#'
+			identifier: assign.propertyType
+			count: 2
+			path: src/Query.php
+
+		-
+			message: '#^Property yii\\sphinx\\Query\:\:\$within \(string\) does not accept array\<mixed, mixed\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between string\|yii\\db\\Expression and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Access to an undefined property yii\\db\\Query\:\:\$facets\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Access to an undefined property yii\\db\\Query\:\:\$groupLimit\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Access to an undefined property yii\\db\\Query\:\:\$match\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Access to an undefined property yii\\db\\Query\:\:\$options\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Access to an undefined property yii\\db\\Query\:\:\$showMeta\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Access to an undefined property yii\\db\\Query\:\:\$within\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Argument of an invalid type array\|false supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Call to an undefined static method yii\\db\\ActiveRecordInterface\:\:indexName\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Call to function ctype_digit\(\) with \*NEVER\* will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 3
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Call to function is_array\(\) with non\-empty\-array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Call to function is_int\(\) with int will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 3
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Call to function is_string\(\) with int will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 2
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Call to function is_string\(\) with int\<min, 0\> will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Cannot access offset \(int\|string\) on non\-empty\-array\|false\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Instanceof between array\|string and yii\\db\\Expression will always evaluate to false\.$#'
+			identifier: instanceof.alwaysFalse
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:__construct\(\) has parameter \$config with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:batchInsert\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:batchInsert\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:batchInsert\(\) has parameter \$rows with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:batchReplace\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:batchReplace\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:batchReplace\(\) has parameter \$rows with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:build\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:build\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildAndCondition\(\) has parameter \$operands with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildAndCondition\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildBetweenCondition\(\) has parameter \$operands with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildBetweenCondition\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildColumns\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildColumns\(\) should return string but returns string\|false\.$#'
+			identifier: return.type
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildCompositeInCondition\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildCompositeInCondition\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildCompositeInCondition\(\) has parameter \$values with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildCondition\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildCondition\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildFacets\(\) has parameter \$facets with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildFacets\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildFrom\(\) has parameter \$indexes with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildFrom\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildGroupBy\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildHashCondition\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildHashCondition\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildHaving\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildHaving\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildInCondition\(\) has parameter \$operands with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildInCondition\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildLikeCondition\(\) has parameter \$operands with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildLikeCondition\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildMatch\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildNotCondition\(\) has parameter \$operands with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildNotCondition\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildOption\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildOption\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildOrderBy\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildOrderByAndLimit\(\) has parameter \$orderBy with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildSelect\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildSelect\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildSelectFields\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildSelectFields\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildShowMeta\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildSimpleCondition\(\) has parameter \$operands with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildSimpleCondition\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildWhere\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildWhere\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:buildWithin\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:callKeywords\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:callSnippets\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:callSnippets\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:callSnippets\(\) has parameter \$source with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:composeColumnValue\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:createTable\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:delete\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:delete\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:generateBatchInsertReplace\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:generateBatchInsertReplace\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:generateBatchInsertReplace\(\) has parameter \$rows with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:generateInsertReplace\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:generateInsertReplace\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:getIndexSchemas\(\) has parameter \$indexes with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:insert\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:insert\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:replace\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:replace\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:update\(\) has parameter \$columns with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:update\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:update\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Method yii\\sphinx\\QueryBuilder\:\:update\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Parameter \#1 \$builder of method yii\\db\\Query\:\:prepare\(\) expects yii\\db\\QueryBuilder, \$this\(yii\\sphinx\\QueryBuilder\) given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Parameter \#1 \$columns of method yii\\sphinx\\QueryBuilder\:\:buildGroupBy\(\) expects array, array\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Parameter \#1 \$columns of method yii\\sphinx\\QueryBuilder\:\:buildOrderBy\(\) expects array, array\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Parameter \#1 \$columns of method yii\\sphinx\\QueryBuilder\:\:buildSelect\(\) expects array, array\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Parameter \#1 \$indexes of method yii\\sphinx\\QueryBuilder\:\:buildFrom\(\) expects array, array\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Parameter \#1 \$indexes of method yii\\sphinx\\QueryBuilder\:\:buildHaving\(\) expects array\<string\>, array\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Parameter \#1 \$indexes of method yii\\sphinx\\QueryBuilder\:\:buildWhere\(\) expects array\<string\>, array\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Parameter \#1 \$limit of method yii\\sphinx\\QueryBuilder\:\:buildLimit\(\) expects int, int\|yii\\db\\ExpressionInterface\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Parameter \#2 \$condition of method yii\\sphinx\\QueryBuilder\:\:buildHaving\(\) expects array\|string, array\|string\|yii\\db\\ExpressionInterface\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Parameter \#2 \$condition of method yii\\sphinx\\QueryBuilder\:\:buildWhere\(\) expects array\|string, array\|string\|yii\\db\\ExpressionInterface\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Parameter \#2 \$offset of method yii\\sphinx\\QueryBuilder\:\:buildLimit\(\) expects int, int\|yii\\db\\ExpressionInterface\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Parameter \#2 \$params of method yii\\sphinx\\QueryBuilder\:\:buildSelect\(\) expects array, array\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$args of function array_merge expects array, array\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Parameter \#3 \$columns of method yii\\sphinx\\QueryBuilder\:\:buildCompositeInCondition\(\) expects array, array\<mixed, mixed\>\|Countable\|Traversable given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Parameter \#4 \$values of method yii\\sphinx\\QueryBuilder\:\:buildCompositeInCondition\(\) expects array, array\|Traversable given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Property yii\\sphinx\\QueryBuilder\:\:\$conditionBuilders type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 4
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between \*NEVER\* and ''0'' will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between yii\\sphinx\\ColumnSchema and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between yii\\sphinx\\IndexSchema and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 4
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between array\|string and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/QueryBuilder.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Cannot call method quote\(\) on PDO\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Class yii\\sphinx\\Schema has PHPDoc tag @property\-read for property \$indexTypes with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Method yii\\sphinx\\Schema\:\:applyDefaultColumns\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Method yii\\sphinx\\Schema\:\:findIndexes\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Method yii\\sphinx\\Schema\:\:getIndexTypes\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Method yii\\sphinx\\Schema\:\:initIndexesInfo\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Method yii\\sphinx\\Schema\:\:loadColumnSchema\(\) has parameter \$info with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Method yii\\sphinx\\Schema\:\:refresh\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Method yii\\sphinx\\Schema\:\:resolveIndexNames\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Method yii\\sphinx\\Schema\:\:resolveIndexType\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Parameter \#3 \$code of class yii\\db\\Exception constructor expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Parameter \#3 \$subject of function str_replace expects array\<string\>\|string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Property yii\\sphinx\\Schema\:\:\$_indexNames \(array\) in isset\(\) is not nullable\.$#'
+			identifier: isset.property
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Property yii\\sphinx\\Schema\:\:\$_indexNames type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Property yii\\sphinx\\Schema\:\:\$_indexTypes \(array\) in isset\(\) is not nullable\.$#'
+			identifier: isset.property
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Property yii\\sphinx\\Schema\:\:\$_indexTypes type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Property yii\\sphinx\\Schema\:\:\$_indexes type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Property yii\\sphinx\\Schema\:\:\$typeMap type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Method yii\\sphinx\\gii\\model\\Generator\:\:autoCompleteData\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Method yii\\sphinx\\gii\\model\\Generator\:\:autoCompleteData\(\) should return array\<array\> but returns array\<string, Closure\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Method yii\\sphinx\\gii\\model\\Generator\:\:generateLabels\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Method yii\\sphinx\\gii\\model\\Generator\:\:generateRules\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Method yii\\sphinx\\gii\\model\\Generator\:\:getDbConnection\(\) should return yii\\sphinx\\Connection but returns object\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Method yii\\sphinx\\gii\\model\\Generator\:\:getIndexNames\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Method yii\\sphinx\\gii\\model\\Generator\:\:hints\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Method yii\\sphinx\\gii\\model\\Generator\:\:requiredTemplates\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Method yii\\sphinx\\gii\\model\\Generator\:\:stickyAttributes\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Method yii\\sphinx\\gii\\model\\Generator\:\:validateDb\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Method yii\\sphinx\\gii\\model\\Generator\:\:validateIndexName\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Method yii\\sphinx\\gii\\model\\Generator\:\:validateModelClass\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Method yii\\sphinx\\gii\\model\\Generator\:\:validateNamespace\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Parameter \#1 \$table of method yii\\sphinx\\gii\\model\\Generator\:\:generateLabels\(\) expects yii\\db\\TableSchema, yii\\sphinx\\IndexSchema given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Property yii\\sphinx\\gii\\model\\Generator\:\:\$_classNames has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Property yii\\sphinx\\gii\\model\\Generator\:\:\$_indexNames has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Property yii\\sphinx\\gii\\model\\Generator\:\:\$baseClass has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Property yii\\sphinx\\gii\\model\\Generator\:\:\$db has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Property yii\\sphinx\\gii\\model\\Generator\:\:\$indexName has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Property yii\\sphinx\\gii\\model\\Generator\:\:\$modelClass has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Property yii\\sphinx\\gii\\model\\Generator\:\:\$ns has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Property yii\\sphinx\\gii\\model\\Generator\:\:\$useIndexPrefix has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between yii\\sphinx\\Connection and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between yii\\sphinx\\Connection and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Variable \$className might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: src/gii/model/default/model.php
+
+		-
+			message: '#^Variable \$generator might not be defined\.$#'
+			identifier: variable.undefined
+			count: 6
+			path: src/gii/model/default/model.php
+
+		-
+			message: '#^Variable \$indexName might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: src/gii/model/default/model.php
+
+		-
+			message: '#^Variable \$indexSchema might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: src/gii/model/default/model.php
+
+		-
+			message: '#^Variable \$labels might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: src/gii/model/default/model.php
+
+		-
+			message: '#^Variable \$rules might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: src/gii/model/default/model.php
+
+		-
+			message: '#^Variable \$form might not be defined\.$#'
+			identifier: variable.undefined
+			count: 8
+			path: src/gii/model/form.php
+
+		-
+			message: '#^Variable \$generator might not be defined\.$#'
+			identifier: variable.undefined
+			count: 8
+			path: src/gii/model/form.php
+
+		-
+			message: '#^Cannot access offset ''row1'' on yii\\test\\Fixture\|null\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: tests/ActiveFixtureTest.php
+
+		-
+			message: '#^Cannot access offset ''row2'' on yii\\test\\Fixture\|null\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: tests/ActiveFixtureTest.php
+
+		-
+			message: '#^Cannot call method getModel\(\) on yii\\test\\Fixture\|null\.$#'
+			identifier: method.nonObject
+			count: 5
+			path: tests/ActiveFixtureTest.php
+
+		-
+			message: '#^Parameter \#1 \$object of function get_class expects object, yii\\test\\Fixture\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/ActiveFixtureTest.php
+
+		-
+			message: '#^Parameter \#1 \$var of function count expects array\|Countable, yii\\test\\Fixture\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/ActiveFixtureTest.php
+
+		-
+			message: '#^Cannot access property \$id on yii\\db\\ActiveRecordInterface\|false\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: tests/ActiveQueryTest.php
+
+		-
+			message: '#^Access to an undefined property yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\:\:\$author_id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: tests/ActiveRecordTest.php
+
+		-
+			message: '#^Access to an undefined property yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 4
+			path: tests/ActiveRecordTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 3
+			path: tests/ActiveRecordTest.php
+
+		-
+			message: '#^Cannot access offset ''add_date'' on array\|yii\\db\\ActiveRecordInterface\|null\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/ActiveRecordTest.php
+
+		-
+			message: '#^Cannot access property \$category on yiiunit\\extensions\\sphinx\\data\\ar\\RtIndex\|null\.$#'
+			identifier: property.nonObject
+			count: 3
+			path: tests/ActiveRecordTest.php
+
+		-
+			message: '#^Cannot access property \$content on yiiunit\\extensions\\sphinx\\data\\ar\\RtIndex\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: tests/ActiveRecordTest.php
+
+		-
+			message: '#^Cannot access property \$custom_column on array\|yii\\db\\ActiveRecordInterface\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: tests/ActiveRecordTest.php
+
+		-
+			message: '#^Cannot access property \$id on array\|yii\\db\\ActiveRecordInterface\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: tests/ActiveRecordTest.php
+
+		-
+			message: '#^Cannot access property \$title on yiiunit\\extensions\\sphinx\\data\\ar\\RtIndex\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: tests/ActiveRecordTest.php
+
+		-
+			message: '#^Cannot access property \$type_id on yiiunit\\extensions\\sphinx\\data\\ar\\RtIndex\|null\.$#'
+			identifier: property.nonObject
+			count: 4
+			path: tests/ActiveRecordTest.php
+
+		-
+			message: '#^Cannot call method delete\(\) on yiiunit\\extensions\\sphinx\\data\\ar\\RtIndex\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/ActiveRecordTest.php
+
+		-
+			message: '#^Cannot call method save\(\) on yiiunit\\extensions\\sphinx\\data\\ar\\RtIndex\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: tests/ActiveRecordTest.php
+
+		-
+			message: '#^Instanceof between yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex and yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 2
+			path: tests/ActiveRecordTest.php
+
+		-
+			message: '#^Instanceof between yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndexQuery and yii\\sphinx\\ActiveQuery will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: tests/ActiveRecordTest.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, array\|string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/ActiveRecordTest.php
+
+		-
+			message: '#^Access to an undefined property yii\\db\\ActiveRecordInterface\:\:\$sourceCompositeLink\.$#'
+			identifier: property.notFound
+			count: 2
+			path: tests/ActiveRelationTest.php
+
+		-
+			message: '#^Access to an undefined property yiiunit\\extensions\\sphinx\\data\\ar\\ArticleDb\:\:\$index\.$#'
+			identifier: property.notFound
+			count: 2
+			path: tests/ActiveRelationTest.php
+
+		-
+			message: '#^Access to an undefined property yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: tests/ActiveRelationTest.php
+
+		-
+			message: '#^Call to an undefined method yii\\db\\ActiveRecordInterface\:\:isRelationPopulated\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/ActiveRelationTest.php
+
+		-
+			message: '#^Cannot access property \$id on yiiunit\\extensions\\sphinx\\data\\ar\\ArticleDb\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: tests/ActiveRelationTest.php
+
+		-
+			message: '#^Cannot access property \$index on yiiunit\\extensions\\sphinx\\data\\ar\\ArticleDb\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: tests/ActiveRelationTest.php
+
+		-
+			message: '#^Cannot access property \$relatedRecords on yiiunit\\extensions\\sphinx\\data\\ar\\ArticleDb\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: tests/ActiveRelationTest.php
+
+		-
+			message: '#^Cannot call method isRelationPopulated\(\) on yiiunit\\extensions\\sphinx\\data\\ar\\ArticleDb\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: tests/ActiveRelationTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''yii\\\\db\\\\BatchQueryResult'' and yii\\db\\BatchQueryResult will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/BatchQueryResultTest.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\ColumnSchemaTest\:\:dataProviderTypeCast\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/ColumnSchemaTest.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\ColumnSchemaTest\:\:testTypeCast\(\) has parameter \$expectedResult with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: tests/ColumnSchemaTest.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\ColumnSchemaTest\:\:testTypeCast\(\) has parameter \$phpType with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: tests/ColumnSchemaTest.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\ColumnSchemaTest\:\:testTypeCast\(\) has parameter \$type with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: tests/ColumnSchemaTest.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\ColumnSchemaTest\:\:testTypeCast\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: tests/ColumnSchemaTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/CommandTest.php
+
+		-
+			message: '#^Cannot access offset ''category_id'' on array\|false\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: tests/CommandTest.php
+
+		-
+			message: '#^Cannot access offset ''id'' on array\|false\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: tests/CommandTest.php
+
+		-
+			message: '#^Instanceof between yii\\db\\DataReader and yii\\db\\DataReader will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: tests/CommandTest.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, int\|string\|false\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/CommandTest.php
+
+		-
+			message: '#^Access to an undefined property yii\\db\\ActiveRecordInterface\:\:\$source\.$#'
+			identifier: property.notFound
+			count: 2
+			path: tests/ExternalActiveRelationTest.php
+
+		-
+			message: '#^Access to an undefined property yii\\db\\ActiveRecordInterface\:\:\$tag\.$#'
+			identifier: property.notFound
+			count: 2
+			path: tests/ExternalActiveRelationTest.php
+
+		-
+			message: '#^Access to an undefined property yii\\db\\ActiveRecordInterface\:\:\$tags\.$#'
+			identifier: property.notFound
+			count: 1
+			path: tests/ExternalActiveRelationTest.php
+
+		-
+			message: '#^Call to an undefined method yii\\db\\ActiveRecordInterface\:\:isRelationPopulated\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: tests/ExternalActiveRelationTest.php
+
+		-
+			message: '#^Cannot access property \$relatedRecords on yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: tests/ExternalActiveRelationTest.php
+
+		-
+			message: '#^Cannot access property \$source on yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: tests/ExternalActiveRelationTest.php
+
+		-
+			message: '#^Cannot access property \$tag on yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\|null\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: tests/ExternalActiveRelationTest.php
+
+		-
+			message: '#^Cannot access property \$tags on yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\|null\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: tests/ExternalActiveRelationTest.php
+
+		-
+			message: '#^Cannot call method isRelationPopulated\(\) on yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\|null\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: tests/ExternalActiveRelationTest.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\QueryBuilderTest\:\:dataProviderBuildCondition\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/QueryBuilderTest.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\QueryBuilderTest\:\:testBuildCondition\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/QueryBuilderTest.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\QueryBuilderTest\:\:testBuildCondition\(\) has parameter \$expectedParams with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/QueryBuilderTest.php
+
+		-
+			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: tests/QueryTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/QueryTest.php
+
+		-
+			message: '#^Cannot access offset ''author'' on array\|bool\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: tests/QueryTest.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\QueryTest\:\:dataProviderMatchSpecialCharValue\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/QueryTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''yii\\\\sphinx…'' and yii\\sphinx\\IndexSchema will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/SchemaTest.php
+
+		-
+			message: '#^Cannot access property \$isRt on yii\\sphinx\\IndexSchema\|null\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: tests/SchemaTest.php
+
+		-
+			message: '#^Cannot access property \$primaryKey on yii\\sphinx\\IndexSchema\|null\.$#'
+			identifier: property.nonObject
+			count: 3
+			path: tests/SchemaTest.php
+
+		-
+			message: '#^Cannot access property \$type on yii\\sphinx\\IndexSchema\|null\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: tests/SchemaTest.php
+
+		-
+			message: '#^Parameter \#1 \$fp of function fclose expects resource, resource\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/SchemaTest.php
+
+		-
+			message: '#^Cannot call method exec\(\) on PDO\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 2
+			path: tests/TestCase.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\TestCase\:\:destroyApplication\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\TestCase\:\:getVendorPath\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\TestCase\:\:mockApplication\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\TestCase\:\:mockApplication\(\) has parameter \$config with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\TestCase\:\:truncateIndex\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^Parameter \#2 \$str of function explode expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^Property yiiunit\\extensions\\sphinx\\TestCase\:\:\$dbConfig type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^Property yiiunit\\extensions\\sphinx\\TestCase\:\:\$params has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^Property yiiunit\\extensions\\sphinx\\TestCase\:\:\$sphinxConfig type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^Right side of && is always true\.$#'
+			identifier: booleanAnd.rightAlwaysTrue
+			count: 2
+			path: tests/TestCase.php
+
+		-
+			message: '#^Static property yii\\BaseYii\<yii\\web\\IdentityInterface\>\:\:\$app \(yii\\console\\Application\|yii\\web\\Application\<yii\\web\\IdentityInterface\>\) does not accept null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/TestCase.php
+
+		-
+			message: '#^Property yiiunit\\extensions\\sphinx\\data\\ar\\ActiveRecord\:\:\$db has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: tests/data/ar/ActiveRecord.php
+
+		-
+			message: '#^Property yiiunit\\extensions\\sphinx\\data\\ar\\ActiveRecordDb\:\:\$db has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: tests/data/ar/ActiveRecordDb.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\data\\ar\\ArticleDb\:\:getIndex\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/data/ar/ArticleDb.php
+
+		-
+			message: '#^Parameter \#1 \$modelClass of class yii\\sphinx\\ActiveQuery constructor expects array, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/data/ar/ArticleDb.php
+
+		-
+			message: '#^Access to an undefined property yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\:\:\$source\.$#'
+			identifier: property.notFound
+			count: 1
+			path: tests/data/ar/ArticleIndex.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\:\:getSource\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/data/ar/ArticleIndex.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\:\:getSourceCompositeLink\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/data/ar/ArticleIndex.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\:\:getTags\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/data/ar/ArticleIndex.php
+
+		-
+			message: '#^Parameter \#1 \$modelClass of class yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndexQuery constructor expects array, class\-string\<static\(yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\)\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/data/ar/ArticleIndex.php
+
+		-
+			message: '#^Property yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\:\:\$custom_column has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: tests/data/ar/ArticleIndex.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndexQuery\:\:favoriteAuthor\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/data/ar/ArticleIndexQuery.php
+
+		-
+			message: '#^Class yiiunit\\extensions\\sphinx\\data\\ar\\RtIndex has PHPDoc tag @property for property \$category with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/data/ar/RtIndex.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\data\\fixture\\MySphinxTestCase\:\:fixtures\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/data/fixture/MySphinxTestCase.php
+
+		-
+			message: '#^Method yiiunit\\extensions\\sphinx\\data\\fixture\\RtIndexFixture\:\:init\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/data/fixture/RtIndexFixture.php

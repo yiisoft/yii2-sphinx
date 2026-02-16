@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
@@ -30,13 +31,13 @@ class Schema extends BaseObject
     /**
      * The following are the supported abstract column data types.
      */
-    const TYPE_PK = 'pk';
-    const TYPE_STRING = 'string';
-    const TYPE_INTEGER = 'integer';
-    const TYPE_BIGINT = 'bigint';
-    const TYPE_FLOAT = 'float';
-    const TYPE_TIMESTAMP = 'timestamp';
-    const TYPE_BOOLEAN = 'boolean';
+    public const TYPE_PK = 'pk';
+    public const TYPE_STRING = 'string';
+    public const TYPE_INTEGER = 'integer';
+    public const TYPE_BIGINT = 'bigint';
+    public const TYPE_FLOAT = 'float';
+    public const TYPE_TIMESTAMP = 'timestamp';
+    public const TYPE_BOOLEAN = 'boolean';
 
     /**
      * @var Connection the Sphinx connection
@@ -381,7 +382,7 @@ class Schema extends BaseObject
      */
     public function quoteSimpleIndexName($name)
     {
-        return strpos($name, "`") !== false ? $name : "`" . $name . "`";
+        return strpos($name, '`') !== false ? $name : '`' . $name . '`';
     }
 
     /**
@@ -584,7 +585,7 @@ class Schema extends BaseObject
         if ($e instanceof Exception) {
             return $e;
         }
-        $message = $e->getMessage()  . "\nThe SQL being executed was: $rawSql";
+        $message = $e->getMessage() . "\nThe SQL being executed was: $rawSql";
         $errorInfo = $e instanceof \PDOException ? $e->errorInfo : null;
         return new Exception($message, $errorInfo, (int) $e->getCode(), $e);
     }

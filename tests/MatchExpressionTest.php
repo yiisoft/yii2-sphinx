@@ -6,7 +6,7 @@ use yii\sphinx\MatchExpression;
 
 class MatchExpressionTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $match = new MatchExpression('@name :name', ['name' => 'value']);
 
@@ -14,7 +14,7 @@ class MatchExpressionTest extends TestCase
         $this->assertEquals(['name' => 'value'], $match->params);
     }
 
-    public function testMatch()
+    public function testMatch(): void
     {
         $match = new MatchExpression();
 
@@ -31,7 +31,7 @@ class MatchExpressionTest extends TestCase
         $this->assertEquals([':content' => 'foo', ':name' => 'something', ':age' => '30'], $match->params);
     }
 
-    public function testParams()
+    public function testParams(): void
     {
         $match = new MatchExpression();
 
@@ -51,7 +51,7 @@ class MatchExpressionTest extends TestCase
     /**
      * @depends testMatch
      */
-    public function testFilterMatch()
+    public function testFilterMatch(): void
     {
         // should work with hash format
         $match = new MatchExpression();

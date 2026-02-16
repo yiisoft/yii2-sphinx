@@ -3,26 +3,26 @@
 namespace yiiunit\extensions\sphinx\data\fixture;
 
 use yii\test\FixtureTrait;
-use yiiunit\extensions\sphinx\data\fixture\RtIndexFixture;
+use yiiunit\extensions\sphinx\TestCase;
 
-class MySphinxTestCase
+class MySphinxTestCase extends TestCase
 {
     use FixtureTrait;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->unloadFixtures();
         $this->loadFixtures();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
-    public function fixtures()
+    public function fixtures(): array
     {
         return [
-            'runtimeIndex' => RtIndexFixture::className(),
+            'runtimeIndex' => RtIndexFixture::class,
         ];
     }
 }

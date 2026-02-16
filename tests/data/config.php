@@ -8,14 +8,14 @@
 
 $config = [
     'sphinx' => [
-        'dsn' => 'mysql:host=127.0.0.1;port=19306;',
+        'dsn' => 'mysql:host=sphinx;port=19306;',
         'username' => 'root',
         'password' => 'root',
     ],
     'db' => [
-        'dsn' => 'mysql:host=127.0.0.1;dbname=yiitest',
-        'username' => 'root',
-        'password' => 'root',
+        'dsn' => 'mysql:host=mysql;dbname=yiitest',
+        'username' => 'yiitest',
+        'password' => 'yiitest',
         'fixture' => __DIR__ . '/source.sql',
     ],
 ];
