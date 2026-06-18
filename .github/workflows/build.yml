@@ -17,6 +17,8 @@ on:
 
 name: build
 
+permissions:
+  contents: read
 jobs:
   tests:
     name: PHP ${{ matrix.php }}-${{ matrix.os }}
@@ -37,13 +39,15 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744
+        with:
+          persist-credentials: false
 
       - name: Run tests with phpunit
         run: make test v=${{ matrix.php }}
 
       - name: Upload coverage to Codecov.
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@04b047e8bb82a0c002c8312c1c880fbc6a999d45
         with:
           files: ./coverage.xml
           token: ${{ secrets.CODECOV_TOKEN }}
