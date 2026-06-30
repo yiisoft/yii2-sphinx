@@ -64,7 +64,12 @@ abstract class ActiveRecord extends BaseActiveRecord
      */
     public static function getDb()
     {
-        return \Yii::$app->get('sphinx');
+        $app = Yii::$app;
+        if ($app === null) {
+            throw new InvalidConfigException('The Sphinx connection can not be resolved because Yii::$app is not configured.');
+        }
+
+        return $app->get('sphinx');
     }
 
     /**
