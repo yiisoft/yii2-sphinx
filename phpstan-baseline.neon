@@ -2521,6 +2521,12 @@ parameters:
 			path: tests/TestCase.php
 
 		-
+			message: '#^Static property yii\\BaseYii\<yii\\web\\IdentityInterface\>\:\:\$app \(yii\\console\\Application\|yii\\web\\Application\<yii\\web\\IdentityInterface\>\) does not accept null\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/TestCase.php
+
+		-
 			message: '#^Property yiiunit\\extensions\\sphinx\\data\\ar\\ActiveRecord\:\:\$db has no type specified\.$#'
 			identifier: missingType.property
 			count: 1

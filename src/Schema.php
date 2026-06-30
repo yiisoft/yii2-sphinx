@@ -9,7 +9,6 @@
 namespace yii\sphinx;
 
 use yii\base\BaseObject;
-use yii\base\InvalidConfigException;
 use yii\caching\Cache;
 use Yii;
 use yii\caching\TagDependency;
@@ -135,7 +134,7 @@ class Schema extends BaseObject
 
         if ($db->enableSchemaCache && !in_array($name, $db->schemaCacheExclude, true)) {
             /* @var $cache Cache */
-            $cache = is_string($db->schemaCache) ? $this->getApplication()->get($db->schemaCache, false) : $db->schemaCache;
+            $cache = is_string($db->schemaCache) ? Yii::$app->get($db->schemaCache, false) : $db->schemaCache;
             if ($cache instanceof Cache) {
                 $key = $this->getCacheKey($name);
                 if ($refresh || ($index = $cache->get($key)) === false) {
@@ -301,26 +300,12 @@ class Schema extends BaseObject
     public function refresh()
     {
         /* @var $cache Cache */
-        $cache = is_string($this->db->schemaCache) ? $this->getApplication()->get($this->db->schemaCache, false) : $this->db->schemaCache;
+        $cache = is_string($this->db->schemaCache) ? Yii::$app->get($this->db->schemaCache, false) : $this->db->schemaCache;
         if ($this->db->enableSchemaCache && $cache instanceof Cache) {
             TagDependency::invalidate($cache, $this->getCacheTag());
         }
         $this->_indexNames = [];
         $this->_indexes = [];
-    }
-
-    /**
-     * @return \yii\base\Application
-     * @throws InvalidConfigException if the Yii application is not configured.
-     */
-    private function getApplication()
-    {
-        $app = Yii::$app;
-        if ($app === null) {
-            throw new InvalidConfigException('The schema cache component can not be resolved because Yii::$app is not configured.');
-        }
-
-        return $app;
     }
 
     /**

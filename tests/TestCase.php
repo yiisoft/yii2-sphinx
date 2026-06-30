@@ -112,19 +112,6 @@ class TestCase extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \yii\base\Application
-     */
-    protected function getApplication()
-    {
-        $app = \Yii::$app;
-        if ($app === null) {
-            throw new \RuntimeException('Yii application is not configured.');
-        }
-
-        return $app;
-    }
-
-    /**
      * @param bool $reset whether to clean up the test database
      * @param bool $open whether to open test database
      * @return \yii\sphinx\Connection

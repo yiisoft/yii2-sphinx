@@ -10,7 +10,6 @@ namespace yii\sphinx;
 
 use Yii;
 use yii\base\InvalidCallException;
-use yii\base\InvalidConfigException;
 use yii\base\NotSupportedException;
 use yii\db\Expression;
 
@@ -166,12 +165,7 @@ class Query extends \yii\db\Query
      */
     protected function defaultConnection()
     {
-        $app = Yii::$app;
-        if ($app === null) {
-            throw new InvalidConfigException('The Sphinx connection can not be resolved because Yii::$app is not configured.');
-        }
-
-        return $app->get('sphinx');
+        return Yii::$app->get('sphinx');
     }
 
     /**

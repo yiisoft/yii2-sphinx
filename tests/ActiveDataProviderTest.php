@@ -4,6 +4,7 @@ namespace yiiunit\extensions\sphinx;
 
 use yii\sphinx\ActiveDataProvider;
 use yii\sphinx\Query;
+use Yii;
 use yii\web\Request;
 use yiiunit\extensions\sphinx\data\ar\ActiveRecord;
 use yiiunit\extensions\sphinx\data\ar\ArticleIndex;
@@ -115,7 +116,7 @@ class ActiveDataProviderTest extends TestCase
     {
         $request = new Request();
         $request->setQueryParams(['page' => 2]);
-        $this->getApplication()->set('request', $request);
+        Yii::$app->set('request', $request);
 
         $query = (new Query())
             ->from('yii2_test_article_index')
@@ -142,7 +143,7 @@ class ActiveDataProviderTest extends TestCase
     {
         $request = new Request();
         $request->setQueryParams(['page' => 99999]);
-        $this->getApplication()->set('request', $request);
+        Yii::$app->set('request', $request);
 
         $query = (new Query())
             ->from('yii2_test_article_index')
