@@ -247,6 +247,12 @@ parameters:
 			path: src/ActiveQuery.php
 
 		-
+			message: '#^Cannot call method get\(\) on yii\\console\\Application\|yii\\web\\Application\<yii\\web\\IdentityInterface\>\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/ActiveRecord.php
+
+		-
 			message: '#^Method yii\\sphinx\\ActiveRecord\:\:attributes\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -862,6 +868,12 @@ parameters:
 			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 2
+			path: src/Query.php
+
+		-
+			message: '#^Cannot call method get\(\) on yii\\console\\Application\|yii\\web\\Application\<yii\\web\\IdentityInterface\>\|null\.$#'
+			identifier: method.nonObject
+			count: 1
 			path: src/Query.php
 
 		-
@@ -1743,7 +1755,7 @@ parameters:
 		-
 			message: '#^Result of && is always false\.$#'
 			identifier: booleanAnd.alwaysFalse
-			count: 4
+			count: 1
 			path: src/QueryBuilder.php
 
 		-
@@ -1774,6 +1786,12 @@ parameters:
 			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Cannot call method get\(\) on yii\\console\\Application\|yii\\web\\Application\<yii\\web\\IdentityInterface\>\|null\.$#'
+			identifier: method.nonObject
+			count: 2
 			path: src/Schema.php
 
 		-
@@ -1889,6 +1907,18 @@ parameters:
 			identifier: deadCode.unreachable
 			count: 1
 			path: src/Schema.php
+
+		-
+			message: '#^Cannot call method get\(\) on yii\\console\\Application\|yii\\web\\Application\<yii\\web\\IdentityInterface\>\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/gii/model/Generator.php
+
+		-
+			message: '#^Cannot call method has\(\) on yii\\console\\Application\|yii\\web\\Application\<yii\\web\\IdentityInterface\>\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/gii/model/Generator.php
 
 		-
 			message: '#^Method yii\\sphinx\\gii\\model\\Generator\:\:autoCompleteData\(\) return type has no value type specified in iterable type array\.$#'
@@ -2083,6 +2113,12 @@ parameters:
 			path: src/gii/model/form.php
 
 		-
+			message: '#^Cannot call method set\(\) on yii\\console\\Application\|yii\\web\\Application\<yii\\web\\IdentityInterface\>\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: tests/ActiveDataProviderTest.php
+
+		-
 			message: '#^Cannot access offset ''row1'' on yii\\test\\Fixture\|null\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 2
@@ -2098,6 +2134,12 @@ parameters:
 			message: '#^Cannot call method getModel\(\) on yii\\test\\Fixture\|null\.$#'
 			identifier: method.nonObject
 			count: 5
+			path: tests/ActiveFixtureTest.php
+
+		-
+			message: '#^Cannot call method set\(\) on yii\\console\\Application\|yii\\web\\Application\<yii\\web\\IdentityInterface\>\|null\.$#'
+			identifier: method.nonObject
+			count: 1
 			path: tests/ActiveFixtureTest.php
 
 		-
@@ -2518,12 +2560,6 @@ parameters:
 			message: '#^Right side of && is always true\.$#'
 			identifier: booleanAnd.rightAlwaysTrue
 			count: 2
-			path: tests/TestCase.php
-
-		-
-			message: '#^Static property yii\\BaseYii\<yii\\web\\IdentityInterface\>\:\:\$app \(yii\\console\\Application\|yii\\web\\Application\<yii\\web\\IdentityInterface\>\) does not accept null\.$#'
-			identifier: assign.propertyType
-			count: 1
 			path: tests/TestCase.php
 
 		-
