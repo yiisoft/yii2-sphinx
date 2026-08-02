@@ -193,6 +193,12 @@ parameters:
 			path: src/ActiveQuery.php
 
 		-
+			message: '#^Method yii\\sphinx\\ActiveQuery\:\:all\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/ActiveQuery.php
+
+		-
 			message: '#^Method yii\\sphinx\\ActiveQuery\:\:callSnippets\(\) has parameter \$source with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -937,6 +943,12 @@ parameters:
 			path: src/Query.php
 
 		-
+			message: '#^Method yii\\sphinx\\Query\:\:fillUpSnippets\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Query.php
+
+		-
 			message: '#^Method yii\\sphinx\\Query\:\:innerJoin\(\) has parameter \$on with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -993,12 +1005,6 @@ parameters:
 		-
 			message: '#^Method yii\\sphinx\\Query\:\:one\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: src/Query.php
-
-		-
-			message: '#^Method yii\\sphinx\\Query\:\:one\(\) should return array\|bool but returns yii\\sphinx\\ActiveRecord\|false\.$#'
-			identifier: return.type
 			count: 1
 			path: src/Query.php
 

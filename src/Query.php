@@ -486,7 +486,7 @@ class Query extends \yii\db\Query
      * Fills the query result rows with the snippets built from source determined by
      * [[snippetCallback]] result.
      * @param array $rows raw query result rows.
-     * @return array|ActiveRecord[] query result rows with filled up snippets.
+     * @return array query result rows with filled up snippets.
      */
     protected function fillUpSnippets($rows)
     {
