@@ -541,6 +541,12 @@ parameters:
 			path: src/Command.php
 
 		-
+			message: '#^Parameter \#2 \$errorInfo of class yii\\db\\Exception constructor expects array, array\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command.php
+
+		-
 			message: '#^Parameter \#3 \$code of class yii\\db\\Exception constructor expects string, int given\.$#'
 			identifier: argument.type
 			count: 1
@@ -1069,14 +1075,8 @@ parameters:
 			path: src/Query.php
 
 		-
-			message: '#^Offset 0 might not exist on array\|null\.$#'
+			message: '#^Offset 0 might not exist on array\|string\|null\.$#'
 			identifier: offsetAccess.notFound
-			count: 1
-			path: src/Query.php
-
-		-
-			message: '#^Parameter \#1 \$arr1 of function array_merge expects array, string given\.$#'
-			identifier: argument.type
 			count: 1
 			path: src/Query.php
 
@@ -1088,6 +1088,12 @@ parameters:
 
 		-
 			message: '#^Parameter \#1 \$db of method yii\\sphinx\\Query\:\:createCommand\(\) expects yii\\sphinx\\Connection\|null, yii\\db\\Connection\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Query.php
+
+		-
+			message: '#^Parameter \#1 \.\.\.\$arrays of function array_merge expects array, string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Query.php
@@ -1687,19 +1693,19 @@ parameters:
 			path: src/QueryBuilder.php
 
 		-
-			message: '#^Parameter \#1 \$indexes of method yii\\sphinx\\QueryBuilder\:\:buildFrom\(\) expects array, array\|null given\.$#'
+			message: '#^Parameter \#1 \$indexes of method yii\\sphinx\\QueryBuilder\:\:buildFrom\(\) expects array, array\|string\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/QueryBuilder.php
 
 		-
-			message: '#^Parameter \#1 \$indexes of method yii\\sphinx\\QueryBuilder\:\:buildHaving\(\) expects array\<string\>, array\|null given\.$#'
+			message: '#^Parameter \#1 \$indexes of method yii\\sphinx\\QueryBuilder\:\:buildHaving\(\) expects array\<string\>, array\|string\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/QueryBuilder.php
 
 		-
-			message: '#^Parameter \#1 \$indexes of method yii\\sphinx\\QueryBuilder\:\:buildWhere\(\) expects array\<string\>, array\|null given\.$#'
+			message: '#^Parameter \#1 \$indexes of method yii\\sphinx\\QueryBuilder\:\:buildWhere\(\) expects array\<string\>, array\|string\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/QueryBuilder.php
@@ -1735,7 +1741,7 @@ parameters:
 			path: src/QueryBuilder.php
 
 		-
-			message: '#^Parameter \#2 \.\.\.\$args of function array_merge expects array, array\|null given\.$#'
+			message: '#^Parameter \#2 \.\.\.\$arrays of function array_merge expects array, array\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/QueryBuilder.php
@@ -1857,6 +1863,12 @@ parameters:
 		-
 			message: '#^Method yii\\sphinx\\Schema\:\:resolveIndexType\(\) has no return type specified\.$#'
 			identifier: missingType.return
+			count: 1
+			path: src/Schema.php
+
+		-
+			message: '#^Parameter \#2 \$errorInfo of class yii\\db\\Exception constructor expects array, array\|null given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Schema.php
 
@@ -2155,7 +2167,7 @@ parameters:
 			path: tests/ActiveFixtureTest.php
 
 		-
-			message: '#^Parameter \#1 \$var of function count expects array\|Countable, yii\\test\\Fixture\|null given\.$#'
+			message: '#^Parameter \#1 \$value of function count expects array\|Countable, yii\\test\\Fixture\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/ActiveFixtureTest.php
@@ -2491,7 +2503,7 @@ parameters:
 			path: tests/SchemaTest.php
 
 		-
-			message: '#^Parameter \#1 \$fp of function fclose expects resource, resource\|false given\.$#'
+			message: '#^Parameter \#1 \$stream of function fclose expects resource, resource\|false given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/SchemaTest.php
@@ -2539,7 +2551,7 @@ parameters:
 			path: tests/TestCase.php
 
 		-
-			message: '#^Parameter \#2 \$str of function explode expects string, string\|false given\.$#'
+			message: '#^Parameter \#2 \$string of function explode expects string, string\|false given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/TestCase.php

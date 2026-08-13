@@ -1,6 +1,12 @@
 Yii Framework 2 sphinx extension Change Log
 ===========================================
 
+22.0 under development
+----------------------
+
+- Bug: Fix compatibility issues with Yii `22.0` and PHP `8.5` (terabytesoftw)
+
+
 3.0.0 under development
 ------------------------
 
