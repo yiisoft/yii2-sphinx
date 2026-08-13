@@ -18,32 +18,26 @@
         }
     ],
     "require": {
-        "php": ">=7.4",
-        "yiisoft/yii2": "~2.0.54",
+        "php": ">=8.3",
+        "yiisoft/yii2": "^22.0@dev",
         "ext-pdo": "*",
         "ext-pdo_mysql": "*"
     },
     "require-dev": {
-        "yiisoft/yii2-coding-standards": "~3.0",
-        "yiisoft/yii2-gii": "^2.2",
-        "phpunit/phpunit": "^9.6",
         "phpstan/phpstan": "^2.1",
-        "phpstan/phpstan-phpunit": "^2.0"
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.6",
+        "yiisoft/yii2-coding-standards": "~3.0",
+        "yiisoft/yii2-gii": "^22.0@dev"
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "yii\\sphinx\\": "src"
         }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.0.x-dev"
+    "autoload-dev": {
+        "psr-4": {
+            "yiiunit\\extensions\\sphinx\\": "tests"
         }
     },
     "config": {
@@ -51,5 +45,11 @@
         "allow-plugins": {
             "yiisoft/yii2-composer": true
         }
+    },
+    "scripts": {
+        "cs": "./vendor/bin/phpcs",
+        "cs-fix": "./vendor/bin/phpcbf",
+        "static": "./vendor/bin/phpstan --memory-limit=-1",
+        "tests": "./vendor/bin/phpunit"
     }
 }

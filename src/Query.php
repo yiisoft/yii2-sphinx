@@ -186,9 +186,9 @@ class Query extends \yii\db\Query
     /**
      * {@inheritdoc}
      */
-    public function populate($rows)
+    public function populate($rows, $db = null)
     {
-        return parent::populate($this->fillUpSnippets($rows));
+        return parent::populate($this->fillUpSnippets($rows), $db);
     }
 
     /**

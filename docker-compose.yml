@@ -3,7 +3,7 @@
 services:
 
   php:
-    image: "yiisoftware/yii2-php:${PHP_VERSION:-8.1}-apache"
+    image: "yiisoftware/yii2-php:${PHP_VERSION:-8.3}-apache"
     networks:
       - yii2-sphinx
     volumes:
@@ -45,15 +45,14 @@ services:
       - '19306:19306'
     volumes:
       - ./runtime/data:/opt/sphinx/index
-      - ./tests/data/sphinx-3.5.1.conf:/opt/sphinx/conf/sphinx.conf
+      - ./tests/data/sphinx-3.5.1.conf:/opt/sphinx/conf/sphinx.conf:ro
     environment:
       - SPHINX_BASE_DIR=/opt/sphinx/sphinx
     entrypoint: >
       sh -c "
-        cp /opt/sphinx/conf/sphinx.conf /tmp/sphinx.conf &&
-        sed \"s~SPHINX_BASE_DIR~$${SPHINX_BASE_DIR}~g\" /tmp/sphinx.conf > /opt/sphinx/conf/sphinx.conf &&
-        indexer --config /opt/sphinx/conf/sphinx.conf --all &&
-        exec searchd --config /opt/sphinx/conf/sphinx.conf --nodetach
+        sed \"s~SPHINX_BASE_DIR~$${SPHINX_BASE_DIR}~g\" /opt/sphinx/conf/sphinx.conf > /tmp/sphinx.conf &&
+        indexer --config /tmp/sphinx.conf --all &&
+        exec searchd --config /tmp/sphinx.conf --nodetach
       "
     healthcheck:
       test: [ "CMD", "searchd", "--status" ]

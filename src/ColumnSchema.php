@@ -107,7 +107,7 @@ class ColumnSchema extends BaseObject
             case 'boolean':
                 return (bool) $value;
             case 'double':
-                return (double) $value;
+                return (float) $value;
         }
 
         return $value;

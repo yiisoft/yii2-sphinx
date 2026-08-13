@@ -8,7 +8,7 @@
 
 namespace yii\sphinx;
 
-use yii\base\InvalidParamException;
+use yii\base\InvalidArgumentException;
 use yii\base\BaseObject;
 use yii\db\Expression;
 
@@ -174,7 +174,7 @@ class MatchBuilder extends BaseObject
     public function buildMultipleMatch($operator, $operands, &$params)
     {
         if (count($operands) < 3) {
-            throw new InvalidParamException("Operator '$operator' requires three or more operands.");
+            throw new InvalidArgumentException("Operator '$operator' requires three or more operands.");
         }
 
         $column = array_shift($operands);
@@ -198,7 +198,7 @@ class MatchBuilder extends BaseObject
     public function buildZoneMatch($operator, $operands, &$params)
     {
         if (!isset($operands[0])) {
-            throw new InvalidParamException("Operator '$operator' requires exactly one operand.");
+            throw new InvalidArgumentException("Operator '$operator' requires exactly one operand.");
         }
 
         $zones = (array)$operands[0];
@@ -216,7 +216,7 @@ class MatchBuilder extends BaseObject
     public function buildProximityMatch($operator, $operands, &$params)
     {
         if (!isset($operands[0], $operands[1], $operands[2])) {
-            throw new InvalidParamException("Operator '$operator' requires three operands.");
+            throw new InvalidArgumentException("Operator '$operator' requires three operands.");
         }
 
         list($column, $value, $proximity) = $operands;
@@ -234,7 +234,7 @@ class MatchBuilder extends BaseObject
     public function buildIgnoreMatch($operator, $operands, &$params)
     {
         if (!isset($operands[0], $operands[1])) {
-            throw new InvalidParamException("Operator '$operator' requires two operands.");
+            throw new InvalidArgumentException("Operator '$operator' requires two operands.");
         }
 
         list($column, $value) = $operands;
@@ -248,12 +248,12 @@ class MatchBuilder extends BaseObject
      * @param array $operands contains two column names.
      * @param array $params the expression parameters to be populated
      * @return string the MATCH expression
-     * @throws InvalidParamException on invalid operands count.
+     * @throws InvalidArgumentException on invalid operands count.
      */
     public function buildSimpleMatch($operator, $operands, &$params)
     {
         if (count($operands) !== 2) {
-            throw new InvalidParamException("Operator '$operator' requires two operands.");
+            throw new InvalidArgumentException("Operator '$operator' requires two operands.");
         }
 
         list($column, $value) = $operands;

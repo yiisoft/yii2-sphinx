@@ -4,12 +4,12 @@ help:			## Display help information.
 start:			## Start services
 	docker compose up -d
 
-test:			## Run tests. Params: {{ v=8.1 }}.
+test:			## Run tests. Params: {{ v=8.3 }}.
 	PHP_VERSION=$(filter-out $@,$(v)) docker compose up -d --build
 	docker exec yii2-sphinx-php-1 sh -c "php -v && composer update && vendor/bin/phpunit --coverage-clover=coverage.xml"
 	make down
 
-build:			## Build an image from a docker-compose file. Params: {{ v=8.1 }}.
+build:			## Build an image from a docker-compose file. Params: {{ v=8.3 }}.
 	PHP_VERSION=$(filter-out $@,$(v)) docker compose up -d --build
 
 down:			## Stop and remove containers, networks
@@ -18,7 +18,7 @@ down:			## Stop and remove containers, networks
 sh:			## Enter the container with the application
 	docker exec -it yii2-sphinx-php-1 bash
 
-static-analysis:	## Run code static analyze. Params: {{ v=8.1 }}.
+static-analysis:	## Run code static analyze. Params: {{ v=8.3 }}.
 	make build v=$(filter-out $@,$(v))
-	PHP_VERSION=$(filter-out $@,$(v)) docker compose exec yii2-sphinx-php sh -c "php -v && composer update && vendor/bin/phpstan analyse --memory-limit 512M"
+	PHP_VERSION=$(filter-out $@,$(v)) docker compose exec php sh -c "php -v && composer update && vendor/bin/phpstan analyse --memory-limit 512M"
 	make down

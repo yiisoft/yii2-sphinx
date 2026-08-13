@@ -182,7 +182,7 @@ class ActiveQuery extends Query implements ActiveQueryInterface
     /**
      * {@inheritdoc}
      */
-    public function populate($rows)
+    public function populate($rows, $db = null)
     {
         if (empty($rows)) {
             return [];
@@ -192,7 +192,7 @@ class ActiveQuery extends Query implements ActiveQueryInterface
         if (!empty($this->with)) {
             $this->findWith($this->with, $models);
         }
-        $models = parent::populate($models);
+        $models = parent::populate($models, $db);
         if (!$this->asArray) {
             foreach ($models as $model) {
                 $model->afterFind();
