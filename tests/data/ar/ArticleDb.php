@@ -4,6 +4,9 @@ namespace yiiunit\extensions\sphinx\data\ar;
 
 use yii\sphinx\ActiveQuery;
 
+/**
+ * @property-read mixed $index
+ */
 class ArticleDb extends ActiveRecordDb
 {
     public static function tableName()
