@@ -2,6 +2,12 @@
 
 namespace yiiunit\extensions\sphinx\data\ar;
 
+/**
+ * @property-read ArticleDb $source
+ * @property-read ArticleDb $sourceCompositeLink
+ * @property-read TagDb[] $tags
+ * @property-read string $snippetSource Snippet source string.
+ */
 class ArticleIndex extends ActiveRecord
 {
     public $custom_column;

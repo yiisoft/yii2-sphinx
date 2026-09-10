@@ -34,7 +34,6 @@ class ExternalActiveRelationTest extends TestCase
         $this->assertFalse($article->isRelationPopulated('source'));
         $source = $article->source;
         $this->assertTrue($article->isRelationPopulated('source'));
-        $this->assertTrue($source instanceof ArticleDb);
         $this->assertEquals(1, count($article->relatedRecords));
 
         // has many :
@@ -42,7 +41,6 @@ class ExternalActiveRelationTest extends TestCase
         $tags = $article->tags;
         $this->assertTrue($article->isRelationPopulated('tags'));
         $this->assertEquals(count($article->tag), count($tags));
-        $this->assertTrue($tags[0] instanceof TagDb);
         foreach ($tags as $tag) {
             $this->assertTrue(in_array($tag->id, $article->tag));
         }

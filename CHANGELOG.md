@@ -7,6 +7,7 @@ Yii Framework 2 sphinx extension Change Log
 - Enh #146: Applying Yii2 coding standards (@s1lver)
 - Enh #146: Raise min version to PHP 7.4 (@s1lver)
 - Bug #154: Fix union types in PHPDoc annotations (mspirkov)
+- Enh #156: Add the missing `@property` tags (mspirkov)
 
 
 2.0.16 March 21, 2024

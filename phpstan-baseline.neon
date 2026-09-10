@@ -2263,12 +2263,6 @@ parameters:
 			path: tests/ActiveRelationTest.php
 
 		-
-			message: '#^Access to an undefined property yiiunit\\extensions\\sphinx\\data\\ar\\ArticleDb\:\:\$index\.$#'
-			identifier: property.notFound
-			count: 2
-			path: tests/ActiveRelationTest.php
-
-		-
 			message: '#^Access to an undefined property yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\:\:\$id\.$#'
 			identifier: property.notFound
 			count: 1
@@ -2591,12 +2585,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: tests/data/ar/ArticleDb.php
-
-		-
-			message: '#^Access to an undefined property yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\:\:\$source\.$#'
-			identifier: property.notFound
-			count: 1
-			path: tests/data/ar/ArticleIndex.php
 
 		-
 			message: '#^Method yiiunit\\extensions\\sphinx\\data\\ar\\ArticleIndex\:\:getSource\(\) has no return type specified\.$#'

@@ -23,7 +23,7 @@ use yii\helpers\StringHelper;
  * runtime indexes!
  *
  * @property string $snippet Snippet value.
- * @property string $snippetSource Snippet source string. This property is read-only.
+ * @property-read string $snippetSource Snippet source string.
  *
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0
