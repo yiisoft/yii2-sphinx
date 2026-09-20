@@ -35,3 +35,7 @@ coverage.xml
 
 # runtime cache
 /tests/runtime
+
+# PHP CS Fixer
+.php-cs-fixer.php
+.php-cs-fixer.cache
