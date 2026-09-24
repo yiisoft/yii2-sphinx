@@ -238,7 +238,7 @@ class ActiveQuery extends Query implements ActiveQueryInterface
         $db = $this->getConnection();
 
         if ($this->sql === null) {
-            list ($sql, $params) = $db->getQueryBuilder()->build($this);
+            list($sql, $params) = $db->getQueryBuilder()->build($this);
         } else {
             $sql = $this->sql;
             $params = $this->params;
