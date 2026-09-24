@@ -30,8 +30,6 @@
         "phpstan/phpstan-phpunit": "^2.0",
         "phpunit/phpunit": "^9.6",
         "rector/rector": "^2.6",
-        "slevomat/coding-standard": "^8.31",
-        "yiisoft/yii2-coding-standards": "~3.0",
         "yiisoft/yii2-gii": "^2.2"
     },
     "repositories": [
@@ -53,13 +51,12 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            "yiisoft/yii2-composer": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "yiisoft/yii2-composer": true
         }
     },
     "scripts": {
-        "cs": "./vendor/bin/phpcs && ./vendor/bin/php-cs-fixer check",
-        "cs-fix": "./vendor/bin/phpcbf && ./vendor/bin/php-cs-fixer fix",
+        "cs": "./vendor/bin/php-cs-fixer check",
+        "cs-fix": "./vendor/bin/php-cs-fixer fix",
         "static": "./vendor/bin/phpstan --memory-limit=-1",
         "tests": "./vendor/bin/phpunit",
         "rector": "./vendor/bin/rector"
