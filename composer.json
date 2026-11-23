@@ -28,7 +28,7 @@
         "mspirkov/yii2-rector": "^0.2",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-phpunit": "^2.0",
-        "phpunit/phpunit": "^9.6",
+        "phpunit/phpunit": "^13.4",
         "rector/rector": "^2.6",
         "yiisoft/yii2-gii": "^2.2"
     },
